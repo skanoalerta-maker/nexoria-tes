@@ -2496,12 +2496,58 @@
         const novela = novelas.find(n => n.id === btn.dataset.continueId);
         if (!novela) return;
 
-        btn.addEventListener("click", () => {
-          saveInitialProgress(novela);
-          window.location.href = getContinuePath(novela);
-        });
-      });
+btn.addEventListener("click", async () => {
+  try {
+    // 🔍 Simulación de estado (después lo conectamos a Firebase)
+    const usuario = {
+      premium: false, // cambiará automáticamente cuando conectemos auth
+      purchased: []   // novelas compradas
+    };
+
+    const novelId = novela.id;
+
+    const tieneAcceso =
+      usuario.premium ||
+      usuario.purchased.includes(novelId);
+
+    // ✅ SI TIENE ACCESO → ENTRA NORMAL
+    if (tieneAcceso) {
+      saveInitialProgress(novela);
+      window.location.href = getContinuePath(novela);
+      return;
     }
+
+    // 💰 SI NO TIENE ACCESO → PAGO
+    const response = await fetch("https://api-mvtstimkcq-uc.a.run.app/create-preference", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        title: novela.titulo 
+        price: 990, // 👈 compra individual
+        userId: "demo-user",
+        email: "demo@email.com" ✔
+        type: "novel",
+        novelId: novelId
+      })
+    });
+
+    const data = await response.json();
+
+    if (!data.init_point) {
+      alert("Error al iniciar pago");
+      return;
+    }
+
+    // 🔥 REDIRIGE A MERCADO PAGO
+    window.location.href = data.init_point;
+
+  } catch (error) {
+    console.error("Error:", error);
+    alert("Error al conectar con el sistema de pago");
+  }
+});
 
     function filtrarHistorias() {
       const q = storySearch.value.trim().toLowerCase();
