@@ -2543,10 +2543,11 @@ btn.addEventListener("click", async () => {
     // 🔥 REDIRIGE A MERCADO PAGO
     window.location.href = data.init_point;
 
-  } catch (error) {
+    } catch (error) {
     console.error("Error:", error);
     alert("Error al conectar con el sistema de pago");
-  }
+   }
+  });
 });
 
     function filtrarHistorias() {
