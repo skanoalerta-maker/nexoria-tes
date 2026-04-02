@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nébula | Página no encontrada</title>
+  <meta name="theme-color" content="#07101f" />
+
+  <style>
+    :root{
+      --bg:#040816;
+      --bg2:#07101f;
+      --bg3:#0b1730;
+      --panel:rgba(8,18,40,.82);
+      --line:rgba(255,255,255,.08);
+      --text:#f8fbff;
+      --muted:#aebddb;
+      --blue:#4a90ff;
+      --blue2:#69b3ff;
+      --violet:#9a66ff;
+      --cyan:#50dbff;
+      --shadow:0 24px 70px rgba(0,0,0,.34);
+      --container:min(900px, calc(100% - 32px));
+    }
+
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      min-height:100vh;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(76,109,255,.18), transparent 24%),
+        radial-gradient(circle at 85% 20%, rgba(154,102,255,.18), transparent 28%),
+        radial-gradient(circle at 30% 80%, rgba(80,219,255,.12), transparent 26%),
+        linear-gradient(180deg, #040816 0%, #07101f 45%, #09162e 100%);
+      overflow:hidden;
+      position:relative;
+    }
+
+    a{
+      text-decoration:none;
+      color:inherit;
+    }
+
+    .stars,
+    .stars::before,
+    .stars::after{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      content:"";
+      display:block;
+    }
+
+    .stars{
+      z-index:0;
+      overflow:hidden;
+    }
+
+    .stars::before{
+      background-image:
+        radial-gradient(2px 2px at 10% 20%, rgba(255,255,255,.92), transparent 62%),
+        radial-gradient(1.5px 1.5px at 20% 72%, rgba(255,255,255,.82), transparent 62%),
+        radial-gradient(2px 2px at 32% 38%, rgba(255,255,255,.86), transparent 62%),
+        radial-gradient(1px 1px at 44% 82%, rgba(255,255,255,.74), transparent 62%),
+        radial-gradient(2px 2px at 57% 26%, rgba(255,255,255,.88), transparent 62%),
+        radial-gradient(1.5px 1.5px at 68% 60%, rgba(255,255,255,.76), transparent 62%),
+        radial-gradient(2px 2px at 80% 34%, rgba(255,255,255,.84), transparent 62%),
+        radial-gradient(1px 1px at 92% 76%, rgba(255,255,255,.70), transparent 62%);
+      opacity:.75;
+      animation: starsFloat 120s linear infinite;
+    }
+
+    .stars::after{
+      background:
+        radial-gradient(circle at 22% 24%, rgba(75,122,255,.12), transparent 20%),
+        radial-gradient(circle at 78% 24%, rgba(174,84,255,.14), transparent 22%),
+        radial-gradient(circle at 65% 72%, rgba(58,194,255,.10), transparent 24%),
+        radial-gradient(circle at 32% 82%, rgba(124,255,220,.06), transparent 18%);
+      filter:blur(40px);
+      opacity:.95;
+      animation: nebulaDrift 20s ease-in-out infinite alternate;
+    }
+
+    @keyframes starsFloat{
+      from{ transform:translateY(0); }
+      to{ transform:translateY(-120px); }
+    }
+
+    @keyframes nebulaDrift{
+      from{ transform:scale(1) translate3d(0,0,0); }
+      to{ transform:scale(1.08) translate3d(-1.5%, 1.5%, 0); }
+    }
+
+    .wrap{
+      position:relative;
+      z-index:2;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px 0;
+    }
+
+    .card{
+      width:var(--container);
+      border-radius:30px;
+      background:linear-gradient(180deg, rgba(8,18,40,.88), rgba(8,18,40,.70));
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+      padding:34px 28px;
+      text-align:center;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:40px;
+      padding:0 16px;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.08);
+      color:#dbe8ff;
+      font-weight:800;
+      font-size:.92rem;
+      margin-bottom:18px;
+    }
+
+    h1{
+      font-size:clamp(3rem, 8vw, 6rem);
+      line-height:.9;
+      letter-spacing:-.05em;
+      margin-bottom:12px;
+      text-shadow:0 0 24px rgba(91,140,255,.28);
+    }
+
+    h2{
+      font-size:clamp(1.2rem, 3vw, 2rem);
+      margin-bottom:14px;
+    }
+
+    p{
+      color:var(--muted);
+      line-height:1.75;
+      font-size:1rem;
+      max-width:680px;
+      margin:0 auto;
+    }
+
+    .smart-box{
+      margin:24px auto 0;
+      max-width:720px;
+      padding:18px;
+      border-radius:22px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.07);
+      text-align:left;
+    }
+
+    .smart-box strong{
+      display:block;
+      margin-bottom:8px;
+      font-size:1rem;
+      color:#fff;
+    }
+
+    .smart-box span{
+      display:block;
+      color:var(--muted);
+      line-height:1.7;
+      font-size:.96rem;
+    }
+
+    .actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      justify-content:center;
+      margin-top:28px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:54px;
+      padding:0 22px;
+      border-radius:18px;
+      font-weight:800;
+      border:1px solid transparent;
+      transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
+      white-space:nowrap;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+    }
+
+    .btn-primary{
+      color:#fff;
+      background:linear-gradient(135deg, var(--blue) 0%, var(--blue2) 100%);
+      box-shadow:0 18px 34px rgba(38,121,255,.24);
+    }
+
+    .btn-secondary{
+      color:#fff;
+      background:rgba(255,255,255,.06);
+      border-color:rgba(255,255,255,.08);
+    }
+
+    .hint{
+      margin-top:22px;
+      color:#8ea3c8;
+      font-size:.9rem;
+    }
+
+    @media (max-width: 680px){
+      .card{
+        padding:26px 18px;
+      }
+
+      .actions{
+        flex-direction:column;
+      }
+
+      .btn{
+        width:100%;
+      }
+
+      .smart-box{
+        text-align:center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="stars"></div>
+
+  <div class="wrap">
+    <main class="card">
+      <div class="badge">Error 404 · Ruta no encontrada</div>
+      <h1>404</h1>
+      <h2>Esta historia se perdió en la galaxia de Nébula</h2>
+      <p id="mainMessage">
+        El enlace que abriste no existe, cambió de ruta o el capítulo todavía no está disponible.
+      </p>
+
+      <section class="smart-box" id="smartBox">
+        <strong>Recomendación inteligente</strong>
+        <span id="smartText">
+          Puedes volver al inicio, revisar el catálogo o regresar a la novela desde donde venías.
+        </span>
+      </section>
+
+      <div class="actions" id="actions">
+        <a class="btn btn-primary" href="/nebula/index.html">Ir al inicio</a>
+        <a class="btn btn-secondary" href="/nebula/novelas/index.html">Ver novelas</a>
+      </div>
+
+      <div class="hint" id="pathHint"></div>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      const path = window.location.pathname || "";
+      const referrer = document.referrer || "";
+      const actions = document.getElementById("actions");
+      const smartText = document.getElementById("smartText");
+      const pathHint = document.getElementById("pathHint");
+
+      pathHint.textContent = path ? `Ruta solicitada: ${path}` : "";
+
+      const novelaMatch = path.match(/\/novelas\/(.+)\/temporada\d+\/capitulo\d+\.html$/i);
+
+      if (novelaMatch) {
+        const beforeSeason = novelaMatch[1];
+        const parts = beforeSeason.split("/").filter(Boolean);
+        const slug = parts[parts.length - 1] || "";
+
+        smartText.textContent =
+          "Detecté que estabas intentando abrir un capítulo de una novela. Puedes volver al catálogo de novelas o intentar regresar a la historia desde su ficha.";
+
+        const novelLink = document.createElement("a");
+        novelLink.className = "btn btn-secondary";
+        novelLink.href = `/nebula/novelas/index.html?id=${encodeURIComponent(slug)}`;
+        novelLink.textContent = "Volver a esta novela";
+        actions.appendChild(novelLink);
+      }
+
+      if (referrer && referrer.includes("/nebula/")) {
+        const backLink = document.createElement("a");
+        backLink.className = "btn btn-secondary";
+        backLink.href = referrer;
+        backLink.textContent = "Volver a la página anterior";
+        actions.appendChild(backLink);
+      }
+    })();
+  </script>
+</body>
+</html>
