@@ -1545,5 +1545,43 @@
     resizeStarsCanvas();
     animateStars();
   </script>
+  <script type="module">
+import { getAuth } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
+
+async function pagarPremium() {
+  const auth = getAuth();
+  const user = auth.currentUser;
+
+  if (!user) {
+    alert("Debes iniciar sesión primero");
+    return;
+  }
+
+  const response = await fetch("https://api-mvtstimkcq-uc.a.run.app/create-preference", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      title: "Nébula Premium",
+      price: 3990,
+      userId: user.uid,
+      email: user.email,
+      type: "premium"
+    })
+  });
+
+  const data = await response.json();
+
+  if (!data.init_point) {
+    alert("No se pudo iniciar el pago premium");
+    return;
+  }
+
+  window.location.href = data.init_point;
+}
+
+window.pagarPremium = pagarPremium;
+</script>
 </body>
 </html>
