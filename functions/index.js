@@ -3,6 +3,7 @@ import cors from "cors";
 import admin from "firebase-admin";
 import { onRequest } from "firebase-functions/v2/https";
 import { defineSecret } from "firebase-functions/params";
+import fetch from "node-fetch";
 
 if (!admin.apps.length) {
   admin.initializeApp();
