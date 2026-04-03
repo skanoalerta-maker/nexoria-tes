@@ -1123,17 +1123,22 @@
     }
 
     async function createPremiumSubscription(currentUser){
-      const data = await postJson(`${API_BASE_URL}/create-premium-subscription`, {
-        uid: currentUser.uid,
-        email: currentUser.email
-      });
+  const data = await postJson(`${API_BASE_URL}/create-preference`, {
+    title: "Nébula Premium Mensual",
+    price: 4990,
+    quantity: 1,
+    type: "premium",
+    novelId: null,
+    userId: currentUser.uid,
+    email: currentUser.email
+  });
 
-      if (!data.ok || !data.init_point) {
-        throw new Error(data.error || "No se pudo crear la suscripción premium.");
-      }
+  if (!data.ok || !data.init_point) {
+    throw new Error(data.error || "No se pudo crear la suscripción premium.");
+  }
 
-      window.location.href = data.init_point;
-    }
+  window.location.href = data.init_point;
+}
 
     function renderNovel(accessState){
       if (!novelId || !window.NEBULA_NOVELS || !window.NEBULA_NOVELS[novelId]) {
