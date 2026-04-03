@@ -1078,26 +1078,44 @@
       }
     }
 
-    async function createNovelPayment(currentUser, novel){
-      const response = await fetch(`${API_BASE_URL}/create-preference`, {
+    async function postJson(url, payload){
+      const response = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({
-          title: `Nébula – ${novel.title}`,
-          price: 990,
-          quantity: 1,
-          type: "single_novel",
-          novelId: novel.id,
-          userId: currentUser.uid,
-          email: currentUser.email
-        })
+        body: JSON.stringify(payload)
       });
 
-      const data = await response.json();
+      const rawText = await response.text();
 
-      if (!response.ok || !data.ok || !data.init_point) {
+      let data;
+      try {
+        data = JSON.parse(rawText);
+      } catch (error) {
+        console.error("Respuesta no válida del servidor:", rawText);
+        throw new Error("El servidor no devolvió JSON válido. Revisa la URL del backend o el endpoint.");
+      }
+
+      if (!response.ok) {
+        throw new Error(data.error || data.message || "Error del servidor.");
+      }
+
+      return data;
+    }
+
+    async function createNovelPayment(currentUser, novel){
+      const data = await postJson(`${API_BASE_URL}/create-preference`, {
+        title: `Nébula – ${novel.title}`,
+        price: 990,
+        quantity: 1,
+        type: "single_novel",
+        novelId: novel.id,
+        userId: currentUser.uid,
+        email: currentUser.email
+      });
+
+      if (!data.ok || !data.init_point) {
         throw new Error(data.error || "No se pudo crear el pago de la novela.");
       }
 
@@ -1105,20 +1123,12 @@
     }
 
     async function createPremiumSubscription(currentUser){
-      const response = await fetch(`${API_BASE_URL}/create-premium-subscription`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          uid: currentUser.uid,
-          email: currentUser.email
-        })
+      const data = await postJson(`${API_BASE_URL}/create-premium-subscription`, {
+        uid: currentUser.uid,
+        email: currentUser.email
       });
 
-      const data = await response.json();
-
-      if (!response.ok || !data.ok || !data.init_point) {
+      if (!data.ok || !data.init_point) {
         throw new Error(data.error || "No se pudo crear la suscripción premium.");
       }
 
