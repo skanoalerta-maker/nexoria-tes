@@ -2544,31 +2544,33 @@ btn.addEventListener("click", async () => {
     window.location.href = data.init_point;
 
     } catch (error) {
-    console.error("Error:", error);
-    alert("Error al conectar con el sistema de pago");
-   }
+      console.error("Error:", error);
+      alert("Error al conectar con el sistema de pago");
+    }
   });
 });
 
-    function filtrarHistorias() {
-      const q = storySearch.value.trim().toLowerCase();
+}
 
-      filtradas = novelas.filter(n => {
-        const texto = [
-          n.titulo,
-          n.genero,
-          n.descripcion,
-          n.temporada || "",
-          String(n.capitulos || ""),
-          String(n.gratis || ""),
-          String(n.rating || "")
-        ].join(" ").toLowerCase();
+function filtrarHistorias() {
+  const q = storySearch.value.trim().toLowerCase();
 
-        return texto.includes(q);
-      });
+  filtradas = novelas.filter(n => {
+    const texto = [
+      n.titulo,
+      n.genero,
+      n.descripcion,
+      n.temporada || "",
+      String(n.capitulos || ""),
+      String(n.gratis || ""),
+      String(n.rating || "")
+    ].join(" ").toLowerCase();
 
-      renderStories(filtradas);
-    }
+    return texto.includes(q);
+  });
+
+  renderStories(filtradas);
+}
 
     function cargarNovelas() {
       const desdeDataJs = buildCatalogFromNebulaData();
