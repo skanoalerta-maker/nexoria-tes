@@ -1344,28 +1344,48 @@
                   ${chapters.map((chapter, index) => buildChapterCard(chapter, index)).join("")}
                 </div>
 
-                <div class="premium-box" id="premiumBox">
-                  <div>
-                    <h3>Desbloquea la historia completa</h3>
-                    <p>
-                      Continúa leyendo sin restricciones y accede a todos los capítulos de
-                      ${escapeHtml(novel.title)}.
-                    </p>
+<div class="premium-box" id="premiumBox">
+  <div>
+    <h3>🔥 Desbloquea la historia completa</h3>
+    <p>
+      Continúa leyendo sin restricciones y accede a todos los capítulos.
+    </p>
 
-                    <div class="premium-details">
-                      <span class="premium-pill">Pago con Mercado Pago</span>
-                      <span class="premium-pill">${escapeHtml(novel.price || "$1.500 CLP")}</span>
-                      <span class="premium-pill">Acceso premium inmediato</span>
-                    </div>
+    <div class="premium-details">
+      <span class="premium-pill" style="
+        background: linear-gradient(135deg,#ff3d3d,#ff9900);
+        color:#fff;
+        font-weight:900;
+      ">
+        🔥 OFERTA LIMITADA
+      </span>
 
-                    <div class="premium-note">
-                      <strong>Tu membresía debe sentirse viva</strong>
-                      <span>
-                        Además de desbloquear esta historia, Nébula seguirá incorporando contenido nuevo
-                        cada semana para que el usuario tenga razones reales para mantenerse dentro de la plataforma.
-                      </span>
-                    </div>
-                  </div>
+      <span class="premium-pill">
+        <span style="text-decoration: line-through; opacity:.6;">$1.500</span>
+        <span style="color:#ffd54a; font-weight:900; margin-left:6px;">$990 CLP</span>
+      </span>
+
+      <span class="premium-pill">
+        <span style="text-decoration: line-through; opacity:.6;">$6.990</span>
+        <span style="color:#4ee7a8; font-weight:900; margin-left:6px;">Premium $4.990</span>
+      </span>
+
+      <span class="premium-pill">Pago con Mercado Pago</span>
+      <span class="premium-pill">Acceso inmediato</span>
+    </div>
+
+    <div class="premium-note">
+      <strong>Acceso completo + contenido en crecimiento</strong>
+      <span>
+        Desbloqueas esta historia y todas las nuevas novelas semanales en Nébula.
+      </span>
+    </div>
+  </div>
+
+  <button class="btn btn-primary" type="button" id="buyBtn">
+    ${paid ? "Historia ya desbloqueada" : "🔥 Comprar ahora por $990"}
+  </button>
+</div>
 
                   <button class="btn btn-primary" type="button" id="buyBtn">
                     ${paid ? "Historia ya desbloqueada" : "Pagar con Mercado Pago"}
