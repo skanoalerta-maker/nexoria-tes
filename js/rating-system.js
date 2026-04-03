@@ -1326,272 +1326,157 @@
                 </div>
               </div>
             </section>
-
             <section class="chapters-section">
-              <div class="container">
-                <div class="section-head">
-                  <div>
-                    <h2>Capítulos disponibles</h2>
-                  </div>
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <h2>Capítulos disponibles</h2>
+      </div>
 
-                  <p class="section-note">
-                    Los primeros ${freeChapters} capítulos están disponibles gratis.
-                    Desde el capítulo ${freeChapters + 1} en adelante, se desbloquean con acceso premium.
-                  </p>
-                </div>
-
-                <div class="chapters-grid" id="chaptersGrid">
-                  ${chapters.map((chapter, index) => buildChapterCard(chapter, index)).join("")}
-                </div>
-
-<div class="premium-box" id="premiumBox">
-  <div>
-    <h3>🔥 Desbloquea la historia completa</h3>
-    <p>
-      Continúa leyendo sin restricciones y accede a todos los capítulos.
-    </p>
-
-    <div class="premium-details">
-      <span class="premium-pill" style="
-        background: linear-gradient(135deg,#ff3d3d,#ff9900);
-        color:#fff;
-        font-weight:900;
-      ">
-        🔥 OFERTA LIMITADA
-      </span>
-
-      <span class="premium-pill">
-        <span style="text-decoration: line-through; opacity:.6;">$1.500</span>
-        <span style="color:#ffd54a; font-weight:900; margin-left:6px;">$990 CLP</span>
-      </span>
-
-      <span class="premium-pill">
-        <span style="text-decoration: line-through; opacity:.6;">$6.990</span>
-        <span style="color:#4ee7a8; font-weight:900; margin-left:6px;">Premium $4.990</span>
-      </span>
-
-      <span class="premium-pill">Pago con Mercado Pago</span>
-      <span class="premium-pill">Acceso inmediato</span>
+      <p class="section-note">
+        Los primeros ${freeChapters} capítulos están disponibles gratis.
+        Desde el capítulo ${freeChapters + 1} en adelante, se desbloquean con acceso premium.
+      </p>
     </div>
 
-    <div class="premium-note">
-      <strong>Acceso completo + contenido en crecimiento</strong>
-      <span>
-        Desbloqueas esta historia y todas las nuevas novelas semanales en Nébula.
-      </span>
+    <div class="chapters-grid" id="chaptersGrid">
+      ${chapters.map((chapter, index) => buildChapterCard(chapter, index)).join("")}
     </div>
+
+    <div class="premium-box" id="premiumBox">
+      <div>
+        <h3>🔥 Desbloquea la historia completa</h3>
+        <p>
+          Continúa leyendo sin restricciones y accede a todos los capítulos.
+        </p>
+
+        <div class="premium-details">
+          <span class="premium-pill" style="
+            background: linear-gradient(135deg,#ff3d3d,#ff9900);
+            color:#fff;
+            font-weight:900;
+          ">
+            🔥 OFERTA LIMITADA
+          </span>
+
+          <span class="premium-pill">
+            <span style="text-decoration: line-through; opacity:.6;">$1.500</span>
+            <span style="color:#ffd54a; font-weight:900; margin-left:6px;">$990 CLP</span>
+          </span>
+
+          <span class="premium-pill">
+            <span style="text-decoration: line-through; opacity:.6;">$6.990</span>
+            <span style="color:#4ee7a8; font-weight:900; margin-left:6px;">Premium $4.990</span>
+          </span>
+
+          <span class="premium-pill">Pago con Mercado Pago</span>
+          <span class="premium-pill">Acceso inmediato</span>
+        </div>
+
+        <div class="premium-note">
+          <strong>Acceso completo + contenido en crecimiento</strong>
+          <span>
+            Desbloqueas esta historia y todas las nuevas novelas semanales en Nébula.
+          </span>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" type="button" id="buyBtn">
+        ${paid ? "Historia ya desbloqueada" : "🔥 Comprar ahora por $990"}
+      </button>
+    </div>
+
   </div>
+</section>
+</main>
 
-  <button class="btn btn-primary" type="button" id="buyBtn">
-    ${paid ? "Historia ya desbloqueada" : "🔥 Comprar ahora por $990"}
-  </button>
-</div>
+<div class="footer-space"></div>
+`;
 
-                  <button class="btn btn-primary" type="button" id="buyBtn">
-                    ${paid ? "Historia ya desbloqueada" : "Pagar con Mercado Pago"}
-                  </button>
-                </div>
-              </div>
-            </section>
-          </main>
+saveInitialProgress();
 
-          <div class="footer-space"></div>
-        `;
+const continueBtn = document.getElementById("continueBtn");
+const buyBtn = document.getElementById("buyBtn");
+const startBtn = document.getElementById("startBtn");
+const accessState = document.getElementById("accessState");
+const ratingStars = Array.from(document.querySelectorAll(".rating-star"));
+const ratingAverage = document.getElementById("ratingAverage");
+const ratingTotal = document.getElementById("ratingTotal");
+const ratingStatus = document.getElementById("ratingStatus");
 
-        saveInitialProgress();
+function paintStars(value){
+  ratingStars.forEach(star => {
+    const starValue = Number(star.dataset.value);
+    star.classList.toggle("active", starValue <= value);
+  });
+}
 
-        const continueBtn = document.getElementById("continueBtn");
-        const buyBtn = document.getElementById("buyBtn");
-        const startBtn = document.getElementById("startBtn");
-        const accessState = document.getElementById("accessState");
-        const ratingStars = Array.from(document.querySelectorAll(".rating-star"));
-        const ratingAverage = document.getElementById("ratingAverage");
-        const ratingTotal = document.getElementById("ratingTotal");
-        const ratingStatus = document.getElementById("ratingStatus");
+function renderRating(){
+  const data = getRatingData();
+  const votes = data.votes || [];
+  const total = votes.length;
 
-        function paintStars(value){
-          ratingStars.forEach(star => {
-            const starValue = Number(star.dataset.value);
-            star.classList.toggle("active", starValue <= value);
-          });
-        }
+  if (!total) {
+    ratingAverage.textContent = "0.0";
+    ratingTotal.textContent = "0";
+    ratingStatus.textContent = "Sé el primero en valorar esta novela.";
+    paintStars(0);
+    return;
+  }
 
-        function renderRating(){
-          const data = getRatingData();
-          const votes = data.votes || [];
-          const total = votes.length;
+  const sum = votes.reduce((acc, value) => acc + Number(value || 0), 0);
+  const average = sum / total;
 
-          if (!total) {
-            ratingAverage.textContent = "0.0";
-            ratingTotal.textContent = "0";
-            ratingStatus.textContent = "Sé el primero en valorar esta novela.";
-            paintStars(0);
-            return;
-          }
+  ratingAverage.textContent = average.toFixed(1);
+  ratingTotal.textContent = String(total);
 
-          const sum = votes.reduce((acc, value) => acc + Number(value || 0), 0);
-          const average = sum / total;
+  const userVote = Number(localStorage.getItem(userVoteKey) || 0);
 
-          ratingAverage.textContent = average.toFixed(1);
-          ratingTotal.textContent = String(total);
+  if (userVote > 0) {
+    ratingStatus.textContent = `Tu valoración actual es de ${userVote} estrella${userVote === 1 ? "" : "s"}.`;
+    paintStars(userVote);
+  } else {
+    ratingStatus.textContent = "Valora esta novela para ayudar a otros lectores.";
+    paintStars(Math.round(average));
+  }
+}
 
-          const userVote = Number(localStorage.getItem(userVoteKey) || 0);
+buyBtn.addEventListener("click", async () => {
+  if (localStorage.getItem(paidKey) === "true") return;
 
-          if (userVote > 0) {
-            ratingStatus.textContent = `Tu valoración actual es de ${userVote} estrella${userVote === 1 ? "" : "s"}.`;
-            paintStars(userVote);
-          } else {
-            ratingStatus.textContent = "Valora esta novela para ayudar a otros lectores.";
-            paintStars(Math.round(average));
-          }
-        }
+  buyBtn.textContent = "Conectando con Mercado Pago...";
+  buyBtn.disabled = true;
 
-        ratingStars.forEach(star => {
-          star.addEventListener("mouseenter", () => {
-            const value = Number(star.dataset.value);
-            paintStars(value);
-          });
+  try {
+    const response = await fetch(`${API_BASE_URL}/create-preference`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        title: novel.title,
+        price: 990,
+        quantity: 1,
+        type: "single_novel",
+        novelId: novelId,
+        userId: "guest",
+        email: "cliente@nebula.cl"
+      })
+    });
 
-          star.addEventListener("mouseleave", () => {
-            const userVote = Number(localStorage.getItem(userVoteKey) || 0);
-            if (userVote > 0) {
-              paintStars(userVote);
-              return;
-            }
+    const data = await response.json();
 
-            const data = getRatingData();
-            const votes = data.votes || [];
-            if (!votes.length) {
-              paintStars(0);
-              return;
-            }
-
-            const avg = votes.reduce((acc, value) => acc + Number(value || 0), 0) / votes.length;
-            paintStars(Math.round(avg));
-          });
-
-          star.addEventListener("click", () => {
-            const value = Number(star.dataset.value);
-            const data = getRatingData();
-            data.votes.push(value);
-            saveRatingData(data);
-            localStorage.setItem(userVoteKey, String(value));
-            renderRating();
-          });
-        });
-
-        startBtn.addEventListener("click", () => {
-          localStorage.setItem(progressKey, getChapterPath(chapters[0]));
-        });
-
-        continueBtn.addEventListener("click", () => {
-          window.location.href = getContinuePath();
-        });
-
-        document.querySelectorAll("[data-chapter-path]").forEach(link => {
-          link.addEventListener("click", (e) => {
-            localStorage.setItem(progressKey, e.currentTarget.dataset.chapterPath);
-          });
-        });
-
-        buyBtn.addEventListener("click", async () => {
-          if (localStorage.getItem(paidKey) === "true") return;
-
-          buyBtn.textContent = "Conectando con Mercado Pago...";
-          buyBtn.disabled = true;
-
-          try {
-            const response = await fetch(`${API_BASE_URL}/create-preference`, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json"
-              },
-              body: JSON.stringify({
-                title: novel.title,
-                price: Number(novel.individualPrice || 1500),
-                quantity: 1,
-                type: "single_novel",
-                novelId: novelId,
-                userId: "guest",
-                email: "cliente@nebula.cl"
-              })
-            });
-
-            const data = await response.json();
-
-            if (!response.ok || !data.ok || !data.initPoint) {
-              throw new Error(data?.error || "No se pudo iniciar el pago.");
-            }
-
-            window.location.href = data.initPoint;
-          } catch (error) {
-            console.error("Error al iniciar pago:", error);
-            alert("No se pudo iniciar el pago con Mercado Pago. Intenta nuevamente.");
-            buyBtn.textContent = "Pagar con Mercado Pago";
-            buyBtn.disabled = false;
-          }
-        });
-
-        renderRating();
-        document.title = `${novel.title} | Nébula`;
-      }
-    }
-  </script>
-
-  <script>
-    const canvas = document.getElementById("stars-canvas");
-    const ctx = canvas.getContext("2d");
-    let stars = [];
-
-    function resizeStarsCanvas() {
-      const dpr = window.devicePixelRatio || 1;
-      canvas.width = window.innerWidth * dpr;
-      canvas.height = window.innerHeight * dpr;
-      canvas.style.width = window.innerWidth + "px";
-      canvas.style.height = window.innerHeight + "px";
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      createStars();
+    if (!response.ok || !data.ok || !data.initPoint) {
+      throw new Error(data?.error || "No se pudo iniciar el pago.");
     }
 
-    function createStars() {
-      stars = [];
-      const area = window.innerWidth * window.innerHeight;
-      const amount = Math.max(70, Math.floor(area / 14000));
-
-      for (let i = 0; i < amount; i++) {
-        stars.push({
-          x: Math.random() * window.innerWidth,
-          y: Math.random() * window.innerHeight,
-          r: Math.random() * 1.5 + 0.4,
-          speed: Math.random() * 0.25 + 0.05,
-          alpha: Math.random() * 0.7 + 0.15
-        });
-      }
-    }
-
-    function animateStars() {
-      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-
-      for (const s of stars) {
-        ctx.beginPath();
-        ctx.fillStyle = `rgba(255,255,255,${s.alpha})`;
-        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-        ctx.fill();
-
-        s.y += s.speed;
-
-        if (s.y > window.innerHeight + 2) {
-          s.y = -2;
-          s.x = Math.random() * window.innerWidth;
-        }
-      }
-
-      requestAnimationFrame(animateStars);
-    }
-
-    window.addEventListener("resize", resizeStarsCanvas);
-    resizeStarsCanvas();
-    animateStars();
-  </script>
-</body>
-</html>
+    window.location.href = data.initPoint;
+  } catch (error) {
+    console.error("Error al iniciar pago:", error);
+    alert("No se pudo iniciar el pago con Mercado Pago. Intenta nuevamente.");
+    buyBtn.textContent = "🔥 Comprar ahora por $990";
+    buyBtn.disabled = false;
+  }
+});
+          
+            
