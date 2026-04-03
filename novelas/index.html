@@ -1484,6 +1484,7 @@
             premiumPayBtn.textContent = "Redirigiendo a Mercado Pago...";
             await createPremiumSubscription(currentUser);
           } catch (error) {
+            alert("VERSIÓN NUEVA CARGADA");
             console.error(error);
             alert(error.message || "No se pudo iniciar el pago premium.");
             premiumPayBtn.disabled = false;
