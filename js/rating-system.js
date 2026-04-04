@@ -1441,6 +1441,31 @@ function renderRating(){
   }
 }
 
+        ratingStars.forEach(star => {
+  star.addEventListener("click", () => {
+    const value = Number(star.dataset.value);
+
+    const previousVote = Number(localStorage.getItem(userVoteKey) || 0);
+    const data = getRatingData();
+    let votes = Array.isArray(data.votes) ? [...data.votes] : [];
+
+    if (previousVote > 0) {
+      const previousIndex = votes.findIndex(v => Number(v) === previousVote);
+      if (previousIndex !== -1) {
+        votes.splice(previousIndex, 1);
+      }
+    }
+
+    votes.push(value);
+
+    saveRatingData({ votes });
+    localStorage.setItem(userVoteKey, String(value));
+
+    renderRating();
+  });
+});
+
+renderRating();
 buyBtn.addEventListener("click", async () => {
   if (localStorage.getItem(paidKey) === "true") return;
 
