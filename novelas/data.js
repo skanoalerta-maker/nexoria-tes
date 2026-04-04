@@ -132,6 +132,7 @@ window.NEBULA_NOVELS = {
   rating: 4,
   visitas: 1300,
   tags: ["Romance", "Drama", "Pasión", "Temporada 2"],
+
     { num: 1, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 1", description: "Nueva temporada, nuevas consecuencias." },
     { num: 2, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 2", description: "La historia retoma desde un punto de dolor y deseo." },
     { num: 3, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 3", description: "Los sentimientos vuelven a mezclarse con decisiones imposibles." },
