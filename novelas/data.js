@@ -123,7 +123,7 @@ window.NEBULA_NOVELS = {
   title: "No debí enamorarme de ti — Temporada 2",
   sagaTitle: "No debí enamorarme de ti",
   description: "Temporada 2. Nueva temporada, nuevas consecuencias y una historia que sube todavía más la intensidad emocional.",
-  cover: "../assets/covers/temporada2-cover.jpg",
+  cover: "../assets/covers/no-debi-enamorarme-t2.jpg",
   baseFolder: "romance/no-debi-enamorarme",
   defaultSeason: "temporada2",
   defaultSeasonLabel: "Temporada 2",
