@@ -1395,6 +1395,12 @@
 
 saveInitialProgress();
 
+
+<div class="footer-space"></div>
+`;
+
+saveInitialProgress();
+
 const continueBtn = document.getElementById("continueBtn");
 const buyBtn = document.getElementById("buyBtn");
 const startBtn = document.getElementById("startBtn");
