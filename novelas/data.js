@@ -9,22 +9,20 @@ window.NEBULA_BILLING = {
 };
 
 window.NEBULA_NOVELS = {
-  "codigo-nebula": {
-    id: "codigo-nebula",
-    productType: "single_novel",
-    allowIndividualPurchase: true,
-    premiumIncluded: true,
-    individualPrice: 1500,
-    individualPriceLabel: "$1.500 CLP",
-    title: "Código Nébula",
-    description: "Una historia futurista donde nada es lo que parece y cada capítulo abre una nueva grieta en el sistema. A medida que avanzas, descubres que la red no solo observa: también recuerda, manipula y espera.",
+  "codigo-nebula-t1": {
+    id: "codigo-nebula-t1",
+    title: "Código Nébula — Temporada 1",
+    sagaTitle: "Código Nébula",
+    description: "Temporada 1. Una historia futurista donde nada es lo que parece y cada capítulo abre una nueva grieta en el sistema.",
     cover: "../assets/covers/nebula.jpg",
     baseFolder: "futurista/codigo-nebula",
     defaultSeason: "temporada1",
     defaultSeasonLabel: "Temporada 1",
     freeChapters: 3,
     price: "$1.500 CLP",
-    tags: ["Futurista", "Tecnología", "Suspenso"],
+    rating: 5,
+    visitas: 1542,
+    tags: ["Futurista", "Tecnología", "Suspenso", "Temporada 1"],
     chapters: [
       { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "El pulso de la anomalía", description: "Una señal imposible aparece en la red y marca el inicio de una cadena de eventos que nadie logra explicar." },
       { num: 2, season: "temporada1", seasonLabel: "Temporada 1", title: "La ciudad bajo vigilancia", description: "A medida que los datos se cruzan, queda claro que la ciudad entera ha sido observada durante más tiempo del que cualquiera imaginaba." },
@@ -35,39 +33,75 @@ window.NEBULA_NOVELS = {
       { num: 7, season: "temporada1", seasonLabel: "Temporada 1", title: "El mapa de los ausentes", description: "Cada nodo de Nébula parece señalar a personas desaparecidas de los archivos públicos, como si alguien las hubiera arrancado del mundo." },
       { num: 8, season: "temporada1", seasonLabel: "Temporada 1", title: "Zona de silencio", description: "Cuando la comunicación se corta por completo, lo único que queda es avanzar hacia un lugar del que nadie vuelve igual." },
       { num: 9, season: "temporada1", seasonLabel: "Temporada 1", title: "La caída del protocolo", description: "Los mecanismos de control empiezan a fallar y la frontera entre vigilancia, memoria y consciencia se rompe." },
-      { num: 10, season: "temporada1", seasonLabel: "Temporada 1", title: "Código Nébula", description: "La verdad final sale a la luz: Nébula no era una herramienta, sino una entidad diseñada para decidir quién permanece y quién desaparece." },
-
-      { num: 1, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 1", description: "Continúa la historia en una nueva temporada." },
-      { num: 2, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 2", description: "Continúa la historia en una nueva temporada." },
-      { num: 3, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 3", description: "Continúa la historia en una nueva temporada." },
-      { num: 4, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 4", description: "Continúa la historia en una nueva temporada." },
-      { num: 5, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 5", description: "Continúa la historia en una nueva temporada." },
-      { num: 6, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 6", description: "Continúa la historia en una nueva temporada." },
-      { num: 7, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 7", description: "Continúa la historia en una nueva temporada." },
-      { num: 8, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 8", description: "Continúa la historia en una nueva temporada." },
-      { num: 9, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 9", description: "Continúa la historia en una nueva temporada." },
-      { num: 10, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 10", description: "Continúa la historia en una nueva temporada." },
-      { num: 11, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 11", description: "Continúa la historia en una nueva temporada." },
-      { num: 12, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 12", description: "Continúa la historia en una nueva temporada." }
+      { num: 10, season: "temporada1", seasonLabel: "Temporada 1", title: "Código Nébula", description: "La verdad final sale a la luz: Nébula no era una herramienta, sino una entidad diseñada para decidir quién permanece y quién desaparece." }
     ]
   },
 
-  "no-debi-enamorarme": {
-    id: "no-debi-enamorarme",
-    productType: "single_novel",
-    allowIndividualPurchase: true,
-    premiumIncluded: true,
-    individualPrice: 1500,
-    individualPriceLabel: "$1.500 CLP",
-    title: "No debí enamorarme de ti",
-    description: "Una historia intensa sobre deseo, decisiones equivocadas y emociones que arden demasiado. Cada capítulo aprieta más la tensión entre lo que se quiere y lo que no se debería sentir.",
+"codigo-nebula-t2": {
+  id: "codigo-nebula-t2",
+  title: "Código Nébula — Temporada 2",
+  sagaTitle: "Código Nébula",
+  description: "Temporada 2. Continúa la historia con nuevas grietas, nuevas amenazas y un sistema cada vez más despierto.",
+  cover: "../assets/covers/codigo-nebula-t2.jpg",
+  baseFolder: "futurista/codigo-nebula",
+  defaultSeason: "temporada2",
+  defaultSeasonLabel: "Temporada 2",
+  freeChapters: 3,
+  price: "$1.500 CLP",
+  rating: 5,
+  visitas: 980,
+  tags: ["Futurista", "Tecnología", "Suspenso", "Temporada 2"],
+  chapters: [
+    { num: 1, season: "temporada2", seasonLabel: "Temporada 2", title: "Reinicio", description: "Después de la caída del protocolo, la red vuelve a encenderse desde un lugar inesperado." },
+    { num: 2, season: "temporada2", seasonLabel: "Temporada 2", title: "Ecos residuales", description: "Viejos rastros del sistema empiezan a reaparecer en zonas que debían estar muertas." },
+    { num: 3, season: "temporada2", seasonLabel: "Temporada 2", title: "El observador", description: "Una nueva presencia parece mirar desde dentro con más control que antes." },
+    { num: 4, season: "temporada2", seasonLabel: "Temporada 2", title: "Punto ciego", description: "Un sector fuera del mapa oculta respuestas que nadie estaba listo para encontrar." },
+    { num: 5, season: "temporada2", seasonLabel: "Temporada 2", title: "Memoria falsa", description: "Los recuerdos dejan de ser confiables cuando la red empieza a reescribir versiones de la verdad." },
+    { num: 6, season: "temporada2", seasonLabel: "Temporada 2", title: "La segunda llave", description: "Un nuevo acceso abre puertas que parecían selladas para siempre." },
+    { num: 7, season: "temporada2", seasonLabel: "Temporada 2", title: "El nodo profundo", description: "Más abajo del sistema existe una capa que nadie había logrado tocar." },
+    { num: 8, season: "temporada2", seasonLabel: "Temporada 2", title: "Frecuencia cero", description: "La señal desaparece del mundo visible y reaparece en un canal imposible." },
+    { num: 9, season: "temporada2", seasonLabel: "Temporada 2", title: "La red responde", description: "Nébula deja de reaccionar y comienza a actuar por voluntad propia." },
+    { num: 10, season: "temporada2", seasonLabel: "Temporada 2", title: "Umbral", description: "El grupo descubre que cruzar cierto límite implica ya no poder volver." },
+    { num: 11, season: "temporada2", seasonLabel: "Temporada 2", title: "Sin retorno", description: "La ofensiva final obliga a elegir entre destruir la red o desaparecer con ella." },
+    { num: 12, season: "temporada2", seasonLabel: "Temporada 2", title: "Nébula despierta", description: "El cierre de temporada revela que el sistema nunca estuvo dormido: solo estaba esperando." }
+  ]
+},
+
+  "despues-de-tu-adios-t1": {
+    id: "despues-de-tu-adios-t1",
+    title: "Después de tu adiós — Temporada 1",
+    sagaTitle: "Después de tu adiós",
+    description: "Una novela emocional sobre recuerdos, ausencia y todo lo que sigue vivo después de una despedida.",
+    cover: "../assets/covers/despues-de-tu-adios.jpg",
+    baseFolder: "romance/despues-de-tu-adios",
+    defaultSeason: "temporada1",
+    defaultSeasonLabel: "Temporada 1",
+    freeChapters: 3,
+    price: "$1.500 CLP",
+    rating: 4,
+    visitas: 1187,
+    tags: ["Romance", "Emocional", "Drama", "Temporada 1"],
+    chapters: [
+      { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "La llamada que no debía llegar", description: "Una voz del pasado reabre emociones que parecían enterradas." },
+      { num: 2, season: "temporada1", seasonLabel: "Temporada 1", title: "El peso del recuerdo", description: "Cada objeto, cada rincón y cada silencio empiezan a devolver escenas que todavía duelen." },
+      { num: 3, season: "temporada1", seasonLabel: "Temporada 1", title: "Lo que dejaste aquí", description: "No todo lo que se pierde desaparece; algunas ausencias toman más espacio que una presencia." }
+    ]
+  },
+
+  "no-debi-enamorarme-t1": {
+    id: "no-debi-enamorarme-t1",
+    title: "No debí enamorarme de ti — Temporada 1",
+    sagaTitle: "No debí enamorarme de ti",
+    description: "Temporada 1. Una historia intensa sobre deseo, decisiones equivocadas y emociones que arden demasiado.",
     cover: "../assets/covers/no-debi-enamorarme.jpg",
     baseFolder: "romance/no-debi-enamorarme",
     defaultSeason: "temporada1",
     defaultSeasonLabel: "Temporada 1",
     freeChapters: 3,
     price: "$1.500 CLP",
-    tags: ["Romance", "Drama", "Pasión"],
+    rating: 4,
+    visitas: 2100,
+    tags: ["Romance", "Drama", "Pasión", "Temporada 1"],
     chapters: [
       { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "La primera mirada", description: "Todo parece normal hasta que una mirada cambia el ritmo de lo que ambos creían controlar." },
       { num: 2, season: "temporada1", seasonLabel: "Temporada 1", title: "Demasiado cerca", description: "La cercanía empieza a incomodar justo cuando ignorarla ya no parece una opción real." },
@@ -79,55 +113,44 @@ window.NEBULA_NOVELS = {
       { num: 8, season: "temporada1", seasonLabel: "Temporada 1", title: "Todo arde", description: "Sentir demasiado empieza a costar más de lo que cualquiera estaba dispuesto a pagar." },
       { num: 9, season: "temporada1", seasonLabel: "Temporada 1", title: "La caída", description: "Las decisiones se acumulan y el punto de no retorno aparece sin aviso." },
       { num: 10, season: "temporada1", seasonLabel: "Temporada 1", title: "No debí enamorarme de ti", description: "El final de temporada obliga a elegir entre protegerse o aceptar que ya no hay manera de retroceder." },
-      { num: 11, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 11", description: "La historia sigue escalando." },
-      { num: 12, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 12", description: "La historia sigue escalando." },
-
-      { num: 1, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 1", description: "Nueva temporada, nuevas consecuencias." },
-      { num: 2, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 2", description: "Nueva temporada, nuevas consecuencias." },
-      { num: 3, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 3", description: "Nueva temporada, nuevas consecuencias." },
-      { num: 4, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 4", description: "Nueva temporada, nuevas consecuencias." },
-      { num: 5, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 5", description: "Nueva temporada, nuevas consecuencias." },
-      { num: 6, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 6", description: "Nueva temporada, nuevas consecuencias." },
-      { num: 7, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 7", description: "Nueva temporada, nuevas consecuencias." },
-      { num: 8, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 8", description: "Nueva temporada, nuevas consecuencias." },
-      { num: 9, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 9", description: "Nueva temporada, nuevas consecuencias." },
-      { num: 10, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 10", description: "Nueva temporada, nuevas consecuencias." },
-      { num: 11, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 11", description: "Nueva temporada, nuevas consecuencias." },
-      { num: 12, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 12", description: "Nueva temporada, nuevas consecuencias." }
+      { num: 11, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 11", description: "La historia sigue escalando y las consecuencias ya no pueden ocultarse." },
+      { num: 12, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 12", description: "La tensión emocional alcanza un punto crítico antes del cierre." }
     ]
   },
 
-  "despues-de-tu-adios": {
-    id: "despues-de-tu-adios",
-    productType: "single_novel",
-    allowIndividualPurchase: true,
-    premiumIncluded: true,
-    individualPrice: 1500,
-    individualPriceLabel: "$1.500 CLP",
-    title: "Después de tu adiós",
-    description: "Una novela emocional sobre recuerdos, ausencia y todo lo que sigue vivo después de una despedida. Una historia marcada por la nostalgia, la pérdida y aquello que cuesta soltar.",
-    cover: "../assets/covers/despues-de-tu-adios.jpg",
-    baseFolder: "romance/despues-de-tu-adios",
-    defaultSeason: "temporada1",
-    defaultSeasonLabel: "Temporada 1",
-    freeChapters: 3,
-    price: "$1.500 CLP",
-    tags: ["Romance", "Emocional", "Drama"],
-    chapters: [
-      { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "La llamada que no debía llegar", description: "Una voz del pasado reabre emociones que parecían enterradas." },
-      { num: 2, season: "temporada1", seasonLabel: "Temporada 1", title: "El peso del recuerdo", description: "Cada objeto, cada rincón y cada silencio empiezan a devolver escenas que todavía duelen." },
-      { num: 3, season: "temporada1", seasonLabel: "Temporada 1", title: "Lo que dejaste aquí", description: "No todo lo que se pierde desaparece; algunas ausencias toman más espacio que una presencia." }
-    ]
-  },
-
-  "la-ultima-conexion": {
-    id: "la-ultima-conexion",
-    productType: "single_novel",
-    allowIndividualPurchase: true,
-    premiumIncluded: true,
-    individualPrice: 1500,
-    individualPriceLabel: "$1.500 CLP",
-    title: "La última conexión",
+"no-debi-enamorarme-t2": {
+  id: "no-debi-enamorarme-t2",
+  title: "No debí enamorarme de ti — Temporada 2",
+  sagaTitle: "No debí enamorarme de ti",
+  description: "Temporada 2. Nueva temporada, nuevas consecuencias y una historia que sube todavía más la intensidad emocional.",
+  cover: "../assets/covers/no-debi-enamorarme-t2.jpg",
+  baseFolder: "romance/no-debi-enamorarme",
+  defaultSeason: "temporada2",
+  defaultSeasonLabel: "Temporada 2",
+  freeChapters: 3,
+  price: "$1.500 CLP",
+  rating: 4,
+  visitas: 1300,
+  tags: ["Romance", "Drama", "Pasión", "Temporada 2"],
+  chapters: [
+    { num: 1, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 1", description: "Nueva temporada, nuevas consecuencias." },
+    { num: 2, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 2", description: "La historia retoma desde un punto de dolor y deseo." },
+    { num: 3, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 3", description: "Los sentimientos vuelven a mezclarse con decisiones imposibles." },
+    { num: 4, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 4", description: "Las heridas del pasado siguen marcando cada paso." },
+    { num: 5, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 5", description: "La distancia no logra apagar lo que todavía sigue vivo." },
+    { num: 6, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 6", description: "Una nueva decisión amenaza con empeorarlo todo." },
+    { num: 7, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 7", description: "El deseo vuelve justo cuando más daño puede causar." },
+    { num: 8, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 8", description: "La relación entra en una etapa más oscura y más intensa." },
+    { num: 9, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 9", description: "El miedo a perderlo todo deja de ser una amenaza lejana." },
+    { num: 10, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 10", description: "Las emociones acumuladas explotan en el peor momento." },
+    { num: 11, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 11", description: "Lo que parecía control vuelve a romperse por completo." },
+    { num: 12, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 12", description: "El cierre de temporada deja a los protagonistas frente a su verdad final." }
+  ]
+},
+  "la-ultima-conexion-t1": {
+    id: "la-ultima-conexion-t1",
+    title: "La última conexión — Temporada 1",
+    sagaTitle: "La última conexión",
     description: "A las 02:17 de la madrugada, Daniel recibe mensajes desde su propio número. Lo peor no es quién escribe, sino que esos mensajes saben exactamente lo que está ocurriendo dentro de su habitación.",
     cover: "../assets/covers/la-ultima-conexion.jpg",
     baseFolder: "terror/la-ultima-conexion",
@@ -135,7 +158,9 @@ window.NEBULA_NOVELS = {
     defaultSeasonLabel: "Temporada 1",
     freeChapters: 3,
     price: "$1.500 CLP",
-    tags: ["Terror", "Tecnológico", "Suspenso"],
+    rating: 5,
+    visitas: 842,
+    tags: ["Terror", "Tecnológico", "Suspenso", "Temporada 1"],
     chapters: [
       { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "02:17", description: "El primer mensaje llega a una hora exacta y con una información que nadie más podría tener." },
       { num: 2, season: "temporada1", seasonLabel: "Temporada 1", title: "Desde mi propio número", description: "Responder parece un error, pero ignorarlo es todavía peor." },
@@ -147,19 +172,15 @@ window.NEBULA_NOVELS = {
       { num: 8, season: "temporada1", seasonLabel: "Temporada 1", title: "No era una app", description: "La entidad detrás de los mensajes no vive en el teléfono; solo lo usa para entrar." },
       { num: 9, season: "temporada1", seasonLabel: "Temporada 1", title: "La última videollamada", description: "Aceptar una llamada final abre una escena que no debería existir del otro lado de la pantalla." },
       { num: 10, season: "temporada1", seasonLabel: "Temporada 1", title: "La última conexión", description: "El cierre de temporada revela que responder fue exactamente lo que esa presencia necesitaba." },
-      { num: 11, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 11", description: "La amenaza sigue creciendo." },
-      { num: 12, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 12", description: "La amenaza sigue creciendo." }
+      { num: 11, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 11", description: "La amenaza sigue creciendo y ya no parece posible desconectarse." },
+      { num: 12, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 12", description: "La historia profundiza en el verdadero origen de la presencia." }
     ]
   },
 
-  "ya-habias-estado-ahi": {
-    id: "ya-habias-estado-ahi",
-    productType: "single_novel",
-    allowIndividualPurchase: true,
-    premiumIncluded: true,
-    individualPrice: 1500,
-    individualPriceLabel: "$1.500 CLP",
-    title: "Ya habías estado ahí",
+  "ya-habias-estado-ahi-t1": {
+    id: "ya-habias-estado-ahi-t1",
+    title: "Ya habías estado ahí — Temporada 1",
+    sagaTitle: "Ya habías estado ahí",
     description: "Volver a casa nunca volvió a sentirse normal. Un cajón abierto, una puerta distinta, objetos fuera de lugar. Al principio parecen detalles mínimos, hasta que entiendes algo peor: alguien ya había estado ahí.",
     cover: "../assets/covers/ya-habias-estado-ahi.jpg",
     baseFolder: "terror/ya-habias-estado-ahi",
@@ -167,7 +188,9 @@ window.NEBULA_NOVELS = {
     defaultSeasonLabel: "Temporada 1",
     freeChapters: 3,
     price: "$1.500 CLP",
-    tags: ["Terror", "Psicológico", "Suspenso"],
+    rating: 5,
+    visitas: 1100,
+    tags: ["Terror", "Psicológico", "Suspenso", "Temporada 1"],
     chapters: [
       { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "Algo no está igual", description: "Volver a casa se siente distinto desde el primer segundo, aunque todavía no hay una razón clara." },
       { num: 2, season: "temporada1", seasonLabel: "Temporada 1", title: "El cajón abierto", description: "Un detalle mínimo basta para sembrar la idea de que alguien tocó lo que no debía." },
@@ -182,37 +205,10 @@ window.NEBULA_NOVELS = {
     ]
   },
 
-  "bajo-la-misma-lluvia": {
-    id: "bajo-la-misma-lluvia",
-    productType: "single_novel",
-    allowIndividualPurchase: true,
-    premiumIncluded: true,
-    individualPrice: 1500,
-    individualPriceLabel: "$1.500 CLP",
-    title: "Bajo la misma lluvia",
-    description: "Dos vidas marcadas por heridas distintas vuelven a cruzarse en el peor momento posible. Bajo la lluvia, lo que parecía casual empieza a sentirse inevitable.",
-    cover: "../assets/covers/bajo-la-misma-lluvia.jpg",
-    baseFolder: "romance/bajo-la-misma-lluvia",
-    defaultSeason: "temporada1",
-    defaultSeasonLabel: "Temporada 1",
-    freeChapters: 3,
-    price: "$1.500 CLP",
-    tags: ["Romance", "Drama", "Emocional"],
-    chapters: [
-      { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "La lluvia de esa tarde", description: "Un encuentro inesperado bajo la lluvia despierta emociones que ambos creían enterradas." },
-      { num: 2, season: "temporada1", seasonLabel: "Temporada 1", title: "Lo que no dijimos", description: "Las palabras no dichas pesan más que cualquier silencio cuando el pasado vuelve a tocar la puerta." },
-      { num: 3, season: "temporada1", seasonLabel: "Temporada 1", title: "Otra vez tú", description: "El destino insiste en cruzarlos justo cuando intentar olvidar parecía la única salida." }
-    ]
-  },
-
-  "pinochet": {
-    id: "pinochet",
-    productType: "single_novel",
-    allowIndividualPurchase: true,
-    premiumIncluded: true,
-    individualPrice: 1500,
-    individualPriceLabel: "$1.500 CLP",
-    title: "Pinochet",
+  "pinochet-t1": {
+    id: "pinochet-t1",
+    title: "Pinochet — Temporada 1",
+    sagaTitle: "Pinochet",
     description: "Una novela histórica intensa sobre poder, control, decisiones militares y el impacto humano de un periodo que marcó para siempre la historia de Chile.",
     cover: "../assets/covers/pinochet_nebula_portada.png",
     baseFolder: "Pinochet",
@@ -220,7 +216,9 @@ window.NEBULA_NOVELS = {
     defaultSeasonLabel: "Temporada 1",
     freeChapters: 3,
     price: "$1.500 CLP",
-    tags: ["Historia", "Militar", "Política"],
+    rating: 5,
+    visitas: 2000,
+    tags: ["Historia", "Militar", "Política", "Temporada 1"],
     chapters: [
       { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 1", description: "Inicio de una historia marcada por poder y ruptura." },
       { num: 2, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 2", description: "La tensión política crece." },
@@ -237,14 +235,10 @@ window.NEBULA_NOVELS = {
     ]
   },
 
-  "allende": {
-    id: "allende",
-    productType: "single_novel",
-    allowIndividualPurchase: true,
-    premiumIncluded: true,
-    individualPrice: 1500,
-    individualPriceLabel: "$1.500 CLP",
-    title: "Allende",
+  "allende-t1": {
+    id: "allende-t1",
+    title: "Allende — Temporada 1",
+    sagaTitle: "Allende",
     description: "Una historia política y humana sobre liderazgo, convicción y uno de los periodos más decisivos de la historia de Chile.",
     cover: "../assets/covers/allende_portada_nebula.png",
     baseFolder: "allende",
@@ -252,7 +246,9 @@ window.NEBULA_NOVELS = {
     defaultSeasonLabel: "Temporada 1",
     freeChapters: 3,
     price: "$1.500 CLP",
-    tags: ["Historia", "Política", "Drama"],
+    rating: 5,
+    visitas: 1800,
+    tags: ["Historia", "Política", "Drama", "Temporada 1"],
     chapters: [
       { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 1", description: "Comienza una historia marcada por ideales y tensión." },
       { num: 2, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 2", description: "Las decisiones empiezan a cambiarlo todo." },
@@ -272,14 +268,10 @@ window.NEBULA_NOVELS = {
     ]
   },
 
-  "el-precio-del-silencio": {
-    id: "el-precio-del-silencio",
-    productType: "single_novel",
-    allowIndividualPurchase: true,
-    premiumIncluded: true,
-    individualPrice: 1500,
-    individualPriceLabel: "$1.500 CLP",
-    title: "El Precio del Silencio",
+  "el-precio-del-silencio-t1": {
+    id: "el-precio-del-silencio-t1",
+    title: "El Precio del Silencio — Temporada 1",
+    sagaTitle: "El Precio del Silencio",
     description: "Una historia de corrupción, secretos y una red de poder que empieza a quebrarse desde dentro.",
     cover: "../assets/covers/portada-nebula.jpg",
     baseFolder: "Thriller de corrupción/El Precio del Silencio",
@@ -287,7 +279,9 @@ window.NEBULA_NOVELS = {
     defaultSeasonLabel: "Temporada 1",
     freeChapters: 3,
     price: "$1.500 CLP",
-    tags: ["Thriller", "Corrupción", "Suspenso"],
+    rating: 5,
+    visitas: 1600,
+    tags: ["Thriller", "Corrupción", "Suspenso", "Temporada 1"],
     chapters: [
       { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 1", description: "Una grieta aparece en el sistema." },
       { num: 2, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 2", description: "Los nombres comienzan a salir a la luz." },
