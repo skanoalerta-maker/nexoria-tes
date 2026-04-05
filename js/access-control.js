@@ -107,25 +107,32 @@
   }
 
   function getPricing(novelId) {
-    const monthly = "$4.990";
-    const single = "$1.500";
+    const premium = {
+      before: "$6.990",
+      now: "$4.990"
+    };
+
+    const defaultNovel = {
+      before: "$1.500",
+      now: "$990"
+    };
 
     const perNovel = {
-      "codigo-nebula-t1": "$1.500",
-      "codigo-nebula-t2": "$1.500",
-      "no-debi-enamorarme-t1": "$1.500",
-      "no-debi-enamorarme-t2": "$1.500",
-      "despues-de-tu-adios-t1": "$1.500",
-      "la-ultima-conexion-t1": "$1.500",
-      "ya-habias-estado-ahi-t1": "$1.500",
-      "allende-t1": "$1.500",
-      "pinochet-t1": "$1.500",
-      "el-precio-del-silencio-t1": "$1.500"
+      "codigo-nebula-t1": { before: "$1.500", now: "$990" },
+      "codigo-nebula-t2": { before: "$1.500", now: "$990" },
+      "no-debi-enamorarme-t1": { before: "$1.500", now: "$990" },
+      "no-debi-enamorarme-t2": { before: "$1.500", now: "$990" },
+      "despues-de-tu-adios-t1": { before: "$1.500", now: "$990" },
+      "la-ultima-conexion-t1": { before: "$1.500", now: "$990" },
+      "ya-habias-estado-ahi-t1": { before: "$1.500", now: "$990" },
+      "allende-t1": { before: "$1.500", now: "$990" },
+      "pinochet-t1": { before: "$1.500", now: "$990" },
+      "el-precio-del-silencio-t1": { before: "$1.500", now: "$990" }
     };
 
     return {
-      premiumMonthly: monthly,
-      individual: perNovel[novelId] || single
+      premium,
+      individual: perNovel[novelId] || defaultNovel
     };
   }
 
@@ -139,7 +146,13 @@
         <div class="nebula-collage-column ${extraClass}">
           ${items.concat(items).map(src => `
             <div class="nebula-collage-card">
-              <img src="${src}" alt="" onerror="this.style.display='none'; this.parentElement.style.background='rgba(255,255,255,.06)';" />
+              <img
+                src="${src}"
+                alt=""
+                loading="eager"
+                decoding="async"
+                onerror="this.style.display='none'; this.parentElement.style.background='rgba(255,255,255,.06)';"
+              />
             </div>
           `).join("")}
         </div>
@@ -168,7 +181,7 @@
           min-height:100vh;
           margin:0;
           background:
-            linear-gradient(rgba(0,0,0,.70), rgba(0,0,0,.80)),
+            linear-gradient(rgba(0,0,0,.68), rgba(0,0,0,.78)),
             radial-gradient(circle at top left, rgba(38, 68, 140, .30), transparent 30%),
             radial-gradient(circle at top right, rgba(120, 60, 180, .22), transparent 28%),
             linear-gradient(180deg, #060b17 0%, #090f1d 45%, #05070d 100%);
@@ -183,13 +196,13 @@
 
         .nebula-paywall-card{
           width:100%;
-          max-width:1000px;
-          min-height:560px;
+          max-width:1020px;
+          min-height:570px;
           display:grid;
           grid-template-columns:1.08fr .92fr;
           background:linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
           border:1px solid rgba(255,255,255,.08);
-          border-radius:26px;
+          border-radius:28px;
           overflow:hidden;
           box-shadow:0 30px 90px rgba(0,0,0,.48);
           backdrop-filter:blur(8px);
@@ -204,58 +217,61 @@
           overflow:hidden;
           isolation:isolate;
           background:
-            linear-gradient(180deg, rgba(6,12,26,.20), rgba(6,12,26,.52));
+            linear-gradient(180deg, rgba(6,12,26,.12), rgba(6,12,26,.42));
         }
 
         .nebula-collage-bg{
           position:absolute;
           inset:0;
           z-index:-3;
-          transform:scale(1.03);
+          transform:scale(1.015);
         }
 
         .nebula-collage-grid{
           position:absolute;
-          inset:-6%;
+          inset:-3%;
           display:grid;
           grid-template-columns:repeat(3, 1fr);
-          gap:12px;
-          padding:14px;
+          gap:10px;
+          padding:12px;
         }
 
         .nebula-collage-column{
           display:flex;
           flex-direction:column;
-          gap:12px;
+          gap:10px;
           will-change:transform;
         }
 
         .nebula-collage-column.speed-a{
-          animation:nebulaScrollA 38s linear infinite;
+          animation:nebulaScrollA 52s linear infinite;
         }
 
         .nebula-collage-column.speed-b{
-          animation:nebulaScrollB 46s linear infinite;
+          animation:nebulaScrollB 60s linear infinite;
         }
 
         .nebula-collage-column.speed-c{
-          animation:nebulaScrollA 42s linear infinite;
+          animation:nebulaScrollA 56s linear infinite;
         }
 
         .nebula-collage-card{
-          border-radius:16px;
+          border-radius:14px;
           overflow:hidden;
           background:rgba(255,255,255,.05);
-          border:1px solid rgba(255,255,255,.10);
-          box-shadow:0 14px 30px rgba(0,0,0,.28);
+          border:1px solid rgba(255,255,255,.08);
+          box-shadow:0 10px 24px rgba(0,0,0,.22);
         }
 
         .nebula-collage-card img{
           display:block;
           width:100%;
-          aspect-ratio:3/4.4;
+          aspect-ratio:3/4.35;
           object-fit:cover;
-          filter:brightness(.92) saturate(1.08) contrast(1.06) sharpen(1);
+          image-rendering:auto;
+          transform:translateZ(0) scale(1.001);
+          filter:brightness(.98) saturate(1.12) contrast(1.09);
+          backface-visibility:hidden;
         }
 
         .nebula-collage-overlay{
@@ -263,9 +279,9 @@
           inset:0;
           z-index:-2;
           background:
-            linear-gradient(90deg, rgba(4,8,22,.18) 0%, rgba(4,8,22,.30) 28%, rgba(4,8,22,.42) 55%, rgba(4,8,22,.70) 100%),
-            radial-gradient(circle at center, rgba(7,16,31,.06) 0%, rgba(7,16,31,.32) 56%, rgba(4,8,22,.72) 100%);
-          backdrop-filter:blur(2px) brightness(.88);
+            linear-gradient(90deg, rgba(4,8,22,.08) 0%, rgba(4,8,22,.16) 26%, rgba(4,8,22,.28) 54%, rgba(4,8,22,.58) 100%),
+            radial-gradient(circle at center, rgba(7,16,31,.02) 0%, rgba(7,16,31,.16) 55%, rgba(4,8,22,.48) 100%);
+          backdrop-filter:blur(.8px) brightness(.96);
         }
 
         .nebula-hero-content{
@@ -280,8 +296,8 @@
           gap:10px;
           padding:8px 14px;
           border-radius:999px;
-          background:rgba(255,255,255,.12);
-          border:1px solid rgba(255,255,255,.14);
+          background:rgba(255,255,255,.14);
+          border:1px solid rgba(255,255,255,.16);
           font-size:.84rem;
           font-weight:700;
           letter-spacing:.03em;
@@ -291,28 +307,28 @@
 
         .nebula-hero-title{
           margin:0 0 14px;
-          font-size:2.85rem;
+          font-size:2.9rem;
           line-height:1.02;
           font-weight:900;
           letter-spacing:-0.04em;
-          text-shadow:0 8px 20px rgba(0,0,0,.22);
+          text-shadow:0 8px 20px rgba(0,0,0,.18);
         }
 
         .nebula-hero-copy{
           margin:0 0 14px;
-          font-size:1.04rem;
-          line-height:1.7;
-          color:rgba(255,255,255,.94);
-          max-width:500px;
-          text-shadow:0 4px 10px rgba(0,0,0,.18);
+          font-size:1.05rem;
+          line-height:1.72;
+          color:rgba(255,255,255,.95);
+          max-width:510px;
+          text-shadow:0 3px 8px rgba(0,0,0,.14);
         }
 
         .nebula-hero-subcopy{
           margin:0;
-          font-size:.96rem;
+          font-size:.97rem;
           line-height:1.6;
-          color:#e0e6f2;
-          text-shadow:0 4px 10px rgba(0,0,0,.18);
+          color:#ebf0f8;
+          text-shadow:0 3px 8px rgba(0,0,0,.14);
         }
 
         .nebula-chip-row{
@@ -327,8 +343,8 @@
         .nebula-chip{
           padding:11px 13px;
           border-radius:14px;
-          background:rgba(255,255,255,.10);
-          border:1px solid rgba(255,255,255,.12);
+          background:rgba(255,255,255,.11);
+          border:1px solid rgba(255,255,255,.14);
           font-size:.9rem;
           font-weight:700;
           backdrop-filter:blur(4px);
@@ -376,23 +392,54 @@
 
         .nebula-price-box{
           margin-bottom:18px;
-          padding:16px 18px;
-          border-radius:16px;
-          background:linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+          padding:18px 18px 16px;
+          border-radius:18px;
+          background:linear-gradient(135deg, rgba(255,255,255,.09), rgba(255,255,255,.03));
           border:1px solid rgba(255,255,255,.10);
         }
 
-        .nebula-price-main{
-          font-size:1.8rem;
-          font-weight:900;
-          letter-spacing:-0.03em;
-          margin-bottom:4px;
+        .nebula-offer-label{
+          display:inline-flex;
+          align-items:center;
+          padding:6px 10px;
+          border-radius:999px;
+          background:rgba(255, 17, 32, .14);
+          border:1px solid rgba(255, 17, 32, .28);
+          color:#ffb7bd;
+          font-size:.78rem;
+          font-weight:800;
+          letter-spacing:.03em;
+          margin-bottom:12px;
+          text-transform:uppercase;
         }
 
-        .nebula-price-sub{
+        .nebula-price-row{
+          display:flex;
+          align-items:flex-end;
+          gap:10px;
+          flex-wrap:wrap;
+          margin-bottom:6px;
+        }
+
+        .nebula-price-before{
+          color:#8f9bb3;
+          font-size:1rem;
+          text-decoration:line-through;
+          text-decoration-thickness:2px;
+          opacity:.95;
+        }
+
+        .nebula-price-now{
+          font-size:2rem;
+          font-weight:900;
+          letter-spacing:-0.03em;
+          line-height:1;
+        }
+
+        .nebula-price-caption{
           color:#aebad0;
           font-size:.92rem;
-          line-height:1.45;
+          line-height:1.48;
         }
 
         .nebula-option-list{
@@ -481,23 +528,23 @@
 
         @keyframes nebulaScrollA{
           0%{ transform:translateY(0); }
-          100%{ transform:translateY(-38%); }
+          100%{ transform:translateY(-28%); }
         }
 
         @keyframes nebulaScrollB{
-          0%{ transform:translateY(-8%); }
-          100%{ transform:translateY(-46%); }
+          0%{ transform:translateY(-5%); }
+          100%{ transform:translateY(-33%); }
         }
 
         @media (max-width: 860px){
           .nebula-paywall-card{
             grid-template-columns:1fr;
-            max-width:660px;
+            max-width:680px;
             min-height:auto;
           }
 
           .nebula-paywall-hero{
-            min-height:400px;
+            min-height:410px;
             padding:32px 24px;
           }
 
@@ -506,20 +553,21 @@
           }
 
           .nebula-hero-title{
-            font-size:2.2rem;
+            font-size:2.24rem;
           }
 
           .nebula-collage-grid{
-            gap:10px;
-            padding:12px;
+            gap:8px;
+            padding:10px;
+            inset:-2%;
           }
 
           .nebula-collage-card{
-            border-radius:14px;
+            border-radius:12px;
           }
 
-          .nebula-price-main{
-            font-size:1.55rem;
+          .nebula-price-now{
+            font-size:1.7rem;
           }
         }
       </style>
@@ -575,11 +623,16 @@
             </div>
 
             <div class="nebula-price-box">
-              <div class="nebula-price-main">
-                ${pricing.individual} CLP
+              <div class="nebula-offer-label">Precio lanzamiento</div>
+
+              <div class="nebula-price-row">
+                <div class="nebula-price-before">${pricing.individual.before}</div>
+                <div class="nebula-price-now">${pricing.individual.now}</div>
               </div>
-              <div class="nebula-price-sub">
-                Compra esta novela o accede a todo con Premium desde ${pricing.premiumMonthly} CLP al mes.
+
+              <div class="nebula-price-caption">
+                Antes ${pricing.individual.before}. Ahora solo ${pricing.individual.now} por esta novela.
+                Premium antes ${pricing.premium.before}, ahora ${pricing.premium.now}.
               </div>
             </div>
 
