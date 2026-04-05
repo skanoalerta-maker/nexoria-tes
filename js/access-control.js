@@ -83,311 +83,474 @@
     return false;
   }
 
+  function getAppBasePath() {
+    const path = window.location.pathname.toLowerCase();
+    if (path.includes("/nexoria/")) return "/nexoria";
+    return "/nebula";
+  }
+
+  function getCoverPaths(basePath) {
+    return [
+      `${basePath}/assets/covers/allende_portada_nebula.png`,
+      `${basePath}/assets/covers/pinochet_nebula_portada.png`,
+      `${basePath}/assets/covers/codigo-nebula-t2.jpg`,
+      `${basePath}/assets/covers/nebula.jpg`,
+      `${basePath}/assets/covers/la-ultima-conexion.jpg`,
+      `${basePath}/assets/covers/ya-habias-estado-ahi.jpg`,
+      `${basePath}/assets/covers/despues-de-tu-adios.jpg`,
+      `${basePath}/assets/covers/no-debi-enamorarme.jpg`,
+      `${basePath}/assets/covers/no-debi-enamorarme-t2.jpg`,
+      `${basePath}/assets/covers/bajo-la-misma-lluvia.jpg`
+    ];
+  }
+
+  function buildCollageColumns(covers) {
+    const col1 = [covers[0], covers[3], covers[6], covers[9]];
+    const col2 = [covers[1], covers[4], covers[7], covers[2]];
+    const col3 = [covers[5], covers[8], covers[0], covers[4]];
+
+    function buildColumn(items, extraClass) {
+      return `
+        <div class="nebula-collage-column ${extraClass}">
+          ${items.concat(items).map(src => `
+            <div class="nebula-collage-card">
+              <img src="${src}" alt="Portada Nébula" />
+            </div>
+          `).join("")}
+        </div>
+      `;
+    }
+
+    return `
+      <div class="nebula-collage-grid">
+        ${buildColumn(col1, "speed-a")}
+        ${buildColumn(col2, "speed-b")}
+        ${buildColumn(col3, "speed-c")}
+      </div>
+    `;
+  }
+
   function showPaywall(novelId, chapterNumber) {
+    const basePath = getAppBasePath();
+    const loginPath = `${basePath}/login.html`;
+    const plansPath = `${basePath}/novelas/index.html?id=${encodeURIComponent(novelId || "")}`;
+    const covers = getCoverPaths(basePath);
+
     document.body.innerHTML = `
-      <div style="
-        min-height:100vh;
-        margin:0;
-        background:
-          linear-gradient(rgba(0,0,0,.72), rgba(0,0,0,.82)),
-          radial-gradient(circle at top left, rgba(38, 68, 140, .30), transparent 30%),
-          radial-gradient(circle at top right, rgba(120, 60, 180, .22), transparent 28%),
-          linear-gradient(180deg, #060b17 0%, #090f1d 45%, #05070d 100%);
-        color:#ffffff;
-        font-family:Inter, Arial, sans-serif;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        padding:20px;
-        box-sizing:border-box;
-      ">
-        <div style="
+      <style>
+        .nebula-paywall-shell{
+          min-height:100vh;
+          margin:0;
+          background:
+            linear-gradient(rgba(0,0,0,.72), rgba(0,0,0,.82)),
+            radial-gradient(circle at top left, rgba(38, 68, 140, .30), transparent 30%),
+            radial-gradient(circle at top right, rgba(120, 60, 180, .22), transparent 28%),
+            linear-gradient(180deg, #060b17 0%, #090f1d 45%, #05070d 100%);
+          color:#ffffff;
+          font-family:Inter, Arial, sans-serif;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          padding:20px;
+          box-sizing:border-box;
+        }
+
+        .nebula-paywall-card{
           width:100%;
-          max-width:900px;
-          min-height:500px;
+          max-width:980px;
+          min-height:540px;
           display:grid;
           grid-template-columns:1.08fr .92fr;
-          background:
-            linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+          background:linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
           border:1px solid rgba(255,255,255,.08);
           border-radius:26px;
           overflow:hidden;
           box-shadow:0 30px 90px rgba(0,0,0,.48);
           backdrop-filter:blur(8px);
-        ">
+        }
 
-          <div style="
-            position:relative;
-            padding:42px 36px;
-            background:
-              linear-gradient(180deg, rgba(6,12,26,.55), rgba(6,12,26,.88)),
-              url('https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
-            display:flex;
-            flex-direction:column;
-            justify-content:space-between;
-          ">
-            <div>
-              <div style="
-                display:inline-flex;
-                align-items:center;
-                gap:10px;
-                padding:8px 14px;
-                border-radius:999px;
-                background:rgba(255,255,255,.08);
-                border:1px solid rgba(255,255,255,.10);
-                font-size:.84rem;
-                font-weight:700;
-                letter-spacing:.03em;
-                margin-bottom:20px;
-              ">
-                NÉBULA PREMIUM
-              </div>
+        .nebula-paywall-hero{
+          position:relative;
+          padding:42px 36px;
+          display:flex;
+          flex-direction:column;
+          justify-content:space-between;
+          overflow:hidden;
+          isolation:isolate;
+          background:
+            linear-gradient(180deg, rgba(6,12,26,.35), rgba(6,12,26,.72));
+        }
 
-              <h1 style="
-                margin:0 0 14px;
-                font-size:2.6rem;
-                line-height:1.05;
-                font-weight:900;
-                letter-spacing:-0.03em;
-              ">
+        .nebula-collage-bg{
+          position:absolute;
+          inset:0;
+          z-index:-3;
+          transform:scale(1.08);
+        }
+
+        .nebula-collage-grid{
+          position:absolute;
+          inset:-14%;
+          display:grid;
+          grid-template-columns:repeat(3, 1fr);
+          gap:14px;
+          padding:16px;
+        }
+
+        .nebula-collage-column{
+          display:flex;
+          flex-direction:column;
+          gap:14px;
+          will-change:transform;
+        }
+
+        .nebula-collage-column.speed-a{
+          animation:nebulaScrollA 34s linear infinite;
+        }
+
+        .nebula-collage-column.speed-b{
+          animation:nebulaScrollB 42s linear infinite;
+        }
+
+        .nebula-collage-column.speed-c{
+          animation:nebulaScrollA 38s linear infinite;
+        }
+
+        .nebula-collage-card{
+          border-radius:18px;
+          overflow:hidden;
+          background:rgba(255,255,255,.04);
+          border:1px solid rgba(255,255,255,.08);
+          box-shadow:0 16px 40px rgba(0,0,0,.35);
+        }
+
+        .nebula-collage-card img{
+          display:block;
+          width:100%;
+          aspect-ratio:3/4.6;
+          object-fit:cover;
+          filter:saturate(.95) contrast(1.03);
+        }
+
+        .nebula-collage-overlay{
+          position:absolute;
+          inset:0;
+          z-index:-2;
+          background:
+            radial-gradient(circle at center, rgba(7,16,31,.12) 0%, rgba(7,16,31,.55) 52%, rgba(4,8,22,.95) 100%),
+            linear-gradient(180deg, rgba(4,8,22,.12) 0%, rgba(4,8,22,.58) 58%, rgba(4,8,22,.88) 100%);
+          backdrop-filter:blur(7px) brightness(.62);
+        }
+
+        .nebula-hero-content{
+          position:relative;
+          z-index:2;
+        }
+
+        .nebula-badge{
+          display:inline-flex;
+          align-items:center;
+          gap:10px;
+          padding:8px 14px;
+          border-radius:999px;
+          background:rgba(255,255,255,.08);
+          border:1px solid rgba(255,255,255,.10);
+          font-size:.84rem;
+          font-weight:700;
+          letter-spacing:.03em;
+          margin-bottom:20px;
+        }
+
+        .nebula-hero-title{
+          margin:0 0 14px;
+          font-size:2.75rem;
+          line-height:1.02;
+          font-weight:900;
+          letter-spacing:-0.04em;
+          text-shadow:0 8px 24px rgba(0,0,0,.28);
+        }
+
+        .nebula-hero-copy{
+          margin:0 0 14px;
+          font-size:1.04rem;
+          line-height:1.65;
+          color:rgba(255,255,255,.90);
+          max-width:500px;
+          text-shadow:0 4px 14px rgba(0,0,0,.22);
+        }
+
+        .nebula-hero-subcopy{
+          margin:0;
+          font-size:.96rem;
+          line-height:1.6;
+          color:#d8deea;
+          text-shadow:0 4px 14px rgba(0,0,0,.22);
+        }
+
+        .nebula-chip-row{
+          display:flex;
+          flex-wrap:wrap;
+          gap:10px;
+          margin-top:24px;
+          position:relative;
+          z-index:2;
+        }
+
+        .nebula-chip{
+          padding:11px 13px;
+          border-radius:14px;
+          background:rgba(255,255,255,.08);
+          border:1px solid rgba(255,255,255,.10);
+          font-size:.9rem;
+          font-weight:700;
+          backdrop-filter:blur(6px);
+        }
+
+        .nebula-paywall-side{
+          padding:38px 32px;
+          display:flex;
+          flex-direction:column;
+          justify-content:center;
+          background:
+            linear-gradient(180deg, rgba(8,12,22,.96), rgba(8,12,22,.90));
+        }
+
+        .nebula-side-kicker{
+          margin-bottom:16px;
+          font-size:.88rem;
+          font-weight:800;
+          color:#b8c6dc;
+          letter-spacing:.05em;
+        }
+
+        .nebula-side-title{
+          margin-bottom:16px;
+          font-size:1.8rem;
+          line-height:1.15;
+          font-weight:900;
+          letter-spacing:-0.02em;
+        }
+
+        .nebula-side-copy{
+          margin:0 0 22px;
+          color:#b9c3d7;
+          line-height:1.65;
+          font-size:.96rem;
+        }
+
+        .nebula-option-list{
+          display:grid;
+          gap:12px;
+          margin-bottom:18px;
+        }
+
+        .nebula-option-card{
+          border:1px solid rgba(255,255,255,.09);
+          background:rgba(255,255,255,.04);
+          border-radius:16px;
+          padding:14px 16px;
+        }
+
+        .nebula-option-title{
+          font-size:.98rem;
+          font-weight:800;
+          margin-bottom:5px;
+        }
+
+        .nebula-option-copy{
+          color:#b8c4da;
+          font-size:.92rem;
+          line-height:1.5;
+        }
+
+        .nebula-payment-note{
+          margin-bottom:16px;
+          padding:13px 15px;
+          border-radius:14px;
+          background:linear-gradient(135deg, rgba(20,34,62,.92), rgba(16,24,41,.88));
+          border:1px solid rgba(255,255,255,.08);
+          color:#e6edf8;
+          font-size:.92rem;
+          font-weight:700;
+        }
+
+        .nebula-action-group{
+          display:flex;
+          flex-direction:column;
+          gap:10px;
+        }
+
+        .nebula-primary-btn,
+        .nebula-secondary-btn{
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          text-decoration:none;
+          border-radius:14px;
+          transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease;
+        }
+
+        .nebula-primary-btn:hover,
+        .nebula-secondary-btn:hover{
+          transform:translateY(-1px);
+        }
+
+        .nebula-primary-btn{
+          min-height:52px;
+          background:linear-gradient(180deg, #e50914 0%, #b20710 100%);
+          color:#ffffff;
+          font-size:.98rem;
+          font-weight:900;
+          letter-spacing:.01em;
+          box-shadow:0 12px 28px rgba(229, 9, 20, .28);
+        }
+
+        .nebula-secondary-btn{
+          min-height:50px;
+          background:rgba(255,255,255,.08);
+          border:1px solid rgba(255,255,255,.10);
+          color:#ffffff;
+          font-size:.96rem;
+          font-weight:800;
+        }
+
+        .nebula-footer-copy{
+          margin:16px 0 0;
+          color:#8f9bb3;
+          font-size:.84rem;
+          line-height:1.6;
+          text-align:center;
+        }
+
+        @keyframes nebulaScrollA{
+          0%{ transform:translateY(0); }
+          100%{ transform:translateY(-50%); }
+        }
+
+        @keyframes nebulaScrollB{
+          0%{ transform:translateY(-12%); }
+          100%{ transform:translateY(-62%); }
+        }
+
+        @media (max-width: 860px){
+          .nebula-paywall-card{
+            grid-template-columns:1fr;
+            max-width:640px;
+            min-height:auto;
+          }
+
+          .nebula-paywall-hero{
+            min-height:380px;
+            padding:32px 24px;
+          }
+
+          .nebula-paywall-side{
+            padding:30px 24px;
+          }
+
+          .nebula-hero-title{
+            font-size:2.15rem;
+          }
+
+          .nebula-collage-grid{
+            gap:10px;
+            padding:12px;
+          }
+
+          .nebula-collage-card{
+            border-radius:14px;
+          }
+        }
+      </style>
+
+      <div class="nebula-paywall-shell">
+        <div class="nebula-paywall-card">
+
+          <div class="nebula-paywall-hero">
+            <div class="nebula-collage-bg">
+              ${buildCollageColumns(covers)}
+            </div>
+            <div class="nebula-collage-overlay"></div>
+
+            <div class="nebula-hero-content">
+              <div class="nebula-badge">NÉBULA PREMIUM</div>
+
+              <h1 class="nebula-hero-title">
                 Historias ilimitadas<br>y mucho más
               </h1>
 
-              <p style="
-                margin:0 0 14px;
-                font-size:1.04rem;
-                line-height:1.65;
-                color:rgba(255,255,255,.86);
-                max-width:500px;
-              ">
+              <p class="nebula-hero-copy">
                 El capítulo ${chapterNumber} requiere acceso premium o compra individual de la novela.
                 Sigue leyendo sin interrupciones y desbloquea toda la experiencia de Nébula.
               </p>
 
-              <p style="
-                margin:0;
-                font-size:.96rem;
-                line-height:1.6;
-                color:#d8deea;
-              ">
+              <p class="nebula-hero-subcopy">
                 Acceso desde <strong>celular</strong>, <strong>tablet</strong> y <strong>PC</strong>.
               </p>
             </div>
 
-            <div style="
-              display:flex;
-              flex-wrap:wrap;
-              gap:10px;
-              margin-top:24px;
-            ">
-              <div style="
-                padding:11px 13px;
-                border-radius:14px;
-                background:rgba(255,255,255,.08);
-                border:1px solid rgba(255,255,255,.10);
-                font-size:.9rem;
-                font-weight:700;
-              ">Nuevas historias</div>
-
-              <div style="
-                padding:11px 13px;
-                border-radius:14px;
-                background:rgba(255,255,255,.08);
-                border:1px solid rgba(255,255,255,.10);
-                font-size:.9rem;
-                font-weight:700;
-              ">Progreso guardado</div>
-
-              <div style="
-                padding:11px 13px;
-                border-radius:14px;
-                background:rgba(255,255,255,.08);
-                border:1px solid rgba(255,255,255,.10);
-                font-size:.9rem;
-                font-weight:700;
-              ">Pago seguro</div>
+            <div class="nebula-chip-row">
+              <div class="nebula-chip">Nuevas historias</div>
+              <div class="nebula-chip">Progreso guardado</div>
+              <div class="nebula-chip">Pago seguro</div>
             </div>
           </div>
 
-          <div style="
-            padding:38px 32px;
-            display:flex;
-            flex-direction:column;
-            justify-content:center;
-            background:
-              linear-gradient(180deg, rgba(8,12,22,.96), rgba(8,12,22,.90));
-          ">
-            <div style="
-              margin-bottom:16px;
-              font-size:.88rem;
-              font-weight:800;
-              color:#b8c6dc;
-              letter-spacing:.05em;
-            ">
+          <div class="nebula-paywall-side">
+            <div class="nebula-side-kicker">
               DESBLOQUEA ESTE CONTENIDO
             </div>
 
-            <div style="
-              margin-bottom:16px;
-              font-size:1.8rem;
-              line-height:1.15;
-              font-weight:900;
-              letter-spacing:-0.02em;
-            ">
+            <div class="nebula-side-title">
               Continúa leyendo en Nébula
             </div>
 
-            <p style="
-              margin:0 0 22px;
-              color:#b9c3d7;
-              line-height:1.65;
-              font-size:.96rem;
-            ">
+            <p class="nebula-side-copy">
               Elige una de las opciones para seguir con esta novela.
             </p>
 
-            <div style="
-              display:grid;
-              gap:12px;
-              margin-bottom:18px;
-            ">
-              <div style="
-                border:1px solid rgba(255,255,255,.09);
-                background:rgba(255,255,255,.04);
-                border-radius:16px;
-                padding:14px 16px;
-              ">
-                <div style="
-                  font-size:.98rem;
-                  font-weight:800;
-                  margin-bottom:5px;
-                ">
+            <div class="nebula-option-list">
+              <div class="nebula-option-card">
+                <div class="nebula-option-title">
                   Membresía Premium
                 </div>
-                <div style="
-                  color:#b8c4da;
-                  font-size:.92rem;
-                  line-height:1.5;
-                ">
+                <div class="nebula-option-copy">
                   Acceso completo al catálogo, lectura sin bloqueos y nuevas novelas todas las semanas.
                 </div>
               </div>
 
-              <div style="
-                border:1px solid rgba(255,255,255,.09);
-                background:rgba(255,255,255,.04);
-                border-radius:16px;
-                padding:14px 16px;
-              ">
-                <div style="
-                  font-size:.98rem;
-                  font-weight:800;
-                  margin-bottom:5px;
-                ">
+              <div class="nebula-option-card">
+                <div class="nebula-option-title">
                   Compra individual
                 </div>
-                <div style="
-                  color:#b8c4da;
-                  font-size:.92rem;
-                  line-height:1.5;
-                ">
+                <div class="nebula-option-copy">
                   Compra solo esta novela y desbloquea sus capítulos.
                 </div>
               </div>
             </div>
 
-            <div style="
-              margin-bottom:16px;
-              padding:13px 15px;
-              border-radius:14px;
-              background:linear-gradient(135deg, rgba(20,34,62,.92), rgba(16,24,41,.88));
-              border:1px solid rgba(255,255,255,.08);
-              color:#e6edf8;
-              font-size:.92rem;
-              font-weight:700;
-            ">
+            <div class="nebula-payment-note">
               💳 Pago seguro con Mercado Pago
             </div>
 
-            <div style="
-              display:flex;
-              flex-direction:column;
-              gap:10px;
-            ">
-              <a href="/nebula/login.html" style="
-                display:flex;
-                align-items:center;
-                justify-content:center;
-                min-height:52px;
-                border-radius:14px;
-                background:linear-gradient(180deg, #e50914 0%, #b20710 100%);
-                color:#ffffff;
-                text-decoration:none;
-                font-size:.98rem;
-                font-weight:900;
-                letter-spacing:.01em;
-                box-shadow:0 12px 28px rgba(229, 9, 20, .28);
-              ">
+            <div class="nebula-action-group">
+              <a href="${loginPath}" class="nebula-primary-btn">
                 Iniciar sesión y continuar
               </a>
 
-              <a href="/nebula/novelas/index.html?id=${encodeURIComponent(novelId)}" style="
-                display:flex;
-                align-items:center;
-                justify-content:center;
-                min-height:50px;
-                border-radius:14px;
-                background:rgba(255,255,255,.08);
-                border:1px solid rgba(255,255,255,.10);
-                color:#ffffff;
-                text-decoration:none;
-                font-size:.96rem;
-                font-weight:800;
-              ">
+              <a href="${plansPath}" class="nebula-secondary-btn">
                 Ver planes y opciones
               </a>
             </div>
 
-            <p style="
-              margin:16px 0 0;
-              color:#8f9bb3;
-              font-size:.84rem;
-              line-height:1.6;
-              text-align:center;
-            ">
+            <p class="nebula-footer-copy">
               Accede al catálogo, compra novelas y sigue leyendo donde quedaste.
             </p>
           </div>
+
         </div>
       </div>
     `;
-
-    const wrapper = document.body.firstElementChild;
-    if (!wrapper) return;
-
-    const mq = window.matchMedia("(max-width: 860px)");
-
-    function applyResponsiveLayout() {
-      const card = wrapper.querySelector("div > div");
-      if (!card) return;
-
-      if (mq.matches) {
-        card.style.gridTemplateColumns = "1fr";
-        card.style.maxWidth = "640px";
-        card.style.minHeight = "auto";
-      } else {
-        card.style.gridTemplateColumns = "1.08fr .92fr";
-        card.style.maxWidth = "900px";
-        card.style.minHeight = "500px";
-      }
-    }
-
-    applyResponsiveLayout();
-    if (typeof mq.addEventListener === "function") {
-      mq.addEventListener("change", applyResponsiveLayout);
-    } else if (typeof mq.addListener === "function") {
-      mq.addListener(applyResponsiveLayout);
-    }
   }
 
   function showLastFreeChapterNotice(chapterNumber) {
