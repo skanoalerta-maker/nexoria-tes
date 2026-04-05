@@ -98,19 +98,19 @@
         display:flex;
         align-items:center;
         justify-content:center;
-        padding:24px;
+        padding:20px;
         box-sizing:border-box;
       ">
         <div style="
           width:100%;
-          max-width:980px;
-          min-height:560px;
+          max-width:900px;
+          min-height:500px;
           display:grid;
           grid-template-columns:1.08fr .92fr;
           background:
             linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
           border:1px solid rgba(255,255,255,.08);
-          border-radius:28px;
+          border-radius:26px;
           overflow:hidden;
           box-shadow:0 30px 90px rgba(0,0,0,.48);
           backdrop-filter:blur(8px);
@@ -118,7 +118,7 @@
 
           <div style="
             position:relative;
-            padding:54px 46px;
+            padding:42px 36px;
             background:
               linear-gradient(180deg, rgba(6,12,26,.55), rgba(6,12,26,.88)),
               url('https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
@@ -135,18 +135,18 @@
                 border-radius:999px;
                 background:rgba(255,255,255,.08);
                 border:1px solid rgba(255,255,255,.10);
-                font-size:.88rem;
+                font-size:.84rem;
                 font-weight:700;
                 letter-spacing:.03em;
-                margin-bottom:24px;
+                margin-bottom:20px;
               ">
                 NÉBULA PREMIUM
               </div>
 
               <h1 style="
-                margin:0 0 16px;
-                font-size:3rem;
-                line-height:1.04;
+                margin:0 0 14px;
+                font-size:2.6rem;
+                line-height:1.05;
                 font-weight:900;
                 letter-spacing:-0.03em;
               ">
@@ -154,11 +154,11 @@
               </h1>
 
               <p style="
-                margin:0 0 16px;
-                font-size:1.12rem;
-                line-height:1.7;
+                margin:0 0 14px;
+                font-size:1.04rem;
+                line-height:1.65;
                 color:rgba(255,255,255,.86);
-                max-width:560px;
+                max-width:500px;
               ">
                 El capítulo ${chapterNumber} requiere acceso premium o compra individual de la novela.
                 Sigue leyendo sin interrupciones y desbloquea toda la experiencia de Nébula.
@@ -166,7 +166,7 @@
 
               <p style="
                 margin:0;
-                font-size:1rem;
+                font-size:.96rem;
                 line-height:1.6;
                 color:#d8deea;
               ">
@@ -177,40 +177,40 @@
             <div style="
               display:flex;
               flex-wrap:wrap;
-              gap:12px;
-              margin-top:30px;
+              gap:10px;
+              margin-top:24px;
             ">
               <div style="
-                padding:12px 14px;
-                border-radius:16px;
+                padding:11px 13px;
+                border-radius:14px;
                 background:rgba(255,255,255,.08);
                 border:1px solid rgba(255,255,255,.10);
-                font-size:.95rem;
+                font-size:.9rem;
                 font-weight:700;
               ">Nuevas historias</div>
 
               <div style="
-                padding:12px 14px;
-                border-radius:16px;
+                padding:11px 13px;
+                border-radius:14px;
                 background:rgba(255,255,255,.08);
                 border:1px solid rgba(255,255,255,.10);
-                font-size:.95rem;
+                font-size:.9rem;
                 font-weight:700;
               ">Progreso guardado</div>
 
               <div style="
-                padding:12px 14px;
-                border-radius:16px;
+                padding:11px 13px;
+                border-radius:14px;
                 background:rgba(255,255,255,.08);
                 border:1px solid rgba(255,255,255,.10);
-                font-size:.95rem;
+                font-size:.9rem;
                 font-weight:700;
               ">Pago seguro</div>
             </div>
           </div>
 
           <div style="
-            padding:48px 40px;
+            padding:38px 32px;
             display:flex;
             flex-direction:column;
             justify-content:center;
@@ -218,8 +218,8 @@
               linear-gradient(180deg, rgba(8,12,22,.96), rgba(8,12,22,.90));
           ">
             <div style="
-              margin-bottom:18px;
-              font-size:.92rem;
+              margin-bottom:16px;
+              font-size:.88rem;
               font-weight:800;
               color:#b8c6dc;
               letter-spacing:.05em;
@@ -228,8 +228,8 @@
             </div>
 
             <div style="
-              margin-bottom:18px;
-              font-size:2rem;
+              margin-bottom:16px;
+              font-size:1.8rem;
               line-height:1.15;
               font-weight:900;
               letter-spacing:-0.02em;
@@ -238,36 +238,36 @@
             </div>
 
             <p style="
-              margin:0 0 24px;
+              margin:0 0 22px;
               color:#b9c3d7;
-              line-height:1.7;
-              font-size:1rem;
+              line-height:1.65;
+              font-size:.96rem;
             ">
               Elige una de las opciones para seguir con esta novela.
             </p>
 
             <div style="
               display:grid;
-              gap:14px;
-              margin-bottom:22px;
+              gap:12px;
+              margin-bottom:18px;
             ">
               <div style="
                 border:1px solid rgba(255,255,255,.09);
                 background:rgba(255,255,255,.04);
-                border-radius:18px;
-                padding:16px 18px;
+                border-radius:16px;
+                padding:14px 16px;
               ">
                 <div style="
-                  font-size:1rem;
+                  font-size:.98rem;
                   font-weight:800;
-                  margin-bottom:6px;
+                  margin-bottom:5px;
                 ">
                   Membresía Premium
                 </div>
                 <div style="
                   color:#b8c4da;
-                  font-size:.96rem;
-                  line-height:1.55;
+                  font-size:.92rem;
+                  line-height:1.5;
                 ">
                   Acceso completo al catálogo, lectura sin bloqueos y nuevas novelas todas las semanas.
                 </div>
@@ -276,20 +276,20 @@
               <div style="
                 border:1px solid rgba(255,255,255,.09);
                 background:rgba(255,255,255,.04);
-                border-radius:18px;
-                padding:16px 18px;
+                border-radius:16px;
+                padding:14px 16px;
               ">
                 <div style="
-                  font-size:1rem;
+                  font-size:.98rem;
                   font-weight:800;
-                  margin-bottom:6px;
+                  margin-bottom:5px;
                 ">
                   Compra individual
                 </div>
                 <div style="
                   color:#b8c4da;
-                  font-size:.96rem;
-                  line-height:1.55;
+                  font-size:.92rem;
+                  line-height:1.5;
                 ">
                   Compra solo esta novela y desbloquea sus capítulos.
                 </div>
@@ -297,13 +297,13 @@
             </div>
 
             <div style="
-              margin-bottom:18px;
-              padding:14px 16px;
-              border-radius:16px;
+              margin-bottom:16px;
+              padding:13px 15px;
+              border-radius:14px;
               background:linear-gradient(135deg, rgba(20,34,62,.92), rgba(16,24,41,.88));
               border:1px solid rgba(255,255,255,.08);
               color:#e6edf8;
-              font-size:.96rem;
+              font-size:.92rem;
               font-weight:700;
             ">
               💳 Pago seguro con Mercado Pago
@@ -312,18 +312,18 @@
             <div style="
               display:flex;
               flex-direction:column;
-              gap:12px;
+              gap:10px;
             ">
               <a href="/nebula/login.html" style="
                 display:flex;
                 align-items:center;
                 justify-content:center;
-                min-height:56px;
-                border-radius:16px;
+                min-height:52px;
+                border-radius:14px;
                 background:linear-gradient(180deg, #e50914 0%, #b20710 100%);
                 color:#ffffff;
                 text-decoration:none;
-                font-size:1rem;
+                font-size:.98rem;
                 font-weight:900;
                 letter-spacing:.01em;
                 box-shadow:0 12px 28px rgba(229, 9, 20, .28);
@@ -335,13 +335,13 @@
                 display:flex;
                 align-items:center;
                 justify-content:center;
-                min-height:54px;
-                border-radius:16px;
+                min-height:50px;
+                border-radius:14px;
                 background:rgba(255,255,255,.08);
                 border:1px solid rgba(255,255,255,.10);
                 color:#ffffff;
                 text-decoration:none;
-                font-size:1rem;
+                font-size:.96rem;
                 font-weight:800;
               ">
                 Ver planes y opciones
@@ -349,9 +349,9 @@
             </div>
 
             <p style="
-              margin:18px 0 0;
+              margin:16px 0 0;
               color:#8f9bb3;
-              font-size:.88rem;
+              font-size:.84rem;
               line-height:1.6;
               text-align:center;
             ">
@@ -374,9 +374,11 @@
       if (mq.matches) {
         card.style.gridTemplateColumns = "1fr";
         card.style.maxWidth = "640px";
+        card.style.minHeight = "auto";
       } else {
         card.style.gridTemplateColumns = "1.08fr .92fr";
-        card.style.maxWidth = "980px";
+        card.style.maxWidth = "900px";
+        card.style.minHeight = "500px";
       }
     }
 
