@@ -83,11 +83,13 @@
     return false;
   }
 
-  function getAppBasePath() {
-    const path = window.location.pathname.toLowerCase();
-    if (path.includes("/nexoria/")) return "/nexoria";
-    return "/nebula";
-  }
+ function getAppBasePath() {
+  const path = window.location.pathname.toLowerCase();
+  if (path.includes("/nexoria-tes/")) return "/nexoria-tes";
+  if (path.includes("/nexoria/")) return "/nexoria";
+  if (path.includes("/nebula/")) return "/nebula";
+  return "";
+}
 
   function getCoverPaths(basePath) {
     return [
