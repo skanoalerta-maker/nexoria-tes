@@ -92,19 +92,19 @@
 }
 
   function getCoverPaths(basePath) {
-    return [
-      `${basePath}/assets/covers/allende_portada_nebula.png`,
-      `${basePath}/assets/covers/pinochet_nebula_portada.png`,
-      `${basePath}/assets/covers/codigo-nebula-t2.jpg`,
-      `${basePath}/assets/covers/nebula.jpg`,
-      `${basePath}/assets/covers/la-ultima-conexion.jpg`,
-      `${basePath}/assets/covers/ya-habias-estado-ahi.jpg`,
-      `${basePath}/assets/covers/despues-de-tu-adios.jpg`,
-      `${basePath}/assets/covers/no-debi-enamorarme.jpg`,
-      `${basePath}/assets/covers/no-debi-enamorarme-t2.jpg`,
-      `${basePath}/assets/covers/bajo-la-misma-lluvia.jpg`
-    ];
-  }
+  return [
+    `${basePath}/assets/covers/allende_portada_nebula.png`,
+    `${basePath}/assets/covers/pinochet_nebula_portada.png`,
+    `${basePath}/assets/covers/codigo-nebula-t2.jpg`,
+    `${basePath}/assets/covers/nebula.jpg`,
+    `${basePath}/assets/covers/la-ultima-conexion.jpg`,
+    `${basePath}/assets/covers/ya-habias-estado-ahi.jpg`,
+    `${basePath}/assets/covers/despues-de-tu-adios.jpg`,
+    `${basePath}/assets/covers/no-debi-enamorarme.jpg`,
+    `${basePath}/assets/covers/no-debi-enamorarme-t2.jpg`,
+    `${basePath}/assets/covers/bajo-la-misma-lluvia.jpg`
+  ];
+}
 
   function buildCollageColumns(covers) {
     const col1 = [covers[0], covers[3], covers[6], covers[9]];
