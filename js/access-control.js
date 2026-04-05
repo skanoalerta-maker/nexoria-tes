@@ -116,7 +116,7 @@
         <div class="nebula-collage-column ${extraClass}">
           ${items.concat(items).map(src => `
             <div class="nebula-collage-card">
-              <img src="${src}" alt="Portada Nébula" />
+              <img src="${src}" alt="" onerror="this.style.display='none'; this.parentElement.style.background='rgba(255,255,255,.06)';" />
             </div>
           `).join("")}
         </div>
