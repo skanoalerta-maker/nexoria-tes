@@ -832,19 +832,132 @@
             <p>Y entonces recordó la última escena entera.</p>
 
             <p>No fragmentos.</p>
-            <p>No ráfagas
-                      </div>
-      </section>
+            <p>No ráfagas.</p>
+<p>No versiones incompletas.</p>
 
-      <div class="nav-chapters">
-        <a href="capitulo9.html" class="btn-nav">← Capítulo anterior</a>
-        <a href="capitulo11.html" class="btn-nav">Siguiente capítulo →</a>
-      </div>
+<p>Alma tocando el centro.</p>
+<p>Alma mirándolo con dos expresiones a la vez.</p>
+<p>Su propia mano sosteniéndola.</p>
+<p>Lira gritando que la suelte.</p>
+<p>Y él negándose.</p>
 
+<p>Hasta que Alma, o lo que ya estaba mezclado con Alma, le dijo algo directo al oído:</p>
+
+<div class="quote">“Si me amas, déjame entrar completa.”</div>
+
+<p>Kai soltó un grito ahogado y cayó de rodillas.</p>
+<p>La memoria fue tan brutal que lo dobló por la mitad.</p>
+<p>Lira se acercó, pero no lo tocó.</p>
+<p>Esperó.</p>
+
+<p>Cuando él levantó la cabeza, ya no había duda en su rostro.</p>
+<p>Solo devastación.</p>
+
+<p>—Yo abrí la primera reapertura —dijo.</p>
+<p>Lira no negó nada.</p>
+
+<div class="quote">Ese fue el verdadero final de la temporada: Kai dejó de ser víctima absoluta de la historia. También había sido una de sus causas.</div>
+
+<div class="divider"></div>
+
+<p>El centro se agitó violentamente.</p>
+<p>La plataforma crujió.</p>
+<p>Una grieta fina se abrió bajo sus pies.</p>
+
+<p>Lira activó un panel manual oculto en la base de la pasarela. Una luz roja comenzó a titilar.</p>
+<p>—Si acciono esto, sellamos la plataforma y nos corta el acceso durante un tiempo.</p>
+<p>—¿Y si no lo haces?</p>
+<p>—Entonces baja algo más que una copia.</p>
+
+<p>Kai volvió a mirar el centro.</p>
+<p>Alma seguía ahí y no seguía ahí.</p>
+<p>Lo suficiente para destruirlo.</p>
+
+<p>La voz del centro habló una última vez:</p>
+<div class="quote">—La próxima vez, no vendrás incompleto.</div>
+
+<p>Lira accionó el cierre.</p>
+<p>Una barrera de contención se elevó desde los bordes de la plataforma, cortando la visión del centro en segmentos de acero y luz azul.</p>
+<p>El subnivel tembló otra vez.</p>
+<p>La pasarela empezó a retraerse.</p>
+<p>Kai y Lira corrieron hacia el ascensor mientras detrás de ellos el sonido del centro se volvía más fuerte, más cercano, más vivo.</p>
+
+<p>Antes de que la reja se cerrara por completo, Kai miró atrás una última vez.</p>
+<p>Entre las luces de contención y la oscuridad fracturada vio una silueta inmóvil.</p>
+<p>Femenina.</p>
+<p>Quietísima.</p>
+<p>Esperándolo.</p>
+
+<div class="quote">Y por primera vez entendió que la temporada no cerraba con una victoria, sino con una promesa: tarde o temprano tendría que volver por Alma.</div>
+          </div>
+        </div>
+
+        <div class="reader-bottom">
+          <p class="reader-note">
+            Final de temporada 1: Kai recuerda que fue parte de la primera apertura y comprende que Alma no desapareció por completo. Solo quedó del otro lado.
+          </p>
+
+          <div class="nav-actions">
+            <a href="capitulo9.html" class="btn btn-ghost">← Capítulo 9</a>
+            <a href="capitulo11.html" class="btn btn-primary">Empezar Temporada 2 →</a>
+          </div>
+        </div>
+      </article>
+
+      <div class="footer-space"></div>
     </main>
   </div>
 
-  <script src="../../../../js/chapter-tracker.js"></script>
+  <script>
+    const canvas = document.getElementById("stars");
+    const ctx = canvas.getContext("2d");
+    let stars = [];
+
+    function resize(){
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      createStars();
+    }
+
+    function createStars(){
+      stars = [];
+      const amount = Math.floor((canvas.width * canvas.height) / 18000);
+      for(let i = 0; i < amount; i++){
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 1.4 + 0.3,
+          speed: Math.random() * 0.22 + 0.05,
+          alpha: Math.random() * 0.55 + 0.15
+        });
+      }
+    }
+
+    function animate(){
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for(const s of stars){
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(255,255,255,${s.alpha})`;
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fill();
+
+        s.y += s.speed;
+
+        if(s.y > canvas.height){
+          s.y = -2;
+          s.x = Math.random() * canvas.width;
+        }
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener("resize", resize);
+    resize();
+    animate();
+  </script>
+  <!-- 🔒 CONTROL DE ACCESO -->
   <script src="../../../../js/access-control.js"></script>
 
 </body>
