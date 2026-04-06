@@ -1318,13 +1318,8 @@ onAuthStateChanged(auth, async (user) => {
   if (user) {
     try {
       await loadUserProfile(user);
-
-      // 🔥 REDIRECCIÓN AUTOMÁTICA
-      window.location.href = "/nexoria-tes/index.html";
-
     } catch (error) {
       console.error(error);
-      showStatus("Tu sesión está activa, pero hubo un problema cargando tu perfil.", "error");
     }
   } else {
     clearPurchaseIdentity();
