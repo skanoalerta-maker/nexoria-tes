@@ -300,7 +300,7 @@ window.NEBULA_NOVELS = {
       { num: 16, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 16", description: "Todo se prepara para el golpe final." },
       { num: 17, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 17", description: "El cierre de la historia revela el verdadero precio del silencio." }
     ]
-  }
+  },
     "luci-t1": {
     id: "luci-t1",
     title: "Luci — Temporada 1",
