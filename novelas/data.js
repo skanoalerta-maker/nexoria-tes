@@ -302,6 +302,7 @@ window.NEBULA_NOVELS = {
     ]
   }
 };
+
 "luci-t1": {
   id: "luci-t1",
   title: "Luci — Temporada 1",
@@ -331,3 +332,5 @@ window.NEBULA_NOVELS = {
     { num: 12, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 12", description: "El cierre de temporada deja a Luci frente a una verdad emocional que ya no puede seguir negando." }
   ]
 }
+
+};
