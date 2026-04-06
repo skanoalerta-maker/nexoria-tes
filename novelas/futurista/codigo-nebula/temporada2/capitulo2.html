@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Capítulo 2 (12) | Código Nébula - Temporada 2</title>
-  <meta name="description" content="Capítulo 12 de Código Nébula: El archivo de Alma." />
+  <title>Capítulo 2 | Código Nébula - Temporada 2</title>
+  <meta name="description" content="Capítulo 2 de Código Nébula: El archivo de Alma." />
   <style>
     :root{--bg:#05080f;--bg2:#0b1220;--card:rgba(12,18,32,0.88);--line:rgba(255,255,255,0.08);--line-strong:rgba(73,182,255,0.24);--text:#f5f8ff;--muted:#aebad1;--muted-2:#7f90ae;--blue:#0A6CFF;--blue2:#49b6ff;--blue-soft:rgba(73,182,255,0.14);--shadow:0 24px 60px rgba(0,0,0,0.45);--radius:22px;--max:860px;}
     *{box-sizing:border-box} html{scroll-behavior:smooth}
@@ -77,14 +77,14 @@
         </div>
         <div class="top-actions">
           <a href="../index.html" class="btn btn-ghost">← Volver al inicio</a>
-          <a href="#" class="btn btn-primary">Continuará…</a>
+          <a href="capitulo3.html" class="btn btn-primary">Siguiente capítulo →</a>
         </div>
       </div>
     </header>
 
     <section class="hero">
       <div class="hero-inner">
-        <div class="crumb">Temporada 2 / Capítulo 12</div>
+        <div class="crumb">Temporada 2 / Capítulo 2</div>
         <div class="hero-grid">
           <div class="hero-copy">
             <p class="eyebrow">Temporada 2</p>
@@ -117,7 +117,7 @@
       <article class="reader">
         <div class="reader-top">
           <div class="reader-top-left">
-            <h3>Capítulo 12: El archivo de Alma</h3>
+            <h3>Capítulo 2: El archivo de Alma</h3>
             <p>Temporada 2 · Misión redefinida</p>
           </div>
           <div class="reader-badge">Capítulo abierto</div>
@@ -390,7 +390,8 @@
             Ya quedó definido el nuevo objetivo de temporada 2: una extracción parcial de Alma antes de que el ancla 03 se degrade y antes de que Kai termine de convertirse en la reapertura viva del centro.
           </p>
           <div class="nav-actions">
-            <a href="capitulo11.html" class="btn btn-ghost">← Capítulo 11</a>
+            <a href="capitulo1.html" class="btn btn-ghost">← Capítulo 1</a>
+            <a href="capitulo3.html" class="btn btn-primary">Leer capítulo 3 →</a>
           </div>
         </div>
       </article>
@@ -407,5 +408,7 @@
     function animate(){ ctx.clearRect(0,0,canvas.width,canvas.height); for(const s of stars){ ctx.beginPath(); ctx.fillStyle=`rgba(255,255,255,${s.alpha})`; ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fill(); s.y+=s.speed; if(s.y>canvas.height){ s.y=-2; s.x=Math.random()*canvas.width; } } requestAnimationFrame(animate); }
     window.addEventListener("resize", resize); resize(); animate();
   </script>
+  <!-- 🔒 CONTROL DE ACCESO -->
+  <script src="../../../../js/access-control.js"></script>
 </body>
 </html>
