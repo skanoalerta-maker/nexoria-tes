@@ -2689,16 +2689,15 @@ function filtrarHistorias() {
   import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
   import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyD0nB8uMQRC_d17zCf2r-nw0jb0eq4s45w",
-    authDomain: "nebula-1955f.firebaseapp.com",
-    projectId: "dyh-nebula",
-    storageBucket: "nebula-1955f.firebasestorage.app",
-    messagingSenderId: "736722257829",
-    appId: "1:736722257829:web:605cab7fde553470454a4c",
-    measurementId: "G-BTF17CDGM7"
-  };
-
+const firebaseConfig = {
+  apiKey: "AIzaSyD0nB8uMQRC_d17zCf2r-nw0jb0eq4s45w",
+  authDomain: "nebula-1955f.firebaseapp.com",
+  projectId: "dyh-nebula",
+  storageBucket: "nebula-1955f.firebasestorage.app",
+  messagingSenderId: "736722257829",
+  appId: "1:736722257829:web:605cab7fde553470454a4c",
+  measurementId: "G-BTF17CDGM7"
+};
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const db = getFirestore(app);
