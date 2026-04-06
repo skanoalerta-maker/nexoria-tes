@@ -2927,14 +2927,43 @@ function vote(value) {
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  // 🔒 BLOQUEO DE ACCESO
-  onAuthStateChanged(auth, (user) => {
-    if (!user) {
-      window.location.href = "../login.html";
-    }
-  });
+onAuthStateChanged(auth, async (user) => {
 
-  // resto de tu código...
+  // ❌ NO LOGUEADO → LOGIN
+  if (!user) {
+    window.location.href = "../login.html";
+    return;
+  }
+
+  try {
+    const userRef = doc(db, "users", user.uid);
+    const userSnap = await getDoc(userRef);
+
+    if (!userSnap.exists()) {
+      // Usuario raro → lo sacamos
+      await signOut(auth);
+      window.location.href = "../login.html";
+      return;
+    }
+
+    const data = userSnap.data();
+
+    const isPremium =
+      data.plan === "premium" ||
+      data.subscription === "premium";
+
+    // ❌ NO PREMIUM → PANTALLA DE PAGO / LANDING
+    if (!isPremium) {
+      window.location.href = "../landing.html"; // 👈 ESTA ES LA NUEVA QUE QUIERES
+      return;
+    }
+
+    // ✅ SI ES PREMIUM → SE QUEDA EN INDEX
+    console.log("Usuario premium OK");
+
+  } catch (e) {
+    console.error("Error validando usuario:", e);
+  }
 });
 </script>
 </body>
