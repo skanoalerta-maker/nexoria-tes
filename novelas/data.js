@@ -302,3 +302,32 @@ window.NEBULA_NOVELS = {
     ]
   }
 };
+"luci-t1": {
+  id: "luci-t1",
+  title: "Luci — Temporada 1",
+  sagaTitle: "Luci",
+  description: "Una novela de romance dramático sobre una joven cuya vida cambia para siempre tras un diagnóstico devastador, mientras el amor, el miedo y la esperanza empiezan a mezclarse en su camino.",
+  cover: "../assets/covers/luci.jpg",
+  baseFolder: "romance/luci",
+  defaultSeason: "temporada1",
+  defaultSeasonLabel: "Temporada 1",
+  freeChapters: 3,
+  price: "$1.500 CLP",
+  rating: 5,
+  visitas: 0,
+  tags: ["Romance", "Drama", "Emocional", "Temporada 1"],
+  chapters: [
+    { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "El día que todo cambió", description: "Una noticia devastadora divide la vida de Luci en un antes y un después, mientras su madre intenta mantenerse en pie." },
+    { num: 2, season: "temporada1", seasonLabel: "Temporada 1", title: "Cuando el miedo se queda a vivir contigo", description: "El silencio, la espera y el peso de la verdad comienzan a instalarse en la casa y en el corazón de Luci." },
+    { num: 3, season: "temporada1", seasonLabel: "Temporada 1", title: "Incluso lo bonito empieza a doler", description: "En una nueva visita al hospital, Luci descubre que incluso en medio del dolor puede aparecer una mirada capaz de cambiarlo todo." },
+    { num: 4, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 4", description: "La historia continúa mientras Luci intenta sostenerse entre el miedo, la fragilidad y una nueva emoción que no esperaba sentir." },
+    { num: 5, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 5", description: "La conexión con ese desconocido empieza a crecer justo cuando la vida de Luci se vuelve más incierta." },
+    { num: 6, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 6", description: "Entre consultas, silencios y emociones contenidas, Luci descubre que todavía hay cosas capaces de hacerla temblar." },
+    { num: 7, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 7", description: "La tensión emocional aumenta y cada encuentro deja más marcas de las que ambos quieren reconocer." },
+    { num: 8, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 8", description: "El amor empieza a asomarse en el peor momento posible, cuando todo alrededor parece romperse." },
+    { num: 9, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 9", description: "Las emociones alcanzan un punto delicado y Luci deberá decidir cuánto está dispuesta a sentir." },
+    { num: 10, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 10", description: "La historia entra en una etapa más intensa, donde cada palabra y cada ausencia pesan más que nunca." },
+    { num: 11, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 11", description: "El miedo, el deseo y la fragilidad de Luci se entrelazan en un momento que cambia la historia otra vez." },
+    { num: 12, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 12", description: "El cierre de temporada deja a Luci frente a una verdad emocional que ya no puede seguir negando." }
+  ]
+}
