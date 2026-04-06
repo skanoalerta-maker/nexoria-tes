@@ -2,195 +2,878 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Nébula | Bienvenido</title>
+  <meta
+    name="description"
+    content="Descubre Nébula, una plataforma de historias por capítulos con romance, terror, historia y ciencia ficción."
+  />
+  <meta name="theme-color" content="#040816" />
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', sans-serif;
+    :root{
+      --bg:#040816;
+      --bg2:#081327;
+      --bg3:#101d39;
+      --panel:rgba(7,15,34,.72);
+      --panel-strong:rgba(10,20,44,.88);
+      --line:rgba(255,255,255,.08);
+      --line-strong:rgba(91,147,255,.20);
+      --text:#f8fbff;
+      --muted:#b8c4da;
+      --muted-2:#91a6c7;
+      --blue:#4da3ff;
+      --blue-2:#7ec1ff;
+      --violet:#8b6dff;
+      --shadow:0 24px 70px rgba(0,0,0,.34);
+      --shadow-soft:0 18px 46px rgba(0,0,0,.24);
+      --radius:24px;
+      --radius-lg:34px;
+      --container:min(1180px, calc(100% - 28px));
     }
 
-    body {
-      background: radial-gradient(circle at top, #0b1730, #040816);
-      color: #fff;
-      overflow-x: hidden;
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
     }
 
-    /* HEADER */
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 40px;
+    html{
+      scroll-behavior:smooth;
     }
 
-    .logo {
-      font-size: 26px;
-      font-weight: bold;
-      color: #4da3ff;
-      letter-spacing: 2px;
+    body{
+      min-height:100vh;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 18% 14%, rgba(77,163,255,.12), transparent 22%),
+        radial-gradient(circle at 82% 18%, rgba(139,109,255,.12), transparent 24%),
+        linear-gradient(180deg, #040816 0%, #061124 44%, #09162e 100%);
+      overflow-x:hidden;
+      position:relative;
     }
 
-    .btn-login {
-      padding: 10px 20px;
-      background: transparent;
-      border: 1px solid #4da3ff;
-      border-radius: 20px;
-      color: #4da3ff;
-      cursor: pointer;
-      transition: 0.3s;
+    a{
+      color:inherit;
+      text-decoration:none;
     }
 
-    .btn-login:hover {
-      background: #4da3ff;
-      color: #000;
+    button,
+    input{
+      font:inherit;
     }
 
-    /* HERO */
-    .hero {
-      text-align: center;
-      padding: 80px 20px;
+    .background-wall{
+      position:fixed;
+      inset:0;
+      overflow:hidden;
+      z-index:-30;
+      pointer-events:none;
+      opacity:.86;
     }
 
-    .hero h1 {
-      font-size: 42px;
-      margin-bottom: 20px;
+    .background-wall::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at center, transparent 26%, rgba(4,8,22,.22) 54%, rgba(4,8,22,.78) 100%),
+        linear-gradient(180deg, rgba(4,8,22,.34), rgba(4,8,22,.68));
     }
 
-    .hero p {
-      color: #aaa;
-      font-size: 18px;
-      margin-bottom: 30px;
+    .poster-columns{
+      position:absolute;
+      inset:-8vh -4vw;
+      display:grid;
+      grid-template-columns:repeat(6, minmax(140px, 1fr));
+      gap:18px;
+      transform:scale(1.03);
     }
 
-    .btn-main {
-      padding: 16px 30px;
-      border-radius: 30px;
-      border: none;
-      background: #4da3ff;
-      color: #000;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
+    .poster-column{
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+      animation:floatUp linear infinite;
+      will-change:transform;
     }
 
-    .btn-main:hover {
-      transform: scale(1.05);
+    .poster-column.reverse{
+      animation-name:floatDown;
     }
 
-    /* PREVIEW */
-    .stories {
-      padding: 50px 20px;
+    .poster{
+      position:relative;
+      width:100%;
+      aspect-ratio:0.68 / 1;
+      border-radius:24px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.04);
+      box-shadow:0 16px 28px rgba(0,0,0,.28);
     }
 
-    .stories h2 {
-      text-align: center;
-      margin-bottom: 30px;
+    .poster img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      filter:brightness(.88) saturate(1.04);
+      transform:scale(1.02);
     }
 
-    .story-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 20px;
-      max-width: 900px;
-      margin: auto;
+    .poster::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.04), rgba(0,0,0,.18)),
+        linear-gradient(0deg, rgba(4,8,20,.24), rgba(4,8,20,.06));
     }
 
-    .story {
-      background: #0f1d3a;
-      border-radius: 15px;
-      overflow: hidden;
-      transition: 0.3s;
+    @keyframes floatUp{
+      0%{ transform:translateY(0); }
+      100%{ transform:translateY(-34%); }
     }
 
-    .story img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
+    @keyframes floatDown{
+      0%{ transform:translateY(-34%); }
+      100%{ transform:translateY(0); }
     }
 
-    .story:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 0 20px rgba(77,163,255,0.3);
+    .glow-orb{
+      position:fixed;
+      border-radius:50%;
+      filter:blur(44px);
+      pointer-events:none;
+      z-index:-28;
+      opacity:.44;
     }
 
-    .story p {
-      padding: 10px;
-      font-size: 14px;
-      text-align: center;
+    .orb-1{
+      width:380px;
+      height:380px;
+      top:10%;
+      right:-110px;
+      background:radial-gradient(circle, rgba(77,163,255,.24), transparent 70%);
+      animation:orbMove1 18s ease-in-out infinite alternate;
     }
 
-    /* CTA FINAL */
-    .cta {
-      text-align: center;
-      padding: 60px 20px;
+    .orb-2{
+      width:330px;
+      height:330px;
+      left:-110px;
+      top:36%;
+      background:radial-gradient(circle, rgba(139,109,255,.20), transparent 70%);
+      animation:orbMove2 20s ease-in-out infinite alternate;
     }
 
-    footer {
-      text-align: center;
-      padding: 30px;
-      font-size: 13px;
-      color: #666;
+    @keyframes orbMove1{
+      from{ transform:translate3d(0,0,0); }
+      to{ transform:translate3d(-28px, 24px, 0); }
+    }
+
+    @keyframes orbMove2{
+      from{ transform:translate3d(0,0,0); }
+      to{ transform:translate3d(30px, -20px, 0); }
+    }
+
+    .container{
+      width:var(--container);
+      margin:0 auto;
+      position:relative;
+      z-index:2;
+    }
+
+    .header{
+      padding:22px 0 10px;
+    }
+
+    .header-shell{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+    }
+
+    .logo-wrap{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      min-width:0;
+    }
+
+    .logo-mark{
+      width:48px;
+      height:48px;
+      border-radius:16px;
+      background:
+        radial-gradient(circle at 35% 30%, rgba(255,255,255,.18), transparent 38%),
+        linear-gradient(135deg, rgba(77,163,255,.26), rgba(139,109,255,.24));
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow:0 0 24px rgba(77,163,255,.16);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:1.15rem;
+      font-weight:900;
+      color:#fff;
+      flex-shrink:0;
+    }
+
+    .logo-copy{
+      min-width:0;
+    }
+
+    .logo-copy strong{
+      display:block;
+      font-size:1.25rem;
+      letter-spacing:.12em;
+      line-height:1;
+    }
+
+    .logo-copy span{
+      display:block;
+      margin-top:5px;
+      color:var(--muted);
+      font-size:.92rem;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      min-height:52px;
+      padding:0 24px;
+      border-radius:18px;
+      border:1px solid transparent;
+      font-weight:800;
+      font-size:1rem;
+      cursor:pointer;
+      transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
+      white-space:nowrap;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+    }
+
+    .btn-primary{
+      color:#06101f;
+      background:linear-gradient(135deg, #65b5ff 0%, #4da3ff 100%);
+      box-shadow:0 18px 34px rgba(38,121,255,.24);
+    }
+
+    .btn-secondary{
+      color:#fff;
+      background:rgba(255,255,255,.06);
+      border-color:rgba(255,255,255,.10);
+      backdrop-filter:blur(10px);
+    }
+
+    .hero{
+      padding:28px 0 30px;
+    }
+
+    .hero-shell{
+      display:grid;
+      grid-template-columns:minmax(0, 1.08fr) minmax(320px, .92fr);
+      gap:24px;
+      align-items:stretch;
+    }
+
+    .hero-copy{
+      padding:34px;
+      border-radius:var(--radius-lg);
+      background:linear-gradient(180deg, rgba(9,18,42,.78), rgba(9,18,42,.56));
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+      backdrop-filter:blur(14px);
+    }
+
+    .hero-copy::before{
+      content:"";
+      position:absolute;
+      inset:auto -12% -30% auto;
+      width:280px;
+      height:280px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(77,163,255,.18), transparent 70%);
+      filter:blur(12px);
+      pointer-events:none;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      min-height:36px;
+      padding:0 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.08);
+      color:#e6f0ff;
+      font-size:.84rem;
+      font-weight:800;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+    }
+
+    .eyebrow::before{
+      content:"";
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:#6fc0ff;
+      box-shadow:0 0 14px rgba(111,192,255,.8);
+      flex-shrink:0;
+    }
+
+    .hero-copy h1{
+      margin-top:18px;
+      font-size:clamp(2.4rem, 5vw, 4.8rem);
+      line-height:.95;
+      letter-spacing:-.05em;
+      max-width:11ch;
+    }
+
+    .hero-copy h1 span{
+      display:block;
+      color:#a5d6ff;
+      margin-top:10px;
+    }
+
+    .hero-copy p{
+      margin-top:22px;
+      max-width:62ch;
+      color:var(--muted);
+      font-size:1.08rem;
+      line-height:1.78;
+    }
+
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      margin-top:26px;
+    }
+
+    .hero-bullets{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0, 1fr));
+      gap:12px;
+      margin-top:26px;
+    }
+
+    .hero-bullet{
+      padding:16px;
+      border-radius:18px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.07);
+      box-shadow:var(--shadow-soft);
+    }
+
+    .hero-bullet small{
+      display:block;
+      color:var(--muted-2);
+      font-size:.82rem;
+      margin-bottom:7px;
+      text-transform:uppercase;
+      letter-spacing:.05em;
+    }
+
+    .hero-bullet strong{
+      font-size:.98rem;
+      line-height:1.35;
+      display:block;
+    }
+
+    .hero-feature{
+      border-radius:var(--radius-lg);
+      overflow:hidden;
+      background:linear-gradient(180deg, rgba(7,16,37,.92), rgba(7,16,37,.78));
+      border:1px solid rgba(255,255,255,.07);
+      box-shadow:var(--shadow);
+      display:flex;
+      flex-direction:column;
+      min-height:100%;
+    }
+
+    .hero-feature-cover{
+      position:relative;
+      aspect-ratio:16 / 10;
+      background:#050b1a;
+      padding:14px;
+    }
+
+    .hero-feature-cover img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      border-radius:20px;
+      display:block;
+    }
+
+    .hero-feature-content{
+      padding:24px;
+      display:flex;
+      flex-direction:column;
+      gap:16px;
+      flex:1;
+    }
+
+    .hero-feature-tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    .hero-feature-tags span{
+      display:inline-flex;
+      align-items:center;
+      min-height:34px;
+      padding:0 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.08);
+      color:#eef5ff;
+      font-weight:800;
+      font-size:.86rem;
+    }
+
+    .hero-feature h2{
+      font-size:clamp(1.65rem, 2.4vw, 2.3rem);
+      line-height:1.04;
+    }
+
+    .hero-feature p{
+      color:var(--muted);
+      line-height:1.75;
+      font-size:1rem;
+    }
+
+    .feature-points{
+      display:grid;
+      gap:10px;
+      margin-top:auto;
+    }
+
+    .feature-points div{
+      padding:14px 16px;
+      border-radius:16px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.06);
+      color:#e6f0ff;
+      line-height:1.6;
+    }
+
+    .section{
+      padding:16px 0 34px;
+    }
+
+    .section-head{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:18px;
+      margin-bottom:22px;
+      flex-wrap:wrap;
+    }
+
+    .section-kicker{
+      color:#9ccfff;
+      text-transform:uppercase;
+      font-size:.82rem;
+      letter-spacing:.08em;
+      font-weight:800;
+      margin-bottom:8px;
+    }
+
+    .section-head h2{
+      font-size:clamp(1.7rem, 3vw, 2.7rem);
+      line-height:1;
+    }
+
+    .section-note{
+      color:var(--muted);
+      max-width:520px;
+      line-height:1.68;
+    }
+
+    .story-grid{
+      display:grid;
+      grid-template-columns:repeat(4, minmax(0, 1fr));
+      gap:20px;
+    }
+
+    .story{
+      display:flex;
+      flex-direction:column;
+      border-radius:24px;
+      overflow:hidden;
+      background:linear-gradient(180deg, rgba(7,16,37,.92), rgba(7,16,37,.80));
+      border:1px solid rgba(255,255,255,.07);
+      box-shadow:var(--shadow-soft);
+      transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+    }
+
+    .story:hover{
+      transform:translateY(-4px);
+      border-color:rgba(77,163,255,.20);
+      box-shadow:0 22px 40px rgba(0,0,0,.26);
+    }
+
+    .story img{
+      width:100%;
+      aspect-ratio:0.78 / 1;
+      object-fit:cover;
+      display:block;
+      background:#071327;
+    }
+
+    .story p{
+      padding:14px 14px 16px;
+      font-size:1rem;
+      text-align:center;
+      color:#eef5ff;
+      font-weight:700;
+      line-height:1.35;
+      min-height:68px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .cta{
+      padding:12px 0 54px;
+    }
+
+    .cta-card{
+      padding:30px;
+      border-radius:28px;
+      border:1px solid rgba(255,255,255,.08);
+      background:
+        radial-gradient(circle at 18% 20%, rgba(77,163,255,.14), transparent 24%),
+        radial-gradient(circle at 82% 20%, rgba(139,109,255,.12), transparent 24%),
+        linear-gradient(135deg, rgba(9,18,42,.94), rgba(8,15,34,.90));
+      box-shadow:var(--shadow);
+      text-align:center;
+    }
+
+    .cta-card h3{
+      font-size:clamp(1.55rem, 3vw, 2.4rem);
+      margin-bottom:12px;
+      line-height:1.08;
+    }
+
+    .cta-card p{
+      color:var(--muted);
+      max-width:760px;
+      margin:0 auto 20px;
+      line-height:1.75;
+    }
+
+    .cta-actions{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:14px;
+    }
+
+    footer{
+      text-align:center;
+      padding:0 0 34px;
+      font-size:.88rem;
+      color:#7f93b5;
+    }
+
+    @media (max-width: 1100px){
+      .poster-columns{
+        grid-template-columns:repeat(5, minmax(120px, 1fr));
+      }
+
+      .hero-shell{
+        grid-template-columns:1fr;
+      }
+
+      .story-grid{
+        grid-template-columns:repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 760px){
+      .header{
+        padding:16px 0 8px;
+      }
+
+      .header-shell{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+
+      .hero{
+        padding:18px 0 26px;
+      }
+
+      .hero-copy,
+      .hero-feature-content,
+      .cta-card{
+        padding:22px 18px;
+      }
+
+      .hero-copy h1{
+        max-width:none;
+      }
+
+      .hero-actions,
+      .cta-actions{
+        flex-direction:column;
+      }
+
+      .hero-actions .btn,
+      .cta-actions .btn,
+      .btn-login{
+        width:100%;
+      }
+
+      .hero-bullets,
+      .story-grid{
+        grid-template-columns:1fr;
+      }
+
+      .poster-columns{
+        grid-template-columns:repeat(3, minmax(120px, 1fr));
+        gap:12px;
+      }
+
+      .poster-column{
+        animation-duration:32s !important;
+      }
+    }
+
+    @media (max-width: 460px){
+      .logo-copy strong{
+        font-size:1.08rem;
+      }
+
+      .logo-copy span{
+        font-size:.84rem;
+      }
+
+      .logo-mark{
+        width:42px;
+        height:42px;
+        border-radius:14px;
+      }
+
+      .story p{
+        font-size:.96rem;
+      }
+
+      .poster{
+        border-radius:18px;
+      }
     }
   </style>
 </head>
-
 <body>
-
-  <!-- HEADER -->
-  <div class="header">
-    <div class="logo">NÉBULA</div>
-    <button class="btn-login" onclick="goLogin()">Iniciar sesión</button>
-  </div>
-
-  <!-- HERO -->
-  <section class="hero">
-    <h1>Historias que te atrapan</h1>
-    <p>Accede a novelas exclusivas, nuevos capítulos cada semana y contenido premium.</p>
-
-    <button class="btn-main" onclick="start()">Comenzar ahora</button>
-  </section>
-
-  <!-- PREVIEW -->
-  <section class="stories">
-    <h2>Lo que encontrarás en Nébula</h2>
-
-    <div class="story-grid">
-      <div class="story">
-        <img src="./assets/covers/nebula.jpg">
-        <p>Código Nébula</p>
+  <div class="background-wall" aria-hidden="true">
+    <div class="poster-columns">
+      <div class="poster-column" style="animation-duration: 38s;">
+        <div class="poster"><img src="./assets/covers/nebula.jpg" alt=""></div>
+        <div class="poster"><img src="./assets/covers/no-debi-enamorarme.jpg" alt=""></div>
+        <div class="poster"><img src="./assets/covers/la-ultima-conexion.jpg" alt=""></div>
+        <div class="poster"><img src="./assets/covers/pinochet_nebula_portada.png" alt=""></div>
       </div>
 
-      <div class="story">
-        <img src="./assets/covers/terror.jpg">
-        <p>Terror</p>
+      <div class="poster-column reverse" style="animation-duration: 34s;">
+        <div class="poster"><img src="./assets/covers/despues-de-tu-adios.jpg" alt=""></div>
+        <div class="poster"><img src="./assets/covers/ya-habias-estado-ahi.jpg" alt=""></div>
+        <div class="poster"><img src="./assets/covers/golpe_estado_nebula.png" alt=""></div>
+        <div class="poster"><img src="./assets/covers/nebula.jpg" alt=""></div>
       </div>
 
-      <div class="story">
-        <img src="./assets/covers/romance.jpg">
-        <p>Romance</p>
+      <div class="poster-column" style="animation-duration: 42s;">
+        <div class="poster"><img src="./assets/covers/no-debi-enamorarme.jpg" alt=""></div>
+        <div class="poster"><img src="./assets/covers/nebula.jpg" alt=""></div>
+        <div class="poster"><img src="./assets/covers/la-ultima-conexion.jpg" alt=""></div>
+        <div class="poster"><img src="./assets/covers/despues-de-tu-adios.jpg" alt=""></div>
       </div>
 
-      <div class="story">
-        <img src="./assets/covers/drama.jpg">
-        <p>Drama</p>
+      <div class="poster-column reverse" style="animation-duration: 36s;">
+        <div class="poster"><img src="./assets/covers/ya-habias-estado-ahi.jpg" alt=""></div>
+        <div class="poster"><img src="./assets/covers/golpe_estado_nebula.png" alt=""></div>
+        <div class="poster"><img src="./assets/covers/pinochet_nebula_portada.png" alt=""></div>
+        <div class="poster"><img src="./assets/covers/no-debi-enamorarme.jpg" alt=""></div>
+      </div>
+
+      <div class="poster-column" style="animation-duration: 40s;">
+        <div class="poster"><img src="./assets/covers/despues-de-tu-adios.jpg" alt=""></div>
+        <div class="poster"><img src="./assets/covers/nebula.jpg" alt=""></div>
+        <div class="poster"><img src="./assets/covers/ya-habias-estado-ahi.jpg" alt=""></div>
+        <div class="poster"><img src="./assets/covers/la-ultima-conexion.jpg" alt=""></div>
+      </div>
+
+      <div class="poster-column reverse" style="animation-duration: 44s;">
+        <div class="poster"><img src="./assets/covers/golpe_estado_nebula.png" alt=""></div>
+        <div class="poster"><img src="./assets/covers/pinochet_nebula_portada.png" alt=""></div>
+        <div class="poster"><img src="./assets/covers/despues-de-tu-adios.jpg" alt=""></div>
+        <div class="poster"><img src="./assets/covers/nebula.jpg" alt=""></div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- CTA -->
-  <section class="cta">
-    <button class="btn-main" onclick="start()">Crear cuenta</button>
-  </section>
+  <div class="glow-orb orb-1"></div>
+  <div class="glow-orb orb-2"></div>
+
+  <header class="header">
+    <div class="container header-shell">
+      <div class="logo-wrap">
+        <div class="logo-mark">N</div>
+        <div class="logo-copy">
+          <strong>NÉBULA</strong>
+          <span>Historias por capítulos</span>
+        </div>
+      </div>
+
+      <button class="btn btn-secondary btn-login" onclick="goLogin()">Iniciar sesión</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-shell">
+        <div class="hero-copy">
+          <div class="eyebrow">Plataforma de lectura</div>
+
+          <h1>
+            Historias que te atrapan
+            <span>desde el primer capítulo</span>
+          </h1>
+
+          <p>
+            Descubre una experiencia de lectura visual, intensa y envolvente.
+            En Nébula encontrarás romance, terror, historia y ciencia ficción
+            con una presentación premium, capítulos gratuitos para engancharte
+            y nuevas historias que mantienen viva la plataforma cada semana.
+          </p>
+
+          <div class="hero-actions">
+            <button class="btn btn-primary" onclick="start()">Comenzar ahora</button>
+            <button class="btn btn-secondary" onclick="goLogin()">Ya tengo cuenta</button>
+          </div>
+
+          <div class="hero-bullets">
+            <div class="hero-bullet">
+              <small>Acceso inicial</small>
+              <strong>Primeros 3 capítulos gratis para descubrir cada historia</strong>
+            </div>
+
+            <div class="hero-bullet">
+              <small>Contenido constante</small>
+              <strong>Nuevas novelas y temporadas para mantener Nébula siempre viva</strong>
+            </div>
+
+            <div class="hero-bullet">
+              <small>Compatible</small>
+              <strong>Lectura cómoda en celular, tablet, notebook y PC</strong>
+            </div>
+          </div>
+        </div>
+
+        <aside class="hero-feature">
+          <div class="hero-feature-cover">
+            <img src="./assets/covers/nebula.jpg" alt="Código Nébula">
+          </div>
+
+          <div class="hero-feature-content">
+            <div class="hero-feature-tags">
+              <span>Destacada</span>
+              <span>Futurista</span>
+              <span>Temporada 1</span>
+            </div>
+
+            <h2>Código Nébula</h2>
+
+            <p>
+              Una historia donde el sistema se agrieta, la realidad cambia y cada
+              capítulo te arrastra más profundo. Ideal para abrir la puerta al universo Nébula.
+            </p>
+
+            <div class="feature-points">
+              <div>⚡ Narrativa envolvente y visual potente desde el primer capítulo.</div>
+              <div>📖 Diseñada para que el lector quiera seguir leyendo sin salir de la plataforma.</div>
+              <div>🚀 Punto de entrada perfecto al estilo premium de Nébula.</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Explora el universo</p>
+            <h2>Lo que encontrarás en Nébula</h2>
+          </div>
+
+          <p class="section-note">
+            Historias con identidad, emoción, tensión y una experiencia moderna
+            pensada para que leer se sienta más inmersivo.
+          </p>
+        </div>
+
+        <div class="story-grid">
+          <div class="story">
+            <img src="./assets/covers/nebula.jpg" alt="Código Nébula">
+            <p>Código Nébula</p>
+          </div>
+
+          <div class="story">
+            <img src="./assets/covers/la-ultima-conexion.jpg" alt="La última conexión">
+            <p>La última conexión</p>
+          </div>
+
+          <div class="story">
+            <img src="./assets/covers/no-debi-enamorarme.jpg" alt="No debí enamorarme de ti">
+            <p>No debí enamorarme de ti</p>
+          </div>
+
+          <div class="story">
+            <img src="./assets/covers/despues-de-tu-adios.jpg" alt="Después de tu adiós">
+            <p>Después de tu adiós</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="container">
+        <div class="cta-card">
+          <h3>Empieza ahora y entra al universo Nébula</h3>
+          <p>
+            Crea tu cuenta, explora el catálogo y continúa leyendo desde cualquier dispositivo.
+            Si ya tienes acceso, entra directamente. Si vienes por primera vez, este es el mejor lugar para empezar.
+          </p>
+
+          <div class="cta-actions">
+            <button class="btn btn-primary" onclick="start()">Crear cuenta</button>
+            <button class="btn btn-secondary" onclick="goLogin()">Iniciar sesión</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer>
     © 2026 Nébula — Todas las historias son ficticias.
   </footer>
 
-  <!-- SCRIPT -->
   <script>
     function start() {
       window.location.href = "/nexoria-tes/login.html";
@@ -200,6 +883,5 @@
       window.location.href = "/nexoria-tes/login.html";
     }
   </script>
-
 </body>
 </html>
