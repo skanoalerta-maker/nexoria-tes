@@ -1821,8 +1821,13 @@
             <h2 id="featuredTitle">Código Nébula</h2>
 
             <div class="feature-rating">
-              <div class="stars" id="featuredStars" aria-label="Calificación 5 de 5"></div>
-              <span class="rating-label" id="featuredRatingLabel">5.0 / 5</span>
+              <div class="stars" id="featuredStars"></div>
+              <span class="rating-label" id="featuredRatingLabel">0 / 5</span>
+            </div>
+
+            <div style="margin-top:10px;">
+              <small style="color:#9fb5db;">Tu evaluación</small>
+              <div class="stars" id="userVoteStars"></div>
             </div>
 
             <p id="featuredDescription">
@@ -2795,6 +2800,136 @@ function filtrarHistorias() {
         console.error("Error al cerrar sesión:", error);
       }
     });
+    <script>
+let currentNovelId = "codigo-nebula"; // dinámico después
+
+function getVotesKey(id) {
+  return `nebula_votes_${id}`;
+}
+
+function getUserVoteKey(id, userId) {
+  return `nebula_user_vote_${id}_${userId}`;
+}
+
+// SIMULACIÓN usuario (después va Firebase)
+function getUserId() {
+  return localStorage.getItem("nebula_user_id") || "user_demo_1";
+}
+
+// Inicializar
+function initVoting(novelId) {
+  currentNovelId = novelId;
+
+  const votes = JSON.parse(localStorage.getItem(getVotesKey(novelId))) || {
+    stars5: 0,
+    stars4: 0,
+    stars3: 0,
+    stars2: 0,
+    stars1: 0
+  };
+
+  renderRating(votes);
+  renderUserStars();
+}
+
+// Render promedio
+function renderRating(votes) {
+  const total =
+    votes.stars5 +
+    votes.stars4 +
+    votes.stars3 +
+    votes.stars2 +
+    votes.stars1;
+
+  let avg = 0;
+
+  if (total > 0) {
+    avg =
+      (5 * votes.stars5 +
+        4 * votes.stars4 +
+        3 * votes.stars3 +
+        2 * votes.stars2 +
+        1 * votes.stars1) /
+      total;
+  }
+
+  document.getElementById("featuredRatingLabel").innerText =
+    avg.toFixed(1) + " / 5";
+
+  const container = document.getElementById("featuredStars");
+  container.innerHTML = "";
+
+  for (let i = 1; i <= 5; i++) {
+    const star = document.createElement("span");
+    star.innerHTML = "★";
+    star.className = "star " + (i <= Math.round(avg) ? "active" : "");
+    container.appendChild(star);
+  }
+}
+
+// Render estrellas del usuario
+function renderUserStars() {
+  const container = document.getElementById("userVoteStars");
+  container.innerHTML = "";
+
+  const userId = getUserId();
+  const savedVote = localStorage.getItem(
+    getUserVoteKey(currentNovelId, userId)
+  );
+
+  for (let i = 1; i <= 5; i++) {
+    const star = document.createElement("span");
+    star.innerHTML = "★";
+    star.className = "star";
+
+    if (savedVote && i <= savedVote) {
+      star.classList.add("active");
+    }
+
+    star.onclick = () => vote(i);
+
+    container.appendChild(star);
+  }
+}
+
+// VOTAR
+function vote(value) {
+  const userId = getUserId();
+
+  let votes = JSON.parse(localStorage.getItem(getVotesKey(currentNovelId))) || {
+    stars5: 0,
+    stars4: 0,
+    stars3: 0,
+    stars2: 0,
+    stars1: 0
+  };
+
+  // evitar doble voto
+  const previousVote = localStorage.getItem(
+    getUserVoteKey(currentNovelId, userId)
+  );
+
+  if (previousVote) {
+    votes["stars" + previousVote]--;
+  }
+
+  votes["stars" + value]++;
+
+  localStorage.setItem(getVotesKey(currentNovelId), JSON.stringify(votes));
+  localStorage.setItem(
+    getUserVoteKey(currentNovelId, userId),
+    value
+  );
+
+  renderRating(votes);
+  renderUserStars();
+}
+
+// INIT AUTOMÁTICO
+document.addEventListener("DOMContentLoaded", () => {
+  initVoting("codigo-nebula");
+});
+
   </script>
 </body>
 </html>
