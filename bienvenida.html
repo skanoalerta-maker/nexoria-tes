@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nébula | Bienvenido</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #0b1730, #040816);
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* HEADER */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+    }
+
+    .logo {
+      font-size: 26px;
+      font-weight: bold;
+      color: #4da3ff;
+      letter-spacing: 2px;
+    }
+
+    .btn-login {
+      padding: 10px 20px;
+      background: transparent;
+      border: 1px solid #4da3ff;
+      border-radius: 20px;
+      color: #4da3ff;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn-login:hover {
+      background: #4da3ff;
+      color: #000;
+    }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 80px 20px;
+    }
+
+    .hero h1 {
+      font-size: 42px;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      color: #aaa;
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    .btn-main {
+      padding: 16px 30px;
+      border-radius: 30px;
+      border: none;
+      background: #4da3ff;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn-main:hover {
+      transform: scale(1.05);
+    }
+
+    /* PREVIEW */
+    .stories {
+      padding: 50px 20px;
+    }
+
+    .stories h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .story {
+      background: #0f1d3a;
+      border-radius: 15px;
+      overflow: hidden;
+      transition: 0.3s;
+    }
+
+    .story img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .story:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 20px rgba(77,163,255,0.3);
+    }
+
+    .story p {
+      padding: 10px;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    /* CTA FINAL */
+    .cta {
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      font-size: 13px;
+      color: #666;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="logo">NÉBULA</div>
+    <button class="btn-login" onclick="goLogin()">Iniciar sesión</button>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Historias que te atrapan</h1>
+    <p>Accede a novelas exclusivas, nuevos capítulos cada semana y contenido premium.</p>
+
+    <button class="btn-main" onclick="start()">Comenzar ahora</button>
+  </section>
+
+  <!-- PREVIEW -->
+  <section class="stories">
+    <h2>Lo que encontrarás en Nébula</h2>
+
+    <div class="story-grid">
+      <div class="story">
+        <img src="./assets/covers/nebula.jpg">
+        <p>Código Nébula</p>
+      </div>
+
+      <div class="story">
+        <img src="./assets/covers/terror.jpg">
+        <p>Terror</p>
+      </div>
+
+      <div class="story">
+        <img src="./assets/covers/romance.jpg">
+        <p>Romance</p>
+      </div>
+
+      <div class="story">
+        <img src="./assets/covers/drama.jpg">
+        <p>Drama</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <button class="btn-main" onclick="start()">Crear cuenta</button>
+  </section>
+
+  <footer>
+    © 2026 Nébula — Todas las historias son ficticias.
+  </footer>
+
+  <!-- SCRIPT -->
+  <script>
+    function start() {
+      window.location.href = "/nexoria-tes/login.html";
+    }
+
+    function goLogin() {
+      window.location.href = "/nexoria-tes/login.html";
+    }
+  </script>
+
+</body>
+</html>
