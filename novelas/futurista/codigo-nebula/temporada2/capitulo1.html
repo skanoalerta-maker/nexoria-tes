@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Capítulo 1 (11) | Código Nébula - Temporada 2</title>
+  <title>Capítulo 11 | Código Nébula - Temporada 2</title>
   <meta name="description" content="Capítulo 11 de Código Nébula: Después del sello." />
   <style>
     :root{--bg:#05080f;--bg2:#0b1220;--card:rgba(12,18,32,0.88);--line:rgba(255,255,255,0.08);--line-strong:rgba(73,182,255,0.24);--text:#f5f8ff;--muted:#aebad1;--muted-2:#7f90ae;--blue:#0A6CFF;--blue2:#49b6ff;--blue-soft:rgba(73,182,255,0.14);--shadow:0 24px 60px rgba(0,0,0,0.45);--radius:22px;--max:860px;}
@@ -228,7 +228,7 @@
 
             <p>—¿Qué son los otros nueve? —preguntó Kai.</p>
             <p>—Intentos.</p>
-            <p>—¿De qué?</p>
+            <p>—De qué?</p>
             <p>—De acceso humano sostenido al centro.</p>
             <p>—¿Había más grupos?</p>
             <p>—Sí.</p>
@@ -380,7 +380,7 @@
             <p>Lira lo miró como si ya supiera que esa frase iba a llegar tarde o temprano.</p>
             <p>—Sí —respondió—. Pero la próxima vez no vamos a bajar a entender el centro.</p>
 
-            <div class="quote">—La próxima vez vamos a bajarlo a matar la apertura.</div>
+            <div class="quote">—La próxima vez vamos a bajar a matar la apertura.</div>
           </div>
         </div>
 
@@ -389,7 +389,7 @@
             Temporada 2 ya cambió el objetivo: ya no se trata solo de recordar. Ahora también se trata de decidir si Alma puede salvarse sin que el centro termine de abrirse.
           </p>
           <div class="nav-actions">
-            <a href="capitulo10.html" class="btn btn-ghost">← Final T1</a>
+            <a href="../temporada1/capitulo10.html" class="btn btn-ghost">← Final Temporada 1</a>
             <a href="capitulo12.html" class="btn btn-primary">Leer capítulo 12 →</a>
           </div>
         </div>
@@ -407,5 +407,7 @@
     function animate(){ ctx.clearRect(0,0,canvas.width,canvas.height); for(const s of stars){ ctx.beginPath(); ctx.fillStyle=`rgba(255,255,255,${s.alpha})`; ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fill(); s.y+=s.speed; if(s.y>canvas.height){ s.y=-2; s.x=Math.random()*canvas.width; } } requestAnimationFrame(animate); }
     window.addEventListener("resize", resize); resize(); animate();
   </script>
+  <!-- 🔒 CONTROL DE ACCESO -->
+  <script src="../../../../js/access-control.js"></script>
 </body>
 </html>
