@@ -2904,7 +2904,7 @@ function filtrarHistorias() {
     initVoting("codigo-nebula");
   });
 
-  onAuthStateChanged(auth, async (user) => {
+ onAuthStateChanged(auth, async (user) => {
   if (!user) {
     updateLoggedOutUI();
     return;
@@ -2914,16 +2914,26 @@ function filtrarHistorias() {
     const userRef = doc(db, "users", user.uid);
     const userSnap = await getDoc(userRef);
 
-    if (!userSnap.exists()) {
-      updateLoggedOutUI();
-      return;
-    }
+    let membershipLabel = "Plan Free";
 
-    const data = userSnap.data();
-    const membershipLabel = getMembershipLabelFromData(data);
+    if (!userSnap.exists()) {
+      // 🔥 SOLUCIÓN: crear usuario automáticamente
+      await setDoc(userRef, {
+        uid: user.uid,
+        email: user.email || "",
+        plan: "free",
+        createdAt: new Date()
+      });
+
+      console.log("🆕 Usuario creado en Firestore");
+    } else {
+      const data = userSnap.data();
+      membershipLabel = getMembershipLabelFromData(data);
+    }
 
     updateLoggedInUI(user, membershipLabel);
     console.log("✅ Usuario autenticado OK");
+
   } catch (error) {
     console.error("Error validando usuario:", error);
     updateLoggedOutUI();
