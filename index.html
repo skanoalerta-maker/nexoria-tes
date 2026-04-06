@@ -2925,9 +2925,16 @@ function vote(value) {
   renderUserStars();
 }
 
-// INIT AUTOMÁTICO
 document.addEventListener("DOMContentLoaded", () => {
-  initVoting("codigo-nebula");
+
+  // 🔒 BLOQUEO DE ACCESO
+  onAuthStateChanged(auth, (user) => {
+    if (!user) {
+      window.location.href = "../login.html";
+    }
+  });
+
+  // resto de tu código...
 });
 </script>
 </body>
