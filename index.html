@@ -2905,42 +2905,30 @@ function filtrarHistorias() {
   });
 
   onAuthStateChanged(auth, async (user) => {
-    if (!user) {
+  if (!user) {
+    updateLoggedOutUI();
+    return;
+  }
+
+  try {
+    const userRef = doc(db, "users", user.uid);
+    const userSnap = await getDoc(userRef);
+
+    if (!userSnap.exists()) {
       updateLoggedOutUI();
-      window.location.href = "bienvenida.html";
       return;
     }
 
-    try {
-      const userRef = doc(db, "users", user.uid);
-      const userSnap = await getDoc(userRef);
+    const data = userSnap.data();
+    const membershipLabel = getMembershipLabelFromData(data);
 
-      if (!userSnap.exists()) {
-        await signOut(auth);
-        window.location.href = "login.html";
-        return;
-      }
-
-      const data = userSnap.data();
-      const isPremium =
-        String(data.plan || "").toLowerCase() === "premium" ||
-        String(data.subscription || "").toLowerCase() === "premium";
-
-      const membershipLabel = getMembershipLabelFromData(data);
-
-      if (!isPremium) {
-        updateLoggedInUI(user, membershipLabel);
-        window.location.href = "bienvenida.html";
-        return;
-      }
-
-      updateLoggedInUI(user, membershipLabel);
-      console.log("✅ Usuario premium OK");
-    } catch (error) {
-      console.error("Error validando usuario:", error);
-      window.location.href = "login.html";
-    }
-  });
+    updateLoggedInUI(user, membershipLabel);
+    console.log("✅ Usuario autenticado OK");
+  } catch (error) {
+    console.error("Error validando usuario:", error);
+    updateLoggedOutUI();
+  }
+});
 </script>
 </body>
 </html>
