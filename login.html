@@ -943,244 +943,383 @@
 
   <script src="./js/login-effects.js"></script>
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+   <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
     import {
       getAuth,
-      onAuthStateChanged,
-      signInWithEmailAndPassword,
+      setPersistence,
+      browserLocalPersistence,
       createUserWithEmailAndPassword,
-      signOut,
-      GoogleAuthProvider,
+      signInWithEmailAndPassword,
       signInWithPopup,
+      GoogleAuthProvider,
+      onAuthStateChanged,
+      signOut,
       updateProfile
-    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
 
     import {
       getFirestore,
       doc,
+      getDoc,
       setDoc,
-      getDoc
-    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+      serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
 
     const firebaseConfig = {
-      apiKey: "TU_API_KEY",
-      authDomain: "TU_PROJECT.firebaseapp.com",
-      projectId: "TU_PROJECT_ID",
-      storageBucket: "TU_PROJECT.appspot.com",
-      messagingSenderId: "XXXX",
-      appId: "XXXX"
+      apiKey: "AIzaSyDccMk1KLoCwXWG2g4r1sOI6qEt_7d5gTw",
+      authDomain: "dyh-nebula.firebaseapp.com",
+      projectId: "dyh-nebula",
+      storageBucket: "dyh-nebula.firebasestorage.app",
+      messagingSenderId: "230506596749",
+      appId: "1:230506596749:web:d7ffcf38de039c9629d5c4",
+      measurementId: "G-KD5ZRFR8C9"
     };
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
-    const provider = new GoogleAuthProvider();
 
+    await setPersistence(auth, browserLocalPersistence);
+
+    const tabLogin = document.getElementById("tabLogin");
+    const tabRegister = document.getElementById("tabRegister");
+    const loginFormBox = document.getElementById("loginForm");
+    const registerFormBox = document.getElementById("registerForm");
+    const authForms = document.getElementById("authForms");
     const statusBox = document.getElementById("statusBox");
-    const loginForm = document.getElementById("loginForm");
-    const registerForm = document.getElementById("registerForm");
-    const loginSubmitBtn = document.getElementById("loginSubmitBtn");
-    const registerSubmitBtn = document.getElementById("registerSubmitBtn");
     const googleLoginBtn = document.getElementById("googleLoginBtn");
     const googleRegisterBtn = document.getElementById("googleRegisterBtn");
+    const sessionBox = document.getElementById("sessionBox");
+    const tabsBox = document.getElementById("tabsBox");
+    const sessionAvatar = document.getElementById("sessionAvatar");
+    const sessionName = document.getElementById("sessionName");
+    const sessionEmail = document.getElementById("sessionEmail");
+    const sessionPlan = document.getElementById("sessionPlan");
+    const sessionReadCount = document.getElementById("sessionReadCount");
+    const logoutBtn = document.getElementById("logoutBtn");
 
-    function showStatus(msg, type = "") {
-      statusBox.textContent = msg;
-      statusBox.className = "status show " + type;
+    const avatarIcons = {
+      navigator: `
+        <svg class="avatar-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="24" cy="24" r="18" fill="url(#g1)" stroke="#78A9FF" stroke-width="1.5"/>
+          <circle cx="24" cy="24" r="4.2" fill="#DDEBFF"/>
+          <path d="M24 12L28.7 24L24 36L19.3 24L24 12Z" fill="#8ED0FF" stroke="#DDEBFF" stroke-width="1.2"/>
+          <defs>
+            <linearGradient id="g1" x1="10" y1="10" x2="38" y2="38" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#173B84"/>
+              <stop offset="1" stop-color="#0A183B"/>
+            </linearGradient>
+          </defs>
+        </svg>`,
+      observer: `
+        <svg class="avatar-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <ellipse cx="24" cy="24" rx="16" ry="10" fill="url(#g2)" stroke="#88B8FF" stroke-width="1.5"/>
+          <circle cx="24" cy="24" r="6" fill="#DDEBFF"/>
+          <circle cx="24" cy="24" r="2.6" fill="#143D7A"/>
+          <defs>
+            <linearGradient id="g2" x1="8" y1="14" x2="40" y2="34" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#1A428F"/>
+              <stop offset="1" stop-color="#102247"/>
+            </linearGradient>
+          </defs>
+        </svg>`,
+      reader: `
+        <svg class="avatar-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M10 13.5C10 11.567 11.567 10 13.5 10H23V37H13.5C11.567 37 10 35.433 10 33.5V13.5Z" fill="#D9E7FF"/>
+          <path d="M38 13.5C38 11.567 36.433 10 34.5 10H25V37H34.5C36.433 37 38 35.433 38 33.5V13.5Z" fill="url(#g3)"/>
+          <path d="M23 10H25V37H23V10Z" fill="#8EB7FF"/>
+          <defs>
+            <linearGradient id="g3" x1="25" y1="10" x2="38" y2="37" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#2D6DDA"/>
+              <stop offset="1" stop-color="#17396F"/>
+            </linearGradient>
+          </defs>
+        </svg>`,
+      sentinel: `
+        <svg class="avatar-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M24 8L36 13V23.8C36 31.1 31 37.7 24 40C17 37.7 12 31.1 12 23.8V13L24 8Z" fill="url(#g4)" stroke="#86B4FF" stroke-width="1.5"/>
+          <path d="M19.5 23.8L22.5 27L29.5 20" stroke="#E6F0FF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <defs>
+            <linearGradient id="g4" x1="12" y1="8" x2="36" y2="40" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#153676"/>
+              <stop offset="1" stop-color="#0B1734"/>
+            </linearGradient>
+          </defs>
+        </svg>`,
+      stellar: `
+        <svg class="avatar-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="24" cy="24" r="16" fill="url(#g5)" stroke="#89D7FF" stroke-width="1.5"/>
+          <path d="M24 12.5L26.6 21.4L35.5 24L26.6 26.6L24 35.5L21.4 26.6L12.5 24L21.4 21.4L24 12.5Z" fill="#E8F7FF"/>
+          <defs>
+            <linearGradient id="g5" x1="10" y1="10" x2="38" y2="38" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#174392"/>
+              <stop offset="1" stop-color="#1B2C66"/>
+            </linearGradient>
+          </defs>
+        </svg>`,
+      crown: `
+        <svg class="avatar-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M12 33L15 17L24 24L33 17L36 33H12Z" fill="url(#g6)" stroke="#FFD978" stroke-width="1.5"/>
+          <path d="M15 33H33" stroke="#FFE8A6" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="15" cy="16" r="2.4" fill="#FFE8A6"/>
+          <circle cx="24" cy="22" r="2.4" fill="#FFE8A6"/>
+          <circle cx="33" cy="16" r="2.4" fill="#FFE8A6"/>
+          <defs>
+            <linearGradient id="g6" x1="12" y1="17" x2="36" y2="33" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#A26814"/>
+              <stop offset="1" stop-color="#F0B64D"/>
+            </linearGradient>
+          </defs>
+        </svg>`
+    };
+
+    function renderAvatarMarkup(key) {
+      return avatarIcons[key] || avatarIcons.navigator;
+    }
+
+    function paintAvatarPreviews() {
+      document.querySelectorAll("[data-icon-preview]").forEach(node => {
+        node.innerHTML = renderAvatarMarkup(node.dataset.iconPreview);
+      });
+    }
+
+    function savePurchaseIdentity(user) {
+      localStorage.setItem("nebula_user_uid", user.uid || "");
+      localStorage.setItem("nebula_user_email", user.email || "");
+    }
+
+    function clearPurchaseIdentity() {
+      localStorage.removeItem("nebula_user_uid");
+      localStorage.removeItem("nebula_user_email");
+    }
+
+    paintAvatarPreviews();
+
+    function showStatus(message, type = "success") {
+      statusBox.textContent = message;
+      statusBox.className = `status show ${type}`;
     }
 
     function clearStatus() {
-      statusBox.className = "status";
       statusBox.textContent = "";
+      statusBox.className = "status";
     }
 
-    function setLoading(button, text, state) {
-      if (!button) return;
-      if (state) {
-        button.dataset.originalText = button.textContent;
-        button.textContent = text;
-        button.disabled = true;
-      } else {
-        button.textContent = button.dataset.originalText || button.textContent;
-        button.disabled = false;
+    function showLogin() {
+      tabLogin.classList.add("active");
+      tabRegister.classList.remove("active");
+      loginFormBox.classList.add("active");
+      registerFormBox.classList.remove("active");
+      clearStatus();
+    }
+
+    function showRegister() {
+      tabRegister.classList.add("active");
+      tabLogin.classList.remove("active");
+      registerFormBox.classList.add("active");
+      loginFormBox.classList.remove("active");
+      clearStatus();
+    }
+
+    function getSelectedAvatar() {
+      const selected = document.querySelector('input[name="avatar"]:checked');
+      return selected ? selected.value : "navigator";
+    }
+
+    function getFriendlyError(error) {
+      const code = error?.code || "";
+
+      switch (code) {
+        case "auth/email-already-in-use":
+          return "Ese correo ya está registrado en Nébula.";
+        case "auth/invalid-email":
+          return "El correo no tiene un formato válido.";
+        case "auth/weak-password":
+          return "La contraseña debe tener al menos 6 caracteres.";
+        case "auth/user-not-found":
+        case "auth/wrong-password":
+        case "auth/invalid-credential":
+          return "Correo o contraseña incorrectos.";
+        case "auth/popup-closed-by-user":
+          return "Cerraste la ventana de Google antes de completar el acceso.";
+        default:
+          return error?.message || "Ocurrió un error inesperado.";
       }
     }
 
-    loginForm.addEventListener("submit", async (e) => {
+    async function ensureUserDocument(user, extraData = {}) {
+      const userRef = doc(db, "users", user.uid);
+      const snap = await getDoc(userRef);
+
+      const baseData = {
+        uid: user.uid,
+        name: extraData.name || user.displayName || "Lector Nébula",
+        email: user.email || "",
+        avatar: extraData.avatar || "navigator",
+        subscription: extraData.subscription || "free",
+        plan: extraData.plan || "free",
+        readChapters: extraData.readChapters || [],
+        createdAt: snap.exists() ? (snap.data().createdAt || serverTimestamp()) : serverTimestamp(),
+        updatedAt: serverTimestamp()
+      };
+
+      if (!snap.exists()) {
+        await setDoc(userRef, baseData, { merge: true });
+      } else {
+        const current = snap.data();
+        await setDoc(userRef, {
+          uid: user.uid,
+          name: current.name || baseData.name,
+          email: current.email || baseData.email,
+          avatar: current.avatar || baseData.avatar,
+          subscription: current.subscription || current.plan || "free",
+          plan: current.plan || current.subscription || "free",
+          readChapters: Array.isArray(current.readChapters) ? current.readChapters : [],
+          updatedAt: serverTimestamp()
+        }, { merge: true });
+      }
+    }
+
+    async function loadUserProfile(user) {
+      const userRef = doc(db, "users", user.uid);
+      const snap = await getDoc(userRef);
+
+      if (!snap.exists()) {
+        await ensureUserDocument(user);
+        return await loadUserProfile(user);
+      }
+
+      const data = snap.data();
+      const readCount = Array.isArray(data.readChapters) ? data.readChapters.length : 0;
+
+      savePurchaseIdentity(user);
+
+      localStorage.setItem("nebula-user-profile", JSON.stringify({
+        name: data.name || user.displayName || "Lector Nébula",
+        icon: data.avatar || "navigator"
+      }));
+
+      sessionAvatar.innerHTML = renderAvatarMarkup(data.avatar || "navigator");
+      sessionName.textContent = data.name || user.displayName || "Lector Nébula";
+      sessionEmail.textContent = data.email || user.email || "";
+      sessionPlan.textContent = data.subscription || data.plan || "free";
+      sessionReadCount.textContent = `${readCount} capítulo${readCount === 1 ? "" : "s"}`;
+
+      sessionBox.classList.add("show");
+      tabsBox.classList.add("hide");
+      authForms.classList.add("hide");
+    }
+
+    function showAuthMode() {
+      sessionBox.classList.remove("show");
+      tabsBox.classList.remove("hide");
+      authForms.classList.remove("hide");
+    }
+
+    tabLogin.addEventListener("click", showLogin);
+    tabRegister.addEventListener("click", showRegister);
+
+    loginFormBox.addEventListener("submit", async (e) => {
       e.preventDefault();
       clearStatus();
 
       const email = document.getElementById("loginEmail").value.trim();
-      const pass = document.getElementById("loginPassword").value;
-
-      if (!email || !pass) {
-        showStatus("Completa correo y contraseña.", "error");
-        return;
-      }
+      const password = document.getElementById("loginPassword").value;
 
       try {
-        setLoading(loginSubmitBtn, "Ingresando...", true);
-        await signInWithEmailAndPassword(auth, email, pass);
-        showStatus("Inicio de sesión correcto.", "success");
-        window.location.href = "./index.html";
-      } catch (err) {
-        console.error(err);
-        showStatus("No se pudo iniciar sesión. Verifica tus datos.", "error");
-      } finally {
-        setLoading(loginSubmitBtn, "Entrar", false);
+        const cred = await signInWithEmailAndPassword(auth, email, password);
+        await ensureUserDocument(cred.user);
+        savePurchaseIdentity(cred.user);
+        showStatus("Sesión iniciada correctamente.", "success");
+      } catch (error) {
+        showStatus(getFriendlyError(error), "error");
       }
     });
 
-    registerForm.addEventListener("submit", async (e) => {
+    registerFormBox.addEventListener("submit", async (e) => {
       e.preventDefault();
       clearStatus();
 
-      const email = document.getElementById("registerEmail").value.trim();
-      const pass = document.getElementById("registerPassword").value;
       const name = document.getElementById("registerName").value.trim();
-      const avatar = document.querySelector('input[name="avatar"]:checked')?.value || "🌌";
-
-      if (!name || !email || !pass) {
-        showStatus("Completa todos los campos del registro.", "error");
-        return;
-      }
-
-      if (pass.length < 6) {
-        showStatus("La contraseña debe tener al menos 6 caracteres.", "error");
-        return;
-      }
+      const email = document.getElementById("registerEmail").value.trim();
+      const password = document.getElementById("registerPassword").value;
+      const avatar = getSelectedAvatar();
 
       try {
-        setLoading(registerSubmitBtn, "Creando cuenta...", true);
-
-        const cred = await createUserWithEmailAndPassword(auth, email, pass);
+        const cred = await createUserWithEmailAndPassword(auth, email, password);
 
         await updateProfile(cred.user, {
           displayName: name
         });
 
-        await setDoc(doc(db, "users", cred.user.uid), {
-          uid: cred.user.uid,
-          email,
+        await ensureUserDocument(cred.user, {
           name,
           avatar,
-          plan: "free",
           subscription: "free",
-          purchasedNovels: [],
-          readChapters: [],
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString()
+          plan: "free",
+          readChapters: []
         });
 
-        showStatus("Cuenta creada correctamente.", "success");
-        window.location.href = "./index.html";
-      } catch (err) {
-        console.error(err);
-        showStatus("No se pudo crear la cuenta.", "error");
-      } finally {
-        setLoading(registerSubmitBtn, "Crear cuenta", false);
+        savePurchaseIdentity(cred.user);
+        showStatus("Cuenta creada correctamente. Ya puedes entrar a tu universo Nébula.", "success");
+      } catch (error) {
+        showStatus(getFriendlyError(error), "error");
       }
     });
 
-    async function signWithGoogle(button) {
+    async function loginWithGoogle() {
       clearStatus();
 
       try {
-        setLoading(button, "Conectando...", true);
+        const provider = new GoogleAuthProvider();
+        const result = await signInWithPopup(auth, provider);
 
-        const res = await signInWithPopup(auth, provider);
-        const ref = doc(db, "users", res.user.uid);
-        const snap = await getDoc(ref);
+        await ensureUserDocument(result.user, {
+          name: result.user.displayName || "Lector Nébula",
+          avatar: "navigator",
+          subscription: "free",
+          plan: "free",
+          readChapters: []
+        });
 
-        if (!snap.exists()) {
-          await setDoc(ref, {
-            uid: res.user.uid,
-            email: res.user.email || "",
-            name: res.user.displayName || "Usuario",
-            avatar: "🌌",
-            plan: "free",
-            subscription: "free",
-            purchasedNovels: [],
-            readChapters: [],
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString()
-          });
-        }
-
-        showStatus("Sesión iniciada con Google.", "success");
-        window.location.href = "./index.html";
-      } catch (err) {
-        console.error(err);
-        showStatus("No se pudo iniciar con Google.", "error");
-      } finally {
-        setLoading(button, "Entrar con Google", false);
-        if (button === googleRegisterBtn) {
-          googleRegisterBtn.textContent = "Registrarme con Google";
-        }
+        savePurchaseIdentity(result.user);
+        showStatus("Acceso con Google completado correctamente.", "success");
+      } catch (error) {
+        showStatus(getFriendlyError(error), "error");
       }
     }
 
-    googleLoginBtn.addEventListener("click", () => signWithGoogle(googleLoginBtn));
-    googleRegisterBtn.addEventListener("click", () => signWithGoogle(googleRegisterBtn));
+    googleLoginBtn.addEventListener("click", loginWithGoogle);
+    googleRegisterBtn.addEventListener("click", loginWithGoogle);
 
-    document.getElementById("logoutBtn").addEventListener("click", async () => {
+    logoutBtn.addEventListener("click", async () => {
       try {
         await signOut(auth);
-      } catch (err) {
-        console.error(err);
+        clearPurchaseIdentity();
+        localStorage.removeItem("nebula-user-profile");
+        showAuthMode();
+        showStatus("Sesión cerrada correctamente.", "success");
+      } catch (error) {
+        showStatus("No se pudo cerrar la sesión.", "error");
       }
     });
 
     onAuthStateChanged(auth, async (user) => {
-      const sessionBox = document.getElementById("sessionBox");
-      const tabs = document.getElementById("tabsBox");
-      const forms = document.getElementById("authForms");
-
       if (user) {
-        sessionBox.classList.add("show");
-        tabs.classList.add("hide");
-        forms.classList.add("hide");
-
         try {
-          const ref = doc(db, "users", user.uid);
-          const snap = await getDoc(ref);
-          const data = snap.exists() ? snap.data() : {};
-
-          document.getElementById("sessionName").textContent = data?.name || user.displayName || "Usuario";
-          document.getElementById("sessionEmail").textContent = user.email || "";
-          document.getElementById("sessionAvatar").textContent = data?.avatar || "🌌";
-          document.getElementById("sessionPlan").textContent = data?.plan || data?.subscription || "free";
-          document.getElementById("sessionReadCount").textContent =
-            `${Array.isArray(data?.readChapters) ? data.readChapters.length : 0} capítulos`;
-        } catch (err) {
-          console.error(err);
+          await loadUserProfile(user);
+        } catch (error) {
+          console.error(error);
+          showStatus("Tu sesión está activa, pero hubo un problema cargando tu perfil.", "error");
         }
       } else {
-        sessionBox.classList.remove("show");
-        tabs.classList.remove("hide");
-        forms.classList.remove("hide");
+        clearPurchaseIdentity();
+        showAuthMode();
       }
     });
 
-    const tabLogin = document.getElementById("tabLogin");
-    const tabRegister = document.getElementById("tabRegister");
-
-    tabLogin.addEventListener("click", () => {
-      clearStatus();
-      tabLogin.classList.add("active");
-      tabRegister.classList.remove("active");
-      loginForm.classList.add("active");
-      registerForm.classList.remove("active");
-    });
-
-    tabRegister.addEventListener("click", () => {
-      clearStatus();
-      tabRegister.classList.add("active");
-      tabLogin.classList.remove("active");
-      registerForm.classList.add("active");
-      loginForm.classList.remove("active");
-    });
+    console.log("🔥 Login Nébula conectado correctamente");
   </script>
 </body>
 </html>
