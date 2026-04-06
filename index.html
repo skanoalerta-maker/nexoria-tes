@@ -2684,319 +2684,263 @@ function filtrarHistorias() {
     resizeStarsCanvas();
     animateStars();
   </script>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
+  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
-    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
-    import { getFirestore } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
+  const firebaseConfig = {
+    apiKey: "AIzaSyD0nB8uMQRC_d17zCf2r-nw0jb0eq4s45w",
+    authDomain: "nebula-1955f.firebaseapp.com",
+    projectId: "nebula-1955f",
+    storageBucket: "nebula-1955f.firebasestorage.app",
+    messagingSenderId: "736722257829",
+    appId: "1:736722257829:web:605cab7fde553470454a4c",
+    measurementId: "G-BTF17CDGM7"
+  };
 
-    onAuthStateChanged(auth, async (user) => {
-  if (!user) {
-    window.location.href = "../login.html";
-    return;
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  window.firebaseApp = app;
+  window.firebaseAuth = auth;
+  window.firebaseDb = db;
+
+  console.log("🔥 Firebase conectado correctamente");
+
+  const headerSessionBtn = document.getElementById("headerSessionBtn");
+  const userGreeting = document.getElementById("userGreeting");
+  const userEmailText = document.getElementById("userEmailText");
+  const userPlanPill = document.getElementById("userPlanPill");
+  const userStatePill = document.getElementById("userStatePill");
+  const userMembershipText = document.getElementById("userMembershipText");
+  const userAvatar = document.getElementById("userAvatar");
+  const userGuestBox = document.getElementById("userGuestBox");
+  const userLoggedBox = document.getElementById("userLoggedBox");
+  const logoutBtn = document.getElementById("logoutBtn");
+
+  function getLocalProfile() {
+    try {
+      const raw = localStorage.getItem("nebula-user-profile");
+      return raw ? JSON.parse(raw) : {};
+    } catch {
+      return {};
+    }
   }
 
-  try {
-    const userRef = doc(db, "users", user.uid);
-    const userSnap = await getDoc(userRef);
-
-    if (!userSnap.exists()) {
-      await signOut(auth);
-      window.location.href = "../login.html";
-      return;
-    }
-
-    const data = userSnap.data();
-    const isPremium =
-      data.plan === "premium" ||
-      data.subscription === "premium";
-
-    if (!isPremium) {
-      window.location.href = "../landing.html";
-      return;
-    }
-
-    updateLoggedInUI(user);
-  } catch (error) {
-    console.error("Error validando usuario:", error);
+  function getMembershipLabelFromData(data) {
+    const raw = String(data?.subscription || data?.plan || "free").toLowerCase();
+    return raw === "premium" ? "Premium" : "Free";
   }
-});
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyD0nB8uMQRC_d17zCf2r-nw0jb0eq4s45w",
-      authDomain: "nebula-1955f.firebaseapp.com",
-      projectId: "nebula-1955f",
-      storageBucket: "nebula-1955f.firebasestorage.app",
-      messagingSenderId: "736722257829",
-      appId: "1:736722257829:web:605cab7fde553470454a4c",
-      measurementId: "G-BTF17CDGM7"
+  function resolveAvatar(user) {
+    const localProfile = getLocalProfile();
+    if (localProfile.icon) return localProfile.icon;
+    if (user?.displayName) return user.displayName.trim().charAt(0).toUpperCase();
+    if (user?.email) return user.email.trim().charAt(0).toUpperCase();
+    return "🌌";
+  }
+
+  function updateLoggedOutUI() {
+    headerSessionBtn.textContent = "Iniciar sesión";
+    headerSessionBtn.href = "login.html";
+
+    userGreeting.textContent = "Usuario Nébula";
+    userEmailText.textContent =
+      "Inicia sesión para guardar tu progreso, continuar leyendo y ver tu membresía activa.";
+    userPlanPill.textContent = "Suscripción: Free";
+    userStatePill.textContent = "Estado: Invitado";
+    userMembershipText.textContent = "Puedes desbloquear temporadas completas";
+    userAvatar.textContent = "🌌";
+
+    userGuestBox.classList.remove("hidden-panel");
+    userLoggedBox.classList.add("hidden-panel");
+  }
+
+  function updateLoggedInUI(user, membershipLabel) {
+    const profile = getLocalProfile();
+    const displayName =
+      profile.name ||
+      user.displayName ||
+      (user.email ? user.email.split("@")[0] : "Usuario Nébula");
+
+    headerSessionBtn.textContent = displayName;
+    headerSessionBtn.href = "#usuario-nebula";
+
+    userGreeting.textContent = displayName;
+    userEmailText.textContent = user.email || "Tu cuenta está conectada correctamente.";
+    userPlanPill.textContent = `Suscripción: ${membershipLabel}`;
+    userStatePill.textContent = "Estado: Activo";
+    userMembershipText.textContent =
+      membershipLabel === "Premium"
+        ? "Tu acceso premium está activo"
+        : "Aún puedes mejorar a Premium";
+    userAvatar.textContent = resolveAvatar(user);
+
+    userGuestBox.classList.add("hidden-panel");
+    userLoggedBox.classList.remove("hidden-panel");
+  }
+
+  let currentNovelId = "codigo-nebula";
+
+  function getVotesKey(id) {
+    return `nebula_votes_${id}`;
+  }
+
+  function getUserVoteKey(id, userId) {
+    return `nebula_user_vote_${id}_${userId}`;
+  }
+
+  function getUserId() {
+    return localStorage.getItem("nebula_user_id") || "user_demo_1";
+  }
+
+  function initVoting(novelId) {
+    currentNovelId = novelId;
+
+    const votes = JSON.parse(localStorage.getItem(getVotesKey(novelId))) || {
+      stars5: 0,
+      stars4: 0,
+      stars3: 0,
+      stars2: 0,
+      stars1: 0
     };
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
+    renderRating(votes);
+    renderUserStars();
+  }
 
-    window.firebaseApp = app;
-    window.firebaseAuth = auth;
-    window.firebaseDb = db;
+  function renderRating(votes) {
+    const total =
+      votes.stars5 +
+      votes.stars4 +
+      votes.stars3 +
+      votes.stars2 +
+      votes.stars1;
 
-    console.log("🔥 Firebase conectado correctamente");
+    let avg = 0;
 
-    const headerSessionBtn = document.getElementById("headerSessionBtn");
-    const userGreeting = document.getElementById("userGreeting");
-    const userEmailText = document.getElementById("userEmailText");
-    const userPlanPill = document.getElementById("userPlanPill");
-    const userStatePill = document.getElementById("userStatePill");
-    const userMembershipText = document.getElementById("userMembershipText");
-    const userAvatar = document.getElementById("userAvatar");
-    const userGuestBox = document.getElementById("userGuestBox");
-    const userLoggedBox = document.getElementById("userLoggedBox");
-    const logoutBtn = document.getElementById("logoutBtn");
+    if (total > 0) {
+      avg =
+        (5 * votes.stars5 +
+          4 * votes.stars4 +
+          3 * votes.stars3 +
+          2 * votes.stars2 +
+          1 * votes.stars1) / total;
+    }
 
-    function getLocalProfile() {
-      try {
-        const raw = localStorage.getItem("nebula-user-profile");
-        return raw ? JSON.parse(raw) : {};
-      } catch {
-        return {};
+    document.getElementById("featuredRatingLabel").innerText = avg.toFixed(1) + " / 5";
+
+    const container = document.getElementById("featuredStars");
+    container.innerHTML = "";
+
+    for (let i = 1; i <= 5; i++) {
+      const star = document.createElement("span");
+      star.innerHTML = "★";
+      star.className = "star " + (i <= Math.round(avg) ? "active" : "");
+      container.appendChild(star);
+    }
+  }
+
+  function renderUserStars() {
+    const container = document.getElementById("userVoteStars");
+    container.innerHTML = "";
+
+    const userId = getUserId();
+    const savedVote = localStorage.getItem(getUserVoteKey(currentNovelId, userId));
+
+    for (let i = 1; i <= 5; i++) {
+      const star = document.createElement("span");
+      star.innerHTML = "★";
+      star.className = "star";
+
+      if (savedVote && i <= savedVote) {
+        star.classList.add("active");
       }
+
+      star.onclick = () => vote(i);
+      container.appendChild(star);
     }
-
-    function getMembershipLabel() {
-      const raw = localStorage.getItem("nebula-membership") || "free";
-      if (raw === "premium") return "Premium";
-      return "Free";
-    }
-
-    function resolveAvatar(user) {
-      const localProfile = getLocalProfile();
-      if (localProfile.icon) return localProfile.icon;
-      if (user?.displayName) return user.displayName.trim().charAt(0).toUpperCase();
-      if (user?.email) return user.email.trim().charAt(0).toUpperCase();
-      return "🌌";
-    }
-
-    function updateLoggedOutUI() {
-      headerSessionBtn.textContent = "Iniciar sesión";
-      headerSessionBtn.href = "login.html";
-
-      userGreeting.textContent = "Usuario Nébula";
-      userEmailText.textContent = "Inicia sesión para guardar tu progreso, continuar leyendo y ver tu membresía activa.";
-      userPlanPill.textContent = "Suscripción: Free";
-      userStatePill.textContent = "Estado: Invitado";
-      userMembershipText.textContent = "Puedes desbloquear temporadas completas";
-      userAvatar.textContent = "🌌";
-
-      userGuestBox.classList.remove("hidden-panel");
-      userLoggedBox.classList.add("hidden-panel");
-    }
-
-    function updateLoggedInUI(user) {
-      const profile = getLocalProfile();
-      const membership = getMembershipLabel();
-      const displayName =
-        profile.name ||
-        user.displayName ||
-        (user.email ? user.email.split("@")[0] : "Usuario Nébula");
-
-      headerSessionBtn.textContent = displayName;
-      headerSessionBtn.href = "#usuario-nebula";
-
-      userGreeting.textContent = displayName;
-      userEmailText.textContent = user.email || "Tu cuenta está conectada correctamente.";
-      userPlanPill.textContent = `Suscripción: ${membership}`;
-      userStatePill.textContent = "Estado: Activo";
-      userMembershipText.textContent =
-        membership === "Premium"
-          ? "Tu acceso premium está activo"
-          : "Aún puedes mejorar a Premium";
-      userAvatar.textContent = resolveAvatar(user);
-
-      userGuestBox.classList.add("hidden-panel");
-      userLoggedBox.classList.remove("hidden-panel");
-    }
-
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        updateLoggedInUI(user);
-      } else {
-        updateLoggedOutUI();
-      }
-    });
-
-    logoutBtn.addEventListener("click", async () => {
-      try {
-        await signOut(auth);
-        updateLoggedOutUI();
-      } catch (error) {
-        console.error("Error al cerrar sesión:", error);
-      }
-    });
-    
-let currentNovelId = "codigo-nebula"; // dinámico después
-
-function getVotesKey(id) {
-  return `nebula_votes_${id}`;
-}
-
-function getUserVoteKey(id, userId) {
-  return `nebula_user_vote_${id}_${userId}`;
-}
-
-// SIMULACIÓN usuario (después va Firebase)
-function getUserId() {
-  return localStorage.getItem("nebula_user_id") || "user_demo_1";
-}
-
-// Inicializar
-function initVoting(novelId) {
-  currentNovelId = novelId;
-
-  const votes = JSON.parse(localStorage.getItem(getVotesKey(novelId))) || {
-    stars5: 0,
-    stars4: 0,
-    stars3: 0,
-    stars2: 0,
-    stars1: 0
-  };
-
-  renderRating(votes);
-  renderUserStars();
-}
-
-// Render promedio
-function renderRating(votes) {
-  const total =
-    votes.stars5 +
-    votes.stars4 +
-    votes.stars3 +
-    votes.stars2 +
-    votes.stars1;
-
-  let avg = 0;
-
-  if (total > 0) {
-    avg =
-      (5 * votes.stars5 +
-        4 * votes.stars4 +
-        3 * votes.stars3 +
-        2 * votes.stars2 +
-        1 * votes.stars1) /
-      total;
   }
 
-  document.getElementById("featuredRatingLabel").innerText =
-    avg.toFixed(1) + " / 5";
+  function vote(value) {
+    const userId = getUserId();
 
-  const container = document.getElementById("featuredStars");
-  container.innerHTML = "";
+    let votes = JSON.parse(localStorage.getItem(getVotesKey(currentNovelId))) || {
+      stars5: 0,
+      stars4: 0,
+      stars3: 0,
+      stars2: 0,
+      stars1: 0
+    };
 
-  for (let i = 1; i <= 5; i++) {
-    const star = document.createElement("span");
-    star.innerHTML = "★";
-    star.className = "star " + (i <= Math.round(avg) ? "active" : "");
-    container.appendChild(star);
-  }
-}
+    const previousVote = localStorage.getItem(getUserVoteKey(currentNovelId, userId));
 
-// Render estrellas del usuario
-function renderUserStars() {
-  const container = document.getElementById("userVoteStars");
-  container.innerHTML = "";
-
-  const userId = getUserId();
-  const savedVote = localStorage.getItem(
-    getUserVoteKey(currentNovelId, userId)
-  );
-
-  for (let i = 1; i <= 5; i++) {
-    const star = document.createElement("span");
-    star.innerHTML = "★";
-    star.className = "star";
-
-    if (savedVote && i <= savedVote) {
-      star.classList.add("active");
+    if (previousVote) {
+      votes["stars" + previousVote]--;
     }
 
-    star.onclick = () => vote(i);
+    votes["stars" + value]++;
 
-    container.appendChild(star);
-  }
-}
+    localStorage.setItem(getVotesKey(currentNovelId), JSON.stringify(votes));
+    localStorage.setItem(getUserVoteKey(currentNovelId, userId), value);
 
-// VOTAR
-function vote(value) {
-  const userId = getUserId();
-
-  let votes = JSON.parse(localStorage.getItem(getVotesKey(currentNovelId))) || {
-    stars5: 0,
-    stars4: 0,
-    stars3: 0,
-    stars2: 0,
-    stars1: 0
-  };
-
-  // evitar doble voto
-  const previousVote = localStorage.getItem(
-    getUserVoteKey(currentNovelId, userId)
-  );
-
-  if (previousVote) {
-    votes["stars" + previousVote]--;
+    renderRating(votes);
+    renderUserStars();
   }
 
-  votes["stars" + value]++;
-
-  localStorage.setItem(getVotesKey(currentNovelId), JSON.stringify(votes));
-  localStorage.setItem(
-    getUserVoteKey(currentNovelId, userId),
-    value
-  );
-
-  renderRating(votes);
-  renderUserStars();
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-
-onAuthStateChanged(auth, async (user) => {
-
-  // ❌ NO LOGUEADO → LOGIN
-  if (!user) {
-    window.location.href = "../login.html";
-    return;
-  }
-
-  try {
-    const userRef = doc(db, "users", user.uid);
-    const userSnap = await getDoc(userRef);
-
-    if (!userSnap.exists()) {
-      // Usuario raro → lo sacamos
+  logoutBtn.addEventListener("click", async () => {
+    try {
       await signOut(auth);
-      window.location.href = "../login.html";
+      updateLoggedOutUI();
+      window.location.href = "bienvenida.html";
+    } catch (error) {
+      console.error("Error al cerrar sesión:", error);
+    }
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    initVoting("codigo-nebula");
+  });
+
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) {
+      updateLoggedOutUI();
+      window.location.href = "bienvenida.html";
       return;
     }
 
-    const data = userSnap.data();
+    try {
+      const userRef = doc(db, "users", user.uid);
+      const userSnap = await getDoc(userRef);
 
-    const isPremium =
-      data.plan === "premium" ||
-      data.subscription === "premium";
+      if (!userSnap.exists()) {
+        await signOut(auth);
+        window.location.href = "login.html";
+        return;
+      }
 
-    // ❌ NO PREMIUM → PANTALLA DE PAGO / LANDING
-    if (!isPremium) {
-      window.location.href = "../landing.html"; // 👈 ESTA ES LA NUEVA QUE QUIERES
-      return;
+      const data = userSnap.data();
+      const isPremium =
+        String(data.plan || "").toLowerCase() === "premium" ||
+        String(data.subscription || "").toLowerCase() === "premium";
+
+      const membershipLabel = getMembershipLabelFromData(data);
+
+      if (!isPremium) {
+        updateLoggedInUI(user, membershipLabel);
+        window.location.href = "bienvenida.html";
+        return;
+      }
+
+      updateLoggedInUI(user, membershipLabel);
+      console.log("✅ Usuario premium OK");
+    } catch (error) {
+      console.error("Error validando usuario:", error);
+      window.location.href = "login.html";
     }
-
-    // ✅ SI ES PREMIUM → SE QUEDA EN INDEX
-    console.log("Usuario premium OK");
-
-  } catch (e) {
-    console.error("Error validando usuario:", e);
-  }
-});
+  });
 </script>
 </body>
 </html>
