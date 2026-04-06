@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  />
+  <title>Nébula | Fin de temporada</title>
+  <meta
+    name="description"
+    content="Has llegado al final de esta temporada en Nébula. Muy pronto podrás continuar con nuevas historias y próximas temporadas."
+  />
+  <meta name="theme-color" content="#050816" />
+
+  <style>
+    :root{
+      --bg:#040816;
+      --bg2:#081123;
+      --bg3:#101a31;
+      --panel:rgba(8,15,31,.58);
+      --panel-strong:rgba(9,18,36,.76);
+      --line:rgba(255,255,255,.09);
+      --line-strong:rgba(255,255,255,.16);
+      --text:#f6f8ff;
+      --muted:rgba(229,236,255,.82);
+      --soft:rgba(214,225,255,.62);
+      --blue:#71a7ff;
+      --blue-2:#346fff;
+      --violet:#8b5cf6;
+      --gold:#ffd76a;
+      --green:#57d48a;
+      --shadow:0 24px 90px rgba(0,0,0,.42);
+      --radius:30px;
+      --radius-lg:38px;
+      --max:1260px;
+    }
+
+    *{ box-sizing:border-box; }
+
+    html,body{
+      margin:0;
+      padding:0;
+      width:100%;
+      min-height:100%;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 20% 0%, rgba(113,167,255,.14), transparent 25%),
+        radial-gradient(circle at 85% 15%, rgba(139,92,246,.14), transparent 22%),
+        linear-gradient(180deg, #040816 0%, #02050d 100%);
+      color:var(--text);
+      overflow-x:hidden;
+    }
+
+    body{
+      position:relative;
+      isolation:isolate;
+    }
+
+    .background-wall,
+    .glow,
+    .vignette,
+    .grid,
+    .noise{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+    }
+
+    .background-wall{
+      z-index:-5;
+      overflow:hidden;
+    }
+
+    .columns{
+      position:absolute;
+      inset:-12vh -5vw;
+      display:grid;
+      grid-template-columns:repeat(6, minmax(140px, 1fr));
+      gap:18px;
+      transform:scale(1.04);
+      filter:saturate(1.12) brightness(.9) contrast(1.06);
+      opacity:1;
+    }
+
+    .column{
+      position:relative;
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+      animation:floatUp linear infinite;
+      will-change:transform;
+    }
+
+    .column.reverse{
+      animation-name:floatDown;
+    }
+
+    .poster{
+      width:100%;
+      aspect-ratio:0.68 / 1;
+      border-radius:24px;
+      overflow:hidden;
+      position:relative;
+      border:1px solid rgba(255,255,255,.08);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)),
+        linear-gradient(135deg, #14213d, #09101f 55%, #111827);
+      box-shadow:0 10px 28px rgba(0,0,0,.35);
+    }
+
+    .poster img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      transform:scale(1.05);
+      filter:brightness(.95) saturate(1.08) contrast(1.05);
+    }
+
+    .poster::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(180deg, rgba(4,8,20,.10), rgba(2,4,10,.32)),
+        linear-gradient(0deg, rgba(2,4,10,.40), rgba(2,4,10,.05));
+    }
+
+    .poster::before{
+      content:"";
+      position:absolute;
+      inset:auto 10% 0 10%;
+      height:22%;
+      background:radial-gradient(circle, rgba(255,255,255,.14), transparent 72%);
+      filter:blur(26px);
+      z-index:1;
+    }
+
+    @keyframes floatUp{
+      0%   { transform:translateY(0); }
+      100% { transform:translateY(-38%); }
+    }
+
+    @keyframes floatDown{
+      0%   { transform:translateY(-38%); }
+      100% { transform:translateY(0); }
+    }
+
+    .glow{
+      z-index:-4;
+      background:
+        radial-gradient(circle at 15% 18%, rgba(113,167,255,.16), transparent 22%),
+        radial-gradient(circle at 84% 15%, rgba(139,92,246,.12), transparent 20%),
+        radial-gradient(circle at 50% 82%, rgba(255,215,106,.09), transparent 26%);
+      filter:blur(12px);
+    }
+
+    .vignette{
+      z-index:-3;
+      background:
+        radial-gradient(circle at center, transparent 40%, rgba(0,0,0,.12) 72%, rgba(0,0,0,.46) 100%),
+        linear-gradient(180deg, rgba(2,6,18,.16), rgba(2,6,18,.42));
+    }
+
+    .grid{
+      z-index:-2;
+      background-image:
+        linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px);
+      background-size:42px 42px;
+      mask-image:linear-gradient(180deg, rgba(255,255,255,.20), transparent 85%);
+      opacity:.26;
+    }
+
+    .noise{
+      z-index:-1;
+      opacity:.03;
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.9'/%3E%3C/svg%3E");
+    }
+
+    .page{
+      position:relative;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:38px 20px;
+    }
+
+    .shell{
+      width:min(100%, var(--max));
+      position:relative;
+    }
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      border-radius:var(--radius-lg);
+      border:1px solid rgba(255,255,255,.08);
+      background:
+        linear-gradient(180deg, rgba(10,18,35,.36), rgba(5,10,22,.60)),
+        linear-gradient(135deg, rgba(255,255,255,.05), rgba(255,255,255,.015));
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(16px);
+      -webkit-backdrop-filter:blur(16px);
+      padding:36px;
+      max-width:780px;
+      margin:0 auto;
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:-20% auto auto -12%;
+      width:360px;
+      height:360px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(94,152,255,.14), transparent 70%);
+      filter:blur(8px);
+      pointer-events:none;
+    }
+
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:auto -10% -25% auto;
+      width:380px;
+      height:380px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(139,92,246,.12), transparent 70%);
+      filter:blur(8px);
+      pointer-events:none;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 18px;
+      border-radius:999px;
+      background:rgba(255,255,255,.11);
+      border:1px solid rgba(255,255,255,.16);
+      color:#fff;
+      font-size:.88rem;
+      font-weight:800;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.10);
+    }
+
+    .eyebrow::before{
+      content:"";
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:linear-gradient(135deg, #ffffff, var(--gold));
+      box-shadow:0 0 16px rgba(255,215,106,.6);
+    }
+
+    .content{
+      position:relative;
+      z-index:2;
+      max-width:670px;
+      margin-top:22px;
+    }
+
+    h1{
+      margin:0 0 16px;
+      font-size:clamp(2.2rem, 4.8vw, 4rem);
+      line-height:1.02;
+      letter-spacing:-.045em;
+      font-weight:900;
+      text-wrap:balance;
+      text-shadow:0 10px 40px rgba(0,0,0,.24);
+    }
+
+    .lead{
+      margin:0;
+      font-size:1.04rem;
+      line-height:1.8;
+      color:var(--muted);
+      max-width:650px;
+      text-wrap:pretty;
+    }
+
+    .lead strong{
+      color:#fff;
+      font-weight:800;
+    }
+
+    .note{
+      margin-top:22px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      align-items:center;
+    }
+
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      min-height:42px;
+      padding:10px 15px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.11);
+      background:rgba(255,255,255,.055);
+      color:#eef4ff;
+      font-size:.94rem;
+      font-weight:700;
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+    }
+
+    .chip svg{
+      width:18px;
+      height:18px;
+      opacity:.92;
+      flex:0 0 auto;
+    }
+
+    .actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      margin-top:28px;
+    }
+
+    .btn{
+      appearance:none;
+      border:none;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      min-height:54px;
+      padding:0 22px;
+      border-radius:16px;
+      font-size:.96rem;
+      font-weight:800;
+      letter-spacing:.01em;
+      transition:transform .22s ease, box-shadow .22s ease, background .22s ease, border-color .22s ease;
+      cursor:pointer;
+      position:relative;
+      overflow:hidden;
+      white-space:nowrap;
+    }
+
+    .btn:hover{
+      transform:translateY(-2px);
+    }
+
+    .btn-primary{
+      color:#fff;
+      background:linear-gradient(135deg, #63a8ff 0%, #2f73ff 55%, #1f4eff 100%);
+      box-shadow:
+        0 18px 50px rgba(47,115,255,.28),
+        inset 0 1px 0 rgba(255,255,255,.22);
+    }
+
+    .btn-secondary{
+      color:#eef4ff;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.055);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+    }
+
+    .btn svg{
+      width:18px;
+      height:18px;
+      flex:0 0 auto;
+    }
+
+    .bottom-panels{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:16px;
+      margin-top:20px;
+    }
+
+    .panel{
+      border-radius:24px;
+      border:1px solid rgba(255,255,255,.08);
+      background:
+        linear-gradient(180deg, rgba(9,18,38,.52), rgba(5,10,20,.62));
+      box-shadow:0 16px 50px rgba(0,0,0,.26);
+      padding:20px;
+      backdrop-filter:blur(14px);
+      -webkit-backdrop-filter:blur(14px);
+    }
+
+    .panel h2{
+      margin:0 0 8px;
+      font-size:1rem;
+      font-weight:900;
+      letter-spacing:-.02em;
+    }
+
+    .panel p{
+      margin:0;
+      color:var(--soft);
+      line-height:1.7;
+      font-size:.95rem;
+    }
+
+    .panel strong{
+      color:#fff;
+    }
+
+    .mini-grid{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:10px;
+      margin-top:16px;
+    }
+
+    .mini-card{
+      padding:14px;
+      border-radius:18px;
+      background:rgba(255,255,255,.045);
+      border:1px solid rgba(255,255,255,.07);
+      min-height:92px;
+    }
+
+    .mini-card .label{
+      font-size:.74rem;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:rgba(230,238,255,.55);
+      font-weight:800;
+      margin-bottom:8px;
+    }
+
+    .mini-card .value{
+      font-size:.95rem;
+      line-height:1.45;
+      color:#fff;
+      font-weight:800;
+    }
+
+    .status-line{
+      margin-top:14px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:#dfe9ff;
+      font-size:.92rem;
+      font-weight:700;
+    }
+
+    .pulse{
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:var(--green);
+      box-shadow:0 0 0 0 rgba(87,212,138,.52);
+      animation:pulseDot 2.2s infinite;
+      flex:0 0 auto;
+    }
+
+    @keyframes pulseDot{
+      0%{ box-shadow:0 0 0 0 rgba(87,212,138,.48); }
+      70%{ box-shadow:0 0 0 14px rgba(87,212,138,0); }
+      100%{ box-shadow:0 0 0 0 rgba(87,212,138,0); }
+    }
+
+    .signature{
+      margin-top:14px;
+      color:rgba(230,238,255,.58);
+      font-size:.82rem;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      font-weight:800;
+    }
+
+    @media (max-width: 1180px){
+      .columns{
+        grid-template-columns:repeat(5, minmax(120px, 1fr));
+      }
+    }
+
+    @media (max-width: 860px){
+      .page{
+        padding:18px 14px 24px;
+      }
+
+      .hero{
+        padding:24px 16px 20px;
+        border-radius:26px;
+        max-width:100%;
+      }
+
+      .content{
+        margin-top:18px;
+        max-width:100%;
+      }
+
+      h1{
+        font-size:clamp(2rem, 9vw, 3.2rem);
+        line-height:1.04;
+        margin-bottom:14px;
+      }
+
+      .lead{
+        font-size:.98rem;
+        line-height:1.68;
+      }
+
+      .actions{
+        flex-direction:column;
+      }
+
+      .btn{
+        width:100%;
+      }
+
+      .mini-grid{
+        grid-template-columns:1fr;
+      }
+
+      .columns{
+        grid-template-columns:repeat(3, minmax(115px, 1fr));
+        gap:12px;
+      }
+
+      .column,
+      .column.reverse{
+        animation-duration:30s !important;
+      }
+    }
+
+    @media (max-width: 560px){
+      .eyebrow{
+        font-size:.82rem;
+        padding:10px 15px;
+      }
+
+      .hero{
+        min-height:auto;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+      }
+
+      .panel{
+        padding:16px;
+        border-radius:22px;
+      }
+
+      .columns{
+        inset:-10vh -12vw;
+        grid-template-columns:repeat(3, minmax(120px, 1fr));
+      }
+
+      .poster{
+        border-radius:18px;
+      }
+
+      .note{
+        gap:10px;
+      }
+
+      .chip{
+        width:100%;
+        justify-content:flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="background-wall" aria-hidden="true">
+    <div class="columns">
+      <div class="column" style="animation-duration: 34s;">
+        <div class="poster"><img src="../assets/covers/nebula.jpg" alt=""></div>
+        <div class="poster"><img src="../assets/covers/despues-de-tu-adios.jpg" alt=""></div>
+        <div class="poster"><img src="../assets/covers/la-ultima-conexion.jpg" alt=""></div>
+        <div class="poster"><img src="../assets/covers/no-debi-enamorarme.jpg" alt=""></div>
+        <div class="poster"><img src="../assets/covers/allende.jpg" alt=""></div>
+      </div>
+
+      <div class="column reverse" style="animation-duration: 30s;">
+        <div class="poster"><img src="../assets/covers/no-debi-enamorarme.jpg" alt=""></div>
+        <div class="poster"><img src="../assets/covers/temporada2-cover.jpg" alt=""></div>
+        <div class="poster"><img src="../assets/covers/despues-de-tu-adios.jpg" alt=""></div>
+        <div class="poster"><img src="../assets/covers/la-ultima-conexion.jpg" alt=""></div>
+        <div class="poster"><img src="../assets/covers/nebula.jpg" alt=""></div>
+      </div>
+
+      <div class="column" style="animation-duration: 38s;">
+        <div class="poster"><img src="../assets/covers/allende.jpg" alt=""></div>
+        <div class="poster"><img src="../assets/covers/nebula.jpg" alt=""></div>
+        <div class="poster"><img src="../assets/covers/no-debi-enamorarme.jpg" alt=""></div>
+        <div class="poster"><img src="../assets/covers/despues-de-tu-adios.jpg" alt=""></div>
+        <div class="poster"><img src="../assets/covers/temporada2-cover.jpg" alt=""></div>
+      </div>
+
+      <div class="column reverse" style="animation-duration: 32s;">
+        <div class="poster"><img src="../assets/covers/la-ultima-conexion.jpg" alt=""></div>
+        <div class="poster"><img src="../assets/covers/allende.jpg" alt=""></div>
+        <div class="poster"><img src="../assets/covers/temporada2-cover.jpg" alt=""></div>
+        <div class="poster"><img src="../assets/covers/no-debi-enamorarme.jpg" alt=""></div>
+        <div class="poster"><img src="../assets/covers/nebula.jpg" alt=""></div>
+      </div>
+
+      <div class="column" style="animation-duration: 36s;">
+        <div class="poster"><img src="../assets/covers/despues-de-tu-adios.jpg" alt=""></div>
+        <div class="poster"><img src="../assets/covers/la-ultima-conexion.jpg" alt=""></div>
+        <div class="poster"><img src="../assets/covers/allende.jpg" alt=""></div>
+        <div class="poster"><img src="../assets/covers/nebula.jpg" alt=""></div>
+        <div class="poster"><img src="../assets/covers/no-debi-enamorarme.jpg" alt=""></div>
+      </div>
+
+      <div class="column reverse" style="animation-duration: 40s;">
+        <div class="poster"><img src="../assets/covers/temporada2-cover.jpg" alt=""></div>
+        <div class="poster"><img src="../assets/covers/no-debi-enamorarme.jpg" alt=""></div>
+        <div class="poster"><img src="../assets/covers/despues-de-tu-adios.jpg" alt=""></div>
+        <div class="poster"><img src="../assets/covers/allende.jpg" alt=""></div>
+        <div class="poster"><img src="../assets/covers/la-ultima-conexion.jpg" alt=""></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="glow"></div>
+  <div class="vignette"></div>
+  <div class="grid"></div>
+  <div class="noise"></div>
+
+  <main class="page">
+    <section class="shell">
+      <div class="hero">
+        <span class="eyebrow">Final de temporada</span>
+
+        <div class="content">
+          <h1>Has llegado al final de esta temporada</h1>
+
+          <p class="lead">
+            Terminaste este recorrido y llegaste hasta el cierre de una etapa.
+            <strong>Gracias por leer, avanzar y quedarte hasta el final.</strong>
+            Muy pronto podrás continuar con una nueva temporada o descubrir otras historias dentro de Nébula.
+          </p>
+
+          <div class="note">
+            <span class="chip">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 8v5l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+              </svg>
+              Próxima temporada próximamente
+            </span>
+
+            <span class="chip">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 3l7 4v5c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V7l7-4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+              </svg>
+              Sigue explorando Nébula
+            </span>
+
+            <span class="chip">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M4 7h16M7 4v6m10-6v6M5 11h14v8H5z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Celular, tablet y PC
+            </span>
+          </div>
+
+          <div class="actions">
+            <a class="btn btn-primary" href="../index.html">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Volver a Nébula
+            </a>
+
+            <a class="btn btn-secondary" href="../index.html#novelas">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M4 19h16M6 17V7.8c0-.4.24-.75.61-.9l5-2a1 1 0 0 1 .78 0l5 2c.37.15.61.5.61.9V17" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M9 10h.01M15 10h.01M12 10h.01" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+              </svg>
+              Ver más historias
+            </a>
+          </div>
+        </div>
+
+        <div class="bottom-panels">
+          <div class="panel">
+            <h2>¿Qué significa esta pantalla?</h2>
+            <p>
+              Esta <strong>temporada ya fue completada</strong>. No estás frente a una novela incompleta,
+              sino al cierre de una etapa dentro de la historia. Cuando la próxima temporada esté disponible,
+              podrás continuar desde Nébula.
+            </p>
+
+            <div class="mini-grid">
+              <div class="mini-card">
+                <div class="label">Estado</div>
+                <div class="value">Temporada finalizada</div>
+              </div>
+
+              <div class="mini-card">
+                <div class="label">Siguiente paso</div>
+                <div class="value">Esperar nueva temporada</div>
+              </div>
+
+              <div class="mini-card">
+                <div class="label">Mientras tanto</div>
+                <div class="value">Explorar otras novelas</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h2>Gracias por llegar hasta aquí</h2>
+            <p>
+              Cada final de temporada es una pausa, no un adiós.
+              Nébula sigue creciendo con nuevas historias, nuevas temporadas y una experiencia cada vez más premium.
+            </p>
+
+            <div class="status-line">
+              <span class="pulse"></span>
+              Universo Nébula en expansión
+            </div>
+
+            <div class="signature">Creado por Nébula</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
