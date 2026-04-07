@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Pago</title>
+
+<style>
+body{
+  font-family: Arial;
+  background:#0b1220;
+  color:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
+
+.card{
+  background:#111a2e;
+  padding:30px;
+  border-radius:20px;
+  text-align:center;
+  width:320px;
+}
+
+.price{
+  font-size:2.5rem;
+  margin:20px 0;
+}
+
+.old{
+  text-decoration:line-through;
+  opacity:.5;
+}
+
+.btn{
+  display:block;
+  background:#3490ff;
+  padding:12px;
+  border-radius:10px;
+  margin-top:20px;
+  color:white;
+  text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h2 id="title">Cargando...</h2>
+
+  <div class="price">
+    <span id="old"></span>
+    <strong id="price"></strong>
+  </div>
+
+  <p id="desc"></p>
+
+  <a id="payBtn" class="btn">Ir a pagar</a>
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const tipo = params.get("tipo");
+
+if(tipo === "individual"){
+  document.getElementById("title").innerText = "Desbloqueo individual";
+  document.getElementById("old").innerText = "$1.500 ";
+  document.getElementById("price").innerText = "$990 CLP";
+  document.getElementById("desc").innerText = "Acceso completo a la historia";
+  document.getElementById("payBtn").href = "LINK_MERCADOPAGO_990";
+}
+
+if(tipo === "premium"){
+  document.getElementById("title").innerText = "Plan Premium";
+  document.getElementById("old").innerText = "$6.990 ";
+  document.getElementById("price").innerText = "$4.990 CLP";
+  document.getElementById("desc").innerText = "Acceso a múltiples historias";
+  document.getElementById("payBtn").href = "LINK_MERCADOPAGO_4990";
+}
+</script>
+
+</body>
+</html>
