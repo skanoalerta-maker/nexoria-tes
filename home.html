@@ -1719,7 +1719,37 @@
 </nav>
 
 <div class="nav-actions">
-  <a href="login.html" class="btn btn-ghost" id="headerLoginLink">Iniciar sesión</a>
+
+  <div class="user-menu" id="userMenu">
+    
+    <button class="user-menu-trigger" id="userMenuTrigger">
+      <span class="user-avatar">🌌</span>
+      <span id="headerUserName">Lector</span>
+      <span class="arrow">▾</span>
+    </button>
+
+    <div class="user-dropdown" id="userDropdown">
+      
+      <div class="user-dropdown-header">
+        <strong id="dropdownUserName">Lector Nébula</strong>
+        <p id="dropdownUserEmail">correo@ejemplo.com</p>
+      </div>
+
+      <div class="user-dropdown-info">
+        <div><span>Plan</span><strong id="infoPlan">Free</strong></div>
+        <div><span>Leídos</span><strong id="infoRead">41 capítulos</strong></div>
+      </div>
+
+      <div class="user-dropdown-links">
+        <a href="#usuario-nebula">Mi espacio</a>
+        <a href="perfil.html">Mi perfil</a>
+        <button id="logoutBtn">Cerrar sesión</button>
+      </div>
+
+    </div>
+
+  </div>
+
 </div>
 
 </div>
