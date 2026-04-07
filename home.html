@@ -2904,10 +2904,18 @@ const firebaseConfig = {
   });
 
 onAuthStateChanged(auth, async (user) => {
-  if (!user) {
-    updateLoggedOutUI();
-    return;
+  if (user) {
+    try {
+      await loadUserProfile(user);
+      console.log("Usuario activo:", user.email);
+    } catch (error) {
+      console.error(error);
+    }
+  } else {
+    clearPurchaseIdentity();
+    showAuthMode();
   }
+});
 
   try {
     const userRef = doc(db, "users", user.uid);
