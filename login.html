@@ -1305,11 +1305,11 @@
         showStatus("No se pudo cerrar la sesión.", "error");
       }
     });
-    goNebulaBtn.addEventListener("click", () => {
+goNebulaBtn.addEventListener("click", () => {
   const user = auth.currentUser;
 
   if (user) {
-    window.location.href = "/nexoria-tes/index.html";
+    window.location.href = "./home.html";
   } else {
     alert("Debes iniciar sesión primero");
   }
