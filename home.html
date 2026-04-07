@@ -1690,6 +1690,174 @@
       }
     }
   </style>
+  .pricing-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:22px;
+}
+
+.pricing-card{
+  padding:28px;
+  border-radius:30px;
+  background:linear-gradient(180deg, rgba(9,18,42,.92), rgba(9,18,42,.72));
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 24px 70px rgba(0,0,0,.34);
+  position:relative;
+  overflow:hidden;
+}
+
+.pricing-card::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  height:1px;
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,.28), transparent);
+}
+
+.pricing-card.featured{
+  border:1px solid rgba(82,145,255,.35);
+  box-shadow:0 24px 70px rgba(0,0,0,.34), 0 0 30px rgba(52,144,255,.14);
+}
+
+.pricing-chip{
+  display:inline-flex;
+  align-items:center;
+  min-height:36px;
+  padding:0 14px;
+  border-radius:999px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.08);
+  color:#edf4ff;
+  font-weight:800;
+  font-size:.82rem;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  margin-bottom:16px;
+}
+
+.premium-chip{
+  background:rgba(52,144,255,.12);
+  border:1px solid rgba(82,145,255,.28);
+  color:#9fd4ff;
+}
+
+.pricing-card h3{
+  font-size:2rem;
+  line-height:1.05;
+  margin-bottom:12px;
+}
+
+.pricing-card p{
+  color:#b8c4da;
+  line-height:1.7;
+  margin-bottom:18px;
+  max-width:52ch;
+}
+
+.pricing-value{
+  display:flex;
+  align-items:flex-end;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-bottom:12px;
+}
+
+.old-price{
+  font-size:1.25rem;
+  font-weight:800;
+  color:rgba(255,255,255,.45);
+  text-decoration:line-through;
+  text-decoration-thickness:2px;
+}
+
+.pricing-value strong{
+  font-size:3rem;
+  line-height:1;
+  letter-spacing:-.04em;
+  color:#fff;
+}
+
+.currency{
+  color:#d7e5fb;
+  font-weight:700;
+  font-size:1rem;
+  margin-bottom:5px;
+}
+
+.offer-badge{
+  display:inline-flex;
+  align-items:center;
+  min-height:36px;
+  padding:0 14px;
+  border-radius:999px;
+  background:rgba(255,191,31,.12);
+  border:1px solid rgba(255,191,31,.22);
+  color:#ffd54a;
+  font-weight:800;
+  font-size:.84rem;
+  margin-bottom:18px;
+}
+
+.premium-offer{
+  background:rgba(52,144,255,.14);
+  border:1px solid rgba(82,145,255,.28);
+  color:#9fd4ff;
+}
+
+.pricing-list{
+  display:grid;
+  gap:12px;
+  margin-bottom:20px;
+}
+
+.pricing-list div{
+  padding:15px 16px;
+  border-radius:18px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.06);
+  color:#e5efff;
+  line-height:1.6;
+}
+
+.payment-trust{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:10px;
+  margin-bottom:20px;
+}
+
+.payment-badge{
+  display:inline-flex;
+  align-items:center;
+  min-height:38px;
+  padding:0 14px;
+  border-radius:999px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.08);
+  color:#fff;
+  font-weight:800;
+  font-size:.9rem;
+}
+
+.pricing-actions{
+  display:flex;
+  margin-top:auto;
+}
+
+.pricing-actions .btn{
+  width:100%;
+  justify-content:center;
+}
+
+@media (max-width: 900px){
+  .pricing-grid{
+    grid-template-columns:1fr;
+  }
+}
+  </style>
 </head>
 <body>
   <canvas id="stars-canvas"></canvas>
