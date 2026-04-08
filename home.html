@@ -2309,9 +2309,12 @@ document.addEventListener('click', (e) => {
     }
     function getMembershipLabelFromData(data){ const raw = String(data?.subscription || data?.plan || 'free').toLowerCase(); return raw === 'premium' ? 'Premium' : 'Free'; }
     function getAvatarValue(user, data = {}){
-      const localProfile = getLocalProfile();
-      return data.avatar || localProfile.icon || user?.displayName?.trim()?.charAt(0)?.toUpperCase() || user?.email?.trim()?.charAt(0)?.toUpperCase() || '🌌';
-    }
+    const localProfile = getLocalProfile();
+    const raw = data.avatar || localProfile.icon || user?.displayName || user?.email || 'N';
+    const txt = String(raw).trim();
+    if (!txt || txt === '🌌') return 'N';
+    return txt.charAt(0).toUpperCase();
+}
     async function ensureUserDocument(user){
       const userRef = doc(db, 'users', user.uid);
       const snap = await getDoc(userRef);
