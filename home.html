@@ -1719,39 +1719,42 @@
 </nav>
 
 <div class="nav-actions">
+  <a href="login.html" class="btn btn-ghost" id="headerLoginLink">Iniciar sesión</a>
 
-  <div class="user-menu" id="userMenu">
-    
-    <button class="user-menu-trigger" id="userMenuTrigger">
-      <span class="user-avatar">🌌</span>
-      <span id="headerUserName">Lector</span>
-      <span class="arrow">▾</span>
+  <div class="account-menu hidden-panel" id="accountMenu">
+    <button class="account-trigger" id="accountTrigger" type="button">
+      <span class="account-avatar" id="accountAvatar">N</span>
+      <span class="account-name" id="accountName">Lector</span>
+      <span class="account-caret">▾</span>
     </button>
 
-    <div class="user-dropdown" id="userDropdown">
-      
-      <div class="user-dropdown-header">
-        <strong id="dropdownUserName">Lector Nébula</strong>
-        <p id="dropdownUserEmail">correo@ejemplo.com</p>
+    <div class="account-dropdown hidden-panel" id="accountDropdown">
+      <div class="account-dropdown-head">
+        <div class="account-avatar large" id="accountAvatarLarge">N</div>
+        <div class="account-head-copy">
+          <strong id="accountUserName">Lector Nébula</strong>
+          <p id="accountUserEmail">correo@ejemplo.com</p>
+        </div>
       </div>
 
-      <div class="user-dropdown-info">
-        <div><span>Plan</span><strong id="infoPlan">Free</strong></div>
-        <div><span>Leídos</span><strong id="infoRead">41 capítulos</strong></div>
+      <div class="account-stats">
+        <div class="account-stat-line">
+          <span>Plan</span>
+          <strong id="accountPlan">Free</strong>
+        </div>
+        <div class="account-stat-line">
+          <span>Leídos</span>
+          <strong id="accountRead">0 capítulos</strong>
+        </div>
       </div>
 
-      <div class="user-dropdown-links">
+      <div class="account-links">
         <a href="#usuario-nebula">Mi espacio</a>
         <a href="perfil.html">Mi perfil</a>
-        <button id="logoutBtn">Cerrar sesión</button>
+        <button type="button" id="accountLogoutBtn">Cerrar sesión</button>
       </div>
-
     </div>
-
   </div>
-
-</div>
-
 </div>
 </header>
 
