@@ -402,7 +402,7 @@ window.NEBULA_NOVELS = {
     sagaTitle: "Misión Peligrosa",
     description: "Una historia de acción militar, traiciones, fuego cruzado y una operación en la costa que termina revelando algo mucho más grande y letal.",
     cover: "../assets/covers/mision-peligrosa.jpg",
-    baseFolder: "accion/mision-peligrosa",
+    baseFolder: "accion/mision_peligrosa",
     defaultSeason: "temporada1",
     defaultSeasonLabel: "Temporada 1",
     freeChapters: 3,
