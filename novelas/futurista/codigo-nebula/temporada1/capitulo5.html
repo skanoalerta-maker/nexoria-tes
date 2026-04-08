@@ -3,6 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- =========================================================
+       ARCHIVO MADRE NÉBULA
+       SOLO CAMBIA LOS DATOS DEL BLOQUE "CONFIGURACIÓN DEL CAPÍTULO"
+       Y EL CONTENIDO DE .story
+     ========================================================= -->
+
   <title>Capítulo 5 | Código Nébula</title>
   <meta
     name="description"
@@ -13,7 +20,7 @@
     :root{
       --bg:#05080f;
       --bg2:#0b1220;
-      --card:rgba(12,18,32,0.88);
+      --card:rgba(12,18,32,0.82);
       --line:rgba(255,255,255,0.08);
       --line-strong:rgba(73,182,255,0.24);
       --text:#f5f8ff;
@@ -39,10 +46,7 @@
       margin:0;
       font-family:Arial, sans-serif;
       color:var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(10,108,255,.10), transparent 24%),
-        radial-gradient(circle at top right, rgba(73,182,255,.08), transparent 20%),
-        linear-gradient(180deg, #04070d 0%, #08101c 45%, #05080f 100%);
+      background:#04070d;
       line-height:1.8;
       position:relative;
       overflow-x:hidden;
@@ -59,7 +63,10 @@
       width:100%;
       height:100%;
       z-index:0;
-      pointer-events:none;
+      background:
+        radial-gradient(circle at top left, rgba(10,108,255,.12), transparent 24%),
+        radial-gradient(circle at top right, rgba(73,182,255,.08), transparent 20%),
+        linear-gradient(180deg, #04070d 0%, #08101c 45%, #05080f 100%);
     }
 
     .page{
@@ -106,10 +113,6 @@
       font-weight:700;
       color:var(--blue2);
       flex:0 0 auto;
-    }
-
-    .brand-text{
-      min-width:0;
     }
 
     .brand-title{
@@ -186,21 +189,12 @@
       position:absolute;
       inset:0;
       background:
-        linear-gradient(180deg, rgba(5,8,15,.56) 0%, rgba(5,8,15,.88) 80%, rgba(5,8,15,1) 100%),
-        url("https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1600&q=80");
+        linear-gradient(180deg, rgba(5,8,15,.58) 0%, rgba(5,8,15,.86) 80%, rgba(5,8,15,1) 100%),
+        url("https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80");
       background-size:cover;
       background-position:center;
-      opacity:.22;
+      opacity:.20;
       filter:saturate(.9);
-    }
-
-    .hero::after{
-      content:"";
-      position:absolute;
-      inset:auto 0 -120px 0;
-      height:240px;
-      background:radial-gradient(circle, rgba(73,182,255,.10), transparent 62%);
-      pointer-events:none;
     }
 
     .hero-inner{
@@ -264,7 +258,7 @@
 
     .chapter-card{
       width:min(100%, 360px);
-      background:linear-gradient(180deg, rgba(12,18,32,.85), rgba(9,13,24,.92));
+      background:linear-gradient(180deg, rgba(12,18,32,.75), rgba(9,13,24,.88));
       border:1px solid rgba(73,182,255,.18);
       border-radius:24px;
       box-shadow:var(--shadow);
@@ -339,12 +333,12 @@
 
     .reader{
       position:relative;
-      background:linear-gradient(180deg, rgba(11,18,32,.78), rgba(8,13,24,.86));
+      background:linear-gradient(180deg, rgba(11,18,32,.58), rgba(8,13,24,.72));
       border:1px solid rgba(255,255,255,0.06);
-      border-radius:var(--radius);
+      border-radius:22px;
       box-shadow:var(--shadow);
       overflow:hidden;
-      backdrop-filter:blur(3px);
+      backdrop-filter:blur(4px);
     }
 
     .reader-top{
@@ -386,6 +380,14 @@
 
     .reader-body{
       padding:34px 26px 18px;
+      position:relative;
+    }
+
+    .story{
+      max-width:720px;
+      margin:0 auto;
+      position:relative;
+      z-index:2;
     }
 
     .lead{
@@ -395,21 +397,18 @@
       margin:0 0 26px;
       padding:18px 18px 18px 20px;
       border-left:3px solid rgba(73,182,255,.44);
-      background:rgba(73,182,255,.06);
+      background:rgba(9, 18, 35, 0.68);
       border-radius:0 14px 14px 0;
-    }
-
-    .story{
-      max-width:720px;
-      margin:0 auto;
+      backdrop-filter:blur(4px);
     }
 
     .story p{
       margin:0 0 22px;
-      color:#d7e0f3;
+      color:#e4ecfb;
       font-size:18px;
       line-height:1.95;
       letter-spacing:.01em;
+      text-shadow:0 1px 2px rgba(0,0,0,.4);
     }
 
     .story p strong{
@@ -421,13 +420,14 @@
       margin:34px 0;
       padding:20px 22px;
       border-radius:18px;
-      background:linear-gradient(180deg, rgba(10,108,255,.10), rgba(73,182,255,.05));
+      background:linear-gradient(180deg, rgba(10,108,255,.12), rgba(73,182,255,.06));
       border:1px solid rgba(73,182,255,.14);
       color:#edf5ff;
       font-size:19px;
       line-height:1.7;
       text-align:center;
       box-shadow:0 12px 30px rgba(0,0,0,.18);
+      backdrop-filter:blur(4px);
     }
 
     .story .divider{
@@ -457,10 +457,6 @@
       display:flex;
       gap:12px;
       flex-wrap:wrap;
-    }
-
-    .footer-space{
-      height:20px;
     }
 
     @media (max-width: 900px){
@@ -538,54 +534,52 @@
       <div class="topbar-inner">
         <div class="brand">
           <div class="brand-badge">N</div>
-          <div class="brand-text">
-            <p class="brand-title">Código Nébula</p>
-            <p class="brand-sub">Thriller tecnológico original</p>
+          <div>
+            <p class="brand-title" id="brandTitle">Nombre de la novela</p>
+            <p class="brand-sub" id="brandSub">Género / subtítulo</p>
           </div>
         </div>
 
         <div class="top-actions">
-          <a href="../index.html" class="btn btn-ghost">← Volver al inicio</a>
-          <a href="capitulo6.html" class="btn btn-primary">Siguiente capítulo →</a>
+          <a id="topBackBtn" href="../index.html" class="btn btn-ghost">← Volver al inicio</a>
+          <a id="topNextBtn" href="capitulo2.html" class="btn btn-primary">Siguiente capítulo →</a>
         </div>
       </div>
     </header>
 
     <section class="hero">
       <div class="hero-inner">
-        <div class="crumb">Inicio / Capítulos / Capítulo 5</div>
+        <div class="crumb" id="crumbText">Inicio / Capítulos / Capítulo 1</div>
 
         <div class="hero-grid">
           <div class="hero-copy">
-            <p class="eyebrow">Capítulo 5</p>
-            <h1>La voz detrás de la puerta</h1>
-            <p>
-              Entre golpes, una advertencia humana y algo arrastrándose sobre él, Kai debe
-              decidir en quién desconfiar primero.
+            <p class="eyebrow" id="heroEyebrow">Capítulo 1</p>
+            <h1 id="heroTitle">Título del capítulo</h1>
+            <p id="heroDescription">
+              Resumen corto del capítulo para la portada.
             </p>
           </div>
 
           <div class="hero-side">
             <aside class="chapter-card">
-              <div class="chapter-label">Contacto</div>
-              <h2>La primera voz humana</h2>
-              <p>
-                No todas las presencias son iguales. En la oscuridad, Kai escucha a alguien
-                que parece real. El problema es que lo real también puede haber sido copiado.
+              <div class="chapter-label" id="chapterLabel">Lectura inicial</div>
+              <h2 id="cardTitle">Subtítulo del capítulo</h2>
+              <p id="cardDescription">
+                Texto corto lateral del capítulo.
               </p>
 
               <div class="meta">
                 <div class="meta-item">
                   <p class="meta-k">Estado</p>
-                  <p class="meta-v">Gratis</p>
+                  <p class="meta-v" id="metaState">Gratis</p>
                 </div>
                 <div class="meta-item">
-                  <p class="meta-k">Tono</p>
-                  <p class="meta-v">Paranoia</p>
+                  <p class="meta-k">Género</p>
+                  <p class="meta-v" id="metaGenre">Suspenso</p>
                 </div>
                 <div class="meta-item">
-                  <p class="meta-k">Clave</p>
-                  <p class="meta-v">Decisión</p>
+                  <p class="meta-k">Saga</p>
+                  <p class="meta-v" id="metaSaga">Nébula</p>
                 </div>
               </div>
             </aside>
@@ -598,14 +592,18 @@
       <article class="reader">
         <div class="reader-top">
           <div class="reader-top-left">
-            <h3>Capítulo 5: La voz detrás de la puerta</h3>
-            <p>Lectura gratuita · Primera alianza posible</p>
+            <h3 id="readerTitle">Capítulo 1: Título del capítulo</h3>
+            <p id="readerSubtitle">Lectura gratuita · Inicio de la historia</p>
           </div>
-          <div class="reader-badge">Capítulo abierto</div>
+          <div class="reader-badge" id="readerBadge">Acceso abierto</div>
         </div>
 
         <div class="reader-body">
           <div class="story">
+            <!-- =========================================================
+                 SOLO CAMBIA DESDE AQUÍ EL TEXTO DE LA HISTORIA
+                 ========================================================= -->
+
             <p class="lead">
               Kai se quedó inmóvil, con la linterna en una mano y la hoja negra en la otra.
               Delante de él, la puerta metálica vibraba por los golpes del otro lado.
@@ -1278,24 +1276,118 @@
             <div class="quote">
               —Ahora sí están juntos.
             </div>
+
+            <!-- =========================================================
+                 HASTA AQUÍ CAMBIAS EL TEXTO DE LA HISTORIA
+                 ========================================================= -->
           </div>
         </div>
 
         <div class="reader-bottom">
-          <p class="reader-note">
+          <p class="reader-note" id="readerNote">
             Kai ya no corre solo. Pero la primera alianza llega con una amenaza aún peor: quizá Lira ya formaba parte de su historia antes de que él lo recordara.
           </p>
 
           <div class="nav-actions">
-            <a href="capitulo4.html" class="btn btn-ghost">← Capítulo 4</a>
-            <a href="capitulo6.html" class="btn btn-primary">Leer capítulo 6 →</a>
+            <a id="bottomBackBtn" href="../index.html" class="btn btn-ghost">← Volver</a>
+            <a id="bottomNextBtn" href="capitulo2.html" class="btn btn-primary">Leer capítulo 2 →</a>
           </div>
         </div>
       </article>
-
-      <div class="footer-space"></div>
     </main>
   </div>
+
+  <script>
+    /* =========================================================
+       CONFIGURACIÓN DEL CAPÍTULO
+       SOLO EDITA ESTE BLOQUE EN CADA ARCHIVO
+       ========================================================= */
+
+    const CHAPTER_CONFIG = {
+      novelTitle: "Código Nébula",
+      novelSubtitle: "Thriller tecnológico original",
+      chapterNumber: 5,
+      chapterTitle: "La voz detrás de la puerta",
+      chapterDescription: "Entre golpes, una advertencia humana y algo arrastrándose sobre él, Kai debe decidir en quién desconfiar primero.",
+      chapterCardLabel: "Contacto",
+      chapterCardTitle: "La primera voz humana",
+      chapterCardDescription: "No todas las presencias son iguales. En la oscuridad, Kai escucha a alguien que parece real. El problema es que lo real también puede haber sido copiado.",
+      chapterState: "Gratis",
+      chapterGenre: "Paranoia",
+      chapterSaga: "Nébula",
+      readerSubtitle: "Lectura gratuita · Primera alianza posible",
+      readerBadge: "Capítulo abierto",
+      readerNote: "Kai ya no corre solo. Pero la primera alianza llega con una amenaza aún peor: quizá Lira ya formaba parte de su historia antes de que él lo recordara.",
+
+      /* ENLACES */
+      novelHome: "../../../home.html",
+      previousChapter: "capitulo4.html",
+      nextChapter: "capitulo6.html"
+    };
+
+    /* =========================================================
+       NO TOCAR DESDE AQUÍ
+       ESTA PARTE ACTUALIZA AUTOMÁTICAMENTE TÍTULOS Y BOTONES
+       ========================================================= */
+
+    document.title = `Capítulo ${CHAPTER_CONFIG.chapterNumber} | ${CHAPTER_CONFIG.novelTitle}`;
+
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute(
+        "content",
+        `Capítulo ${CHAPTER_CONFIG.chapterNumber} de ${CHAPTER_CONFIG.novelTitle}: ${CHAPTER_CONFIG.chapterTitle}.`
+      );
+    }
+
+    document.getElementById("brandTitle").textContent = CHAPTER_CONFIG.novelTitle;
+    document.getElementById("brandSub").textContent = CHAPTER_CONFIG.novelSubtitle;
+    document.getElementById("crumbText").textContent = `Inicio / Capítulos / Capítulo ${CHAPTER_CONFIG.chapterNumber}`;
+    document.getElementById("heroEyebrow").textContent = `Capítulo ${CHAPTER_CONFIG.chapterNumber}`;
+    document.getElementById("heroTitle").textContent = CHAPTER_CONFIG.chapterTitle;
+    document.getElementById("heroDescription").textContent = CHAPTER_CONFIG.chapterDescription;
+    document.getElementById("chapterLabel").textContent = CHAPTER_CONFIG.chapterCardLabel;
+    document.getElementById("cardTitle").textContent = CHAPTER_CONFIG.chapterCardTitle;
+    document.getElementById("cardDescription").textContent = CHAPTER_CONFIG.chapterCardDescription;
+    document.getElementById("metaState").textContent = CHAPTER_CONFIG.chapterState;
+    document.getElementById("metaGenre").textContent = CHAPTER_CONFIG.chapterGenre;
+    document.getElementById("metaSaga").textContent = CHAPTER_CONFIG.chapterSaga;
+    document.getElementById("readerTitle").textContent =
+      `Capítulo ${CHAPTER_CONFIG.chapterNumber}: ${CHAPTER_CONFIG.chapterTitle}`;
+    document.getElementById("readerSubtitle").textContent = CHAPTER_CONFIG.readerSubtitle;
+    document.getElementById("readerBadge").textContent = CHAPTER_CONFIG.readerBadge;
+    document.getElementById("readerNote").textContent = CHAPTER_CONFIG.readerNote;
+
+    const topBackBtn = document.getElementById("topBackBtn");
+    const bottomBackBtn = document.getElementById("bottomBackBtn");
+    const topNextBtn = document.getElementById("topNextBtn");
+    const bottomNextBtn = document.getElementById("bottomNextBtn");
+
+    function setBackButton(button) {
+      if (!CHAPTER_CONFIG.previousChapter) {
+        button.href = CHAPTER_CONFIG.novelHome;
+        button.textContent = "← Volver a la novela";
+      } else {
+        button.href = CHAPTER_CONFIG.previousChapter;
+        button.textContent = `← Capítulo ${CHAPTER_CONFIG.chapterNumber - 1}`;
+      }
+    }
+
+    function setNextButton(button) {
+      if (!CHAPTER_CONFIG.nextChapter) {
+        button.href = CHAPTER_CONFIG.novelHome;
+        button.textContent = "Volver a la novela →";
+      } else {
+        button.href = CHAPTER_CONFIG.nextChapter;
+        button.textContent = `Leer capítulo ${CHAPTER_CONFIG.chapterNumber + 1} →`;
+      }
+    }
+
+    setBackButton(topBackBtn);
+    setBackButton(bottomBackBtn);
+    setNextButton(topNextBtn);
+    setNextButton(bottomNextBtn);
+  </script>
 
   <script>
     const canvas = document.getElementById("stars");
@@ -1310,14 +1402,14 @@
 
     function createStars(){
       stars = [];
-      const amount = Math.floor((canvas.width * canvas.height) / 18000);
+      const amount = Math.floor((canvas.width * canvas.height) / 14000);
       for(let i = 0; i < amount; i++){
         stars.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          r: Math.random() * 1.4 + 0.3,
-          speed: Math.random() * 0.22 + 0.05,
-          alpha: Math.random() * 0.55 + 0.15
+          r: Math.random() * 1.6 + 0.3,
+          speed: Math.random() * 0.35 + 0.08,
+          alpha: Math.random() * 0.7 + 0.2
         });
       }
     }
@@ -1345,9 +1437,9 @@
     window.addEventListener("resize", resize);
     resize();
     animate();
-    </script>
+  </script>
+
   <!-- 🔒 CONTROL DE ACCESO -->
   <script src="../../../../js/access-control.js"></script>
-
 </body>
 </html>
