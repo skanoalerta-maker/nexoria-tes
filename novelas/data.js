@@ -361,26 +361,40 @@ window.NEBULA_NOVELS = {
     ]
   },
 
-  "luci-t1": {
-    id: "luci-t1",
-    title: "Luci  Temporada 1",
-    sagaTitle: "Luci",
-    description: "Una historia intensa de amor, dolor y decisiones que marcan la vida para siempre.",
-    cover: "../assets/covers/luci.jpg",
-    baseFolder: "romance/luci",
-    defaultSeason: "temporada1",
-    defaultSeasonLabel: "Temporada 1",
-    freeChapters: 3,
-    price: "$1.500 CLP",
-    rating: 5,
-    visitas: 0,
-    tags: ["Romance", "Drama", "Emocional"],
-    chapters: [
-      { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "El comienzo", description: "Todo empezó con una mirada que ninguno de los dos esperaba." },
-      { num: 2, season: "temporada1", seasonLabel: "Temporada 1", title: "La conexión", description: "Una conexión inesperada comienza a crecer entre ellos." },
-      { num: 3, season: "temporada1", seasonLabel: "Temporada 1", title: "El quiebre", description: "Una verdad cambia todo lo que creían conocer." }
-    ]
-  },
+"luci-t1": {
+  id: "luci-t1",
+  title: "Luci — Temporada 1",
+  sagaTitle: "Luci",
+  description: "Una historia intensa de amor, dolor y decisiones que marcan la vida para siempre.",
+  cover: "../assets/covers/luci.jpg",
+  baseFolder: "romance/luci",
+  defaultSeason: "temporada1",
+  defaultSeasonLabel: "Temporada 1",
+  freeChapters: 3,
+  price: "$1.500 CLP",
+  rating: 5,
+  visitas: 0,
+  tags: ["Romance", "Drama", "Emocional"],
+  chapters: [
+    { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "El comienzo", description: "Todo empezó con una mirada que ninguno de los dos esperaba." },
+    { num: 2, season: "temporada1", seasonLabel: "Temporada 1", title: "La conexión", description: "Una conexión inesperada comienza a crecer entre ellos." },
+    { num: 3, season: "temporada1", seasonLabel: "Temporada 1", title: "El quiebre", description: "Una verdad cambia todo lo que creían conocer." },
+    { num: 4, season: "temporada1", seasonLabel: "Temporada 1", title: "Cartas al futuro", description: "Luci comienza a escribir lo que tal vez no alcance a decir." },
+    { num: 5, season: "temporada1", seasonLabel: "Temporada 1", title: "Bajo la lluvia", description: "Una conversación cambia el rumbo de sus emociones." },
+    { num: 6, season: "temporada1", seasonLabel: "Temporada 1", title: "Las cosas pequeñas", description: "Momentos simples que se vuelven eternos." },
+    { num: 7, season: "temporada1", seasonLabel: "Temporada 1", title: "Secretos de Bruno", description: "No todo es lo que parece en él." },
+    { num: 8, season: "temporada1", seasonLabel: "Temporada 1", title: "El escape", description: "Un día fuera del mundo cambia todo." },
+    { num: 9, season: "temporada1", seasonLabel: "Temporada 1", title: "El primer beso", description: "El momento que ya no tiene vuelta atrás." },
+    { num: 10, season: "temporada1", seasonLabel: "Temporada 1", title: "El miedo", description: "Amar también significa temer perder." },
+    { num: 11, season: "temporada1", seasonLabel: "Temporada 1", title: "Distancia", description: "Algo empieza a romperse entre ellos." },
+    { num: 12, season: "temporada1", seasonLabel: "Temporada 1", title: "La verdad", description: "Todo sale a la luz." },
+    { num: 13, season: "temporada1", seasonLabel: "Temporada 1", title: "El golpe", description: "La vida no avisa antes de cambiarlo todo." },
+    { num: 14, season: "temporada1", seasonLabel: "Temporada 1", title: "Resistencia", description: "Seguir adelante se vuelve una decisión." },
+    { num: 15, season: "temporada1", seasonLabel: "Temporada 1", title: "El último intento", description: "Cuando todo parece perdido, aún queda algo." },
+    { num: 16, season: "temporada1", seasonLabel: "Temporada 1", title: "Despedida", description: "No todas las historias terminan como esperamos." },
+    { num: 17, season: "temporada1", seasonLabel: "Temporada 1", title: "Lo que queda", description: "El final que abre algo nuevo." }
+  ]
+},
 
   "mision-peligrosa-t1": {
     id: "mision-peligrosa-t1",
