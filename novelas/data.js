@@ -310,7 +310,7 @@ window.NEBULA_NOVELS = {
     title: "Suegro a la Deriva — Temporada 1",
     sagaTitle: "Suegro a la Deriva",
     description: "Una comedia con drama y caos familiar donde un paseo termina sacando a flote heridas, secretos y una segunda temporada inevitable.",
-    cover: "../assets/covers/suegro-deriva.jpg",
+    cover: "assets/covers/suegro-a-la-deriva-t1.jpg"
     baseFolder: "comedia/suegro-a-la-deriva",
     defaultSeason: "temporada1",
     defaultSeasonLabel: "Temporada 1",
