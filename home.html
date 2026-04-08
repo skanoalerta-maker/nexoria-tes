@@ -2351,8 +2351,8 @@ function updateLoggedInUI(user, data){
       }catch(error){ console.error('Error al cerrar sesión:', error); }
     }
     logoutBtn.addEventListener('click', handleLogout);
-    headerLogoutBtn.addEventListener('click', handleLogout);
-
+    accountLogoutBtn.addEventListener('click', handleLogout);
+    
     let currentNovelId = 'codigo-nebula';
     function getVotesKey(id){ return `nebula_votes_${id}`; }
     function getUserVoteKey(id, userId){ return `nebula_user_vote_${id}_${userId}`; }
