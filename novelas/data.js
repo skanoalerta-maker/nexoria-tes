@@ -382,6 +382,40 @@ window.NEBULA_NOVELS = {
     ]
   },
 
+  "mision-peligrosa-t1": {
+    id: "mision-peligrosa-t1",
+    title: "Misión Peligrosa — Temporada 1",
+    sagaTitle: "Misión Peligrosa",
+    description: "Una historia de acción militar, traiciones, fuego cruzado y una operación en la costa que termina revelando algo mucho más grande y letal.",
+    cover: "../assets/covers/mision-peligrosa.png",
+    baseFolder: "accion/mision-peligrosa",
+    defaultSeason: "temporada1",
+    defaultSeasonLabel: "Temporada 1",
+    freeChapters: 3,
+    price: "$1.500 CLP",
+    rating: 5,
+    visitas: 0,
+    tags: ["Acción", "Militar", "Suspenso", "Costa", "Temporada 1"],
+    chapters: [
+      { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "La extracción fallida", description: "Una operación nocturna en la costa se sale de control en los primeros minutos y deja al equipo atrapado en territorio enemigo." },
+      { num: 2, season: "temporada1", seasonLabel: "Temporada 1", title: "Fuego desde la niebla", description: "Mientras intentan reagruparse bajo fuego cruzado, una emboscada confirma que alguien filtró la misión." },
+      { num: 3, season: "temporada1", seasonLabel: "Temporada 1", title: "El hombre que no debía estar ahí", description: "Entre cadáveres, humo y mar revuelto, aparece una figura que conecta la misión con una red más peligrosa de lo esperado." },
+      { num: 4, season: "temporada1", seasonLabel: "Temporada 1", title: "Código negro", description: "La unidad descubre que la operación real nunca fue rescatar a nadie, sino silenciar algo que no debía salir a la luz." },
+      { num: 5, season: "temporada1", seasonLabel: "Temporada 1", title: "Costa hostil", description: "Sin apoyo, con munición limitada y el enemigo cerrando rutas, avanzar por la costa se vuelve una sentencia." },
+      { num: 6, season: "temporada1", seasonLabel: "Temporada 1", title: "Bajo la línea de fuego", description: "Cada paso obliga a elegir entre salvar al equipo o seguir persiguiendo la verdad detrás del operativo." },
+      { num: 7, season: "temporada1", seasonLabel: "Temporada 1", title: "La lista de los muertos", description: "Un archivo recuperado del campamento enemigo revela nombres, pagos y oficiales vinculados a una cadena de traiciones." },
+      { num: 8, season: "temporada1", seasonLabel: "Temporada 1", title: "Objetivo comprometido", description: "La misión cambia por completo cuando entienden que el verdadero objetivo todavía sigue vivo." },
+      { num: 9, season: "temporada1", seasonLabel: "Temporada 1", title: "Nadie sale limpio", description: "La operación deja de ser militar y se convierte en una guerra sucia donde aliados y enemigos ya no se distinguen." },
+      { num: 10, season: "temporada1", seasonLabel: "Temporada 1", title: "Zona de quiebre", description: "Entre explosiones, persecuciones y confesiones, el grupo llega al punto donde toda lealtad empieza a romperse." },
+      { num: 11, season: "temporada1", seasonLabel: "Temporada 1", title: "El precio del regreso", description: "Volver con vida tiene un costo inesperado cuando el enemigo demuestra que también controla la retaguardia." },
+      { num: 12, season: "temporada1", seasonLabel: "Temporada 1", title: "La base sumergida", description: "Una instalación oculta frente al litoral confirma que la misión solo era la puerta de entrada a algo mucho mayor." },
+      { num: 13, season: "temporada1", seasonLabel: "Temporada 1", title: "Traidor interno", description: "Las sospechas se transforman en certeza cuando uno de los suyos queda expuesto en plena fase crítica." },
+      { num: 14, season: "temporada1", seasonLabel: "Temporada 1", title: "Operación ceniza", description: "La orden oficial es borrar todo rastro, incluso si para lograrlo deben eliminar a los sobrevivientes." },
+      { num: 15, season: "temporada1", seasonLabel: "Temporada 1", title: "Sin extracción", description: "Abandonados por el mando, el equipo entiende que la única salida es abrirse paso por su cuenta." },
+      { num: 16, season: "temporada1", seasonLabel: "Temporada 1", title: "La última carga", description: "Con el tiempo encima y la costa ardiendo, la ofensiva final se convierte en una carrera brutal contra la muerte." },
+      { num: 17, season: "temporada1", seasonLabel: "Temporada 1", title: "El superviviente equivocado", description: "Cuando todo parece terminar, una revelación deja claro que la misión real apenas acaba de comenzar y abre el camino a la temporada 2." }
+    ]
+  }
   "codigos-de-calle-t1": {
     id: "codigos-de-calle-t1",
     title: "Códigos de Calle — Temporada 1",
