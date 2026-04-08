@@ -395,7 +395,42 @@ window.NEBULA_NOVELS = {
     { num: 17, season: "temporada1", seasonLabel: "Temporada 1", title: "Lo que queda", description: "El final que abre algo nuevo." }
   ]
 },
-
+  
+"area51-protocolo-oculto-t1": {
+  id: "area51-protocolo-oculto-t1",
+  title: "Area 51  El Protocolo Oculto  Temporada 1",
+  sagaTitle: "Area 51  El Protocolo Oculto",
+  description: "Temporada 1. Una historia de conspiracion, experimentos secretos, desapariciones y un complejo subterraneo donde la verdad sobre Area 51 podria destruir todo lo que creemos conocer.",
+  cover: "../assets/covers/area51-protocolo-oculto.jpg",
+  baseFolder: "futurista/area51_protocolo_oculto",
+  defaultSeason: "temporada1",
+  defaultSeasonLabel: "Temporada 1",
+  freeChapters: 3,
+  price: "$1.500 CLP",
+  rating: 5,
+  visitas: 0,
+  tags: ["Futurista", "Alienigena", "Conspiracion", "Suspenso", "Temporada 1"],
+  chapters: [
+    { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "La señal bajo la arena", description: "Una transmision enterrada bajo el desierto activa un protocolo que llevaba decadas dormido." },
+    { num: 2, season: "temporada1", seasonLabel: "Temporada 1", title: "El ingreso prohibido", description: "El equipo entra a una zona restringida y descubre que Area 51 no era solo una base militar." },
+    { num: 3, season: "temporada1", seasonLabel: "Temporada 1", title: "Los cuerpos de vidrio", description: "Detras de un laboratorio sellado aparecen camaras de contencion con algo que no deberia existir." },
+    { num: 4, season: "temporada1", seasonLabel: "Temporada 1", title: "Protocolo Nox", description: "Un archivo clasificado revela que los experimentos no eran humanos y que el contacto nunca se detuvo." },
+    { num: 5, season: "temporada1", seasonLabel: "Temporada 1", title: "Nivel subterraneo nueve", description: "Bajo la instalacion principal existe una estructura mas antigua, mas grande y mucho peor de lo imaginado." },
+    { num: 6, season: "temporada1", seasonLabel: "Temporada 1", title: "La sala de los no registrados", description: "Una lista de nombres borrados del sistema conecta desapariciones civiles con pruebas secretas dentro de la base." },
+    { num: 7, season: "temporada1", seasonLabel: "Temporada 1", title: "Contacto visual", description: "Uno de los sujetos despierta y demuestra una capacidad imposible que cambia toda la operacion." },
+    { num: 8, season: "temporada1", seasonLabel: "Temporada 1", title: "La compuerta negra", description: "Una puerta blindada conduce a una zona donde el tiempo, la energia y la materia parecen comportarse distinto." },
+    { num: 9, season: "temporada1", seasonLabel: "Temporada 1", title: "Ecos de Roswell", description: "Viejos registros militares confirman que lo recuperado en Roswell nunca abandono el pais." },
+    { num: 10, season: "temporada1", seasonLabel: "Temporada 1", title: "Los ingenieros del cielo", description: "La tecnologia hallada en los hangares demuestra que hubo cooperacion entre humanos y algo venido de fuera." },
+    { num: 11, season: "temporada1", seasonLabel: "Temporada 1", title: "El duplicado", description: "Uno de los integrantes del equipo descubre que ya habia estado ahi... aunque no lo recuerda." },
+    { num: 12, season: "temporada1", seasonLabel: "Temporada 1", title: "Zona de silencio", description: "Las comunicaciones con el exterior se cortan y la base entra en aislamiento total mientras algo empieza a moverse." },
+    { num: 13, season: "temporada1", seasonLabel: "Temporada 1", title: "La camara roja", description: "En el nucleo del complejo se conserva un organismo que no esta muerto ni completamente vivo." },
+    { num: 14, season: "temporada1", seasonLabel: "Temporada 1", title: "El protocolo oculto", description: "La verdad sale a la luz: Area 51 fue creada para contener una activacion global, no para esconder naves." },
+    { num: 15, season: "temporada1", seasonLabel: "Temporada 1", title: "La frecuencia", description: "Una señal emitida desde el subsuelo comienza a llamar a algo que se encuentra fuera de la Tierra." },
+    { num: 16, season: "temporada1", seasonLabel: "Temporada 1", title: "Apertura", description: "El sistema de contencion colapsa y el cielo sobre el desierto responde con una presencia imposible de ocultar." },
+    { num: 17, season: "temporada1", seasonLabel: "Temporada 1", title: "No estaban viniendo, ya estaban aqui", description: "El cierre de temporada revela que la invasion nunca fue una llegada, sino un despertar desde dentro." }
+  ]
+},
+  
   "mision-peligrosa-t1": {
     id: "mision-peligrosa-t1",
     title: "Misión Peligrosa  Temporada 1",
@@ -430,6 +465,7 @@ window.NEBULA_NOVELS = {
       { num: 17, season: "temporada1", seasonLabel: "Temporada 1", title: "El superviviente equivocado", description: "Cuando todo parece terminar, una revelación deja claro que la misión real apenas acaba de comenzar y abre el camino a la temporada 2." }
     ]
   },
+  
   "codigos-de-calle-t1": {
     id: "codigos-de-calle-t1",
     title: "Códigos de Calle  Temporada 1",
