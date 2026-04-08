@@ -2384,9 +2384,15 @@
       document.getElementById('userLastProgress').textContent = lastProgressText;
       return readChapters;
     }
-    function cargarNovelas(){ const desdeDataJs = buildCatalogFromNebulaData(); novelas = prepararNovelas(desdeDataJs.length ? desdeDataJs : fallbackNovelas); filtradas = [...novelas]; renderFeatured(); renderGenres(); renderStories(filtradas); updateUserReadingStats(); }
-    storySearch.addEventListener('input', filtrarHistorias);
-    cargarNovelas();
+   function cargarNovelas(){
+  const desdeDataJs = buildCatalogFromNebulaData();
+  novelas = prepararNovelas(desdeDataJs);
+  filtradas = [...novelas];
+  renderFeatured();
+  renderGenres();
+  renderStories(filtradas);
+  updateUserReadingStats();
+}
   </script>
 
   <script>
