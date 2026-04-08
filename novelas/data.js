@@ -37,35 +37,35 @@ window.NEBULA_NOVELS = {
     ]
   },
 
-"codigo-nebula-t2": {
-  id: "codigo-nebula-t2",
-  title: "Código Nébula — Temporada 2",
-  sagaTitle: "Código Nébula",
-  description: "Temporada 2. Continúa la historia con nuevas grietas, nuevas amenazas y un sistema cada vez más despierto.",
-  cover: "../assets/covers/codigo-nebula-t2.jpg",
-  baseFolder: "futurista/codigo-nebula",
-  defaultSeason: "temporada2",
-  defaultSeasonLabel: "Temporada 2",
-  freeChapters: 3,
-  price: "$1.500 CLP",
-  rating: 5,
-  visitas: 980,
-  tags: ["Futurista", "Tecnología", "Suspenso", "Temporada 2"],
-  chapters: [
-    { num: 1, season: "temporada2", seasonLabel: "Temporada 2", title: "Reinicio", description: "Después de la caída del protocolo, la red vuelve a encenderse desde un lugar inesperado." },
-    { num: 2, season: "temporada2", seasonLabel: "Temporada 2", title: "Ecos residuales", description: "Viejos rastros del sistema empiezan a reaparecer en zonas que debían estar muertas." },
-    { num: 3, season: "temporada2", seasonLabel: "Temporada 2", title: "El observador", description: "Una nueva presencia parece mirar desde dentro con más control que antes." },
-    { num: 4, season: "temporada2", seasonLabel: "Temporada 2", title: "Punto ciego", description: "Un sector fuera del mapa oculta respuestas que nadie estaba listo para encontrar." },
-    { num: 5, season: "temporada2", seasonLabel: "Temporada 2", title: "Memoria falsa", description: "Los recuerdos dejan de ser confiables cuando la red empieza a reescribir versiones de la verdad." },
-    { num: 6, season: "temporada2", seasonLabel: "Temporada 2", title: "La segunda llave", description: "Un nuevo acceso abre puertas que parecían selladas para siempre." },
-    { num: 7, season: "temporada2", seasonLabel: "Temporada 2", title: "El nodo profundo", description: "Más abajo del sistema existe una capa que nadie había logrado tocar." },
-    { num: 8, season: "temporada2", seasonLabel: "Temporada 2", title: "Frecuencia cero", description: "La señal desaparece del mundo visible y reaparece en un canal imposible." },
-    { num: 9, season: "temporada2", seasonLabel: "Temporada 2", title: "La red responde", description: "Nébula deja de reaccionar y comienza a actuar por voluntad propia." },
-    { num: 10, season: "temporada2", seasonLabel: "Temporada 2", title: "Umbral", description: "El grupo descubre que cruzar cierto límite implica ya no poder volver." },
-    { num: 11, season: "temporada2", seasonLabel: "Temporada 2", title: "Sin retorno", description: "La ofensiva final obliga a elegir entre destruir la red o desaparecer con ella." },
-    { num: 12, season: "temporada2", seasonLabel: "Temporada 2", title: "Nébula despierta", description: "El cierre de temporada revela que el sistema nunca estuvo dormido: solo estaba esperando." }
-  ]
-},
+  "codigo-nebula-t2": {
+    id: "codigo-nebula-t2",
+    title: "Código Nébula — Temporada 2",
+    sagaTitle: "Código Nébula",
+    description: "Temporada 2. Continúa la historia con nuevas grietas, nuevas amenazas y un sistema cada vez más despierto.",
+    cover: "../assets/covers/codigo-nebula-t2.jpg",
+    baseFolder: "futurista/codigo-nebula",
+    defaultSeason: "temporada2",
+    defaultSeasonLabel: "Temporada 2",
+    freeChapters: 3,
+    price: "$1.500 CLP",
+    rating: 5,
+    visitas: 980,
+    tags: ["Futurista", "Tecnología", "Suspenso", "Temporada 2"],
+    chapters: [
+      { num: 1, season: "temporada2", seasonLabel: "Temporada 2", title: "Reinicio", description: "Después de la caída del protocolo, la red vuelve a encenderse desde un lugar inesperado." },
+      { num: 2, season: "temporada2", seasonLabel: "Temporada 2", title: "Ecos residuales", description: "Viejos rastros del sistema empiezan a reaparecer en zonas que debían estar muertas." },
+      { num: 3, season: "temporada2", seasonLabel: "Temporada 2", title: "El observador", description: "Una nueva presencia parece mirar desde dentro con más control que antes." },
+      { num: 4, season: "temporada2", seasonLabel: "Temporada 2", title: "Punto ciego", description: "Un sector fuera del mapa oculta respuestas que nadie estaba listo para encontrar." },
+      { num: 5, season: "temporada2", seasonLabel: "Temporada 2", title: "Memoria falsa", description: "Los recuerdos dejan de ser confiables cuando la red empieza a reescribir versiones de la verdad." },
+      { num: 6, season: "temporada2", seasonLabel: "Temporada 2", title: "La segunda llave", description: "Un nuevo acceso abre puertas que parecían selladas para siempre." },
+      { num: 7, season: "temporada2", seasonLabel: "Temporada 2", title: "El nodo profundo", description: "Más abajo del sistema existe una capa que nadie había logrado tocar." },
+      { num: 8, season: "temporada2", seasonLabel: "Temporada 2", title: "Frecuencia cero", description: "La señal desaparece del mundo visible y reaparece en un canal imposible." },
+      { num: 9, season: "temporada2", seasonLabel: "Temporada 2", title: "La red responde", description: "Nébula deja de reaccionar y comienza a actuar por voluntad propia." },
+      { num: 10, season: "temporada2", seasonLabel: "Temporada 2", title: "Umbral", description: "El grupo descubre que cruzar cierto límite implica ya no poder volver." },
+      { num: 11, season: "temporada2", seasonLabel: "Temporada 2", title: "Sin retorno", description: "La ofensiva final obliga a elegir entre destruir la red o desaparecer con ella." },
+      { num: 12, season: "temporada2", seasonLabel: "Temporada 2", title: "Nébula despierta", description: "El cierre de temporada revela que el sistema nunca estuvo dormido: solo estaba esperando." }
+    ]
+  },
 
   "despues-de-tu-adios-t1": {
     id: "despues-de-tu-adios-t1",
@@ -118,35 +118,36 @@ window.NEBULA_NOVELS = {
     ]
   },
 
-"no-debi-enamorarme-t2": {
-  id: "no-debi-enamorarme-t2",
-  title: "No debí enamorarme de ti — Temporada 2",
-  sagaTitle: "No debí enamorarme de ti",
-  description: "Temporada 2. Nueva temporada, nuevas consecuencias y una historia que sube todavía más la intensidad emocional.",
-  cover: "../assets/covers/no-debi-enamorarme-t2.jpg",
-  baseFolder: "romance/no-debi-enamorarme",
-  defaultSeason: "temporada2",
-  defaultSeasonLabel: "Temporada 2",
-  freeChapters: 3,
-  price: "$1.500 CLP",
-  rating: 4,
-  visitas: 1300,
-  tags: ["Romance", "Drama", "Pasión", "Temporada 2"],
-  chapters: [
-    { num: 1, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 1", description: "Nueva temporada, nuevas consecuencias." },
-    { num: 2, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 2", description: "La historia retoma desde un punto de dolor y deseo." },
-    { num: 3, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 3", description: "Los sentimientos vuelven a mezclarse con decisiones imposibles." },
-    { num: 4, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 4", description: "Las heridas del pasado siguen marcando cada paso." },
-    { num: 5, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 5", description: "La distancia no logra apagar lo que todavía sigue vivo." },
-    { num: 6, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 6", description: "Una nueva decisión amenaza con empeorarlo todo." },
-    { num: 7, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 7", description: "El deseo vuelve justo cuando más daño puede causar." },
-    { num: 8, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 8", description: "La relación entra en una etapa más oscura y más intensa." },
-    { num: 9, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 9", description: "El miedo a perderlo todo deja de ser una amenaza lejana." },
-    { num: 10, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 10", description: "Las emociones acumuladas explotan en el peor momento." },
-    { num: 11, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 11", description: "Lo que parecía control vuelve a romperse por completo." },
-    { num: 12, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 12", description: "El cierre de temporada deja a los protagonistas frente a su verdad final." }
-  ]
-},
+  "no-debi-enamorarme-t2": {
+    id: "no-debi-enamorarme-t2",
+    title: "No debí enamorarme de ti — Temporada 2",
+    sagaTitle: "No debí enamorarme de ti",
+    description: "Temporada 2. Nueva temporada, nuevas consecuencias y una historia que sube todavía más la intensidad emocional.",
+    cover: "../assets/covers/no-debi-enamorarme-t2.jpg",
+    baseFolder: "romance/no-debi-enamorarme",
+    defaultSeason: "temporada2",
+    defaultSeasonLabel: "Temporada 2",
+    freeChapters: 3,
+    price: "$1.500 CLP",
+    rating: 4,
+    visitas: 1300,
+    tags: ["Romance", "Drama", "Pasión", "Temporada 2"],
+    chapters: [
+      { num: 1, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 1", description: "Nueva temporada, nuevas consecuencias." },
+      { num: 2, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 2", description: "La historia retoma desde un punto de dolor y deseo." },
+      { num: 3, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 3", description: "Los sentimientos vuelven a mezclarse con decisiones imposibles." },
+      { num: 4, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 4", description: "Las heridas del pasado siguen marcando cada paso." },
+      { num: 5, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 5", description: "La distancia no logra apagar lo que todavía sigue vivo." },
+      { num: 6, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 6", description: "Una nueva decisión amenaza con empeorarlo todo." },
+      { num: 7, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 7", description: "El deseo vuelve justo cuando más daño puede causar." },
+      { num: 8, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 8", description: "La relación entra en una etapa más oscura y más intensa." },
+      { num: 9, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 9", description: "El miedo a perderlo todo deja de ser una amenaza lejana." },
+      { num: 10, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 10", description: "Las emociones acumuladas explotan en el peor momento." },
+      { num: 11, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 11", description: "Lo que parecía control vuelve a romperse por completo." },
+      { num: 12, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 12", description: "El cierre de temporada deja a los protagonistas frente a su verdad final." }
+    ]
+  },
+
   "la-ultima-conexion-t1": {
     id: "la-ultima-conexion-t1",
     title: "La última conexión — Temporada 1",
@@ -261,6 +262,7 @@ window.NEBULA_NOVELS = {
       { num: 9, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 9", description: "La historia continúa." },
       { num: 10, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 10", description: "La historia alcanza su clímax." },
       { num: 11, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 11", description: "La presión política y social alcanza un nivel insoportable." },
+      { num: 12, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 12", description: "El país entra en una etapa decisiva donde cada movimiento acerca el desenlace." },
       { num: 13, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 13", description: "Los acontecimientos avanzan hacia un desenlace histórico." },
       { num: 14, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 14", description: "La historia entra en su etapa más oscura y decisiva." },
       { num: 15, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 15", description: "El país enfrenta el peso total de sus fracturas." },
@@ -297,11 +299,48 @@ window.NEBULA_NOVELS = {
       { num: 12, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 12", description: "La presión ya no deja espacio para errores." },
       { num: 13, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 13", description: "Cada decisión empuja la red más cerca del colapso." },
       { num: 14, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 14", description: "La verdad empieza a filtrarse donde más duele." },
+      { num: 15, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 15", description: "Las lealtades se quiebran justo antes del golpe final." },
       { num: 16, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 16", description: "Todo se prepara para el golpe final." },
       { num: 17, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 17", description: "El cierre de la historia revela el verdadero precio del silencio." }
     ]
   },
-    "luci-t1": {
+
+  "suegro-a-la-deriva-t1": {
+    id: "suegro-a-la-deriva-t1",
+    title: "Suegro a la Deriva — Temporada 1",
+    sagaTitle: "Suegro a la Deriva",
+    description: "Una comedia con drama y caos familiar donde un paseo termina sacando a flote heridas, secretos y una segunda temporada inevitable.",
+    cover: "../assets/covers/suegro-deriva.jpg",
+    baseFolder: "comedia/suegro-a-la-deriva",
+    defaultSeason: "temporada1",
+    defaultSeasonLabel: "Temporada 1",
+    freeChapters: 3,
+    price: "$1.500 CLP",
+    rating: 5,
+    visitas: 0,
+    tags: ["Comedia", "Drama", "Familia", "Temporada 1"],
+    chapters: [
+      { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "El viaje que nadie quería", description: "Un paseo familiar comienza mal desde el primer minuto y deja claro que nadie saldrá igual." },
+      { num: 2, season: "temporada1", seasonLabel: "Temporada 1", title: "El primer choque", description: "Las tensiones entre yerno y suegro explotan antes de que aparezca el verdadero problema." },
+      { num: 3, season: "temporada1", seasonLabel: "Temporada 1", title: "Sin señal", description: "Aislados y sin salida fácil, las máscaras empiezan a caer." },
+      { num: 4, season: "temporada1", seasonLabel: "Temporada 1", title: "Lo que no se dijo", description: "Viejas heridas familiares resurgen en medio del encierro y el cansancio." },
+      { num: 5, season: "temporada1", seasonLabel: "Temporada 1", title: "El límite", description: "Una discusión feroz obliga a todos a mostrar quiénes son realmente." },
+      { num: 6, season: "temporada1", seasonLabel: "Temporada 1", title: "Nadie se va", description: "Escapar ya no es simple, y la convivencia se vuelve insoportable." },
+      { num: 7, season: "temporada1", seasonLabel: "Temporada 1", title: "El pasado vuelve", description: "Un recuerdo mal enterrado empieza a cambiar la mirada sobre Raúl." },
+      { num: 8, season: "temporada1", seasonLabel: "Temporada 1", title: "La noche larga", description: "La oscuridad, el miedo y el hambre hacen que todo se vuelva más frágil." },
+      { num: 9, season: "temporada1", seasonLabel: "Temporada 1", title: "Punto de quiebre", description: "Una decisión impulsiva deja consecuencias que nadie puede controlar." },
+      { num: 10, season: "temporada1", seasonLabel: "Temporada 1", title: "Demasiado tarde", description: "Cuando intentan recomponerse, descubren que el daño ya está hecho." },
+      { num: 11, season: "temporada1", seasonLabel: "Temporada 1", title: "El verdadero problema", description: "La crisis deja claro que el conflicto nunca fue solo el viaje." },
+      { num: 12, season: "temporada1", seasonLabel: "Temporada 1", title: "Todo se rompe", description: "Las relaciones se fracturan y la familia deja de parecer familia." },
+      { num: 13, season: "temporada1", seasonLabel: "Temporada 1", title: "Sin salida", description: "La tensión escala hasta un punto donde cualquier error puede ser fatal." },
+      { num: 14, season: "temporada1", seasonLabel: "Temporada 1", title: "El error", description: "Una mala decisión cambia el rumbo de todos justo antes del desenlace." },
+      { num: 15, season: "temporada1", seasonLabel: "Temporada 1", title: "Consecuencias", description: "El peso emocional del viaje cae sobre cada uno de manera distinta." },
+      { num: 16, season: "temporada1", seasonLabel: "Temporada 1", title: "Antes del final", description: "Todo parece cerrarse, pero hay algo que todavía no encaja." },
+      { num: 17, season: "temporada1", seasonLabel: "Temporada 1", title: "El inicio de algo más", description: "Cuando por fin parece terminar, una revelación deja abierta una nueva tormenta." }
+    ]
+  },
+
+  "luci-t1": {
     id: "luci-t1",
     title: "Luci — Temporada 1",
     sagaTitle: "Luci",
@@ -321,6 +360,7 @@ window.NEBULA_NOVELS = {
       { num: 3, season: "temporada1", seasonLabel: "Temporada 1", title: "El quiebre", description: "Una verdad cambia todo lo que creían conocer." }
     ]
   },
+  
   "suegro-a-la-deriva-t1": {
   id: "suegro-a-la-deriva-t1",
   title: "Suegro a la Deriva — Temporada 1",
@@ -353,6 +393,7 @@ window.NEBULA_NOVELS = {
     { num: 15, season: "temporada1", seasonLabel: "Temporada 1", title: "Consecuencias", description: "Nada vuelve a ser igual." },
     { num: 16, season: "temporada1", seasonLabel: "Temporada 1", title: "Antes del final", description: "Todo apunta a algo peor." },
     { num: 17, season: "temporada1", seasonLabel: "Temporada 1", title: "El inicio de algo más", description: "El final deja claro que la historia recién comienza." }
-  ]
+   ]
+  }
 };
 
