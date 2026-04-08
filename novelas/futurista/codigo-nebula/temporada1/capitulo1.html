@@ -3,10 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Capítulo 1 | Código Nébula</title>
+
+  <!-- =========================================================
+       ARCHIVO MADRE NÉBULA
+       SOLO CAMBIA LOS DATOS DEL BLOQUE "CONFIGURACIÓN DEL CAPÍTULO"
+       Y EL CONTENIDO DE .story
+     ========================================================= -->
+
+  <title>Capítulo X | Nombre de la novela</title>
   <meta
     name="description"
-    content="Capítulo 1 de Código Nébula: El patrón imposible."
+    content="Capítulo X de Nombre de la novela."
   />
 
   <style>
@@ -528,53 +535,51 @@
         <div class="brand">
           <div class="brand-badge">N</div>
           <div>
-            <p class="brand-title">Código Nébula</p>
-            <p class="brand-sub">Thriller tecnológico original</p>
+            <p class="brand-title" id="brandTitle">Nombre de la novela</p>
+            <p class="brand-sub" id="brandSub">Género / subtítulo</p>
           </div>
         </div>
 
         <div class="top-actions">
-          <a href="../index.html" class="btn btn-ghost">← Volver al inicio</a>
-          <a href="capitulo2.html" class="btn btn-primary">Siguiente capítulo →</a>
+          <a id="topBackBtn" href="../index.html" class="btn btn-ghost">← Volver al inicio</a>
+          <a id="topNextBtn" href="capitulo2.html" class="btn btn-primary">Siguiente capítulo →</a>
         </div>
       </div>
     </header>
 
     <section class="hero">
       <div class="hero-inner">
-        <div class="crumb">Inicio / Capítulos / Capítulo 1</div>
+        <div class="crumb" id="crumbText">Inicio / Capítulos / Capítulo 1</div>
 
         <div class="hero-grid">
           <div class="hero-copy">
-            <p class="eyebrow">Capítulo 1</p>
-            <h1>El patrón imposible</h1>
-            <p>
-              Todo sistema deja huellas. Todo error tiene una lógica. Hasta que una noche,
-              Kai encuentra algo que no debería existir.
+            <p class="eyebrow" id="heroEyebrow">Capítulo 1</p>
+            <h1 id="heroTitle">Título del capítulo</h1>
+            <p id="heroDescription">
+              Resumen corto del capítulo para la portada.
             </p>
           </div>
 
           <div class="hero-side">
             <aside class="chapter-card">
-              <div class="chapter-label">Lectura inicial</div>
-              <h2>Una señal que no debería existir</h2>
-              <p>
-                Personas muertas siguen apareciendo activas en la red. Lo que comienza
-                como una anomalía estadística pronto se convierte en una amenaza real.
+              <div class="chapter-label" id="chapterLabel">Lectura inicial</div>
+              <h2 id="cardTitle">Subtítulo del capítulo</h2>
+              <p id="cardDescription">
+                Texto corto lateral del capítulo.
               </p>
 
               <div class="meta">
                 <div class="meta-item">
                   <p class="meta-k">Estado</p>
-                  <p class="meta-v">Gratis</p>
+                  <p class="meta-v" id="metaState">Gratis</p>
                 </div>
                 <div class="meta-item">
                   <p class="meta-k">Género</p>
-                  <p class="meta-v">Suspenso</p>
+                  <p class="meta-v" id="metaGenre">Suspenso</p>
                 </div>
                 <div class="meta-item">
                   <p class="meta-k">Saga</p>
-                  <p class="meta-v">Nébula</p>
+                  <p class="meta-v" id="metaSaga">Nébula</p>
                 </div>
               </div>
             </aside>
@@ -587,124 +592,240 @@
       <article class="reader">
         <div class="reader-top">
           <div class="reader-top-left">
-            <h3>Capítulo 1: El patrón imposible</h3>
-            <p>Lectura gratuita · Inicio de la historia</p>
+            <h3 id="readerTitle">Capítulo 1: Título del capítulo</h3>
+            <p id="readerSubtitle">Lectura gratuita · Inicio de la historia</p>
           </div>
-          <div class="reader-badge">Acceso abierto</div>
+          <div class="reader-badge" id="readerBadge">Acceso abierto</div>
         </div>
 
         <div class="reader-body">
           <div class="story">
-            <p class="lead">
-              Kai no creía en errores. Durante años había dedicado su vida a encontrar
-              patrones, limpiar anomalías y descifrar sistemas. Todo tenía una causa.
-              Todo podía rastrearse. Todo, excepto aquello.
-            </p>
+            <!-- =========================================================
+                 SOLO CAMBIA DESDE AQUÍ EL TEXTO DE LA HISTORIA
+                 ========================================================= -->
 
-            <p>
-              Llevaba años trabajando analizando datos globales. Millones de registros,
-              comportamientos, movimientos, horarios, rutas, actividad cruzada entre redes,
-              consumo, presencia, trazabilidad. Un océano de información que para otros era ruido,
-              pero que para él tenía estructura.
-            </p>
+<p class="lead">
+  Kai no creía en errores. Durante años había dedicado su vida a encontrar patrones, limpiar anomalías y descifrar sistemas. Todo tenía una causa. Todo podía rastrearse. Todo… excepto aquello.
+</p>
 
-            <p><strong>Todo tenía lógica.</strong></p>
-            <p>Hasta ese día.</p>
+<p>
+  Llevaba años trabajando analizando datos globales. Millones de registros, comportamientos, movimientos, horarios, rutas, actividad cruzada entre redes, consumo, presencia, trazabilidad.
+</p>
 
-            <div class="divider"></div>
+<p>
+  Un océano de información que para otros era ruido, pero que para él tenía estructura.
+</p>
 
-            <p>La alerta apareció a las 02:11 de la madrugada.</p>
+<p><strong>Todo tenía lógica.</strong></p>
+<p>Hasta ese día.</p>
 
-            <p>
-              Un registro extraño. Uno entre miles. Lo normal habría sido descartarlo
-              de inmediato como una inconsistencia más. Un error de sincronización.
-              Un desfase de servidores. Un dato mal arrastrado por alguna integración vieja.
-            </p>
+<div class="divider"></div>
 
-            <p>Pero algo en la estructura del archivo le llamó la atención.</p>
-            <p>El usuario seguía activo.</p>
-            <p>Navegando. Registrando movimiento. Consumiendo datos como si estuviera vivo.</p>
-            <p>Kai amplió la ficha.</p>
+<p>La alerta apareció a las 02:11 de la madrugada.</p>
 
-            <div class="quote">Fecha de fallecimiento: hace 8 meses.</div>
+<p>
+  Un registro extraño. Uno entre miles. Lo normal habría sido descartarlo de inmediato como una inconsistencia más. Un error de sincronización. Un desfase de servidores. Un dato mal arrastrado por alguna integración vieja.
+</p>
 
-            <p>Frunció el ceño.</p>
+<p>
+  Pero algo en la estructura del archivo le llamó la atención.
+</p>
 
-            <p>
-              Revisó otra vez el identificador. Mismo documento. Mismo perfil. Mismo historial.
-              No había duplicados visibles. No era una cuenta espejo. No era una copia.
-            </p>
+<p>El usuario seguía activo.</p>
+<p>Navegando. Registrando movimiento. Consumiendo datos como si estuviera vivo.</p>
 
-            <p>Abrió una segunda búsqueda.</p>
-            <p>Encontró otro caso.</p>
-            <p>Después otro.</p>
-            <p>Y otro más.</p>
-            <p>Todos iguales.</p>
+<p>Kai amplió la ficha.</p>
 
-            <p>
-              Personas que oficialmente estaban muertas…
-              <strong>seguían activas en la red.</strong>
-            </p>
+<div class="quote">Fecha de fallecimiento: hace 8 meses.</div>
 
-            <div class="divider"></div>
+<p>Frunció el ceño.</p>
 
-            <p>Un frío lento le recorrió la espalda.</p>
-            <p>Intentó exportar los datos. La ventana respondió de inmediato:</p>
+<p>
+  Revisó otra vez el identificador. Mismo documento. Mismo perfil. Mismo historial. No había duplicados visibles. No era una cuenta espejo. No era una copia.
+</p>
 
-            <div class="quote">Acceso denegado.</div>
+<p>Abrió una segunda búsqueda.</p>
+<p>Encontró otro caso.</p>
+<p>Después otro.</p>
+<p>Y otro más.</p>
+<p>Todos iguales.</p>
 
-            <p>Kai se quedó inmóvil.</p>
-            <p>Eso no pasaba. No con su nivel de acceso.</p>
-            <p>Lo intentó otra vez.</p>
-            <p>Mismo resultado.</p>
-            <p>Entonces su monitor parpadeó una vez.</p>
-            <p>Después otra.</p>
+<p>
+  Personas que oficialmente estaban muertas…
+  <strong>seguían activas en la red.</strong>
+</p>
 
-            <p>
-              Y entonces ocurrió algo que jamás había visto en toda su carrera:
-              la cámara del computador se activó sola.
-            </p>
+<div class="divider"></div>
 
-            <p>Kai levantó la mirada lentamente.</p>
-            <p>En la pantalla apareció su propio rostro. Pálido. Tenso. Quieto.</p>
-            <p>Pero no estaba solo.</p>
-            <p>Detrás de él, en la oscuridad de la oficina, había una figura inmóvil.</p>
+<p>Un frío lento le recorrió la espalda.</p>
 
-            <div class="quote">Alta. Oscura. Observándolo.</div>
+<p>Intentó exportar los datos.</p>
 
-            <p>Kai dejó de respirar por un segundo.</p>
-            <p>El corazón empezó a golpearle el pecho con fuerza.</p>
-            <p>No quería girarse.</p>
-            <p>No quería confirmar que aquello estaba realmente ahí.</p>
-            <p>Pero lo hizo.</p>
-            <p>Lentamente.</p>
-            <p>Con el cuerpo rígido.</p>
+<p>La ventana respondió de inmediato:</p>
 
-            <p>
-              Con la certeza irracional de que, al mirar, iba a romper algo que ya no podría volver a reparar.
-            </p>
+<div class="quote">Acceso denegado.</div>
 
-            <p>
-              Y en ese instante, supo que aquella noche no era un error de sistema.
-            </p>
+<p>Kai se quedó inmóvil.</p>
 
-            <p><strong>Era el comienzo de algo mucho peor.</strong></p>
+<p>Eso no pasaba. No con su nivel de acceso.</p>
+
+<p>Lo intentó otra vez.</p>
+<p>Mismo resultado.</p>
+
+<p>Entonces su monitor parpadeó una vez.</p>
+<p>Después otra.</p>
+
+<p>
+  Y entonces ocurrió algo que jamás había visto en toda su carrera:
+  la cámara del computador se activó sola.
+</p>
+
+<p>Kai levantó la mirada lentamente.</p>
+
+<p>
+  En la pantalla apareció su propio rostro. Pálido. Tenso. Quieto.
+</p>
+
+<p>Pero no estaba solo.</p>
+
+<p>
+  Detrás de él, en la oscuridad de la oficina, había una figura inmóvil.
+</p>
+
+<div class="quote">Alta. Oscura. Observándolo.</div>
+
+<p>Kai dejó de respirar por un segundo.</p>
+
+<p>El corazón empezó a golpearle el pecho con fuerza.</p>
+
+<p>No quería girarse.</p>
+<p>No quería confirmar que aquello estaba realmente ahí.</p>
+
+<p>Pero lo hizo.</p>
+
+<p>Lentamente.</p>
+<p>Con el cuerpo rígido.</p>
+
+<p>
+  Con la certeza irracional de que, al mirar, iba a romper algo que ya no podría volver a reparar.
+</p>
+
+<p>
+  Y en ese instante, supo que aquella noche no era un error de sistema.
+</p>
+
+<p><strong>Era el comienzo de algo mucho peor.</strong></p>
+            <!-- =========================================================
+                 HASTA AQUÍ CAMBIAS EL TEXTO DE LA HISTORIA
+                 ========================================================= -->
           </div>
         </div>
 
         <div class="reader-bottom">
-          <p class="reader-note">
-            Continúa la historia para descubrir quién —o qué— estaba detrás de Kai.
+          <p class="reader-note" id="readerNote">
+            Continúa la historia en el siguiente capítulo.
           </p>
 
           <div class="nav-actions">
-            <a href="../index.html" class="btn btn-ghost">← Volver</a>
-            <a href="capitulo2.html" class="btn btn-primary">Leer capítulo 2 →</a>
+            <a id="bottomBackBtn" href="../index.html" class="btn btn-ghost">← Volver</a>
+            <a id="bottomNextBtn" href="capitulo2.html" class="btn btn-primary">Leer capítulo 2 →</a>
           </div>
         </div>
       </article>
     </main>
   </div>
+
+  <script>
+    /* =========================================================
+       CONFIGURACIÓN DEL CAPÍTULO
+       SOLO EDITA ESTE BLOQUE EN CADA ARCHIVO
+       ========================================================= */
+
+    const CHAPTER_CONFIG = {
+      novelTitle: "Código Nébula",
+      novelSubtitle: "Thriller tecnológico original",
+      chapterNumber: 1,
+      chapterTitle: "El patrón imposible",
+      chapterDescription: "Todo sistema deja huellas. Todo error tiene una lógica. Hasta que una noche, alguien encuentra algo que no debería existir.",
+      chapterCardLabel: "Lectura inicial",
+      chapterCardTitle: "Una señal que no debería existir",
+      chapterCardDescription: "Lo que comienza como una anomalía pronto se convierte en una amenaza real.",
+      chapterState: "Gratis",
+      chapterGenre: "Suspenso",
+      chapterSaga: "Nébula",
+      readerSubtitle: "Lectura gratuita · Inicio de la historia",
+      readerBadge: "Acceso abierto",
+      readerNote: "Continúa la historia en el siguiente capítulo.",
+
+      /* ENLACES */
+      novelHome: "../home.html",
+      previousChapter: null,
+      nextChapter: "capitulo2.html"
+    };
+
+    /* =========================================================
+       NO TOCAR DESDE AQUÍ
+       ESTA PARTE ACTUALIZA AUTOMÁTICAMENTE TÍTULOS Y BOTONES
+       ========================================================= */
+
+    document.title = `Capítulo ${CHAPTER_CONFIG.chapterNumber} | ${CHAPTER_CONFIG.novelTitle}`;
+
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute(
+        "content",
+        `Capítulo ${CHAPTER_CONFIG.chapterNumber} de ${CHAPTER_CONFIG.novelTitle}: ${CHAPTER_CONFIG.chapterTitle}.`
+      );
+    }
+
+    document.getElementById("brandTitle").textContent = CHAPTER_CONFIG.novelTitle;
+    document.getElementById("brandSub").textContent = CHAPTER_CONFIG.novelSubtitle;
+    document.getElementById("crumbText").textContent = `Inicio / Capítulos / Capítulo ${CHAPTER_CONFIG.chapterNumber}`;
+    document.getElementById("heroEyebrow").textContent = `Capítulo ${CHAPTER_CONFIG.chapterNumber}`;
+    document.getElementById("heroTitle").textContent = CHAPTER_CONFIG.chapterTitle;
+    document.getElementById("heroDescription").textContent = CHAPTER_CONFIG.chapterDescription;
+    document.getElementById("chapterLabel").textContent = CHAPTER_CONFIG.chapterCardLabel;
+    document.getElementById("cardTitle").textContent = CHAPTER_CONFIG.chapterCardTitle;
+    document.getElementById("cardDescription").textContent = CHAPTER_CONFIG.chapterCardDescription;
+    document.getElementById("metaState").textContent = CHAPTER_CONFIG.chapterState;
+    document.getElementById("metaGenre").textContent = CHAPTER_CONFIG.chapterGenre;
+    document.getElementById("metaSaga").textContent = CHAPTER_CONFIG.chapterSaga;
+    document.getElementById("readerTitle").textContent =
+      `Capítulo ${CHAPTER_CONFIG.chapterNumber}: ${CHAPTER_CONFIG.chapterTitle}`;
+    document.getElementById("readerSubtitle").textContent = CHAPTER_CONFIG.readerSubtitle;
+    document.getElementById("readerBadge").textContent = CHAPTER_CONFIG.readerBadge;
+    document.getElementById("readerNote").textContent = CHAPTER_CONFIG.readerNote;
+
+    const topBackBtn = document.getElementById("topBackBtn");
+    const bottomBackBtn = document.getElementById("bottomBackBtn");
+    const topNextBtn = document.getElementById("topNextBtn");
+    const bottomNextBtn = document.getElementById("bottomNextBtn");
+
+    function setBackButton(button) {
+      if (!CHAPTER_CONFIG.previousChapter) {
+        button.href = CHAPTER_CONFIG.novelHome;
+        button.textContent = "← Volver a la novela";
+      } else {
+        button.href = CHAPTER_CONFIG.previousChapter;
+        button.textContent = `← Capítulo ${CHAPTER_CONFIG.chapterNumber - 1}`;
+      }
+    }
+
+    function setNextButton(button) {
+      if (!CHAPTER_CONFIG.nextChapter) {
+        button.href = CHAPTER_CONFIG.novelHome;
+        button.textContent = "Volver a la novela →";
+      } else {
+        button.href = CHAPTER_CONFIG.nextChapter;
+        button.textContent = `Leer capítulo ${CHAPTER_CONFIG.chapterNumber + 1} →`;
+      }
+    }
+
+    setBackButton(topBackBtn);
+    setBackButton(bottomBackBtn);
+    setNextButton(topNextBtn);
+    setNextButton(bottomNextBtn);
+  </script>
 
   <script>
     const canvas = document.getElementById("stars");
@@ -754,9 +875,9 @@
     window.addEventListener("resize", resize);
     resize();
     animate();
-   </script>
+  </script>
+
   <!-- 🔒 CONTROL DE ACCESO -->
   <script src="../../../../js/access-control.js"></script>
-
 </body>
 </html>
