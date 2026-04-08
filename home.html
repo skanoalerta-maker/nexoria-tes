@@ -2274,29 +2274,35 @@
     const auth = getAuth(app);
     const db = getFirestore(app);
 
-    const headerLoginLink = document.getElementById('headerLoginLink');
-    const userMenu = document.getElementById('userMenu');
-    const userMenuTrigger = document.getElementById('userMenuTrigger');
-    const userMenuDropdown = document.getElementById('userMenuDropdown');
-    const headerAvatar = document.getElementById('headerAvatar');
-    const headerUserName = document.getElementById('headerUserName');
-    const dropdownAvatar = document.getElementById('dropdownAvatar');
-    const dropdownUserName = document.getElementById('dropdownUserName');
-    const dropdownUserEmail = document.getElementById('dropdownUserEmail');
-    const dropdownUserPlan = document.getElementById('dropdownUserPlan');
-    const dropdownUserRead = document.getElementById('dropdownUserRead');
-    const headerLogoutBtn = document.getElementById('headerLogoutBtn');
+    const accountMenu = document.getElementById('accountMenu');
+const accountTrigger = document.getElementById('accountTrigger');
+const accountDropdown = document.getElementById('accountDropdown');
+const accountAvatar = document.getElementById('accountAvatar');
+const accountAvatarLarge = document.getElementById('accountAvatarLarge');
+const accountName = document.getElementById('accountName');
+const accountUserName = document.getElementById('accountUserName');
+const accountUserEmail = document.getElementById('accountUserEmail');
+const accountPlan = document.getElementById('accountPlan');
+const accountRead = document.getElementById('accountRead');
+const accountLogoutBtn = document.getElementById('accountLogoutBtn');
 
-    const userGreeting = document.getElementById('userGreeting');
-    const userEmailText = document.getElementById('userEmailText');
-    const userPlanPill = document.getElementById('userPlanPill');
-    const userStatePill = document.getElementById('userStatePill');
-    const userMembershipText = document.getElementById('userMembershipText');
-    const userAvatar = document.getElementById('userAvatar');
-    const userGuestBox = document.getElementById('userGuestBox');
-    const userLoggedBox = document.getElementById('userLoggedBox');
-    const logoutBtn = document.getElementById('logoutBtn');
+function closeAccountMenu(){
+  accountDropdown.classList.add('hidden-panel');
+}
 
+function openAccountMenu(){
+  accountDropdown.classList.remove('hidden-panel');
+}
+
+accountTrigger?.addEventListener('click', (e) => {
+  e.stopPropagation();
+  if (accountDropdown.classList.contains('hidden-panel')) openAccountMenu();
+  else closeAccountMenu();
+});
+
+document.addEventListener('click', (e) => {
+  if (accountMenu && !accountMenu.contains(e.target)) closeAccountMenu();
+});
     function getLocalProfile(){
       try{ const raw = localStorage.getItem('nebula-user-profile'); return raw ? JSON.parse(raw) : {}; }
       catch{ return {}; }
