@@ -2376,13 +2376,6 @@ document.addEventListener('click', (e) => {
       userLoggedBox.classList.remove('hidden-panel');
       updateUserReadingStats();
     }
-
-    userMenuTrigger.addEventListener('click', (e) => {
-      e.stopPropagation();
-      if (userMenuDropdown.classList.contains('hidden-panel')) openUserMenu(); else closeUserMenu();
-    });
-    document.addEventListener('click', (e) => { if (!userMenu.contains(e.target)) closeUserMenu(); });
-
     async function handleLogout(){
       try{
         await signOut(auth);
