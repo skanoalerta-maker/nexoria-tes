@@ -2438,6 +2438,8 @@ const accountUserEmail = document.getElementById('accountUserEmail');
 const accountPlan = document.getElementById('accountPlan');
 const accountRead = document.getElementById('accountRead');
 const accountLogoutBtn = document.getElementById('accountLogoutBtn');
+    
+accountLogoutBtn?.addEventListener('click', handleLogout);
 
 function closeAccountMenu(){
   accountMenu.classList.remove('open');
