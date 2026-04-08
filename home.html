@@ -2384,7 +2384,7 @@
       document.getElementById('userLastProgress').textContent = lastProgressText;
       return readChapters;
     }
-   function cargarNovelas(){
+function cargarNovelas(){
   const desdeDataJs = buildCatalogFromNebulaData();
   novelas = prepararNovelas(desdeDataJs);
   filtradas = [...novelas];
@@ -2393,6 +2393,9 @@
   renderStories(filtradas);
   updateUserReadingStats();
 }
+
+storySearch.addEventListener('input', filtrarHistorias);
+cargarNovelas();
   </script>
 
   <script>
