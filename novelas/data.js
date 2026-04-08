@@ -11,7 +11,7 @@ window.NEBULA_BILLING = {
 window.NEBULA_NOVELS = {
   "codigo-nebula-t1": {
     id: "codigo-nebula-t1",
-    title: "Código Nébula — Temporada 1",
+    title: "Código Nébula  Temporada 1",
     sagaTitle: "Código Nébula",
     description: "Temporada 1. Una historia futurista donde nada es lo que parece y cada capítulo abre una nueva grieta en el sistema.",
     cover: "../assets/covers/nebula.jpg",
@@ -39,7 +39,7 @@ window.NEBULA_NOVELS = {
 
   "codigo-nebula-t2": {
     id: "codigo-nebula-t2",
-    title: "Código Nébula — Temporada 2",
+    title: "Código Nébula  Temporada 2",
     sagaTitle: "Código Nébula",
     description: "Temporada 2. Continúa la historia con nuevas grietas, nuevas amenazas y un sistema cada vez más despierto.",
     cover: "../assets/covers/codigo-nebula-t2.jpg",
@@ -69,7 +69,7 @@ window.NEBULA_NOVELS = {
 
   "despues-de-tu-adios-t1": {
     id: "despues-de-tu-adios-t1",
-    title: "Después de tu adiós — Temporada 1",
+    title: "Después de tu adiós  Temporada 1",
     sagaTitle: "Después de tu adiós",
     description: "Una novela emocional sobre recuerdos, ausencia y todo lo que sigue vivo después de una despedida.",
     cover: "../assets/covers/despues-de-tu-adios.jpg",
@@ -90,7 +90,7 @@ window.NEBULA_NOVELS = {
 
   "no-debi-enamorarme-t1": {
     id: "no-debi-enamorarme-t1",
-    title: "No debí enamorarme de ti — Temporada 1",
+    title: "No debí enamorarme de ti  Temporada 1",
     sagaTitle: "No debí enamorarme de ti",
     description: "Temporada 1. Una historia intensa sobre deseo, decisiones equivocadas y emociones que arden demasiado.",
     cover: "../assets/covers/no-debi-enamorarme.jpg",
@@ -120,7 +120,7 @@ window.NEBULA_NOVELS = {
 
   "no-debi-enamorarme-t2": {
     id: "no-debi-enamorarme-t2",
-    title: "No debí enamorarme de ti — Temporada 2",
+    title: "No debí enamorarme de ti  Temporada 2",
     sagaTitle: "No debí enamorarme de ti",
     description: "Temporada 2. Nueva temporada, nuevas consecuencias y una historia que sube todavía más la intensidad emocional.",
     cover: "../assets/covers/no-debi-enamorarme-t2.jpg",
@@ -150,7 +150,7 @@ window.NEBULA_NOVELS = {
 
   "la-ultima-conexion-t1": {
     id: "la-ultima-conexion-t1",
-    title: "La última conexión — Temporada 1",
+    title: "La última conexión  Temporada 1",
     sagaTitle: "La última conexión",
     description: "A las 02:17 de la madrugada, Daniel recibe mensajes desde su propio número. Lo peor no es quién escribe, sino que esos mensajes saben exactamente lo que está ocurriendo dentro de su habitación.",
     cover: "../assets/covers/la-ultima-conexion.jpg",
@@ -180,7 +180,7 @@ window.NEBULA_NOVELS = {
 
   "ya-habias-estado-ahi-t1": {
     id: "ya-habias-estado-ahi-t1",
-    title: "Ya habías estado ahí — Temporada 1",
+    title: "Ya habías estado ahí  Temporada 1",
     sagaTitle: "Ya habías estado ahí",
     description: "Volver a casa nunca volvió a sentirse normal. Un cajón abierto, una puerta distinta, objetos fuera de lugar. Al principio parecen detalles mínimos, hasta que entiendes algo peor: alguien ya había estado ahí.",
     cover: "../assets/covers/ya-habias-estado-ahi.jpg",
@@ -208,7 +208,7 @@ window.NEBULA_NOVELS = {
 
   "pinochet-t1": {
     id: "pinochet-t1",
-    title: "Pinochet — Temporada 1",
+    title: "Pinochet  Temporada 1",
     sagaTitle: "Pinochet",
     description: "Una novela histórica intensa sobre poder, control, decisiones militares y el impacto humano de un periodo que marcó para siempre la historia de Chile.",
     cover: "../assets/covers/pinochet_nebula_portada.png",
@@ -238,7 +238,7 @@ window.NEBULA_NOVELS = {
 
   "allende-t1": {
     id: "allende-t1",
-    title: "Allende — Temporada 1",
+    title: "Allende  Temporada 1",
     sagaTitle: "Allende",
     description: "Una historia política y humana sobre liderazgo, convicción y uno de los periodos más decisivos de la historia de Chile.",
     cover: "../assets/covers/allende_portada_nebula.png",
@@ -272,7 +272,7 @@ window.NEBULA_NOVELS = {
 
   "golpe-de-estado-t1": {
     id: "golpe-de-estado-t1",
-    title: "Golpe de Estado — Temporada 1",
+    title: "Golpe de Estado  Temporada 1",
     sagaTitle: "Golpe de Estado",
     description: "Una historia política, social y humana sobre la fractura de un país, la tensión del poder y los días que cambiaron Chile para siempre.",
     cover: "../assets/covers/golpe_estado_nebula.png",
@@ -293,7 +293,7 @@ window.NEBULA_NOVELS = {
 
   "el-precio-del-silencio-t1": {
     id: "el-precio-del-silencio-t1",
-    title: "El Precio del Silencio — Temporada 1",
+    title: "El Precio del Silencio  Temporada 1",
     sagaTitle: "El Precio del Silencio",
     description: "Una historia de corrupción, secretos y una red de poder que empieza a quebrarse desde dentro.",
     cover: "../assets/covers/portada-nebula.jpg",
@@ -328,7 +328,7 @@ window.NEBULA_NOVELS = {
 
   "suegro-a-la-deriva-t1": {
     id: "suegro-a-la-deriva-t1",
-    title: "Suegro a la Deriva — Temporada 1",
+    title: "Suegro a la Deriva  Temporada 1",
     sagaTitle: "Suegro a la Deriva",
     description: "Una comedia con drama y caos familiar donde un paseo termina sacando a flote heridas, secretos y una segunda temporada inevitable.",
     cover: "../assets/covers/suegro-a-la-deriva-t1.jpg",
@@ -363,7 +363,7 @@ window.NEBULA_NOVELS = {
 
   "luci-t1": {
     id: "luci-t1",
-    title: "Luci — Temporada 1",
+    title: "Luci  Temporada 1",
     sagaTitle: "Luci",
     description: "Una historia intensa de amor, dolor y decisiones que marcan la vida para siempre.",
     cover: "../assets/covers/luci.jpg",
@@ -384,7 +384,7 @@ window.NEBULA_NOVELS = {
 
   "mision-peligrosa-t1": {
     id: "mision-peligrosa-t1",
-    title: "Misión Peligrosa — Temporada 1",
+    title: "Misión Peligrosa  Temporada 1",
     sagaTitle: "Misión Peligrosa",
     description: "Una historia de acción militar, traiciones, fuego cruzado y una operación en la costa que termina revelando algo mucho más grande y letal.",
     cover: "../assets/covers/mision-peligrosa.png",
@@ -418,7 +418,7 @@ window.NEBULA_NOVELS = {
   }
   "codigos-de-calle-t1": {
     id: "codigos-de-calle-t1",
-    title: "Códigos de Calle — Temporada 1",
+    title: "Códigos de Calle  Temporada 1",
     sagaTitle: "Códigos de Calle",
     description: "Una historia cruda de calle, poder, corrupción y traiciones en Santiago, donde nadie juega limpio y cada decisión puede costarte la vida.",
     cover: "../assets/covers/codigos-calle.jpg",
