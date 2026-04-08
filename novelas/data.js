@@ -320,6 +320,39 @@ window.NEBULA_NOVELS = {
       { num: 2, season: "temporada1", seasonLabel: "Temporada 1", title: "La conexión", description: "Una conexión inesperada comienza a crecer entre ellos." },
       { num: 3, season: "temporada1", seasonLabel: "Temporada 1", title: "El quiebre", description: "Una verdad cambia todo lo que creían conocer." }
     ]
-  }
+  },
+  "suegro-a-la-deriva-t1": {
+  id: "suegro-a-la-deriva-t1",
+  title: "Suegro a la Deriva — Temporada 1",
+  sagaTitle: "Suegro a la Deriva",
+  description: "Una comedia cargada de tensión, donde un viaje familiar se transforma en un caos emocional lleno de secretos, peleas y momentos absurdamente humanos.",
+  cover: "../assets/covers/suegro-deriva.jpg",
+  baseFolder: "comedia/suegro-a-la-deriva",
+  defaultSeason: "temporada1",
+  defaultSeasonLabel: "Temporada 1",
+  freeChapters: 3,
+  price: "$1.500 CLP",
+  rating: 5,
+  visitas: 0,
+  tags: ["Comedia", "Drama", "Familia", "Temporada 1"],
+  chapters: [
+    { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "El viaje que nadie quería", description: "Lo que parecía un simple paseo familiar termina siendo el inicio de un desastre." },
+    { num: 2, season: "temporada1", seasonLabel: "Temporada 1", title: "El primer choque", description: "Las tensiones comienzan a salir a la superficie antes de siquiera llegar al destino." },
+    { num: 3, season: "temporada1", seasonLabel: "Temporada 1", title: "Sin señal", description: "Perdidos, sin comunicación y atrapados con alguien que nadie soporta." },
+    { num: 4, season: "temporada1", seasonLabel: "Temporada 1", title: "Lo que no se dijo", description: "Viejos conflictos empiezan a reaparecer en medio del encierro." },
+    { num: 5, season: "temporada1", seasonLabel: "Temporada 1", title: "El límite", description: "Una discusión rompe la frágil calma del grupo." },
+    { num: 6, season: "temporada1", seasonLabel: "Temporada 1", title: "Nadie se va", description: "Salir ya no es opción, y eso lo cambia todo." },
+    { num: 7, season: "temporada1", seasonLabel: "Temporada 1", title: "El pasado vuelve", description: "Un secreto antiguo comienza a afectar a todos." },
+    { num: 8, season: "temporada1", seasonLabel: "Temporada 1", title: "La noche larga", description: "La convivencia se vuelve insoportable." },
+    { num: 9, season: "temporada1", seasonLabel: "Temporada 1", title: "Punto de quiebre", description: "Alguien cruza un límite que no tiene vuelta." },
+    { num: 10, season: "temporada1", seasonLabel: "Temporada 1", title: "Demasiado tarde", description: "Las consecuencias comienzan a aparecer." },
+    { num: 11, season: "temporada1", seasonLabel: "Temporada 1", title: "El verdadero problema", description: "No era el viaje… era la relación entre ellos." },
+    { num: 12, season: "temporada1", seasonLabel: "Temporada 1", title: "Todo se rompe", description: "La familia deja de funcionar como tal." },
+    { num: 13, season: "temporada1", seasonLabel: "Temporada 1", title: "Sin salida", description: "La tensión llega a su punto máximo." },
+    { num: 14, season: "temporada1", seasonLabel: "Temporada 1", title: "El error", description: "Una decisión cambia el rumbo de todo." },
+    { num: 15, season: "temporada1", seasonLabel: "Temporada 1", title: "Consecuencias", description: "Nada vuelve a ser igual." },
+    { num: 16, season: "temporada1", seasonLabel: "Temporada 1", title: "Antes del final", description: "Todo apunta a algo peor." },
+    { num: 17, season: "temporada1", seasonLabel: "Temporada 1", title: "El inicio de algo más", description: "El final deja claro que la historia recién comienza." }
+  ]
 };
 
