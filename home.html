@@ -2333,49 +2333,53 @@ document.addEventListener('click', (e) => {
     function closeUserMenu(){ userMenu.classList.remove('open'); userMenuDropdown.classList.add('hidden-panel'); }
     function openUserMenu(){ userMenu.classList.add('open'); userMenuDropdown.classList.remove('hidden-panel'); }
 
-    function updateLoggedOutUI(){
-      headerLoginLink.classList.remove('hidden-panel');
-      userMenu.classList.add('hidden-panel');
-      closeUserMenu();
-      userGreeting.textContent = 'Usuario Nébula';
-      userEmailText.textContent = 'Inicia sesión para guardar tu progreso, continuar leyendo y ver tu membresía activa.';
-      userPlanPill.textContent = 'Suscripción: Free';
-      userStatePill.textContent = 'Estado: Invitado';
-      userMembershipText.textContent = 'Puedes desbloquear temporadas completas';
-      userAvatar.textContent = '🌌';
-      userGuestBox.classList.remove('hidden-panel');
-      userLoggedBox.classList.add('hidden-panel');
-      updateUserReadingStats();
-    }
+function updateLoggedOutUI(){
+  headerLoginLink.classList.remove('hidden-panel');
+  accountMenu.classList.add('hidden-panel');
+  closeAccountMenu();
 
-    function updateLoggedInUI(user, data){
-      const membershipLabel = getMembershipLabelFromData(data);
-      const displayName = data.name || user.displayName || (user.email ? user.email.split('@')[0] : 'Usuario Nébula');
-      const avatarValue = getAvatarValue(user, data);
-      const readCount = Array.isArray(data.readChapters) ? data.readChapters.length : updateUserReadingStats();
+  userGreeting.textContent = 'Usuario Nébula';
+  userEmailText.textContent = 'Inicia sesión para guardar tu progreso, continuar leyendo y ver tu membresía activa.';
+  userPlanPill.textContent = 'Suscripción: Free';
+  userStatePill.textContent = 'Estado: Invitado';
+  userMembershipText.textContent = 'Puedes desbloquear temporadas completas';
+  userAvatar.textContent = 'N';
+  userGuestBox.classList.remove('hidden-panel');
+  userLoggedBox.classList.add('hidden-panel');
+  updateUserReadingStats();
+}
 
-      localStorage.setItem('nebula-user-profile', JSON.stringify({ name: displayName, icon: avatarValue }));
+function updateLoggedInUI(user, data){
+  const membershipLabel = getMembershipLabelFromData(data);
+  const displayName = data.name || user.displayName || (user.email ? user.email.split('@')[0] : 'Usuario Nébula');
+  const avatarValue = getAvatarValue(user, data);
+  const readCount = Array.isArray(data.readChapters) ? data.readChapters.length : updateUserReadingStats();
 
-      headerLoginLink.classList.add('hidden-panel');
-      userMenu.classList.remove('hidden-panel');
-      headerAvatar.textContent = avatarValue;
-      headerUserName.textContent = displayName;
-      dropdownAvatar.textContent = avatarValue;
-      dropdownUserName.textContent = displayName;
-      dropdownUserEmail.textContent = user.email || '';
-      dropdownUserPlan.textContent = membershipLabel;
-      dropdownUserRead.textContent = `${readCount} capítulo${readCount === 1 ? '' : 's'}`;
+  localStorage.setItem('nebula-user-profile', JSON.stringify({ name: displayName, icon: avatarValue }));
 
-      userGreeting.textContent = displayName;
-      userEmailText.textContent = user.email || 'Tu cuenta está conectada correctamente.';
-      userPlanPill.textContent = `Suscripción: ${membershipLabel}`;
-      userStatePill.textContent = 'Estado: Activo';
-      userMembershipText.textContent = membershipLabel === 'Premium' ? 'Tu acceso premium está activo' : 'Aún puedes mejorar a Premium';
-      userAvatar.textContent = avatarValue;
-      userGuestBox.classList.add('hidden-panel');
-      userLoggedBox.classList.remove('hidden-panel');
-      updateUserReadingStats();
-    }
+  headerLoginLink.classList.add('hidden-panel');
+  accountMenu.classList.remove('hidden-panel');
+
+  accountAvatar.textContent = avatarValue;
+  accountAvatarLarge.textContent = avatarValue;
+  accountName.textContent = displayName;
+  accountUserName.textContent = displayName;
+  accountUserEmail.textContent = user.email || '';
+  accountPlan.textContent = membershipLabel;
+  accountRead.textContent = `${readCount} capítulo${readCount === 1 ? '' : 's'}`;
+
+  userGreeting.textContent = displayName;
+  userEmailText.textContent = user.email || 'Tu cuenta está conectada correctamente.';
+  userPlanPill.textContent = `Suscripción: ${membershipLabel}`;
+  userStatePill.textContent = 'Estado: Activo';
+  userMembershipText.textContent = membershipLabel === 'Premium'
+    ? 'Tu acceso premium está activo'
+    : 'Aún puedes mejorar a Premium';
+  userAvatar.textContent = avatarValue;
+  userGuestBox.classList.add('hidden-panel');
+  userLoggedBox.classList.remove('hidden-panel');
+  updateUserReadingStats();
+}
     async function handleLogout(){
       try{
         await signOut(auth);
