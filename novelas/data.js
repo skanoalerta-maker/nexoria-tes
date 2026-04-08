@@ -436,7 +436,7 @@ window.NEBULA_NOVELS = {
     sagaTitle: "Códigos de Calle",
     description: "Una historia cruda de calle, poder, corrupción y traiciones en Santiago, donde nadie juega limpio y cada decisión puede costarte la vida.",
     cover: "../assets/covers/codigos-calle.jpg",
-    baseFolder: "thriller/codigos-de-calle",
+    baseFolder: "Thriller de corrupción/codigos-de-calle",
     defaultSeason: "temporada1",
     defaultSeasonLabel: "Temporada 1",
     freeChapters: 3,
