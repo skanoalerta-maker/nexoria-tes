@@ -2518,7 +2518,7 @@ function updateLoggedInUI(user, data){
 
   accountAvatar.textContent = avatarValue;
   accountAvatarLarge.textContent = avatarValue;
-  accountName.textContent = displayName;
+  accountName.textContent = displayName.toUpperCase();
   accountUserName.textContent = displayName;
   accountUserEmail.textContent = user.email || '';
   accountPlan.textContent = membershipLabel;
