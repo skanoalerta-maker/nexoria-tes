@@ -402,7 +402,7 @@ window.NEBULA_NOVELS = {
   sagaTitle: "Area 51  El Protocolo Oculto",
   description: "Temporada 1. Una historia de conspiracion, experimentos secretos, desapariciones y un complejo subterraneo donde la verdad sobre Area 51 podria destruir todo lo que creemos conocer.",
   cover: "../assets/covers/area51_protocolo_oculto",
-  baseFolder: "futurista/area51_protocolo_oculto",
+  baseFolder: "Thriller de corrupción/area51_protocolo_oculto",
   defaultSeason: "temporada1",
   defaultSeasonLabel: "Temporada 1",
   freeChapters: 3,
