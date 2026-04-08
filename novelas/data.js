@@ -415,7 +415,7 @@ window.NEBULA_NOVELS = {
       { num: 16, season: "temporada1", seasonLabel: "Temporada 1", title: "La última carga", description: "Con el tiempo encima y la costa ardiendo, la ofensiva final se convierte en una carrera brutal contra la muerte." },
       { num: 17, season: "temporada1", seasonLabel: "Temporada 1", title: "El superviviente equivocado", description: "Cuando todo parece terminar, una revelación deja claro que la misión real apenas acaba de comenzar y abre el camino a la temporada 2." }
     ]
-  }
+  },
   "codigos-de-calle-t1": {
     id: "codigos-de-calle-t1",
     title: "Códigos de Calle  Temporada 1",
