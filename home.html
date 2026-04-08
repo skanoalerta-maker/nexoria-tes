@@ -2313,7 +2313,7 @@ function updateLoggedOutUI(){
 
 function updateLoggedInUI(user, data){
   const membershipLabel = getMembershipLabelFromData(data);
-  const displayName = data.name || user.displayName || (user.email ? user.email.split('@')[0] : 'Usuario Nébula');
+  const displayName = data?.nombre || data?.name || user.displayName || (user.email ? user.email.split('@')[0] : 'Usuario Nébula');
   const avatarValue = getAvatarValue(user, data);
   const readCount = Array.isArray(data.readChapters) ? data.readChapters.length : updateUserReadingStats();
 
