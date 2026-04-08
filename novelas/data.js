@@ -270,6 +270,27 @@ window.NEBULA_NOVELS = {
     ]
   },
 
+  "golpe-de-estado-t1": {
+    id: "golpe-de-estado-t1",
+    title: "Golpe de Estado — Temporada 1",
+    sagaTitle: "Golpe de Estado",
+    description: "Una historia política, social y humana sobre la fractura de un país, la tensión del poder y los días que cambiaron Chile para siempre.",
+    cover: "../assets/covers/golpe_estado_nebula.png",
+    baseFolder: "historia/golpe-de-estado",
+    defaultSeason: "temporada1",
+    defaultSeasonLabel: "Temporada 1",
+    freeChapters: 3,
+    price: "$1.500 CLP",
+    rating: 5,
+    visitas: 0,
+    tags: ["Historia", "Política", "Drama", "Temporada 1"],
+    chapters: [
+      { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "La antesala", description: "Las tensiones se acumulan en silencio mientras el país se acerca a una ruptura irreversible." },
+      { num: 2, season: "temporada1", seasonLabel: "Temporada 1", title: "La orden", description: "Los movimientos militares dejan claro que ya no hay vuelta atrás." },
+      { num: 3, season: "temporada1", seasonLabel: "Temporada 1", title: "El día que cambió todo", description: "Las calles, el poder y la historia colisionan en una jornada imposible de olvidar." }
+    ]
+  },
+
   "el-precio-del-silencio-t1": {
     id: "el-precio-del-silencio-t1",
     title: "El Precio del Silencio — Temporada 1",
@@ -310,7 +331,7 @@ window.NEBULA_NOVELS = {
     title: "Suegro a la Deriva — Temporada 1",
     sagaTitle: "Suegro a la Deriva",
     description: "Una comedia con drama y caos familiar donde un paseo termina sacando a flote heridas, secretos y una segunda temporada inevitable.",
-    cover: "assets/covers/suegro-a-la-deriva-t1.jpg",
+    cover: "../assets/covers/suegro-a-la-deriva-t1.jpg",
     baseFolder: "comedia/suegro-a-la-deriva",
     defaultSeason: "temporada1",
     defaultSeasonLabel: "Temporada 1",
@@ -360,39 +381,39 @@ window.NEBULA_NOVELS = {
       { num: 3, season: "temporada1", seasonLabel: "Temporada 1", title: "El quiebre", description: "Una verdad cambia todo lo que creían conocer." }
     ]
   },
+
   "codigos-de-calle-t1": {
-  id: "codigos-de-calle-t1",
-  title: "Códigos de Calle — Temporada 1",
-  sagaTitle: "Códigos de Calle",
-  description: "Una historia cruda de calle, poder, corrupción y traiciones en Santiago, donde nadie juega limpio y cada decisión puede costarte la vida.",
-  cover: "../assets/covers/codigos-de-calle.jpg",
-  baseFolder: "thriller/codigos-de-calle",
-  defaultSeason: "temporada1",
-  defaultSeasonLabel: "Temporada 1",
-  freeChapters: 3,
-  price: "$1.500 CLP",
-  rating: 5,
-  visitas: 0,
-  tags: ["Thriller", "Calle", "Corrupción", "Suspenso", "Temporada 1"],
-  chapters: [
-    { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "La noche del primer disparo", description: "Una ejecución en plena noche deja al descubierto que Santiago está a punto de explotar." },
-    { num: 2, season: "temporada1", seasonLabel: "Temporada 1", title: "Lo que dejó el muerto", description: "Un hallazgo inesperado conecta a la calle con una red mucho más grande y peligrosa." },
-    { num: 3, season: "temporada1", seasonLabel: "Temporada 1", title: "Nadie manda solo", description: "Las primeras traiciones revelan que detrás del negocio hay nombres que nadie se atreve a tocar." },
-    { num: 4, season: "temporada1", seasonLabel: "Temporada 1", title: "La primera caída", description: "Una operación sale mal y obliga a mover piezas antes de tiempo." },
-    { num: 5, season: "temporada1", seasonLabel: "Temporada 1", title: "Plata manchada", description: "El dinero empieza a correr mientras la violencia deja de ser una amenaza y se vuelve rutina." },
-    { num: 6, season: "temporada1", seasonLabel: "Temporada 1", title: "Santiago no duerme", description: "La ciudad se convierte en un tablero donde todos vigilan a todos." },
-    { num: 7, season: "temporada1", seasonLabel: "Temporada 1", title: "Los nombres prohibidos", description: "Una lista filtrada revela vínculos entre la calle, la política y la policía." },
-    { num: 8, season: "temporada1", seasonLabel: "Temporada 1", title: "La deuda", description: "Viejas cuentas pendientes obligan a elegir entre lealtad y supervivencia." },
-    { num: 9, season: "temporada1", seasonLabel: "Temporada 1", title: "Noche de ajuste", description: "Un ajuste de cuentas desata una guerra que ya nadie puede frenar." },
-    { num: 10, season: "temporada1", seasonLabel: "Temporada 1", title: "Cara de traidor", description: "La traición aparece donde menos lo esperaban y cambia por completo el juego." },
-    { num: 11, season: "temporada1", seasonLabel: "Temporada 1", title: "La ciudad cercada", description: "Con la presión encima, todos empiezan a cometer errores." },
-    { num: 12, season: "temporada1", seasonLabel: "Temporada 1", title: "Código rojo", description: "Una orden interna deja claro que el enemigo no está solo afuera." },
-    { num: 13, season: "temporada1", seasonLabel: "Temporada 1", title: "Bajo la misma sangre", description: "Los vínculos personales contaminan una guerra que debía ser solo de negocios." },
-    { num: 14, season: "temporada1", seasonLabel: "Temporada 1", title: "Sin vuelta atrás", description: "Después de una decisión brutal, el conflicto cruza un punto irreversible." },
-    { num: 15, season: "temporada1", seasonLabel: "Temporada 1", title: "El operativo", description: "Todo apunta a un cierre definitivo, pero las piezas no encajan del todo." },
-    { num: 16, season: "temporada1", seasonLabel: "Temporada 1", title: "La captura", description: "La caída del objetivo parece cerrar la historia, aunque algo huele demasiado mal." },
-    { num: 17, season: "temporada1", seasonLabel: "Temporada 1", title: "La falsa victoria", description: "Cuando todos creen que terminó, una verdad brutal revela que la captura fue una mentira." }
-   ]
+    id: "codigos-de-calle-t1",
+    title: "Códigos de Calle — Temporada 1",
+    sagaTitle: "Códigos de Calle",
+    description: "Una historia cruda de calle, poder, corrupción y traiciones en Santiago, donde nadie juega limpio y cada decisión puede costarte la vida.",
+    cover: "../assets/covers/codigos-de-calle.jpg",
+    baseFolder: "thriller/codigos-de-calle",
+    defaultSeason: "temporada1",
+    defaultSeasonLabel: "Temporada 1",
+    freeChapters: 3,
+    price: "$1.500 CLP",
+    rating: 5,
+    visitas: 0,
+    tags: ["Thriller", "Calle", "Corrupción", "Suspenso", "Temporada 1"],
+    chapters: [
+      { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "La noche del primer disparo", description: "Una ejecución en plena noche deja al descubierto que Santiago está a punto de explotar." },
+      { num: 2, season: "temporada1", seasonLabel: "Temporada 1", title: "Lo que dejó el muerto", description: "Un hallazgo inesperado conecta a la calle con una red mucho más grande y peligrosa." },
+      { num: 3, season: "temporada1", seasonLabel: "Temporada 1", title: "Nadie manda solo", description: "Las primeras traiciones revelan que detrás del negocio hay nombres que nadie se atreve a tocar." },
+      { num: 4, season: "temporada1", seasonLabel: "Temporada 1", title: "La primera caída", description: "Una operación sale mal y obliga a mover piezas antes de tiempo." },
+      { num: 5, season: "temporada1", seasonLabel: "Temporada 1", title: "Plata manchada", description: "El dinero empieza a correr mientras la violencia deja de ser una amenaza y se vuelve rutina." },
+      { num: 6, season: "temporada1", seasonLabel: "Temporada 1", title: "Santiago no duerme", description: "La ciudad se convierte en un tablero donde todos vigilan a todos." },
+      { num: 7, season: "temporada1", seasonLabel: "Temporada 1", title: "Los nombres prohibidos", description: "Una lista filtrada revela vínculos entre la calle, la política y la policía." },
+      { num: 8, season: "temporada1", seasonLabel: "Temporada 1", title: "La deuda", description: "Viejas cuentas pendientes obligan a elegir entre lealtad y supervivencia." },
+      { num: 9, season: "temporada1", seasonLabel: "Temporada 1", title: "Noche de ajuste", description: "Un ajuste de cuentas desata una guerra que ya nadie puede frenar." },
+      { num: 10, season: "temporada1", seasonLabel: "Temporada 1", title: "Cara de traidor", description: "La traición aparece donde menos lo esperaban y cambia por completo el juego." },
+      { num: 11, season: "temporada1", seasonLabel: "Temporada 1", title: "La ciudad cercada", description: "Con la presión encima, todos empiezan a cometer errores." },
+      { num: 12, season: "temporada1", seasonLabel: "Temporada 1", title: "Código rojo", description: "Una orden interna deja claro que el enemigo no está solo afuera." },
+      { num: 13, season: "temporada1", seasonLabel: "Temporada 1", title: "Bajo la misma sangre", description: "Los vínculos personales contaminan una guerra que debía ser solo de negocios." },
+      { num: 14, season: "temporada1", seasonLabel: "Temporada 1", title: "Sin vuelta atrás", description: "Después de una decisión brutal, el conflicto cruza un punto irreversible." },
+      { num: 15, season: "temporada1", seasonLabel: "Temporada 1", title: "El operativo", description: "Todo apunta a un cierre definitivo, pero las piezas no encajan del todo." },
+      { num: 16, season: "temporada1", seasonLabel: "Temporada 1", title: "La captura", description: "La caída del objetivo parece cerrar la historia, aunque algo huele demasiado mal." },
+      { num: 17, season: "temporada1", seasonLabel: "Temporada 1", title: "La falsa victoria", description: "Cuando todos creen que terminó, una verdad brutal revela que la captura fue una mentira." }
+    ]
   }
 };
-
