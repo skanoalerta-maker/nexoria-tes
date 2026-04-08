@@ -3,17 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Capítulo 2 | Código Nébula</title>
-  <meta
-    name="description"
-    content="Capítulo 2 de Código Nébula: No estás solo."
-  />
+
+  <!-- =========================================================
+       ARCHIVO MADRE NÉBULA
+       SOLO CAMBIA LOS DATOS DEL BLOQUE "CONFIGURACIÓN DEL CAPÍTULO"
+       Y EL CONTENIDO DE .story
+     ========================================================= -->
+
+<title>Capítulo 2 | Código Nébula</title>
+<meta
+  name="description"
+  content="Capítulo 2 de Código Nébula. Kai comienza a entender que no está solo y que algo dentro del sistema lo está observando."
+/>
 
   <style>
     :root{
       --bg:#05080f;
       --bg2:#0b1220;
-      --card:rgba(12,18,32,0.88);
+      --card:rgba(12,18,32,0.82);
       --line:rgba(255,255,255,0.08);
       --line-strong:rgba(73,182,255,0.24);
       --text:#f5f8ff;
@@ -39,10 +46,7 @@
       margin:0;
       font-family:Arial, sans-serif;
       color:var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(10,108,255,.10), transparent 24%),
-        radial-gradient(circle at top right, rgba(73,182,255,.08), transparent 20%),
-        linear-gradient(180deg, #04070d 0%, #08101c 45%, #05080f 100%);
+      background:#04070d;
       line-height:1.8;
       position:relative;
       overflow-x:hidden;
@@ -53,14 +57,16 @@
       text-decoration:none;
     }
 
-    /* ⭐ estrellas solo al fondo */
     #stars{
       position:fixed;
       inset:0;
       width:100%;
       height:100%;
       z-index:0;
-      pointer-events:none;
+      background:
+        radial-gradient(circle at top left, rgba(10,108,255,.12), transparent 24%),
+        radial-gradient(circle at top right, rgba(73,182,255,.08), transparent 20%),
+        linear-gradient(180deg, #04070d 0%, #08101c 45%, #05080f 100%);
     }
 
     .page{
@@ -107,10 +113,6 @@
       font-weight:700;
       color:var(--blue2);
       flex:0 0 auto;
-    }
-
-    .brand-text{
-      min-width:0;
     }
 
     .brand-title{
@@ -182,27 +184,17 @@
       border-bottom:1px solid rgba(255,255,255,0.04);
     }
 
-    /* ✅ se mantiene tu foto */
     .hero::before{
       content:"";
       position:absolute;
       inset:0;
       background:
-        linear-gradient(180deg, rgba(5,8,15,.52) 0%, rgba(5,8,15,.86) 80%, rgba(5,8,15,1) 100%),
-        url("https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1600&q=80");
+        linear-gradient(180deg, rgba(5,8,15,.58) 0%, rgba(5,8,15,.86) 80%, rgba(5,8,15,1) 100%),
+        url("https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80");
       background-size:cover;
       background-position:center;
-      opacity:.28;
+      opacity:.20;
       filter:saturate(.9);
-    }
-
-    .hero::after{
-      content:"";
-      position:absolute;
-      inset:auto 0 -120px 0;
-      height:240px;
-      background:radial-gradient(circle, rgba(73,182,255,.10), transparent 62%);
-      pointer-events:none;
     }
 
     .hero-inner{
@@ -266,7 +258,7 @@
 
     .chapter-card{
       width:min(100%, 360px);
-      background:linear-gradient(180deg, rgba(12,18,32,.85), rgba(9,13,24,.92));
+      background:linear-gradient(180deg, rgba(12,18,32,.75), rgba(9,13,24,.88));
       border:1px solid rgba(73,182,255,.18);
       border-radius:24px;
       box-shadow:var(--shadow);
@@ -339,15 +331,14 @@
       padding:28px 20px 80px;
     }
 
-    /* ✅ lector un poco más transparente para que las estrellas se noten solo en vacíos */
     .reader{
       position:relative;
-      background:linear-gradient(180deg, rgba(11,18,32,.78), rgba(8,13,24,.86));
+      background:linear-gradient(180deg, rgba(11,18,32,.58), rgba(8,13,24,.72));
       border:1px solid rgba(255,255,255,0.06);
-      border-radius:var(--radius);
+      border-radius:22px;
       box-shadow:var(--shadow);
       overflow:hidden;
-      backdrop-filter:blur(3px);
+      backdrop-filter:blur(4px);
     }
 
     .reader-top{
@@ -389,6 +380,14 @@
 
     .reader-body{
       padding:34px 26px 18px;
+      position:relative;
+    }
+
+    .story{
+      max-width:720px;
+      margin:0 auto;
+      position:relative;
+      z-index:2;
     }
 
     .lead{
@@ -398,21 +397,18 @@
       margin:0 0 26px;
       padding:18px 18px 18px 20px;
       border-left:3px solid rgba(73,182,255,.44);
-      background:rgba(73,182,255,.06);
+      background:rgba(9, 18, 35, 0.68);
       border-radius:0 14px 14px 0;
-    }
-
-    .story{
-      max-width:720px;
-      margin:0 auto;
+      backdrop-filter:blur(4px);
     }
 
     .story p{
       margin:0 0 22px;
-      color:#d7e0f3;
+      color:#e4ecfb;
       font-size:18px;
       line-height:1.95;
       letter-spacing:.01em;
+      text-shadow:0 1px 2px rgba(0,0,0,.4);
     }
 
     .story p strong{
@@ -424,13 +420,14 @@
       margin:34px 0;
       padding:20px 22px;
       border-radius:18px;
-      background:linear-gradient(180deg, rgba(10,108,255,.10), rgba(73,182,255,.05));
+      background:linear-gradient(180deg, rgba(10,108,255,.12), rgba(73,182,255,.06));
       border:1px solid rgba(73,182,255,.14);
       color:#edf5ff;
       font-size:19px;
       line-height:1.7;
       text-align:center;
       box-shadow:0 12px 30px rgba(0,0,0,.18);
+      backdrop-filter:blur(4px);
     }
 
     .story .divider{
@@ -460,10 +457,6 @@
       display:flex;
       gap:12px;
       flex-wrap:wrap;
-    }
-
-    .footer-space{
-      height:20px;
     }
 
     @media (max-width: 900px){
@@ -541,54 +534,52 @@
       <div class="topbar-inner">
         <div class="brand">
           <div class="brand-badge">N</div>
-          <div class="brand-text">
-            <p class="brand-title">Código Nébula</p>
-            <p class="brand-sub">Thriller tecnológico original</p>
+          <div>
+            <p class="brand-title" id="brandTitle">Nombre de la novela</p>
+            <p class="brand-sub" id="brandSub">Género / subtítulo</p>
           </div>
         </div>
 
         <div class="top-actions">
-          <a href="../index.html" class="btn btn-ghost">← Volver al inicio</a>
-          <a href="capitulo3.html" class="btn btn-primary">Siguiente capítulo →</a>
+          <a id="topBackBtn" href="../index.html" class="btn btn-ghost">← Volver al inicio</a>
+          <a id="topNextBtn" href="capitulo2.html" class="btn btn-primary">Siguiente capítulo →</a>
         </div>
       </div>
     </header>
 
     <section class="hero">
       <div class="hero-inner">
-        <div class="crumb">Inicio / Capítulos / Capítulo 2</div>
+        <div class="crumb" id="crumbText">Inicio / Capítulos / Capítulo 1</div>
 
         <div class="hero-grid">
           <div class="hero-copy">
-            <p class="eyebrow">Capítulo 2</p>
-            <h1>No estás solo</h1>
-            <p>
-              La pantalla ya no muestra solo datos. Ahora responde. Y lo que responde,
-              sabe exactamente quién es Kai.
+            <p class="eyebrow" id="heroEyebrow">Capítulo 1</p>
+            <h1 id="heroTitle">Título del capítulo</h1>
+            <p id="heroDescription">
+              Resumen corto del capítulo para la portada.
             </p>
           </div>
 
           <div class="hero-side">
             <aside class="chapter-card">
-              <div class="chapter-label">Tensión creciente</div>
-              <h2>La anomalía ahora observa de vuelta</h2>
-              <p>
-                Lo que parecía una irregularidad digital se transforma en una presencia.
-                Kai ya no está investigando un error: está entrando en algo que lo ve.
+              <div class="chapter-label" id="chapterLabel">Lectura inicial</div>
+              <h2 id="cardTitle">Subtítulo del capítulo</h2>
+              <p id="cardDescription">
+                Texto corto lateral del capítulo.
               </p>
 
               <div class="meta">
                 <div class="meta-item">
                   <p class="meta-k">Estado</p>
-                  <p class="meta-v">Gratis</p>
+                  <p class="meta-v" id="metaState">Gratis</p>
                 </div>
                 <div class="meta-item">
                   <p class="meta-k">Género</p>
-                  <p class="meta-v">Thriller</p>
+                  <p class="meta-v" id="metaGenre">Suspenso</p>
                 </div>
                 <div class="meta-item">
-                  <p class="meta-k">Nivel</p>
-                  <p class="meta-v">Alerta</p>
+                  <p class="meta-k">Saga</p>
+                  <p class="meta-v" id="metaSaga">Nébula</p>
                 </div>
               </div>
             </aside>
@@ -601,214 +592,420 @@
       <article class="reader">
         <div class="reader-top">
           <div class="reader-top-left">
-            <h3>Capítulo 2: No estás solo</h3>
-            <p>Lectura gratuita · El patrón comienza a responder</p>
+            <h3 id="readerTitle">Capítulo 1: Título del capítulo</h3>
+            <p id="readerSubtitle">Lectura gratuita · Inicio de la historia</p>
           </div>
-          <div class="reader-badge">Capítulo abierto</div>
+          <div class="reader-badge" id="readerBadge">Acceso abierto</div>
         </div>
 
         <div class="reader-body">
           <div class="story">
-            <p class="lead">
-              Kai no respiraba. No de verdad. Solo permanecía quieto, atrapado entre la
-              lógica que lo había guiado siempre y la certeza brutal de que algo imposible
-              acababa de entrar en su realidad.
-            </p>
+            <!-- =========================================================
+                 SOLO CAMBIA DESDE AQUÍ EL TEXTO DE LA HISTORIA
+                 ========================================================= -->
+<p class="lead">
+  Kai no respiraba. No de verdad. Solo permanecía quieto, atrapado entre la lógica que siempre lo había guiado y la certeza brutal de que algo imposible acababa de entrar en su realidad.
+</p>
 
-            <p>Sus ojos seguían clavados en la pantalla.</p>
-            <p>La cámara seguía encendida.</p>
-            <p>Y detrás de él, en el monitor, esa figura inmóvil continuaba allí.</p>
-            <p>
-              Alta. Oscura. Sin rostro visible. Como si la noche misma hubiera adoptado
-              una forma humana solo para observarlo.
-            </p>
-            <p>Kai tragó saliva.</p>
-            <p>Lentamente, casi con dolor, giró la cabeza hacia atrás.</p>
+<p>Sus ojos seguían clavados en la pantalla.</p>
 
-            <div class="quote">No había nadie.</div>
+<p>La cámara seguía encendida.</p>
 
-            <p>La oficina estaba vacía.</p>
-            <p>
-              Filas de escritorios apagados. Sillas desordenadas. Pantallas en negro.
-              Un silencio tan limpio que empezó a resultarle antinatural.
-            </p>
-            <p>Volvió a mirar el monitor.</p>
-            <p>La figura seguía ahí.</p>
-            <p>
-              Exactamente donde debería haber estado si la cámara mostrara algo real.
-            </p>
-            <p>Kai sintió un frío seco en la nuca.</p>
+<p>Y detrás de él, en el monitor, esa figura inmóvil continuaba allí.</p>
 
-            <div class="divider"></div>
+<p>
+  Alta. Oscura. Sin rostro visible. Como si la noche misma hubiera adoptado una forma humana solo para observarlo.
+</p>
 
-            <p>Entonces el cursor se movió solo.</p>
-            <p>Él no tocó el mouse.</p>
-            <p>No presionó ninguna tecla.</p>
-            <p>
-              Aun así, el sistema reaccionó como si alguien más lo estuviera usando.
-            </p>
-            <p>Una ventana negra apareció sobre su escritorio digital.</p>
-            <p>No tenía encabezado. No tenía programa. No tenía origen.</p>
-            <p>Solo una línea de texto blanco, escrita letra por letra frente a sus ojos:</p>
+<p>Kai tragó saliva.</p>
 
-            <div class="quote">“Ya nos viste.”</div>
+<p>Lentamente, casi con dolor, giró la cabeza hacia atrás.</p>
 
-            <p>El corazón empezó a golpearle el pecho con más fuerza.</p>
-            <p>Kai sintió que algo estaba mal… profundamente mal.</p>
-            <p>Se inclinó hacia la pantalla como si acercarse pudiera devolverle control.</p>
-            <p>—¿Quién eres? —susurró.</p>
-            <p>La respuesta llegó de inmediato.</p>
+<div class="quote">
+  No había nadie.
+</div>
 
-            <div class="quote">“No estás solo.”</div>
+<p>La oficina estaba vacía.</p>
 
-            <p>Kai apretó la mandíbula.</p>
-            <p>Se obligó a respirar.</p>
-            <p>
-              Malware, pensó. Una intrusión. Un acceso remoto. Un ataque visual. Algún tipo
-              de prueba interna. Algo explicable. Algo técnico. Algo que todavía pudiera
-              contener dentro del mundo que conocía.
-            </p>
-            <p>Tiró del cable del computador y lo desconectó de golpe.</p>
-            <p>La pantalla murió.</p>
-            <p>La luz del monitor desapareció.</p>
-            <p>Y por un segundo hubo solo oscuridad.</p>
-            <p>Silencio.</p>
-            <p>
-              Un silencio tan total que Kai pensó que tal vez había terminado.
-            </p>
-            <p>Entonces su celular vibró.</p>
+<p>
+  Filas de escritorios apagados. Sillas desordenadas. Pantallas en negro. Un silencio tan limpio que empezó a resultarle antinatural.
+</p>
 
-            <div class="divider"></div>
+<p>Volvió a mirar el monitor.</p>
 
-            <p>El sonido lo atravesó como una descarga.</p>
-            <p>Bajó la mirada.</p>
-            <p>Pantalla activa.</p>
-            <p>Un mensaje nuevo.</p>
-            <p>Sin número.</p>
-            <p>Sin nombre.</p>
-            <p>Sin aplicación visible.</p>
-            <p>Solo texto sobre fondo negro.</p>
+<p>La figura seguía ahí.</p>
 
-            <div class="quote">“Mira detrás de ti.”</div>
+<p>
+  Exactamente donde debería haber estado si la cámara mostrara algo real.
+</p>
 
-            <p>Kai se quedó inmóvil.</p>
-            <p>Su mano tembló apenas.</p>
-            <p>
-              Ya no sentía curiosidad. Ya no sentía obsesión. Eso había mutado.
-              Ahora solo quedaba una alerta primitiva, animal, irracional.
-            </p>
-            <p>Aun así, giró.</p>
-            <p>Despacio.</p>
-            <p>Preparándose para encontrar algo.</p>
-            <p>
-              Preparándose, incluso, para confirmar que estaba perdiendo la razón.
-            </p>
-            <p>Pero otra vez no vio a nadie.</p>
-            <p>Solo la oficina vacía.</p>
-            <p>Solo el eco bajo del sistema de ventilación.</p>
-            <p>Solo la luz de emergencia dibujando sombras pálidas en el suelo.</p>
-            <p>
-              Kai soltó aire por la nariz, confundido, tenso, a punto de convencerse de que
-              todo era un montaje muy sofisticado.
-            </p>
-            <p>Entonces algo cambió.</p>
-            <p>No en la sala.</p>
-            <p>En el vidrio de la ventana.</p>
-            <p>En el reflejo.</p>
+<p>Kai sintió un frío seco en la nuca.</p>
 
-            <div class="quote">Allí sí había alguien.</div>
+<div class="divider"></div>
 
-            <p>Una silueta alta, quieta, justo detrás de él.</p>
-            <p>No en la oficina.</p>
-            <p>En el reflejo.</p>
-            <p>
-              Como si solo pudiera existir a través de superficies que devolvían imagen.
-            </p>
-            <p>Kai giró de nuevo.</p>
-            <p>Nada.</p>
-            <p>Miró la ventana.</p>
-            <p>Ahí seguía.</p>
-            <p>Quieta.</p>
-            <p>Esperando.</p>
+<p>Entonces el cursor se movió solo.</p>
 
-            <div class="divider"></div>
+<p>Él no tocó el mouse.</p>
 
-            <p>Dio un paso hacia el vidrio.</p>
-            <p>La figura también.</p>
-            <p>No en la oficina.</p>
-            <p>Dentro del reflejo.</p>
-            <p>Kai sintió que el estómago se le vaciaba.</p>
-            <p>Sus dedos se cerraron con fuerza alrededor del teléfono.</p>
-            <p>La forma oscura inclinó ligeramente la cabeza.</p>
-            <p>
-              Y entonces, donde debería haber un rostro, se abrió una especie de curva.
-            </p>
-            <p>No era una boca.</p>
-            <p>Pero parecía una sonrisa.</p>
-            <p>Kai dejó caer el celular.</p>
-            <p>El golpe contra el suelo resonó demasiado fuerte.</p>
-            <p>
-              Cuando volvió a mirar la ventana, la figura había desaparecido.
-            </p>
-            <p>El reflejo volvió a ser solo reflejo.</p>
-            <p>Su respiración estaba completamente fuera de ritmo.</p>
-            <p>Se agachó para recoger el teléfono.</p>
-            <p>Había otro mensaje.</p>
+<p>No presionó ninguna tecla.</p>
 
-            <div class="quote">“Ahora sí me viste.”</div>
+<p>
+  Aun así, el sistema reaccionó como si alguien más lo estuviera usando.
+</p>
 
-            <p>Esta vez ya no intentó explicarlo.</p>
-            <p>Esta vez entendió algo mucho peor:</p>
-            <p>aquello no estaba interfiriendo un sistema.</p>
-            <p>Estaba jugando con él.</p>
+<p>Una ventana negra apareció sobre su escritorio digital.</p>
 
-            <div class="divider"></div>
+<p>No tenía encabezado. No tenía programa. No tenía origen.</p>
 
-            <p>Kai levantó la vista hacia la puerta de la oficina.</p>
-            <p>Estaba entreabierta.</p>
-            <p>Él recordaba haberla cerrado.</p>
-            <p>No solo cerrada: bloqueada.</p>
-            <p>
-              El pasillo del otro lado estaba vacío, pero la puerta oscilaba apenas, con un
-              movimiento casi imperceptible, como si alguien hubiera pasado recién.
-            </p>
+<p>Solo una línea de texto blanco, escrita letra por letra frente a sus ojos:</p>
 
-            <div class="quote">Tal vez nunca estuvo solo.</div>
+<div class="quote">
+  “Ya nos viste.”
+</div>
 
-            <p>Dio un paso atrás.</p>
-            <p>El teléfono vibró otra vez.</p>
-            <p>Kai no quería mirar.</p>
-            <p>Miró igual.</p>
+<p>El corazón empezó a golpearle el pecho con más fuerza.</p>
 
-            <div class="quote">“Abre la carpeta.”</div>
+<p>Kai sintió que algo estaba mal… profundamente mal.</p>
 
-            <p>
-              El monitor apagado del computador reflejaba tenuemente su silueta.
-            </p>
-            <p>
-              Y por un instante, solo uno, le pareció ver una sombra pasar detrás de él otra vez.
-            </p>
-            <p>Esa noche, Kai comprendió que el patrón no solo existía.</p>
-            <p>Estaba respondiendo.</p>
-            <p>Y acababa de invitarlo a seguir.</p>
+<p>Se inclinó hacia la pantalla como si acercarse pudiera devolverle control.</p>
+
+<p>—¿Quién eres? —susurró.</p>
+
+<p>La respuesta llegó de inmediato.</p>
+
+<div class="quote">
+  “No estás solo.”
+</div>
+
+<p>Kai apretó la mandíbula.</p>
+
+<p>Se obligó a respirar.</p>
+
+<p>
+  Malware, pensó. Una intrusión. Un acceso remoto. Un ataque visual. Algún tipo de prueba interna.
+</p>
+
+<p>
+  Algo explicable. Algo técnico. Algo que todavía pudiera contener dentro del mundo que conocía.
+</p>
+
+<p>Tiró del cable del computador y lo desconectó de golpe.</p>
+
+<p>La pantalla murió.</p>
+
+<p>La luz del monitor desapareció.</p>
+
+<p>Y por un segundo hubo solo oscuridad.</p>
+
+<p>Silencio.</p>
+
+<p>
+  Un silencio tan total que Kai pensó que tal vez había terminado.
+</p>
+
+<p>Entonces su celular vibró.</p>
+
+<div class="divider"></div>
+
+<p>El sonido lo atravesó como una descarga.</p>
+
+<p>Bajó la mirada.</p>
+
+<p>Pantalla activa.</p>
+
+<p>Un mensaje nuevo.</p>
+
+<p>Sin número.</p>
+
+<p>Sin nombre.</p>
+
+<p>Sin aplicación visible.</p>
+
+<p>Solo texto sobre fondo negro.</p>
+
+<div class="quote">
+  “Mira detrás de ti.”
+</div>
+
+<p>Kai se quedó inmóvil.</p>
+
+<p>Su mano tembló apenas.</p>
+
+<p>
+  Ya no sentía curiosidad. Ya no sentía obsesión. Eso había mutado.
+</p>
+
+<p>
+  Ahora solo quedaba una alerta primitiva, animal, irracional.
+</p>
+
+<p>Aun así, giró.</p>
+
+<p>Despacio.</p>
+
+<p>Preparándose para encontrar algo.</p>
+
+<p>
+  Preparándose incluso para confirmar que estaba perdiendo la razón.
+</p>
+
+<p>Pero otra vez no vio a nadie.</p>
+
+<p>Solo la oficina vacía.</p>
+
+<p>Solo el eco bajo del sistema de ventilación.</p>
+
+<p>Solo la luz de emergencia dibujando sombras pálidas en el suelo.</p>
+
+<p>
+  Kai soltó aire por la nariz, confundido, tenso, a punto de convencerse de que todo era un montaje.
+</p>
+
+<p>Entonces algo cambió.</p>
+
+<p>No en la sala.</p>
+
+<p>En el vidrio de la ventana.</p>
+
+<p>En el reflejo.</p>
+
+<div class="quote">
+  Allí sí había alguien.
+</div>
+
+<p>Una silueta alta, quieta, justo detrás de él.</p>
+
+<p>No en la oficina.</p>
+
+<p>En el reflejo.</p>
+
+<p>
+  Como si solo pudiera existir a través de superficies que devolvían imagen.
+</p>
+
+<p>Kai giró de nuevo.</p>
+
+<p>Nada.</p>
+
+<p>Miró la ventana.</p>
+
+<p>Ahí seguía.</p>
+
+<p>Quieta.</p>
+
+<p>Esperando.</p>
+
+<div class="divider"></div>
+
+<p>Dio un paso hacia el vidrio.</p>
+
+<p>La figura también.</p>
+
+<p>No en la oficina.</p>
+
+<p>Dentro del reflejo.</p>
+
+<p>Kai sintió que el estómago se le vaciaba.</p>
+
+<p>Sus dedos se cerraron con fuerza alrededor del teléfono.</p>
+
+<p>La forma oscura inclinó ligeramente la cabeza.</p>
+
+<p>
+  Y entonces, donde debería haber un rostro, se abrió una especie de curva.
+</p>
+
+<p>No era una boca.</p>
+
+<p>Pero parecía una sonrisa.</p>
+
+<p>Kai dejó caer el celular.</p>
+
+<p>El golpe contra el suelo resonó demasiado fuerte.</p>
+
+<p>
+  Cuando volvió a mirar la ventana, la figura había desaparecido.
+</p>
+
+<p>El reflejo volvió a ser solo reflejo.</p>
+
+<p>Su respiración estaba completamente fuera de ritmo.</p>
+
+<p>Se agachó para recoger el teléfono.</p>
+
+<p>Había otro mensaje.</p>
+
+<div class="quote">
+  “Ahora sí me viste.”
+</div>
+
+<p>Esta vez ya no intentó explicarlo.</p>
+
+<p>Esta vez entendió algo mucho peor:</p>
+
+<p>
+  aquello no estaba interfiriendo un sistema.
+</p>
+
+<p>
+  Estaba jugando con él.
+</p>
+
+<div class="divider"></div>
+
+<p>Kai levantó la vista hacia la puerta de la oficina.</p>
+
+<p>Estaba entreabierta.</p>
+
+<p>Él recordaba haberla cerrado.</p>
+
+<p>No solo cerrada: bloqueada.</p>
+
+<p>
+  El pasillo del otro lado estaba vacío, pero la puerta oscilaba apenas,
+  como si alguien hubiera pasado recién.
+</p>
+
+<div class="quote">
+  Tal vez nunca estuvo solo.
+</div>
+
+<p>Dio un paso atrás.</p>
+
+<p>El teléfono vibró otra vez.</p>
+
+<p>Kai no quería mirar.</p>
+
+<p>Miró igual.</p>
+
+<div class="quote">
+  “Abre la carpeta.”
+</div>
+
+<p>
+  El monitor apagado del computador reflejaba tenuemente su silueta.
+</p>
+
+<p>
+  Y por un instante, solo uno, le pareció ver una sombra pasar detrás de él otra vez.
+</p>
+
+<p>Esa noche, Kai comprendió que el patrón no solo existía.</p>
+
+<p>Estaba respondiendo.</p>
+
+<p>Y acababa de invitarlo a seguir.</p>
+            <!-- =========================================================
+                 HASTA AQUÍ CAMBIAS EL TEXTO DE LA HISTORIA
+                 ========================================================= -->
           </div>
         </div>
 
         <div class="reader-bottom">
-          <p class="reader-note">
-            El sistema ya no solo registra datos. Ahora empieza a guiar a Kai hacia algo más profundo.
+          <p class="reader-note" id="readerNote">
+            Continúa la historia en el siguiente capítulo.
           </p>
 
           <div class="nav-actions">
-            <a href="capitulo1.html" class="btn btn-ghost">← Capítulo 1</a>
-            <a href="capitulo3.html" class="btn btn-primary">Leer capítulo 3 →</a>
+            <a id="bottomBackBtn" href="../index.html" class="btn btn-ghost">← Volver</a>
+            <a id="bottomNextBtn" href="capitulo2.html" class="btn btn-primary">Leer capítulo 2 →</a>
           </div>
         </div>
       </article>
-
-      <div class="footer-space"></div>
     </main>
   </div>
+
+  <script>
+    /* =========================================================
+       CONFIGURACIÓN DEL CAPÍTULO
+       SOLO EDITA ESTE BLOQUE EN CADA ARCHIVO
+       ========================================================= */
+
+    const CHAPTER_CONFIG = {
+      novelTitle: "Código Nébula",
+      novelSubtitle: "Thriller tecnológico original",
+      chapterNumber: 1,
+      chapterTitle: "El patrón imposible",
+      chapterDescription: "Todo sistema deja huellas. Todo error tiene una lógica. Hasta que una noche, alguien encuentra algo que no debería existir.",
+      chapterCardLabel: "Lectura inicial",
+      chapterCardTitle: "Una señal que no debería existir",
+      chapterCardDescription: "Lo que comienza como una anomalía pronto se convierte en una amenaza real.",
+      chapterState: "Gratis",
+      chapterGenre: "Suspenso",
+      chapterSaga: "Nébula",
+      readerSubtitle: "Lectura gratuita · Inicio de la historia",
+      readerBadge: "Acceso abierto",
+      readerNote: "Continúa la historia en el siguiente capítulo.",
+
+      /* ENLACES */
+      novelHome: "../home.html",
+      previousChapter: "capitulo1.html",
+      nextChapter: "capitulo3.html"
+    };
+
+    /* =========================================================
+       NO TOCAR DESDE AQUÍ
+       ESTA PARTE ACTUALIZA AUTOMÁTICAMENTE TÍTULOS Y BOTONES
+       ========================================================= */
+
+    document.title = `Capítulo ${CHAPTER_CONFIG.chapterNumber} | ${CHAPTER_CONFIG.novelTitle}`;
+
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute(
+        "content",
+        `Capítulo ${CHAPTER_CONFIG.chapterNumber} de ${CHAPTER_CONFIG.novelTitle}: ${CHAPTER_CONFIG.chapterTitle}.`
+      );
+    }
+
+    document.getElementById("brandTitle").textContent = CHAPTER_CONFIG.novelTitle;
+    document.getElementById("brandSub").textContent = CHAPTER_CONFIG.novelSubtitle;
+    document.getElementById("crumbText").textContent = `Inicio / Capítulos / Capítulo ${CHAPTER_CONFIG.chapterNumber}`;
+    document.getElementById("heroEyebrow").textContent = `Capítulo ${CHAPTER_CONFIG.chapterNumber}`;
+    document.getElementById("heroTitle").textContent = CHAPTER_CONFIG.chapterTitle;
+    document.getElementById("heroDescription").textContent = CHAPTER_CONFIG.chapterDescription;
+    document.getElementById("chapterLabel").textContent = CHAPTER_CONFIG.chapterCardLabel;
+    document.getElementById("cardTitle").textContent = CHAPTER_CONFIG.chapterCardTitle;
+    document.getElementById("cardDescription").textContent = CHAPTER_CONFIG.chapterCardDescription;
+    document.getElementById("metaState").textContent = CHAPTER_CONFIG.chapterState;
+    document.getElementById("metaGenre").textContent = CHAPTER_CONFIG.chapterGenre;
+    document.getElementById("metaSaga").textContent = CHAPTER_CONFIG.chapterSaga;
+    document.getElementById("readerTitle").textContent =
+      `Capítulo ${CHAPTER_CONFIG.chapterNumber}: ${CHAPTER_CONFIG.chapterTitle}`;
+    document.getElementById("readerSubtitle").textContent = CHAPTER_CONFIG.readerSubtitle;
+    document.getElementById("readerBadge").textContent = CHAPTER_CONFIG.readerBadge;
+    document.getElementById("readerNote").textContent = CHAPTER_CONFIG.readerNote;
+
+    const topBackBtn = document.getElementById("topBackBtn");
+    const bottomBackBtn = document.getElementById("bottomBackBtn");
+    const topNextBtn = document.getElementById("topNextBtn");
+    const bottomNextBtn = document.getElementById("bottomNextBtn");
+
+    function setBackButton(button) {
+      if (!CHAPTER_CONFIG.previousChapter) {
+        button.href = CHAPTER_CONFIG.novelHome;
+        button.textContent = "← Volver a la novela";
+      } else {
+        button.href = CHAPTER_CONFIG.previousChapter;
+        button.textContent = `← Capítulo ${CHAPTER_CONFIG.chapterNumber - 1}`;
+      }
+    }
+
+    function setNextButton(button) {
+      if (!CHAPTER_CONFIG.nextChapter) {
+        button.href = CHAPTER_CONFIG.novelHome;
+        button.textContent = "Volver a la novela →";
+      } else {
+        button.href = CHAPTER_CONFIG.nextChapter;
+        button.textContent = `Leer capítulo ${CHAPTER_CONFIG.chapterNumber + 1} →`;
+      }
+    }
+
+    setBackButton(topBackBtn);
+    setBackButton(bottomBackBtn);
+    setNextButton(topNextBtn);
+    setNextButton(bottomNextBtn);
+  </script>
 
   <script>
     const canvas = document.getElementById("stars");
@@ -823,14 +1020,14 @@
 
     function createStars(){
       stars = [];
-      const amount = Math.floor((canvas.width * canvas.height) / 18000);
+      const amount = Math.floor((canvas.width * canvas.height) / 14000);
       for(let i = 0; i < amount; i++){
         stars.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          r: Math.random() * 1.4 + 0.3,
-          speed: Math.random() * 0.22 + 0.05,
-          alpha: Math.random() * 0.55 + 0.15
+          r: Math.random() * 1.6 + 0.3,
+          speed: Math.random() * 0.35 + 0.08,
+          alpha: Math.random() * 0.7 + 0.2
         });
       }
     }
@@ -858,9 +1055,9 @@
     window.addEventListener("resize", resize);
     resize();
     animate();
-    </script>
+  </script>
+
   <!-- 🔒 CONTROL DE ACCESO -->
   <script src="../../../../js/access-control.js"></script>
-
 </body>
 </html>
