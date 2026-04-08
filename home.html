@@ -2441,13 +2441,14 @@ const accountRead = document.getElementById('accountRead');
 const accountLogoutBtn = document.getElementById('accountLogoutBtn');
 
 function closeAccountMenu(){
+  accountMenu.classList.remove('open');
   accountDropdown.classList.add('hidden-panel');
 }
 
 function openAccountMenu(){
+  accountMenu.classList.add('open');
   accountDropdown.classList.remove('hidden-panel');
 }
-
 accountTrigger?.addEventListener('click', (e) => {
   e.stopPropagation();
   if (accountDropdown.classList.contains('hidden-panel')) openAccountMenu();
