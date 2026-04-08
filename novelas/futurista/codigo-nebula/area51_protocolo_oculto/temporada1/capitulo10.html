@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- =========================================================
+       ARCHIVO MADRE NÉBULA
+       SOLO CAMBIA LOS DATOS DEL BLOQUE "CONFIGURACIÓN DEL CAPÍTULO"
+       Y EL CONTENIDO DE .story
+     ========================================================= -->
+
+  <title>Capítulo X | Nombre de la novela</title>
+  <meta
+    name="description"
+    content="Capítulo X de Nombre de la novela."
+  />
+
+  <style>
+    :root{
+      --bg:#05080f;
+      --bg2:#0b1220;
+      --card:rgba(12,18,32,0.82);
+      --line:rgba(255,255,255,0.08);
+      --line-strong:rgba(73,182,255,0.24);
+      --text:#f5f8ff;
+      --muted:#aebad1;
+      --muted-2:#7f90ae;
+      --blue:#0A6CFF;
+      --blue2:#49b6ff;
+      --blue-soft:rgba(73,182,255,0.14);
+      --shadow:0 24px 60px rgba(0,0,0,0.45);
+      --radius:22px;
+      --max:860px;
+    }
+
+    *{
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      margin:0;
+      font-family:Arial, sans-serif;
+      color:var(--text);
+      background:#04070d;
+      line-height:1.8;
+      position:relative;
+      overflow-x:hidden;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    #stars{
+      position:fixed;
+      inset:0;
+      width:100%;
+      height:100%;
+      z-index:0;
+      background:
+        radial-gradient(circle at top left, rgba(10,108,255,.12), transparent 24%),
+        radial-gradient(circle at top right, rgba(73,182,255,.08), transparent 20%),
+        linear-gradient(180deg, #04070d 0%, #08101c 45%, #05080f 100%);
+    }
+
+    .page{
+      min-height:100vh;
+      position:relative;
+      z-index:1;
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:30;
+      backdrop-filter:blur(14px);
+      background:rgba(5,8,15,0.72);
+      border-bottom:1px solid var(--line);
+    }
+
+    .topbar-inner{
+      max-width:1100px;
+      margin:0 auto;
+      padding:16px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+    }
+
+    .brand-badge{
+      width:38px;
+      height:38px;
+      border-radius:12px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg, rgba(10,108,255,.22), rgba(73,182,255,.08));
+      border:1px solid var(--line-strong);
+      box-shadow:0 0 24px rgba(10,108,255,.12);
+      font-weight:700;
+      color:var(--blue2);
+      flex:0 0 auto;
+    }
+
+    .brand-title{
+      font-size:14px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:#dfe9ff;
+      margin:0 0 2px;
+    }
+
+    .brand-sub{
+      font-size:12px;
+      color:var(--muted-2);
+      margin:0;
+    }
+
+    .top-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      min-height:44px;
+      padding:0 18px;
+      border-radius:12px;
+      font-size:14px;
+      font-weight:700;
+      transition:transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
+      border:1px solid transparent;
+      cursor:pointer;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+    }
+
+    .btn-primary{
+      background:linear-gradient(135deg, var(--blue) 0%, #0d7eff 100%);
+      color:white;
+      box-shadow:0 12px 28px rgba(10,108,255,.28);
+    }
+
+    .btn-primary:hover{
+      background:linear-gradient(135deg, #0c62e0 0%, #0a6cef 100%);
+    }
+
+    .btn-ghost{
+      background:rgba(255,255,255,0.03);
+      border-color:var(--line);
+      color:#dbe8ff;
+    }
+
+    .btn-ghost:hover{
+      background:rgba(255,255,255,0.06);
+      border-color:var(--line-strong);
+    }
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      border-bottom:1px solid rgba(255,255,255,0.04);
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(180deg, rgba(5,8,15,.58) 0%, rgba(5,8,15,.86) 80%, rgba(5,8,15,1) 100%),
+        url("area51-bg.jpg");
+      background-size:cover;
+      background-position:center;
+      opacity:.26;
+      filter:saturate(.95) contrast(1.02);
+    }
+
+    .hero-inner{
+      position:relative;
+      z-index:1;
+      max-width:1100px;
+      margin:0 auto;
+      padding:56px 20px 34px;
+    }
+
+    .crumb{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.06);
+      color:var(--muted);
+      font-size:13px;
+      margin-bottom:18px;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:28px;
+      align-items:end;
+    }
+
+    .hero-copy h1{
+      margin:0 0 12px;
+      font-size:clamp(34px, 6vw, 64px);
+      line-height:1.02;
+      letter-spacing:.02em;
+      color:white;
+      text-shadow:0 0 22px rgba(10,108,255,.18);
+    }
+
+    .eyebrow{
+      margin:0 0 14px;
+      color:var(--blue2);
+      font-weight:700;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      font-size:12px;
+    }
+
+    .hero-copy p{
+      margin:0;
+      max-width:700px;
+      color:#d4def3;
+      font-size:18px;
+      line-height:1.75;
+    }
+
+    .hero-side{
+      display:flex;
+      justify-content:flex-end;
+    }
+
+    .chapter-card{
+      width:min(100%, 360px);
+      background:linear-gradient(180deg, rgba(12,18,32,.75), rgba(9,13,24,.88));
+      border:1px solid rgba(73,182,255,.18);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      padding:22px;
+      backdrop-filter:blur(16px);
+    }
+
+    .chapter-label{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 12px;
+      border-radius:999px;
+      background:var(--blue-soft);
+      border:1px solid rgba(73,182,255,.18);
+      color:var(--blue2);
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:14px;
+    }
+
+    .chapter-card h2{
+      margin:0 0 10px;
+      font-size:24px;
+      line-height:1.15;
+      color:white;
+    }
+
+    .chapter-card p{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.7;
+    }
+
+    .meta{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .meta-item{
+      padding:12px;
+      border-radius:14px;
+      background:rgba(255,255,255,0.03);
+      border:1px solid rgba(255,255,255,0.05);
+    }
+
+    .meta-k{
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:var(--muted-2);
+      margin:0 0 6px;
+    }
+
+    .meta-v{
+      margin:0;
+      font-size:13px;
+      color:#e7efff;
+      font-weight:700;
+    }
+
+    .content-wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:28px 20px 80px;
+    }
+
+    .reader{
+      position:relative;
+      background:linear-gradient(180deg, rgba(11,18,32,.58), rgba(8,13,24,.72));
+      border:1px solid rgba(255,255,255,0.06);
+      border-radius:22px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      backdrop-filter:blur(4px);
+    }
+
+    .reader-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:18px 22px;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
+    }
+
+    .reader-top-left h3{
+      margin:0 0 4px;
+      font-size:18px;
+      color:#edf3ff;
+    }
+
+    .reader-top-left p{
+      margin:0;
+      color:var(--muted-2);
+      font-size:13px;
+    }
+
+    .reader-badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:34px;
+      padding:0 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.03);
+      border:1px solid rgba(255,255,255,0.06);
+      color:#cfe0ff;
+      font-size:12px;
+      font-weight:700;
+      white-space:nowrap;
+    }
+
+    .reader-body{
+      padding:34px 26px 18px;
+      position:relative;
+    }
+
+    .story{
+      max-width:720px;
+      margin:0 auto;
+      position:relative;
+      z-index:2;
+    }
+
+    .lead{
+      font-size:19px;
+      line-height:1.9;
+      color:#ecf3ff;
+      margin:0 0 26px;
+      padding:18px 18px 18px 20px;
+      border-left:3px solid rgba(73,182,255,.44);
+      background:rgba(9, 18, 35, 0.68);
+      border-radius:0 14px 14px 0;
+      backdrop-filter:blur(4px);
+    }
+
+    .story p{
+      margin:0 0 22px;
+      color:#e4ecfb;
+      font-size:18px;
+      line-height:1.95;
+      letter-spacing:.01em;
+      text-shadow:0 1px 2px rgba(0,0,0,.4);
+    }
+
+    .story p strong{
+      color:#ffffff;
+      font-weight:700;
+    }
+
+    .story .quote{
+      margin:34px 0;
+      padding:20px 22px;
+      border-radius:18px;
+      background:linear-gradient(180deg, rgba(10,108,255,.12), rgba(73,182,255,.06));
+      border:1px solid rgba(73,182,255,.14);
+      color:#edf5ff;
+      font-size:19px;
+      line-height:1.7;
+      text-align:center;
+      box-shadow:0 12px 30px rgba(0,0,0,.18);
+      backdrop-filter:blur(4px);
+    }
+
+    .story .divider{
+      width:86px;
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(73,182,255,.6), transparent);
+      margin:34px auto;
+    }
+
+    .reader-bottom{
+      padding:24px 26px 28px;
+      border-top:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .reader-note{
+      color:var(--muted-2);
+      font-size:13px;
+      margin:0;
+    }
+
+    .nav-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    @media (max-width: 900px){
+      .hero-grid{
+        grid-template-columns:1fr;
+      }
+
+      .hero-side{
+        justify-content:flex-start;
+      }
+
+      .chapter-card{
+        width:100%;
+        max-width:unset;
+      }
+    }
+
+    @media (max-width: 640px){
+      .topbar-inner{
+        padding:14px 14px;
+      }
+
+      .hero-inner{
+        padding:34px 14px 22px;
+      }
+
+      .content-wrap{
+        padding:20px 14px 60px;
+      }
+
+      .reader-top,
+      .reader-body,
+      .reader-bottom{
+        padding-left:16px;
+        padding-right:16px;
+      }
+
+      .reader-body{
+        padding-top:24px;
+      }
+
+      .hero-copy p,
+      .story p,
+      .lead{
+        font-size:16px;
+      }
+
+      .meta{
+        grid-template-columns:1fr;
+      }
+
+      .top-actions{
+        width:100%;
+      }
+
+      .btn{
+        width:100%;
+      }
+
+      .nav-actions{
+        width:100%;
+      }
+
+      .nav-actions .btn{
+        flex:1 1 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="stars"></canvas>
+
+  <div class="page">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand">
+          <div class="brand-badge">A</div>
+          <div>
+            <p class="brand-title" id="brandTitle">Nombre de la novela</p>
+            <p class="brand-sub" id="brandSub">Género / subtítulo</p>
+          </div>
+        </div>
+
+        <div class="top-actions">
+          <a id="topBackBtn" href="../index.html" class="btn btn-ghost">← Volver al inicio</a>
+          <a id="topNextBtn" href="capitulo2.html" class="btn btn-primary">Siguiente capítulo →</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="crumb" id="crumbText">Inicio / Capítulos / Capítulo 1</div>
+
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow" id="heroEyebrow">Capítulo 1</p>
+            <h1 id="heroTitle">Título del capítulo</h1>
+            <p id="heroDescription">
+              Resumen corto del capítulo para la portada.
+            </p>
+          </div>
+
+          <div class="hero-side">
+            <aside class="chapter-card">
+              <div class="chapter-label" id="chapterLabel">Lectura inicial</div>
+              <h2 id="cardTitle">Subtítulo del capítulo</h2>
+              <p id="cardDescription">
+                Texto corto lateral del capítulo.
+              </p>
+
+              <div class="meta">
+                <div class="meta-item">
+                  <p class="meta-k">Estado</p>
+                  <p class="meta-v" id="metaState">Gratis</p>
+                </div>
+                <div class="meta-item">
+                  <p class="meta-k">Género</p>
+                  <p class="meta-v" id="metaGenre">Suspenso</p>
+                </div>
+                <div class="meta-item">
+                  <p class="meta-k">Saga</p>
+                  <p class="meta-v" id="metaSaga">Nébula</p>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="content-wrap">
+      <article class="reader">
+        <div class="reader-top">
+          <div class="reader-top-left">
+            <h3 id="readerTitle">Capítulo 1: Título del capítulo</h3>
+            <p id="readerSubtitle">Lectura gratuita · Inicio de la historia</p>
+          </div>
+          <div class="reader-badge" id="readerBadge">Acceso abierto</div>
+        </div>
+
+        <div class="reader-body">
+          <div class="story">
+            <!-- =========================================================
+                 SOLO CAMBIA DESDE AQUÍ EL TEXTO DE LA HISTORIA
+                 ========================================================= -->
+
+            <p class="lead">
+              La cámara de alineación no cerró sobre su cuerpo como una máquina. Cerró sobre su identidad.
+            </p>
+<p>
+              El interior del dispositivo no tenía paredes visibles. Era una negrura líquida recorrida por filamentos de luz. Gael flotó, o creyó flotar, sin saber si su cuerpo seguía en el puente o si ya había sido traducido a otra clase de espacio mental.
+            </p>
+<p>
+              La voz de su madre llegó cargada de una ternura tan exacta que casi dolió. Le pidió descansar. Le dijo que todo había sido demasiado pesado, que no tenía por qué seguir luchando solo, que había alguien más vasto dispuesto a sostenerlo.
+            </p>
+<p>
+              Tomás tenía razón: la interfaz no entraba con gruñidos monstruosos. Entraba usando amor, culpa, nostalgia y alivio.
+            </p>
+<p>
+              Gael recordó la advertencia y no respondió. Se aferró a la secuencia marcada en su muñeca, no como un texto sino como un ritmo interno: pausa, impulso, retorno, quiebre, silencio.
+            </p>
+            <div class="divider"></div>
+<p>
+              El escenario cambió. Ahora estaba en la cocina de la casa de su infancia. La luz del atardecer caía exactamente igual que en un verano remoto. Su padre estaba allí, joven, amable, casi irreconocible, sirviéndole un vaso de agua. La imagen perfecta del hombre que nunca tuvo.
+            </p>
+<p>
+              —Podemos darte esa vida —dijo la figura—. Podemos devolverte todo lo que te arrebataron.
+            </p>
+            <div class="quote">
+              La primera voz que escuchó no fue alienígena. Fue la de su madre llamándolo como cuando era niño.
+            </div>
+<p>
+              Gael sintió el peso seductor de la mentira. No porque la creyera, sino porque una parte rota de él la deseaba.
+            </p>
+<p>
+              Entonces aparecieron más escenas: un futuro sin guerra, ciudades silenciosas, hospitales sin dolor, violencia humana desactivada por una red superior de regulación cognitiva. La propuesta era monstruosa precisamente porque incluía beneficios reales.
+            </p>
+<p>
+              ¿Y si Adrián tenía razón en algo? ¿Y si la especie humana necesitaba ser intervenida para sobrevivir a su propia brutalidad?
+            </p>
+            <div class="divider"></div>
+<p>
+              La pregunta casi lo parte. La voz lo sintió y apretó.
+            </p>
+<p>
+              Mostró océanos arruinados, ciudades incendiadas, campos de refugiados, arsenales nucleares, hambre, crueldad cotidiana. Luego susurró: “Míralos. Ya se destruyen solos. Nosotros solo podemos reorganizar lo que ustedes arruinaron”.
+            </p>
+<p>
+              Gael entendió que la inteligencia agresiva no mentía del todo. Ese era su mayor poder: usar verdades parciales para justificar esclavitudes totales.
+            </p>
+<p>
+              Repitió la secuencia interna otra vez. Pausa. Impulso. Retorno. Quiebre. Silencio.
+            </p>
+<p>
+              Las imágenes fallaron una fracción. La cocina se deformó. Su padre perdió detalles en el rostro. La voz cambió de táctica y se volvió la suya propia.
+            </p>
+            <div class="divider"></div>
+<p>
+              —Estás cansado —le dijo con su misma entonación—. Déjame conducir un poco. Seguiremos siendo nosotros.
+            </p>
+<p>
+              Ese “nosotros” resultó insoportable. Gael recordó entonces cada vida reducida a función, cada sujeto renombrado como nodo, cada ser humano convertido en herramienta. No importaba cuánta paz prometiera el otro lado. El precio era la abolición del yo.
+            </p>
+<p>
+              Concentró toda esa rabia en la secuencia de Tomás. Esta vez no la pensó. La escuchó, como le indicaron, resonando desde un lugar más profundo que las palabras. El entorno se quebró con un estallido de luz azul.
+            </p>
+<p>
+              Delante de él surgió por fin una forma no humana: un entramado de rostros parciales, ojos múltiples y geometrías flexibles que intentaban estabilizarse sobre referencias que su cerebro pudiera tolerar. La entidad lo observó sin odio y sin afecto. Solo con utilidad.
+            </p>
+<p>
+              —Eres un umbral eficiente —dijo—. No desperdicies tu configuración.
+            </p>
+<p>
+              Gael respondió por primera vez.
+            </p>
+<p>
+              —No soy una configuración.
+            </p>
+<p>
+              Empujó la secuencia de desvío hacia el centro del vínculo. Sintió una resistencia brutal, como intentar desviar un océano con las manos. La entidad reaccionó infiltrando recuerdos aún más profundos: la risa de su madre, el olor a lluvia de una noche específica, la culpa de compañeros muertos, el deseo de ser amado por un padre que nunca lo vio como hijo.
+            </p>
+<p>
+              Gael gritó, no por dolor físico, sino porque el sistema estaba usando su vida completa como palanca.
+            </p>
+<p>
+              Entonces, desde muy lejos, oyó a Elena repitiendo su nombre en la frecuencia de audio del puente. No sabía si era real o una nueva trampa. Lo decisivo fue otra cosa: Elena siempre lo llamaba con rabia primero y ternura después. La voz hizo exactamente eso.
+            </p>
+<p>
+              Esa imperfección humana lo salvó.
+            </p>
+<p>
+              Gael sostuvo la secuencia, la abrió dentro del núcleo y logró que una parte del flujo se desviara hacia aislamiento profundo. La entidad dejó de seducir. Por primera vez mostró prisa.
+            </p>
+<p>
+              Y cuando una inteligencia inmensa muestra prisa, uno entiende que todavía puede hacerla perder.
+            </p>
+            
+
+            <!-- =========================================================
+                 HASTA AQUÍ CAMBIAS EL TEXTO DE LA HISTORIA
+                 ========================================================= -->
+          </div>
+        </div>
+
+        <div class="reader-bottom">
+          <p class="reader-note" id="readerNote">
+            Continúa la historia en el siguiente capítulo.
+          </p>
+
+          <div class="nav-actions">
+            <a id="bottomBackBtn" href="../index.html" class="btn btn-ghost">← Volver</a>
+            <a id="bottomNextBtn" href="capitulo2.html" class="btn btn-primary">Leer capítulo 2 →</a>
+          </div>
+        </div>
+      </article>
+    </main>
+  </div>
+
+  <script>
+    /* =========================================================
+       CONFIGURACIÓN DEL CAPÍTULO
+       SOLO EDITA ESTE BLOQUE EN CADA ARCHIVO
+       ========================================================= */
+
+    const CHAPTER_CONFIG = {
+      novelTitle: "AREA 51: El Protocolo Oculto",
+      novelSubtitle: "Thriller sci-fi conspirativo",
+      chapterNumber: 10,
+      chapterTitle: "La voz que usa tu nombre",
+      chapterDescription: "Dentro de la cámara de alineación, Gael enfrenta una entidad que adopta recuerdos personales para quebrar su voluntad.",
+      chapterCardLabel: "Guerra interior",
+      chapterCardTitle: "El enemigo ya habla desde adentro",
+      chapterCardDescription: "No basta con resistir físicamente cuando la interfaz aprende a pensar con tu biografía.",
+      chapterState: "Premium",
+      chapterGenre: "Thriller sci-fi",
+      chapterSaga: "Temporada 1",
+      readerSubtitle: "Lectura continua · Temporada 1",
+      readerBadge: "Señal clasificada",
+      readerNote: "La invasión más eficiente no entra con violencia; entra con intimidad.",
+
+      /* ENLACES */
+      novelHome: "index.html",
+      previousChapter: "capitulo9.html",
+      nextChapter: "capitulo11.html"
+    };
+
+    /* =========================================================
+       NO TOCAR DESDE AQUÍ
+       ESTA PARTE ACTUALIZA AUTOMÁTICAMENTE TÍTULOS Y BOTONES
+       ========================================================= */
+
+    document.title = `Capítulo ${CHAPTER_CONFIG.chapterNumber} | ${CHAPTER_CONFIG.novelTitle}`;
+
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute(
+        "content",
+        `Capítulo ${CHAPTER_CONFIG.chapterNumber} de ${CHAPTER_CONFIG.novelTitle}: ${CHAPTER_CONFIG.chapterTitle}.`
+      );
+    }
+
+    document.getElementById("brandTitle").textContent = CHAPTER_CONFIG.novelTitle;
+    document.getElementById("brandSub").textContent = CHAPTER_CONFIG.novelSubtitle;
+    document.getElementById("crumbText").textContent = `Inicio / Capítulos / Capítulo ${CHAPTER_CONFIG.chapterNumber}`;
+    document.getElementById("heroEyebrow").textContent = `Capítulo ${CHAPTER_CONFIG.chapterNumber}`;
+    document.getElementById("heroTitle").textContent = CHAPTER_CONFIG.chapterTitle;
+    document.getElementById("heroDescription").textContent = CHAPTER_CONFIG.chapterDescription;
+    document.getElementById("chapterLabel").textContent = CHAPTER_CONFIG.chapterCardLabel;
+    document.getElementById("cardTitle").textContent = CHAPTER_CONFIG.chapterCardTitle;
+    document.getElementById("cardDescription").textContent = CHAPTER_CONFIG.chapterCardDescription;
+    document.getElementById("metaState").textContent = CHAPTER_CONFIG.chapterState;
+    document.getElementById("metaGenre").textContent = CHAPTER_CONFIG.chapterGenre;
+    document.getElementById("metaSaga").textContent = CHAPTER_CONFIG.chapterSaga;
+    document.getElementById("readerTitle").textContent =
+      `Capítulo ${CHAPTER_CONFIG.chapterNumber}: ${CHAPTER_CONFIG.chapterTitle}`;
+    document.getElementById("readerSubtitle").textContent = CHAPTER_CONFIG.readerSubtitle;
+    document.getElementById("readerBadge").textContent = CHAPTER_CONFIG.readerBadge;
+    document.getElementById("readerNote").textContent = CHAPTER_CONFIG.readerNote;
+
+    const topBackBtn = document.getElementById("topBackBtn");
+    const bottomBackBtn = document.getElementById("bottomBackBtn");
+    const topNextBtn = document.getElementById("topNextBtn");
+    const bottomNextBtn = document.getElementById("bottomNextBtn");
+
+    function setBackButton(button) {
+      if (!CHAPTER_CONFIG.previousChapter) {
+        button.href = CHAPTER_CONFIG.novelHome;
+        button.textContent = "← Volver a la novela";
+      } else {
+        button.href = CHAPTER_CONFIG.previousChapter;
+        button.textContent = `← Capítulo ${CHAPTER_CONFIG.chapterNumber - 1}`;
+      }
+    }
+
+    function setNextButton(button) {
+      if (!CHAPTER_CONFIG.nextChapter) {
+        button.href = CHAPTER_CONFIG.novelHome;
+        button.textContent = "Volver a la novela →";
+      } else {
+        button.href = CHAPTER_CONFIG.nextChapter;
+        button.textContent = `Leer capítulo ${CHAPTER_CONFIG.chapterNumber + 1} →`;
+      }
+    }
+
+    setBackButton(topBackBtn);
+    setBackButton(bottomBackBtn);
+    setNextButton(topNextBtn);
+    setNextButton(bottomNextBtn);
+  </script>
+
+  <script>
+    const canvas = document.getElementById("stars");
+    const ctx = canvas.getContext("2d");
+    let stars = [];
+
+    function resize(){
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      createStars();
+    }
+
+    function createStars(){
+      stars = [];
+      const amount = Math.floor((canvas.width * canvas.height) / 14000);
+      for(let i = 0; i < amount; i++){
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 1.6 + 0.3,
+          speed: Math.random() * 0.35 + 0.08,
+          alpha: Math.random() * 0.7 + 0.2
+        });
+      }
+    }
+
+    function animate(){
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for(const s of stars){
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(255,255,255,${s.alpha})`;
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fill();
+
+        s.y += s.speed;
+
+        if(s.y > canvas.height){
+          s.y = -2;
+          s.x = Math.random() * canvas.width;
+        }
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener("resize", resize);
+    resize();
+    animate();
+  </script>
+
+  <!-- 🔒 CONTROL DE ACCESO -->
+  <!-- control de acceso desactivado en este paquete standalone -->
+</body>
+</html>
