@@ -201,7 +201,7 @@
         <div class="feature-list" id="featureList"></div>
         <div class="trust" id="trustBadges"></div>
 
-        <a id="payBtn" class="btn btn-primary" href="#">Ir a pagar</a>
+        <a id="payBtn" class="btn btn-primary" href="#" onclick="iniciarPago(); return false;"></a>
         <a id="secondaryBtn" class="btn btn-secondary" href="javascript:history.back()" style="margin-top:12px;">Volver a Nébula</a>
 
         <p class="note" id="noteText">Serás redirigido al flujo de pago correspondiente.</p>
@@ -326,6 +326,58 @@
     payBtn.innerText = "Pasar a premium por $4.990";
     payBtn.href = "#";
   }
+
+</script> <!-- 🔥 ESTE ERA EL ERROR, FALTABA ESTO -->
+
+<script>
+const API_BASE = "https://api-mvtstimkcq-uc.a.run.app";
+
+async function iniciarPago() {
+  try {
+    const userId = "8DccbiG8PigdEBnm4uMRqmWyd6r2";
+    const email = "dhasociados25@gmail.com";
+
+    let payload;
+
+    if (tipo === "individual") {
+      payload = {
+        title: "Codigo Nebula - Temporada 1",
+        price: 990,
+        quantity: 1,
+        type: "single_purchase",
+        novelId: "codigo-nebula-t1",
+        userId,
+        email
+      };
+    } else {
+      payload = {
+        title: "Nebula Premium Mensual",
+        price: 4990,
+        quantity: 1,
+        type: "premium",
+        userId,
+        email
+      };
+    }
+
+    const res = await fetch(`${API_BASE}/create-preference`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+
+    const data = await res.json();
+
+    if (data.ok) {
+      window.location.href = data.initPoint;
+    } else {
+      alert("Error al iniciar pago");
+    }
+
+  } catch (err) {
+    alert("Error de conexión");
+  }
+}
 </script>
-</body>
-</html>
