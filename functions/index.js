@@ -22,7 +22,7 @@ const FRONTEND_URL = (
 
 const WEBHOOK_URL =
   process.env.WEBHOOK_URL ||
-  "https://us-central1-dyh-nebula.cloudfunctions.net/api/webhook";
+  "https://api-mvtstimkcq-uc.a.run.app/webhook";
 
 /**
  * Limpia títulos para evitar problemas de encoding en Mercado Pago.
@@ -379,7 +379,7 @@ app.post("/webhook", async (req, res) => {
       return res.status(200).send("ok");
     }
 
-    // Ignora otros eventos que no sean payment
+    // Ignora otros eventos que no sean paymentconst WEBHOOK_URL =
     if (topic && topic !== "payment") {
       return res.status(200).send("ok");
     }
