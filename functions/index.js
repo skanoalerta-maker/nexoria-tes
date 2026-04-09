@@ -24,6 +24,19 @@ const WEBHOOK_URL =
   process.env.WEBHOOK_URL ||
   "https://us-central1-dyh-nebula.cloudfunctions.net/api/webhook";
 
+/**
+ * Limpia títulos para evitar problemas de encoding en Mercado Pago.
+ * En tu web puedes mostrar "Código Nébula", pero a MP conviene enviar texto plano.
+ */
+function sanitizeTitle(value = "") {
+  return String(value)
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[—–]/g, "-")
+    .replace(/[^\x20-\x7E]/g, "")
+    .trim();
+}
+
 app.get("/", (req, res) => {
   res.status(200).json({
     ok: true,
@@ -34,7 +47,7 @@ app.get("/", (req, res) => {
 app.get("/create-preference", (req, res) => {
   res.status(405).json({
     ok: false,
-    error: "Método no permitido. Usa POST para crear la preferencia.",
+    error: "Metodo no permitido. Usa POST para crear la preferencia.",
   });
 });
 
@@ -45,7 +58,7 @@ app.post("/create-preference", async (req, res) => {
     if (!MP_ACCESS_TOKEN) {
       return res.status(500).json({
         ok: false,
-        error: "Mercado Pago no está configurado en el backend.",
+        error: "Mercado Pago no esta configurado en el backend.",
       });
     }
 
@@ -53,30 +66,31 @@ app.post("/create-preference", async (req, res) => {
       title,
       price,
       quantity = 1,
-      type = "single_purchase",
-      novelId = null,
+      type = "single_purchase", // single_purchase | premium
+      novelId = null,           // obligatorio solo para compra individual
       userId = null,
       email = null,
     } = req.body || {};
 
-    if (!title || !price) {
+    if (!title || price === undefined || price === null) {
       return res.status(400).json({
         ok: false,
         error: "Faltan datos obligatorios: title y price.",
       });
     }
 
-    if (!novelId) {
-      return res.status(400).json({
+    if (!userId) {
+      return res.status(401).json({
         ok: false,
-        error: "Falta novelId.",
+        error: "Debes iniciar sesion para comprar.",
       });
     }
 
-    if (!userId || !email) {
-      return res.status(401).json({
+    // Compra individual requiere novelId. Premium no.
+    if (type !== "premium" && !novelId) {
+      return res.status(400).json({
         ok: false,
-        error: "Debes iniciar sesión para comprar.",
+        error: "Falta novelId para la compra individual.",
       });
     }
 
@@ -86,7 +100,7 @@ app.post("/create-preference", async (req, res) => {
     if (!Number.isFinite(numericPrice) || numericPrice <= 0) {
       return res.status(400).json({
         ok: false,
-        error: "price debe ser un número mayor a 0.",
+        error: "price debe ser un numero mayor a 0.",
       });
     }
 
@@ -97,9 +111,11 @@ app.post("/create-preference", async (req, res) => {
       });
     }
 
+    const safeTitle = sanitizeTitle(title);
+
     const externalReference = [
       type || "purchase",
-      novelId,
+      novelId || "premium",
       userId,
       Date.now(),
     ].join("_");
@@ -107,16 +123,13 @@ app.post("/create-preference", async (req, res) => {
     const mpBody = {
       items: [
         {
-          title: String(title),
+          title: safeTitle,
           quantity: numericQuantity,
           unit_price: numericPrice,
           currency_id: "CLP",
         },
       ],
       external_reference: externalReference,
-      payer: {
-        email: String(email),
-      },
       back_urls: {
         success: `${FRONTEND_URL}/?mp_status=success`,
         failure: `${FRONTEND_URL}/?mp_status=failure`,
@@ -131,6 +144,13 @@ app.post("/create-preference", async (req, res) => {
         email,
       },
     };
+
+    // Solo manda payer si hay email
+    if (email) {
+      mpBody.payer = {
+        email: String(email),
+      };
+    }
 
     const mpResponse = await fetch("https://api.mercadopago.com/checkout/preferences", {
       method: "POST",
@@ -155,7 +175,8 @@ app.post("/create-preference", async (req, res) => {
     await db.collection("mp_preferences").add({
       createdAt: admin.firestore.FieldValue.serverTimestamp(),
       updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-      title,
+      originalTitle: title,
+      safeTitle,
       price: numericPrice,
       quantity: numericQuantity,
       type,
@@ -228,6 +249,7 @@ async function processApprovedPayment(paymentData) {
   const paymentRef = db.collection("payments").doc(paymentId);
   const existingPayment = await paymentRef.get();
 
+  // Evita reprocesar el mismo pago
   if (existingPayment.exists && existingPayment.data()?.processed === true) {
     return { alreadyProcessed: true };
   }
@@ -254,6 +276,7 @@ async function processApprovedPayment(paymentData) {
     { merge: true }
   );
 
+  // Si no esta aprobado, solo registramos estado
   if (status !== "approved") {
     await paymentRef.set(
       {
@@ -270,6 +293,7 @@ async function processApprovedPayment(paymentData) {
     throw new Error("userId no encontrado en metadata.");
   }
 
+  // Compra individual: desbloquea solo esa novela
   if (type === "single_purchase" || type === "novel") {
     if (!novelId) {
       throw new Error("novelId no encontrado en metadata.");
@@ -284,6 +308,7 @@ async function processApprovedPayment(paymentData) {
     );
   }
 
+  // Premium: activa acceso total
   if (type === "premium") {
     await db.collection("users").doc(userId).set(
       {
@@ -354,6 +379,7 @@ app.post("/webhook", async (req, res) => {
       return res.status(200).send("ok");
     }
 
+    // Ignora otros eventos que no sean payment
     if (topic && topic !== "payment") {
       return res.status(200).send("ok");
     }
