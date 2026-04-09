@@ -16,8 +16,13 @@ const app = express();
 app.use(cors({ origin: true }));
 app.use(express.json());
 
-const FRONTEND_URL = (process.env.FRONTEND_URL || "https://skanoalerta-maker.github.io/nebula").replace(/\/$/, "");
-const WEBHOOK_URL = process.env.WEBHOOK_URL || "";
+const FRONTEND_URL = (
+  process.env.FRONTEND_URL || "https://skanoalerta-maker.github.io/nexoria-tes"
+).replace(/\/$/, "");
+
+const WEBHOOK_URL =
+  process.env.WEBHOOK_URL ||
+  "https://us-central1-dyh-nebula.cloudfunctions.net/api/webhook";
 
 app.get("/", (req, res) => {
   res.status(200).json({
@@ -61,6 +66,13 @@ app.post("/create-preference", async (req, res) => {
       });
     }
 
+    if (!novelId) {
+      return res.status(400).json({
+        ok: false,
+        error: "Falta novelId.",
+      });
+    }
+
     if (!userId || !email) {
       return res.status(401).json({
         ok: false,
@@ -87,10 +99,38 @@ app.post("/create-preference", async (req, res) => {
 
     const externalReference = [
       type || "purchase",
-      novelId || "general",
+      novelId,
       userId,
       Date.now(),
     ].join("_");
+
+    const mpBody = {
+      items: [
+        {
+          title: String(title),
+          quantity: numericQuantity,
+          unit_price: numericPrice,
+          currency_id: "CLP",
+        },
+      ],
+      external_reference: externalReference,
+      payer: {
+        email: String(email),
+      },
+      back_urls: {
+        success: `${FRONTEND_URL}/?mp_status=success`,
+        failure: `${FRONTEND_URL}/?mp_status=failure`,
+        pending: `${FRONTEND_URL}/?mp_status=pending`,
+      },
+      auto_return: "approved",
+      notification_url: WEBHOOK_URL,
+      metadata: {
+        type,
+        novelId,
+        userId,
+        email,
+      },
+    };
 
     const mpResponse = await fetch("https://api.mercadopago.com/checkout/preferences", {
       method: "POST",
@@ -98,33 +138,7 @@ app.post("/create-preference", async (req, res) => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${MP_ACCESS_TOKEN}`,
       },
-      body: JSON.stringify({
-        items: [
-          {
-            title: String(title),
-            quantity: numericQuantity,
-            unit_price: numericPrice,
-            currency_id: "CLP",
-          },
-        ],
-        external_reference: externalReference,
-        payer: {
-          email: String(email),
-        },
-        back_urls: {
-          success: `${FRONTEND_URL}/?mp_status=success`,
-          failure: `${FRONTEND_URL}/?mp_status=failure`,
-          pending: `${FRONTEND_URL}/?mp_status=pending`,
-        },
-        auto_return: "approved",
-        notification_url: WEBHOOK_URL || undefined,
-        metadata: {
-          type,
-          novelId,
-          userId,
-          email,
-        },
-      }),
+      body: JSON.stringify(mpBody),
     });
 
     const result = await mpResponse.json();
@@ -140,6 +154,7 @@ app.post("/create-preference", async (req, res) => {
 
     await db.collection("mp_preferences").add({
       createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
       title,
       price: numericPrice,
       quantity: numericQuantity,
@@ -152,6 +167,7 @@ app.post("/create-preference", async (req, res) => {
       initPoint: result.init_point || null,
       sandboxInitPoint: result.sandbox_init_point || null,
       status: "created",
+      mpRawResponse: result || null,
     });
 
     return res.status(200).json({
@@ -174,8 +190,137 @@ app.post("/create-preference", async (req, res) => {
   }
 });
 
+async function getMercadoPagoPayment(paymentId, accessToken) {
+  const response = await fetch(`https://api.mercadopago.com/v1/payments/${paymentId}`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "application/json",
+    },
+  });
+
+  const result = await response.json();
+
+  return {
+    ok: response.ok,
+    status: response.status,
+    result,
+  };
+}
+
+async function processApprovedPayment(paymentData) {
+  const paymentId = String(paymentData.id || "");
+  const status = paymentData.status || null;
+  const statusDetail = paymentData.status_detail || null;
+  const externalReference = paymentData.external_reference || null;
+  const metadata = paymentData.metadata || {};
+
+  const type = metadata.type || "single_purchase";
+  const novelId = metadata.novelId || null;
+  const userId = metadata.userId || null;
+  const email = metadata.email || paymentData.payer?.email || null;
+  const amount = Number(paymentData.transaction_amount || 0);
+
+  if (!paymentId) {
+    throw new Error("paymentId no encontrado en el pago.");
+  }
+
+  const paymentRef = db.collection("payments").doc(paymentId);
+  const existingPayment = await paymentRef.get();
+
+  if (existingPayment.exists && existingPayment.data()?.processed === true) {
+    return { alreadyProcessed: true };
+  }
+
+  await paymentRef.set(
+    {
+      paymentId,
+      provider: "mercado_pago",
+      status,
+      statusDetail,
+      type,
+      novelId,
+      userId,
+      email,
+      amount,
+      externalReference,
+      preferenceId: paymentData.order?.id || null,
+      payerId: paymentData.payer?.id || null,
+      raw: paymentData,
+      processed: false,
+      createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+    },
+    { merge: true }
+  );
+
+  if (status !== "approved") {
+    await paymentRef.set(
+      {
+        processed: false,
+        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+      },
+      { merge: true }
+    );
+
+    return { approved: false };
+  }
+
+  if (!userId) {
+    throw new Error("userId no encontrado en metadata.");
+  }
+
+  if (type === "single_purchase" || type === "novel") {
+    if (!novelId) {
+      throw new Error("novelId no encontrado en metadata.");
+    }
+
+    await db.collection("users").doc(userId).set(
+      {
+        purchasedNovels: admin.firestore.FieldValue.arrayUnion(novelId),
+        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+      },
+      { merge: true }
+    );
+  }
+
+  if (type === "premium") {
+    await db.collection("users").doc(userId).set(
+      {
+        plan: "premium",
+        subscription: "premium",
+        premiumActive: true,
+        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+      },
+      { merge: true }
+    );
+  }
+
+  await paymentRef.set(
+    {
+      processed: true,
+      processedAt: admin.firestore.FieldValue.serverTimestamp(),
+      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+    },
+    { merge: true }
+  );
+
+  await db.collection("mp_payment_events").add({
+    paymentId,
+    userId,
+    novelId,
+    type,
+    status,
+    createdAt: admin.firestore.FieldValue.serverTimestamp(),
+  });
+
+  return { approved: true, userId, novelId, type };
+}
+
 app.post("/webhook", async (req, res) => {
   try {
+    const MP_ACCESS_TOKEN = mpAccessToken.value();
+
     await db.collection("mp_webhooks").add({
       createdAt: admin.firestore.FieldValue.serverTimestamp(),
       body: req.body || null,
@@ -186,10 +331,46 @@ app.post("/webhook", async (req, res) => {
       },
     });
 
+    if (!MP_ACCESS_TOKEN) {
+      console.error("MP_ACCESS_TOKEN no configurado.");
+      return res.status(200).send("ok");
+    }
+
+    const topic =
+      req.body?.type ||
+      req.query?.type ||
+      req.body?.topic ||
+      req.query?.topic ||
+      null;
+
+    const paymentId =
+      req.body?.data?.id ||
+      req.query?.["data.id"] ||
+      req.body?.id ||
+      req.query?.id ||
+      null;
+
+    if (!paymentId) {
+      return res.status(200).send("ok");
+    }
+
+    if (topic && topic !== "payment") {
+      return res.status(200).send("ok");
+    }
+
+    const mpPayment = await getMercadoPagoPayment(paymentId, MP_ACCESS_TOKEN);
+
+    if (!mpPayment.ok) {
+      console.error("No se pudo consultar el pago en MP:", mpPayment.result);
+      return res.status(200).send("ok");
+    }
+
+    await processApprovedPayment(mpPayment.result);
+
     return res.status(200).send("ok");
   } catch (error) {
     console.error("Error en webhook:", error);
-    return res.status(500).send("error");
+    return res.status(200).send("ok");
   }
 });
 
