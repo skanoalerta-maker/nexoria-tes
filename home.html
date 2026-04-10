@@ -1457,7 +1457,43 @@
     font-weight:800;
     font-size:.92rem;
   }
+.pricing-card{
+  transition: all .25s ease;
+}
 
+.pricing-card:hover{
+  transform: translateY(-6px);
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.45),
+    0 0 40px rgba(80,150,255,.12);
+}
+
+.pricing-card.featured:hover{
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.45),
+    0 0 50px rgba(255,213,74,.18);
+}
+
+.pricing-actions{
+  margin-top:18px;
+}
+
+.pricing-actions .btn{
+  width:100%;
+  min-height:56px;
+  font-size:1rem;
+  border-radius:18px;
+}
+
+.btn-primary{
+  background:linear-gradient(135deg, #2a82ff, #4aa7ff);
+  box-shadow:0 20px 40px rgba(50,120,255,.25);
+}
+
+.btn-secondary{
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
+}
   .empty-state{
     margin-top:20px;
     padding:22px;
