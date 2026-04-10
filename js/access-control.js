@@ -136,6 +136,23 @@
     };
   }
 
+  function getNovelTitle(novelId) {
+    const titles = {
+      "codigo-nebula-t1": "Código Nébula — Temporada 1",
+      "codigo-nebula-t2": "Código Nébula — Temporada 2",
+      "no-debi-enamorarme-t1": "No debí enamorarme — Temporada 1",
+      "no-debi-enamorarme-t2": "No debí enamorarme — Temporada 2",
+      "despues-de-tu-adios-t1": "Después de tu adiós — Temporada 1",
+      "la-ultima-conexion-t1": "La última conexión — Temporada 1",
+      "ya-habias-estado-ahi-t1": "Ya habías estado ahí — Temporada 1",
+      "allende-t1": "Allende — Temporada 1",
+      "pinochet-t1": "Pinochet — Temporada 1",
+      "el-precio-del-silencio-t1": "El precio del silencio — Temporada 1"
+    };
+
+    return titles[novelId] || "Novela Nébula";
+  }
+
   function buildCollageColumns(covers) {
     const col1 = [covers[0], covers[3], covers[6], covers[9]];
     const col2 = [covers[1], covers[4], covers[7], covers[2]];
@@ -168,12 +185,90 @@
     `;
   }
 
+  const API_BASE = "https://api-mvtstimkcq-uc.a.run.app";
+
+  async function startPremiumPayment() {
+    try {
+      const userId = "8DccbiG8PigdEBnm4uMRqmWyd6r2";
+      const email = "dhasociados25@gmail.com";
+
+      const payload = {
+        title: "Nebula Premium Mensual",
+        price: 4990,
+        quantity: 1,
+        type: "premium",
+        userId,
+        email
+      };
+
+      const res = await fetch(`${API_BASE}/create-preference`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await res.json();
+
+      if (data.ok) {
+        window.location.href = data.initPoint;
+      } else {
+        alert("Error al iniciar pago premium");
+      }
+    } catch (err) {
+      alert("Error de conexión");
+    }
+  }
+
+  async function startIndividualPayment(novelId) {
+    try {
+      const userId = "8DccbiG8PigdEBnm4uMRqmWyd6r2";
+      const email = "dhasociados25@gmail.com";
+
+      if (!novelId) {
+        alert("No se detectó la novela");
+        return;
+      }
+
+      const payload = {
+        title: getNovelTitle(novelId),
+        price: 990,
+        quantity: 1,
+        type: "single_purchase",
+        novelId,
+        userId,
+        email
+      };
+
+      const res = await fetch(`${API_BASE}/create-preference`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await res.json();
+
+      if (data.ok) {
+        window.location.href = data.initPoint;
+      } else {
+        alert("Error al iniciar compra individual");
+      }
+    } catch (err) {
+      alert("Error de conexión");
+    }
+  }
+
+  window.nebulaStartPremiumPayment = startPremiumPayment;
+  window.nebulaStartIndividualPayment = () => startIndividualPayment(getNovelId());
+
   function showPaywall(novelId, chapterNumber) {
     const basePath = getAppBasePath();
-    const loginPath = `${basePath}/login.html`;
-    const plansPath = `${basePath}/novelas/index.html?id=${encodeURIComponent(novelId || "")}`;
     const covers = getCoverPaths(basePath);
     const pricing = getPricing(novelId);
+    const novelTitle = getNovelTitle(novelId);
 
     document.body.innerHTML = `
       <style>
@@ -365,6 +460,7 @@
           font-weight:800;
           color:#b8c6dc;
           letter-spacing:.05em;
+          text-transform:uppercase;
         }
 
         .nebula-side-title{
@@ -492,6 +588,8 @@
           text-decoration:none;
           border-radius:14px;
           transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease;
+          border:none;
+          cursor:pointer;
         }
 
         .nebula-primary-btn:hover,
@@ -661,13 +759,13 @@
             </div>
 
             <div class="nebula-action-group">
-              <a href="${loginPath}" class="nebula-primary-btn">
-                Iniciar sesión y continuar
-              </a>
+              <button class="nebula-primary-btn" onclick="window.nebulaStartPremiumPayment()">
+                Hazte premium por ${pricing.premium.now}
+              </button>
 
-              <a href="${plansPath}" class="nebula-secondary-btn">
-                Ver planes y opciones
-              </a>
+              <button class="nebula-secondary-btn" onclick="window.nebulaStartIndividualPayment()">
+                Comprar esta novela por ${pricing.individual.now}
+              </button>
             </div>
 
             <p class="nebula-footer-copy">
