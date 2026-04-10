@@ -235,278 +235,382 @@
     font-weight:700;
   }
 
-  .pay-layout{
+  .nebula-paywall-card{
+    width:100%;
+    min-height:570px;
     display:grid;
-    grid-template-columns:minmax(0, 1fr) minmax(360px, 470px);
-    gap:26px;
-    align-items:stretch;
-  }
-
-  .pay-visual{
-    position:relative;
-    min-height:760px;
-    border-radius:34px;
-    overflow:hidden;
+    grid-template-columns:1.08fr .92fr;
+    background:linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
     border:1px solid rgba(255,255,255,.08);
-    box-shadow:var(--shadow);
-    background:
-      linear-gradient(180deg, rgba(3,7,18,.28), rgba(3,7,18,.82)),
-      url("assets/covers/collage.jpg") center center / cover no-repeat;
+    border-radius:28px;
+    overflow:hidden;
+    box-shadow:0 30px 90px rgba(0,0,0,.48);
+    backdrop-filter:blur(8px);
   }
 
-  .pay-visual::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:
-      radial-gradient(circle at 16% 22%, rgba(61,146,255,.16), transparent 24%),
-      radial-gradient(circle at 78% 18%, rgba(154,102,255,.14), transparent 28%),
-      linear-gradient(180deg, rgba(0,0,0,.18), rgba(0,0,0,.52) 58%, rgba(0,0,0,.82) 100%);
-    pointer-events:none;
-  }
-
-  .visual-copy{
-    position:absolute;
-    top:28px;
-    left:28px;
-    right:28px;
-    z-index:2;
-  }
-
-  .visual-copy h1{
-    font-size:clamp(2rem, 4.2vw, 4.1rem);
-    line-height:.93;
-    letter-spacing:-.04em;
-    max-width:8ch;
-    margin-bottom:14px;
-  }
-
-  .visual-copy p{
-    max-width:26ch;
-    color:#ecf4ff;
-    font-size:1.05rem;
-    line-height:1.7;
-  }
-
-  .visual-bottom{
-    position:absolute;
-    left:22px;
-    right:22px;
-    bottom:18px;
-    display:flex;
-    gap:12px;
-    flex-wrap:wrap;
-    z-index:2;
-  }
-
-  .visual-pill{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    min-height:58px;
-    padding:0 20px;
-    border-radius:18px;
-    background:rgba(255,255,255,.12);
-    border:1px solid rgba(255,255,255,.10);
-    backdrop-filter:blur(10px);
-    box-shadow:0 14px 28px rgba(0,0,0,.18);
-    color:#fff;
-    font-size:1rem;
-    font-weight:800;
-  }
-
-  .pay-panel{
+  .nebula-paywall-hero{
+    position:relative;
+    padding:42px 36px;
     display:flex;
     flex-direction:column;
-    gap:16px;
-    min-width:0;
-  }
-
-  .panel-card{
-    position:relative;
-    padding:24px 22px;
-    border-radius:28px;
-    background:linear-gradient(180deg, rgba(9,18,42,.88), rgba(9,18,42,.66));
-    border:1px solid rgba(255,255,255,.08);
-    box-shadow:var(--shadow-soft);
+    justify-content:space-between;
     overflow:hidden;
+    isolation:isolate;
+    background:
+      linear-gradient(180deg, rgba(6,12,26,.12), rgba(6,12,26,.42));
   }
 
-  .panel-card::before{
-    content:"";
+  .nebula-collage-bg{
     position:absolute;
-    top:0;
-    left:0;
-    right:0;
-    height:1px;
-    background:linear-gradient(90deg, transparent, rgba(255,255,255,.26), transparent);
+    inset:0;
+    z-index:-3;
+    transform:scale(1.015);
   }
 
-  .price-card{
-    padding-top:26px;
-    padding-bottom:18px;
+  .nebula-collage-grid{
+    position:absolute;
+    inset:-3%;
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:10px;
+    padding:12px;
   }
 
-  .launch-tag{
+  .nebula-collage-column{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    will-change:transform;
+  }
+
+  .nebula-collage-column.speed-a{
+    animation:nebulaScrollA 52s linear infinite;
+  }
+
+  .nebula-collage-column.speed-b{
+    animation:nebulaScrollB 60s linear infinite;
+  }
+
+  .nebula-collage-column.speed-c{
+    animation:nebulaScrollA 56s linear infinite;
+  }
+
+  .nebula-collage-card{
+    border-radius:14px;
+    overflow:hidden;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+    box-shadow:0 10px 24px rgba(0,0,0,.22);
+  }
+
+  .nebula-collage-card img{
+    display:block;
+    width:100%;
+    aspect-ratio:3/4.35;
+    object-fit:cover;
+    image-rendering:auto;
+    transform:translateZ(0) scale(1.001);
+    filter:brightness(.98) saturate(1.12) contrast(1.09);
+    backface-visibility:hidden;
+  }
+
+  .nebula-collage-overlay{
+    position:absolute;
+    inset:0;
+    z-index:-2;
+    background:
+      linear-gradient(90deg, rgba(4,8,22,.08) 0%, rgba(4,8,22,.16) 26%, rgba(4,8,22,.28) 54%, rgba(4,8,22,.58) 100%),
+      radial-gradient(circle at center, rgba(7,16,31,.02) 0%, rgba(7,16,31,.16) 55%, rgba(4,8,22,.48) 100%);
+    backdrop-filter:blur(.8px) brightness(.96);
+  }
+
+  .nebula-hero-content{
+    position:relative;
+    z-index:2;
+    max-width:520px;
+  }
+
+  .nebula-badge{
     display:inline-flex;
     align-items:center;
-    min-height:44px;
-    padding:0 18px;
+    gap:10px;
+    padding:8px 14px;
     border-radius:999px;
-    background:rgba(255,39,72,.12);
-    border:1px solid rgba(255,86,112,.26);
-    color:#ffb9c3;
-    font-weight:900;
-    font-size:1rem;
+    background:rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.16);
+    font-size:.84rem;
+    font-weight:700;
     letter-spacing:.03em;
+    margin-bottom:20px;
+    backdrop-filter:blur(4px);
+  }
+
+  .nebula-hero-title{
+    margin:0 0 14px;
+    font-size:2.9rem;
+    line-height:1.02;
+    font-weight:900;
+    letter-spacing:-0.04em;
+    text-shadow:0 8px 20px rgba(0,0,0,.18);
+  }
+
+  .nebula-hero-copy{
+    margin:0 0 14px;
+    font-size:1.05rem;
+    line-height:1.72;
+    color:rgba(255,255,255,.95);
+    max-width:510px;
+    text-shadow:0 3px 8px rgba(0,0,0,.14);
+  }
+
+  .nebula-hero-subcopy{
+    margin:0;
+    font-size:.97rem;
+    line-height:1.6;
+    color:#ebf0f8;
+    text-shadow:0 3px 8px rgba(0,0,0,.14);
+  }
+
+  .nebula-chip-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:24px;
+    position:relative;
+    z-index:2;
+  }
+
+  .nebula-chip{
+    padding:11px 13px;
+    border-radius:14px;
+    background:rgba(255,255,255,.11);
+    border:1px solid rgba(255,255,255,.14);
+    font-size:.9rem;
+    font-weight:700;
+    backdrop-filter:blur(4px);
+  }
+
+  .nebula-paywall-side{
+    padding:38px 32px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    background:
+      linear-gradient(180deg, rgba(8,12,22,.96), rgba(8,12,22,.90));
+  }
+
+  .nebula-side-kicker{
+    margin-bottom:12px;
+    font-size:.88rem;
+    font-weight:800;
+    color:#b8c6dc;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+  }
+
+  .nebula-side-title{
+    margin-bottom:14px;
+    font-size:1.8rem;
+    line-height:1.12;
+    font-weight:900;
+    letter-spacing:-0.02em;
+  }
+
+  .nebula-side-copy{
+    margin:0 0 14px;
+    color:#b9c3d7;
+    line-height:1.65;
+    font-size:.96rem;
+  }
+
+  .nebula-urgency{
+    margin:0 0 18px;
+    color:#ffd15c;
+    font-size:.92rem;
+    font-weight:800;
+    line-height:1.4;
+  }
+
+  .nebula-price-box{
+    margin-bottom:18px;
+    padding:18px 18px 16px;
+    border-radius:18px;
+    background:linear-gradient(135deg, rgba(255,255,255,.09), rgba(255,255,255,.03));
+    border:1px solid rgba(255,255,255,.10);
+  }
+
+  .nebula-offer-label{
+    display:inline-flex;
+    align-items:center;
+    padding:6px 10px;
+    border-radius:999px;
+    background:rgba(255, 17, 32, .14);
+    border:1px solid rgba(255, 17, 32, .28);
+    color:#ffb7bd;
+    font-size:.78rem;
+    font-weight:800;
+    letter-spacing:.03em;
+    margin-bottom:12px;
+    text-transform:uppercase;
+  }
+
+  .nebula-price-row{
+    display:flex;
+    align-items:flex-end;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:6px;
+  }
+
+  .nebula-price-before{
+    color:#8f9bb3;
+    font-size:1rem;
+    text-decoration:line-through;
+    text-decoration-thickness:2px;
+    opacity:.95;
+  }
+
+  .nebula-price-now{
+    font-size:2rem;
+    font-weight:900;
+    letter-spacing:-0.03em;
+    line-height:1;
+  }
+
+  .nebula-price-caption{
+    color:#aebad0;
+    font-size:.92rem;
+    line-height:1.48;
+  }
+
+  .nebula-option-list{
+    display:grid;
+    gap:12px;
     margin-bottom:18px;
   }
 
-  .price-row{
-    display:flex;
-    align-items:flex-end;
-    gap:14px;
-    flex-wrap:wrap;
-    margin-bottom:10px;
+  .nebula-option-card{
+    border:1px solid rgba(255,255,255,.09);
+    background:rgba(255,255,255,.04);
+    border-radius:16px;
+    padding:14px 16px;
   }
 
-  .old-price{
-    color:rgba(255,255,255,.42);
-    text-decoration:line-through;
-    text-decoration-thickness:2px;
-    font-size:1.05rem;
+  .nebula-option-title{
+    font-size:.98rem;
     font-weight:800;
-    margin-bottom:10px;
+    margin-bottom:5px;
   }
 
-  .new-price{
-    font-size:4rem;
-    line-height:.92;
-    letter-spacing:-.05em;
-    font-weight:900;
+  .nebula-option-copy{
+    color:#b8c4da;
+    font-size:.92rem;
+    line-height:1.5;
   }
 
-  .price-copy{
-    color:#d6e4fb;
-    line-height:1.55;
-    font-size:1rem;
+  .nebula-payment-note{
+    margin-bottom:16px;
+    padding:13px 15px;
+    border-radius:14px;
+    background:linear-gradient(135deg, rgba(20,34,62,.92), rgba(16,24,41,.88));
+    border:1px solid rgba(255,255,255,.08);
+    color:#e6edf8;
+    font-size:.92rem;
+    font-weight:700;
   }
 
-  .panel-title{
-    font-size:1.1rem;
-    line-height:1.15;
-    margin-bottom:10px;
-    font-weight:900;
+  .nebula-action-group{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
   }
 
-  .panel-text{
-    color:#cddbf1;
-    line-height:1.65;
-    font-size:1rem;
-  }
-
-  .pay-secure{
+  .nebula-primary-btn,
+  .nebula-secondary-btn{
     display:flex;
     align-items:center;
-    gap:10px;
-    font-weight:900;
-    font-size:1rem;
-    color:#edf5ff;
-  }
-
-  .pay-main-btn,
-  .pay-alt-btn{
-    min-height:62px;
+    justify-content:center;
+    text-decoration:none;
+    border-radius:14px;
+    transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease;
     border:none;
-    border-radius:20px;
-    font-size:1.05rem;
-    font-weight:900;
     cursor:pointer;
-    transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
   }
 
-  .pay-main-btn:hover,
-  .pay-alt-btn:hover{
+  .nebula-primary-btn:hover,
+  .nebula-secondary-btn:hover{
     transform:translateY(-1px);
   }
 
-  .pay-main-btn{
-    color:#fff;
-    background:linear-gradient(180deg, var(--danger-2), var(--danger));
-    box-shadow:0 18px 36px rgba(255,23,53,.22);
+  .nebula-primary-btn{
+    min-height:54px;
+    background:linear-gradient(180deg, #ff0f1c 0%, #c10610 100%);
+    color:#ffffff;
+    font-size:1rem;
+    font-weight:900;
+    letter-spacing:.01em;
+    box-shadow:0 12px 28px rgba(229, 9, 20, .30);
   }
 
-  .pay-alt-btn{
-    color:#fff;
-    background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.06));
-    border:1px solid rgba(255,255,255,.08);
-  }
-
-  .pay-footer-note{
-    text-align:center;
-    color:#90a5c9;
+  .nebula-secondary-btn{
+    min-height:50px;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.10);
+    color:#ffffff;
     font-size:.96rem;
+    font-weight:800;
+  }
+
+  .nebula-footer-copy{
+    margin:16px 0 0;
+    color:#8f9bb3;
+    font-size:.84rem;
     line-height:1.6;
-    padding:0 8px;
+    text-align:center;
   }
 
-  @media (max-width: 1080px){
-    .pay-layout{
+  @keyframes nebulaScrollA{
+    0%{ transform:translateY(0); }
+    100%{ transform:translateY(-28%); }
+  }
+
+  @keyframes nebulaScrollB{
+    0%{ transform:translateY(-5%); }
+    100%{ transform:translateY(-33%); }
+  }
+
+  @media (max-width: 860px){
+    .nebula-paywall-card{
       grid-template-columns:1fr;
+      max-width:680px;
+      min-height:auto;
     }
 
-    .pay-visual{
-      min-height:560px;
-    }
-  }
-
-  @media (max-width: 760px){
-    .page{
-      padding-top:20px;
+    .nebula-paywall-hero{
+      min-height:410px;
+      padding:32px 24px;
     }
 
-    .topbar{
-      padding-bottom:18px;
-      flex-wrap:wrap;
+    .nebula-paywall-side{
+      padding:30px 24px;
     }
 
-    .visual-copy{
-      top:22px;
-      left:22px;
-      right:22px;
+    .nebula-hero-title{
+      font-size:2.24rem;
     }
 
-    .visual-bottom{
-      left:16px;
-      right:16px;
-      bottom:16px;
-      gap:10px;
+    .nebula-collage-grid{
+      gap:8px;
+      padding:10px;
+      inset:-2%;
     }
 
-    .visual-pill{
-      min-height:52px;
-      padding:0 16px;
-      font-size:.94rem;
+    .nebula-collage-card{
+      border-radius:12px;
     }
 
-    .pay-visual{
-      min-height:520px;
-      border-radius:28px;
-    }
-
-    .panel-card{
-      padding:20px 18px;
-      border-radius:24px;
-    }
-
-    .new-price{
-      font-size:3.1rem;
-    }
-
-    .pay-main-btn,
-    .pay-alt-btn{
-      min-height:58px;
-      font-size:1rem;
+    .nebula-price-now{
+      font-size:1.7rem;
     }
   }
 </style>
@@ -531,61 +635,107 @@
       <a class="back-link" href="javascript:history.back()">Volver</a>
     </div>
 
-    <section class="pay-layout">
-      <article class="pay-visual">
-        <div class="visual-copy">
-          <h1 id="heroTitle">Cargando plan...</h1>
-          <p id="heroText">Estamos preparando tu acceso para que continúes leyendo sin interrupciones.</p>
+    <section class="nebula-paywall-card">
+      <div class="nebula-paywall-hero">
+        <div class="nebula-collage-bg" id="collageMount"></div>
+        <div class="nebula-collage-overlay"></div>
+
+        <div class="nebula-hero-content">
+          <div class="nebula-badge" id="heroBadge">NÉBULA PREMIUM</div>
+
+          <h1 class="nebula-hero-title" id="heroTitle">
+            Historias ilimitadas<br>y mucho más
+          </h1>
+
+          <p class="nebula-hero-copy" id="heroText">
+            Sigue leyendo sin interrupciones y desbloquea toda la experiencia de Nébula.
+          </p>
+
+          <p class="nebula-hero-subcopy" id="heroSubcopy">
+            Acceso desde <strong>celular</strong>, <strong>tablet</strong> y <strong>PC</strong>.
+          </p>
         </div>
 
-        <div class="visual-bottom">
-          <span class="visual-pill" id="mini1">Acceso inmediato</span>
-          <span class="visual-pill" id="mini2">Progreso guardado</span>
-          <span class="visual-pill" id="mini3">Pago seguro</span>
+        <div class="nebula-chip-row">
+          <div class="nebula-chip" id="mini1">Nuevas historias</div>
+          <div class="nebula-chip" id="mini2">Progreso guardado</div>
+          <div class="nebula-chip" id="mini3">Pago seguro</div>
         </div>
-      </article>
+      </div>
 
-      <aside class="pay-panel">
-        <div class="panel-card price-card">
-          <span class="launch-tag" id="launchTag">PRECIO LANZAMIENTO</span>
+      <div class="nebula-paywall-side">
+        <div class="nebula-side-kicker" id="sideKicker">
+          DESBLOQUEA ESTE CONTENIDO
+        </div>
 
-          <div class="price-row">
-            <span class="old-price" id="old"></span>
-            <strong class="new-price" id="price"></strong>
+        <div class="nebula-side-title" id="sideTitle">
+          Continúa leyendo en Nébula
+        </div>
+
+        <p class="nebula-side-copy" id="sideCopy">
+          Elige una de las opciones para seguir con esta novela.
+        </p>
+
+        <div class="nebula-urgency" id="urgencyText">
+          🔥 Acceso inmediato al continuar
+        </div>
+
+        <div class="nebula-price-box">
+          <div class="nebula-offer-label" id="offerLabel">Precio lanzamiento</div>
+
+          <div class="nebula-price-row">
+            <div class="nebula-price-before" id="oldPrice">$1.500</div>
+            <div class="nebula-price-now" id="newPrice">$990</div>
           </div>
 
-          <p class="price-copy" id="priceText"></p>
+          <div class="nebula-price-caption" id="priceCaption">
+            Antes $1.500. Ahora solo $990 por esta novela. Premium antes $6.990, ahora $4.990.
+          </div>
         </div>
 
-        <div class="panel-card">
-          <h2 class="panel-title" id="premiumTitle">Membresía Premium</h2>
-          <p class="panel-text" id="premiumText">Acceso completo al catálogo, lectura sin bloqueos y nuevas novelas todas las semanas.</p>
+        <div class="nebula-option-list">
+          <div class="nebula-option-card">
+            <div class="nebula-option-title" id="premiumTitle">
+              Membresía Premium
+            </div>
+            <div class="nebula-option-copy" id="premiumText">
+              Acceso completo al catálogo, lectura sin bloqueos y nuevas novelas todas las semanas.
+            </div>
+          </div>
+
+          <div class="nebula-option-card">
+            <div class="nebula-option-title" id="individualTitle">
+              Compra individual
+            </div>
+            <div class="nebula-option-copy" id="individualText">
+              Compra solo esta novela y desbloquea sus capítulos.
+            </div>
+          </div>
         </div>
 
-        <div class="panel-card">
-          <h2 class="panel-title" id="individualTitle">Compra individual</h2>
-          <p class="panel-text" id="individualText">Compra solo esta novela y desbloquea sus capítulos.</p>
+        <div class="nebula-payment-note" id="secureText">
+          💳 Pago seguro con Mercado Pago
         </div>
 
-        <div class="panel-card">
-          <div class="pay-secure" id="secureText">💳 Pago seguro con Mercado Pago</div>
+        <div class="nebula-action-group">
+          <button id="payBtn" class="nebula-primary-btn" type="button" onclick="iniciarPago()">
+            Iniciar pago y continuar
+          </button>
+
+          <button class="nebula-secondary-btn" type="button" onclick="history.back()">
+            Volver a Nébula
+          </button>
         </div>
 
-        <button id="payBtn" class="pay-main-btn" onclick="iniciarPago()">
-          Continuar al pago
-        </button>
-
-        <button class="pay-alt-btn" onclick="history.back()">
-          Volver a Nébula
-        </button>
-
-        <p class="pay-footer-note" id="noteText">
+        <p class="nebula-footer-copy" id="noteText">
           Accede al catálogo, compra novelas y sigue leyendo donde quedaste.
         </p>
-      </aside>
+      </div>
     </section>
   </div>
 </div>
+
+<script src="novelas/data.js"></script>
 
 <script>
   const canvas = document.getElementById('stars-canvas');
@@ -640,52 +790,179 @@
 
 <script>
   const params = new URLSearchParams(window.location.search);
-  const tipo = params.get("tipo");
+  const tipo = params.get("tipo") || "premium";
+  const novelaId = params.get("novela");
+  const novelaActual = window.NEBULA_NOVELS?.[novelaId] || null;
 
+  const heroBadge = document.getElementById("heroBadge");
   const heroTitle = document.getElementById("heroTitle");
   const heroText = document.getElementById("heroText");
+  const heroSubcopy = document.getElementById("heroSubcopy");
   const mini1 = document.getElementById("mini1");
   const mini2 = document.getElementById("mini2");
   const mini3 = document.getElementById("mini3");
-  const oldPrice = document.getElementById("old");
-  const price = document.getElementById("price");
-  const priceText = document.getElementById("priceText");
+
+  const sideKicker = document.getElementById("sideKicker");
+  const sideTitle = document.getElementById("sideTitle");
+  const sideCopy = document.getElementById("sideCopy");
+  const urgencyText = document.getElementById("urgencyText");
+  const oldPrice = document.getElementById("oldPrice");
+  const newPrice = document.getElementById("newPrice");
+  const priceCaption = document.getElementById("priceCaption");
   const premiumTitle = document.getElementById("premiumTitle");
   const premiumText = document.getElementById("premiumText");
   const individualTitle = document.getElementById("individualTitle");
   const individualText = document.getElementById("individualText");
+  const secureText = document.getElementById("secureText");
   const payBtn = document.getElementById("payBtn");
   const noteText = document.getElementById("noteText");
+  const collageMount = document.getElementById("collageMount");
 
-  if(tipo === "individual"){
-    heroTitle.innerText = "Sigue leyendo sin interrupciones";
-    heroText.innerText = "Desbloquea esta historia con un pago único y continúa exactamente donde te quedaste dentro de Nébula.";
+  function getAppBasePath() {
+    const path = window.location.pathname.toLowerCase();
+    if (path.includes("/nexoria-tes/")) return "/nexoria-tes";
+    if (path.includes("/nexoria/")) return "/nexoria";
+    if (path.includes("/nebula/")) return "/nebula";
+    return "";
+  }
+
+  function getCoverPaths(basePath) {
+    return [
+      `${basePath}/assets/covers/allende_portada_nebula.png`,
+      `${basePath}/assets/covers/pinochet_nebula_portada.png`,
+      `${basePath}/assets/covers/codigo-nebula-t2.jpg`,
+      `${basePath}/assets/covers/nebula.jpg`,
+      `${basePath}/assets/covers/la-ultima-conexion.jpg`,
+      `${basePath}/assets/covers/ya-habias-estado-ahi.jpg`,
+      `${basePath}/assets/covers/despues-de-tu-adios.jpg`,
+      `${basePath}/assets/covers/no-debi-enamorarme.jpg`,
+      `${basePath}/assets/covers/no-debi-enamorarme-t2.jpg`,
+      `${basePath}/assets/covers/bajo-la-misma-lluvia.jpg`
+    ];
+  }
+
+  function buildCollageColumns(covers) {
+    const col1 = [covers[0], covers[3], covers[6], covers[9]];
+    const col2 = [covers[1], covers[4], covers[7], covers[2]];
+    const col3 = [covers[5], covers[8], covers[0], covers[4]];
+
+    function buildColumn(items, extraClass) {
+      return `
+        <div class="nebula-collage-column ${extraClass}">
+          ${items.concat(items).map(src => `
+            <div class="nebula-collage-card">
+              <img
+                src="${src}"
+                alt=""
+                loading="eager"
+                decoding="async"
+                onerror="this.style.display='none'; this.parentElement.style.background='rgba(255,255,255,.06)';"
+              />
+            </div>
+          `).join("")}
+        </div>
+      `;
+    }
+
+    return `
+      <div class="nebula-collage-grid">
+        ${buildColumn(col1, "speed-a")}
+        ${buildColumn(col2, "speed-b")}
+        ${buildColumn(col3, "speed-c")}
+      </div>
+    `;
+  }
+
+  function getPricing(novelId) {
+    const premium = {
+      before: "$6.990",
+      now: "$4.990"
+    };
+
+    const defaultNovel = {
+      before: "$1.500",
+      now: "$990"
+    };
+
+    const perNovel = {
+      "codigo-nebula-t1": { before: "$1.500", now: "$990" },
+      "codigo-nebula-t2": { before: "$1.500", now: "$990" },
+      "no-debi-enamorarme-t1": { before: "$1.500", now: "$990" },
+      "no-debi-enamorarme-t2": { before: "$1.500", now: "$990" },
+      "despues-de-tu-adios-t1": { before: "$1.500", now: "$990" },
+      "la-ultima-conexion-t1": { before: "$1.500", now: "$990" },
+      "ya-habias-estado-ahi-t1": { before: "$1.500", now: "$990" },
+      "allende-t1": { before: "$1.500", now: "$990" },
+      "pinochet-t1": { before: "$1.500", now: "$990" },
+      "el-precio-del-silencio-t1": { before: "$1.500", now: "$990" }
+    };
+
+    return {
+      premium,
+      individual: perNovel[novelaId] || defaultNovel
+    };
+  }
+
+  const basePath = getAppBasePath();
+  const covers = getCoverPaths(basePath);
+  collageMount.innerHTML = buildCollageColumns(covers);
+
+  const pricing = getPricing(novelaId);
+  const novelTitle = novelaActual?.title || "esta novela";
+
+  if (tipo === "individual") {
+    heroBadge.innerText = "COMPRA INDIVIDUAL";
+    heroTitle.innerHTML = `Desbloquea<br>${novelTitle}`;
+    heroText.innerText = `Compra esta historia con un pago único y continúa exactamente donde te quedaste dentro de Nébula.`;
+    heroSubcopy.innerHTML = `Acceso desde <strong>celular</strong>, <strong>tablet</strong> y <strong>PC</strong>.`;
     mini1.innerText = "Nuevas historias";
     mini2.innerText = "Progreso guardado";
     mini3.innerText = "Pago seguro";
-    oldPrice.innerText = "$1.500";
-    price.innerText = "$990";
-    priceText.innerHTML = "Antes $1.500. Ahora solo $990 por esta novela.<br>Premium antes $6.990, ahora $4.990.";
+
+    sideKicker.innerText = "DESBLOQUEA ESTA NOVELA";
+    sideTitle.innerText = "Continúa leyendo en Nébula";
+    sideCopy.innerText = novelaActual
+      ? `Vas a comprar ${novelTitle} y desbloquear sus capítulos.`
+      : "Elige una de las opciones para seguir con esta novela.";
+    urgencyText.innerText = "🔥 Acceso inmediato al continuar";
+
+    oldPrice.innerText = pricing.individual.before;
+    newPrice.innerText = pricing.individual.now;
+    priceCaption.innerText = `Antes ${pricing.individual.before}. Ahora solo ${pricing.individual.now} por esta novela. Premium antes ${pricing.premium.before}, ahora ${pricing.premium.now}.`;
+
     premiumTitle.innerText = "Membresía Premium";
     premiumText.innerText = "Acceso completo al catálogo, lectura sin bloqueos y nuevas novelas todas las semanas.";
     individualTitle.innerText = "Compra individual";
-    individualText.innerText = "Compra solo esta novela y desbloquea sus capítulos.";
-    payBtn.innerText = "Iniciar pago y continuar";
+    individualText.innerText = novelaActual
+      ? `Compra ${novelTitle} y desbloquea sus capítulos.`
+      : "Compra solo esta novela y desbloquea sus capítulos.";
+    secureText.innerText = "💳 Pago seguro con Mercado Pago";
+    payBtn.innerText = `Pagar ${pricing.individual.now} y continuar`;
     noteText.innerText = "Accede al catálogo, compra novelas y sigue leyendo donde quedaste.";
   } else {
-    heroTitle.innerText = "Pasa a Premium y desbloquea más";
+    heroBadge.innerText = "NÉBULA PREMIUM";
+    heroTitle.innerHTML = `Historias ilimitadas<br>y mucho más`;
     heroText.innerText = "Obtén la mejor relación precio-contenido para descubrir más historias y leer sin límites dentro de Nébula.";
+    heroSubcopy.innerHTML = `Acceso desde <strong>celular</strong>, <strong>tablet</strong> y <strong>PC</strong>.`;
     mini1.innerText = "Más historias";
     mini2.innerText = "Mejor valor";
     mini3.innerText = "Membresía activa";
-    oldPrice.innerText = "$6.990";
-    price.innerText = "$4.990";
-    priceText.innerHTML = "Activa tu membresía y desbloquea una experiencia más completa dentro de Nébula.";
+
+    sideKicker.innerText = "PASA A PREMIUM";
+    sideTitle.innerText = "Desbloquea más historias";
+    sideCopy.innerText = "Obtén acceso más amplio dentro de Nébula y sigue descubriendo nuevas novelas todas las semanas.";
+    urgencyText.innerText = "⭐ Mejor opción para lectores frecuentes";
+
+    oldPrice.innerText = pricing.premium.before;
+    newPrice.innerText = pricing.premium.now;
+    priceCaption.innerText = `Activa tu membresía y desbloquea una experiencia más completa dentro de Nébula.`;
+
     premiumTitle.innerText = "Membresía Premium";
     premiumText.innerText = "Ideal para lectores frecuentes que quieren seguir descubriendo nuevas novelas cada semana.";
     individualTitle.innerText = "Compra individual";
     individualText.innerText = "También puedes optar por desbloquear una sola novela con pago único.";
-    payBtn.innerText = "Pasar a premium";
+    secureText.innerText = "💳 Pago seguro con Mercado Pago";
+    payBtn.innerText = `Pasar a premium por ${pricing.premium.now}`;
     noteText.innerText = "Obtén acceso continuo y aprovecha mejor el universo Nébula.";
   }
 </script>
@@ -701,12 +978,17 @@ async function iniciarPago() {
     let payload;
 
     if (tipo === "individual") {
+      if (!novelaId || !novelaActual) {
+        alert("La novela seleccionada no existe o no fue enviada correctamente.");
+        return;
+      }
+
       payload = {
-        title: "Codigo Nebula - Temporada 1",
+        title: novelaActual.title || "Novela Nébula",
         price: 990,
         quantity: 1,
         type: "single_purchase",
-        novelId: "codigo-nebula-t1",
+        novelId: novelaId,
         userId,
         email
       };
