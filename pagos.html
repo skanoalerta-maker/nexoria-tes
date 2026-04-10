@@ -7,29 +7,80 @@
 <meta name="theme-color" content="#07101f" />
 <style>
   :root{
-    --bg:#040816;--bg2:#07101f;--bg3:#0b1730;--panel:rgba(8,18,40,.78);--panel-strong:rgba(10,20,44,.94);
-    --line:rgba(255,255,255,.08);--text:#f8fbff;--muted:#b8c4da;--muted-2:#8ea3c8;--blue:#3490ff;
-    --blue2:#66b8ff;--violet:#9a66ff;--cyan:#50dbff;--gold:#ffd54a;--green:#4ee7a8;
-    --shadow:0 24px 70px rgba(0,0,0,.34);--shadow-soft:0 18px 46px rgba(0,0,0,.24);
-    --radius:28px;--radius-lg:34px;--container:min(1180px, calc(100% - 28px));
+    --bg:#040816;
+    --bg2:#07101f;
+    --bg3:#0b1730;
+    --panel:rgba(8,18,40,.78);
+    --panel-strong:rgba(10,20,44,.94);
+    --line:rgba(255,255,255,.08);
+    --text:#f8fbff;
+    --muted:#b8c4da;
+    --muted-2:#8ea3c8;
+    --blue:#3490ff;
+    --blue2:#66b8ff;
+    --violet:#9a66ff;
+    --cyan:#50dbff;
+    --gold:#ffd54a;
+    --green:#4ee7a8;
+    --danger:#ff1735;
+    --danger-2:#ff344e;
+    --shadow:0 24px 70px rgba(0,0,0,.34);
+    --shadow-soft:0 18px 46px rgba(0,0,0,.24);
+    --radius:28px;
+    --radius-lg:34px;
+    --container:min(1220px, calc(100% - 28px));
   }
+
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
+
   body{
-    min-height:100vh;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    min-height:100vh;
+    font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
     color:var(--text);
     background:
       radial-gradient(circle at 12% 14%, rgba(76,109,255,.16), transparent 24%),
       radial-gradient(circle at 84% 18%, rgba(166,90,255,.16), transparent 28%),
       radial-gradient(circle at 26% 76%, rgba(67,201,255,.10), transparent 24%),
       linear-gradient(180deg, #040816 0%, #07101f 42%, #09162e 100%);
-    overflow-x:hidden;position:relative;
+    overflow-x:hidden;
+    position:relative;
   }
+
   a{color:inherit;text-decoration:none}
-  .container{width:var(--container);margin:0 auto;position:relative;z-index:2}
-  #stars-canvas{position:fixed;inset:0;width:100%;height:100%;z-index:-35;pointer-events:none}
-  .galaxy-bg,.galaxy-bg::before,.galaxy-bg::after{content:"";position:fixed;inset:0;pointer-events:none;display:block}
-  .galaxy-bg{z-index:-30;overflow:hidden}
+  button{font:inherit}
+
+  .container{
+    width:var(--container);
+    margin:0 auto;
+    position:relative;
+    z-index:2;
+  }
+
+  #stars-canvas{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    z-index:-35;
+    pointer-events:none;
+  }
+
+  .galaxy-bg,
+  .galaxy-bg::before,
+  .galaxy-bg::after{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    display:block;
+  }
+
+  .galaxy-bg{
+    z-index:-30;
+    overflow:hidden;
+  }
+
   .galaxy-bg::before{
     background-image:
       radial-gradient(2px 2px at 8% 11%, rgba(255,255,255,.94), transparent 62%),
@@ -42,104 +93,422 @@
       radial-gradient(1px 1px at 76% 74%, rgba(255,255,255,.70), transparent 62%),
       radial-gradient(2px 2px at 85% 45%, rgba(255,255,255,.86), transparent 62%),
       radial-gradient(1.5px 1.5px at 94% 14%, rgba(255,255,255,.82), transparent 62%);
-    opacity:.7;animation:starsFloat 120s linear infinite;
+    opacity:.7;
+    animation:starsFloat 120s linear infinite;
   }
+
   .galaxy-bg::after{
     background:
       radial-gradient(circle at 18% 22%, rgba(75,122,255,.12), transparent 20%),
       radial-gradient(circle at 78% 22%, rgba(174,84,255,.12), transparent 22%),
       radial-gradient(circle at 68% 70%, rgba(58,194,255,.10), transparent 25%),
       radial-gradient(circle at 30% 82%, rgba(124,255,220,.07), transparent 18%);
-    filter:blur(38px);opacity:.95;animation:nebulaDrift 22s ease-in-out infinite alternate;
+    filter:blur(38px);
+    opacity:.95;
+    animation:nebulaDrift 22s ease-in-out infinite alternate;
   }
+
   .bg-grid{
-    position:fixed;inset:0;z-index:-28;pointer-events:none;
-    background:linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
-    background-size:64px 64px;mask-image:radial-gradient(circle at center, rgba(0,0,0,.95), transparent 88%);opacity:.26;
+    position:fixed;
+    inset:0;
+    z-index:-28;
+    pointer-events:none;
+    background:
+      linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+    background-size:64px 64px;
+    mask-image:radial-gradient(circle at center, rgba(0,0,0,.95), transparent 88%);
+    opacity:.26;
   }
-  .bg-orb{position:fixed;pointer-events:none;border-radius:50%;filter:blur(48px);z-index:-27;opacity:.36}
-  .orb-1{width:420px;height:420px;top:10%;right:-120px;background:radial-gradient(circle, rgba(123,78,255,.36), transparent 68%);animation:orbMove1 18s ease-in-out infinite alternate}
-  .orb-2{width:360px;height:360px;left:-120px;top:48%;background:radial-gradient(circle, rgba(61,173,255,.28), transparent 68%);animation:orbMove2 20s ease-in-out infinite alternate}
-  @keyframes starsFloat{from{transform:translateY(0)}to{transform:translateY(-120px)}}
-  @keyframes nebulaDrift{0%{transform:scale(1) translate3d(0,0,0)}100%{transform:scale(1.07) translate3d(-1.5%,1.5%,0)}}
-  @keyframes orbMove1{from{transform:translate3d(0,0,0)}to{transform:translate3d(-30px,35px,0)}}
-  @keyframes orbMove2{from{transform:translate3d(0,0,0)}to{transform:translate3d(35px,-22px,0)}}
-  .page{padding:28px 0 44px}
-  .topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0 22px}
-  .brand{display:flex;align-items:center;gap:14px}
+
+  .bg-orb{
+    position:fixed;
+    pointer-events:none;
+    border-radius:50%;
+    filter:blur(48px);
+    z-index:-27;
+    opacity:.36;
+  }
+
+  .orb-1{
+    width:420px;
+    height:420px;
+    top:10%;
+    right:-120px;
+    background:radial-gradient(circle, rgba(123,78,255,.36), transparent 68%);
+    animation:orbMove1 18s ease-in-out infinite alternate;
+  }
+
+  .orb-2{
+    width:360px;
+    height:360px;
+    left:-120px;
+    top:48%;
+    background:radial-gradient(circle, rgba(61,173,255,.28), transparent 68%);
+    animation:orbMove2 20s ease-in-out infinite alternate;
+  }
+
+  @keyframes starsFloat{
+    from{transform:translateY(0)}
+    to{transform:translateY(-120px)}
+  }
+
+  @keyframes nebulaDrift{
+    0%{transform:scale(1) translate3d(0,0,0)}
+    100%{transform:scale(1.07) translate3d(-1.5%,1.5%,0)}
+  }
+
+  @keyframes orbMove1{
+    from{transform:translate3d(0,0,0)}
+    to{transform:translate3d(-30px,35px,0)}
+  }
+
+  @keyframes orbMove2{
+    from{transform:translate3d(0,0,0)}
+    to{transform:translate3d(35px,-22px,0)}
+  }
+
+  .page{
+    padding:28px 0 44px;
+  }
+
+  .topbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    padding:14px 0 22px;
+  }
+
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+
   .brand-badge{
-    width:52px;height:52px;border-radius:18px;
+    width:52px;
+    height:52px;
+    border-radius:18px;
     background:
       radial-gradient(circle at 30% 30%, rgba(160,220,255,.9), transparent 30%),
       radial-gradient(circle at 68% 38%, rgba(155,102,255,.8), transparent 34%),
       radial-gradient(circle at 52% 68%, rgba(52,144,255,.8), transparent 34%),
       linear-gradient(135deg, rgba(24,41,88,.94), rgba(9,18,42,.96));
-    border:1px solid rgba(255,255,255,.08);box-shadow:var(--shadow-soft);position:relative;overflow:hidden;
+    border:1px solid rgba(255,255,255,.08);
+    box-shadow:var(--shadow-soft);
+    position:relative;
+    overflow:hidden;
   }
-  .brand-badge::after{content:"";position:absolute;inset:10px;border-radius:14px;border:1px solid rgba(255,255,255,.08)}
-  .brand-copy strong{display:block;letter-spacing:.12em;font-size:.86rem}
-  .brand-copy span{display:block;margin-top:4px;color:var(--muted);font-size:.95rem}
-  .back-link{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 18px;border-radius:16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:#fff;font-weight:700}
-  .hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(320px,.95fr);gap:24px;align-items:stretch}
-  .hero-copy,.card{
-    background:linear-gradient(180deg, rgba(9,18,42,.84), rgba(9,18,42,.62));
-    border:1px solid rgba(255,255,255,.08);box-shadow:var(--shadow);border-radius:var(--radius-lg);position:relative;overflow:hidden;
+
+  .brand-badge::after{
+    content:"";
+    position:absolute;
+    inset:10px;
+    border-radius:14px;
+    border:1px solid rgba(255,255,255,.08);
   }
-  .hero-copy{padding:32px}
-  .hero-copy::before,.card::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg, transparent, rgba(255,255,255,.28), transparent)}
-  .eyebrow{display:inline-flex;align-items:center;min-height:34px;padding:0 14px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.07);color:#d8e7ff;font-size:.84rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
-  .hero-copy h1{margin-top:18px;font-size:clamp(2rem,4.6vw,4rem);line-height:.96;letter-spacing:-.04em;max-width:10ch}
-  .hero-copy p{margin-top:18px;color:var(--muted);max-width:62ch;line-height:1.78;font-size:1.05rem}
-  .visual-shell{margin-top:24px;display:grid;grid-template-columns:1.05fr .95fr;gap:16px}
-  .mini-bullets{display:grid;gap:12px}
-  .mini-bullets div,.feature-list div{
-    padding:14px 16px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);color:#e5efff;line-height:1.55;
+
+  .brand-copy strong{
+    display:block;
+    letter-spacing:.12em;
+    font-size:.86rem;
   }
-  .cover-art{
-    min-height:188px;border-radius:22px;
+
+  .brand-copy span{
+    display:block;
+    margin-top:4px;
+    color:var(--muted);
+    font-size:.95rem;
+  }
+
+  .back-link{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-height:48px;
+    padding:0 18px;
+    border-radius:16px;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+    color:#fff;
+    font-weight:700;
+  }
+
+  .pay-layout{
+    display:grid;
+    grid-template-columns:minmax(0, 1fr) minmax(360px, 470px);
+    gap:26px;
+    align-items:stretch;
+  }
+
+  .pay-visual{
+    position:relative;
+    min-height:760px;
+    border-radius:34px;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.08);
+    box-shadow:var(--shadow);
     background:
-      radial-gradient(circle at 20% 20%, rgba(110,180,255,.28), transparent 26%),
-      radial-gradient(circle at 80% 22%, rgba(154,102,255,.22), transparent 28%),
-      radial-gradient(circle at 46% 75%, rgba(80,219,255,.18), transparent 24%),
-      linear-gradient(180deg, rgba(7,16,37,.98), rgba(8,14,30,.94));
-    border:1px solid rgba(255,255,255,.06);position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:20px;
+      linear-gradient(180deg, rgba(3,7,18,.28), rgba(3,7,18,.82)),
+      url("assets/covers/collage.jpg") center center / cover no-repeat;
   }
-  .cover-art::before{
-    content:"";position:absolute;inset:0;
+
+  .pay-visual::before{
+    content:"";
+    position:absolute;
+    inset:0;
     background:
-      radial-gradient(2px 2px at 14% 18%, rgba(255,255,255,.94), transparent 62%),
-      radial-gradient(1.5px 1.5px at 22% 67%, rgba(255,255,255,.88), transparent 62%),
-      radial-gradient(2px 2px at 74% 30%, rgba(255,255,255,.86), transparent 62%),
-      radial-gradient(1px 1px at 64% 75%, rgba(255,255,255,.72), transparent 62%),
-      radial-gradient(2px 2px at 46% 18%, rgba(255,255,255,.88), transparent 62%);
-    opacity:.7;
+      radial-gradient(circle at 16% 22%, rgba(61,146,255,.16), transparent 24%),
+      radial-gradient(circle at 78% 18%, rgba(154,102,255,.14), transparent 28%),
+      linear-gradient(180deg, rgba(0,0,0,.18), rgba(0,0,0,.52) 58%, rgba(0,0,0,.82) 100%);
+    pointer-events:none;
   }
-  .cover-label{position:relative;z-index:2}
-  .cover-label small{display:block;color:#9ccfff;text-transform:uppercase;letter-spacing:.08em;font-size:.76rem;margin-bottom:6px}
-  .cover-label strong{font-size:1.4rem;line-height:1.08}
-  .card{padding:28px;display:flex;flex-direction:column}
-  .chip-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
-  .chip{display:inline-flex;align-items:center;min-height:34px;padding:0 12px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);font-weight:800;font-size:.82rem}
-  .chip.accent{background:rgba(255,191,31,.12);border-color:rgba(255,191,31,.22);color:#ffd54a}
-  .chip.blue{background:rgba(52,144,255,.12);border-color:rgba(82,145,255,.28);color:#9fd4ff}
-  .plan-title{font-size:1.9rem;line-height:1.04;margin-bottom:10px}
-  .plan-copy{color:var(--muted);line-height:1.72;margin-bottom:18px}
-  .price-row{display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-bottom:10px}
-  .old-price{font-size:1.2rem;font-weight:800;color:rgba(255,255,255,.45);text-decoration:line-through;text-decoration-thickness:2px}
-  .new-price{font-size:3rem;line-height:1;letter-spacing:-.04em;font-weight:900}
-  .currency{color:#d7e5fb;font-weight:700;font-size:1rem;margin-bottom:5px}
-  .desc{color:#9fb5db;font-size:.98rem;margin-bottom:18px}
-  .feature-list{display:grid;gap:12px;margin-bottom:18px}
-  .trust{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
-  .trust span{display:inline-flex;align-items:center;min-height:36px;padding:0 14px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);color:#fff;font-weight:800;font-size:.88rem}
-  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:0 22px;border-radius:18px;font-weight:800;font-size:1rem;border:1px solid transparent;cursor:pointer;transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease}
-  .btn:hover{transform:translateY(-1px)}
-  .btn-primary{color:#fff;background:linear-gradient(135deg,#2a82ff 0%,#4aa7ff 100%);box-shadow:0 18px 34px rgba(38,121,255,.24)}
-  .btn-secondary{color:#fff;background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.08);backdrop-filter:blur(10px)}
-  .note{margin-top:14px;color:#8ea3c8;font-size:.88rem;line-height:1.55}
-  .footer-note{margin-top:22px;padding:16px 18px;border-radius:20px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);color:#cfe0fa;line-height:1.65;font-size:.94rem}
-  @media (max-width: 980px){.hero{grid-template-columns:1fr}}
-  @media (max-width: 760px){.page{padding-top:20px}.topbar{padding-bottom:18px}.visual-shell{grid-template-columns:1fr}.hero-copy,.card{padding:22px}.plan-title{font-size:1.65rem}.new-price{font-size:2.45rem}}
+
+  .visual-copy{
+    position:absolute;
+    top:28px;
+    left:28px;
+    right:28px;
+    z-index:2;
+  }
+
+  .visual-copy h1{
+    font-size:clamp(2rem, 4.2vw, 4.1rem);
+    line-height:.93;
+    letter-spacing:-.04em;
+    max-width:8ch;
+    margin-bottom:14px;
+  }
+
+  .visual-copy p{
+    max-width:26ch;
+    color:#ecf4ff;
+    font-size:1.05rem;
+    line-height:1.7;
+  }
+
+  .visual-bottom{
+    position:absolute;
+    left:22px;
+    right:22px;
+    bottom:18px;
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    z-index:2;
+  }
+
+  .visual-pill{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-height:58px;
+    padding:0 20px;
+    border-radius:18px;
+    background:rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.10);
+    backdrop-filter:blur(10px);
+    box-shadow:0 14px 28px rgba(0,0,0,.18);
+    color:#fff;
+    font-size:1rem;
+    font-weight:800;
+  }
+
+  .pay-panel{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+    min-width:0;
+  }
+
+  .panel-card{
+    position:relative;
+    padding:24px 22px;
+    border-radius:28px;
+    background:linear-gradient(180deg, rgba(9,18,42,.88), rgba(9,18,42,.66));
+    border:1px solid rgba(255,255,255,.08);
+    box-shadow:var(--shadow-soft);
+    overflow:hidden;
+  }
+
+  .panel-card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    height:1px;
+    background:linear-gradient(90deg, transparent, rgba(255,255,255,.26), transparent);
+  }
+
+  .price-card{
+    padding-top:26px;
+    padding-bottom:18px;
+  }
+
+  .launch-tag{
+    display:inline-flex;
+    align-items:center;
+    min-height:44px;
+    padding:0 18px;
+    border-radius:999px;
+    background:rgba(255,39,72,.12);
+    border:1px solid rgba(255,86,112,.26);
+    color:#ffb9c3;
+    font-weight:900;
+    font-size:1rem;
+    letter-spacing:.03em;
+    margin-bottom:18px;
+  }
+
+  .price-row{
+    display:flex;
+    align-items:flex-end;
+    gap:14px;
+    flex-wrap:wrap;
+    margin-bottom:10px;
+  }
+
+  .old-price{
+    color:rgba(255,255,255,.42);
+    text-decoration:line-through;
+    text-decoration-thickness:2px;
+    font-size:1.05rem;
+    font-weight:800;
+    margin-bottom:10px;
+  }
+
+  .new-price{
+    font-size:4rem;
+    line-height:.92;
+    letter-spacing:-.05em;
+    font-weight:900;
+  }
+
+  .price-copy{
+    color:#d6e4fb;
+    line-height:1.55;
+    font-size:1rem;
+  }
+
+  .panel-title{
+    font-size:1.1rem;
+    line-height:1.15;
+    margin-bottom:10px;
+    font-weight:900;
+  }
+
+  .panel-text{
+    color:#cddbf1;
+    line-height:1.65;
+    font-size:1rem;
+  }
+
+  .pay-secure{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-weight:900;
+    font-size:1rem;
+    color:#edf5ff;
+  }
+
+  .pay-main-btn,
+  .pay-alt-btn{
+    min-height:62px;
+    border:none;
+    border-radius:20px;
+    font-size:1.05rem;
+    font-weight:900;
+    cursor:pointer;
+    transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
+  }
+
+  .pay-main-btn:hover,
+  .pay-alt-btn:hover{
+    transform:translateY(-1px);
+  }
+
+  .pay-main-btn{
+    color:#fff;
+    background:linear-gradient(180deg, var(--danger-2), var(--danger));
+    box-shadow:0 18px 36px rgba(255,23,53,.22);
+  }
+
+  .pay-alt-btn{
+    color:#fff;
+    background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.06));
+    border:1px solid rgba(255,255,255,.08);
+  }
+
+  .pay-footer-note{
+    text-align:center;
+    color:#90a5c9;
+    font-size:.96rem;
+    line-height:1.6;
+    padding:0 8px;
+  }
+
+  @media (max-width: 1080px){
+    .pay-layout{
+      grid-template-columns:1fr;
+    }
+
+    .pay-visual{
+      min-height:560px;
+    }
+  }
+
+  @media (max-width: 760px){
+    .page{
+      padding-top:20px;
+    }
+
+    .topbar{
+      padding-bottom:18px;
+      flex-wrap:wrap;
+    }
+
+    .visual-copy{
+      top:22px;
+      left:22px;
+      right:22px;
+    }
+
+    .visual-bottom{
+      left:16px;
+      right:16px;
+      bottom:16px;
+      gap:10px;
+    }
+
+    .visual-pill{
+      min-height:52px;
+      padding:0 16px;
+      font-size:.94rem;
+    }
+
+    .pay-visual{
+      min-height:520px;
+      border-radius:28px;
+    }
+
+    .panel-card{
+      padding:20px 18px;
+      border-radius:24px;
+    }
+
+    .new-price{
+      font-size:3.1rem;
+    }
+
+    .pay-main-btn,
+    .pay-alt-btn{
+      min-height:58px;
+      font-size:1rem;
+    }
+  }
 </style>
 </head>
 <body>
@@ -162,49 +531,57 @@
       <a class="back-link" href="javascript:history.back()">Volver</a>
     </div>
 
-    <section class="hero">
-      <article class="hero-copy">
-        <span class="eyebrow">Checkout Nébula</span>
-        <h1 id="heroTitle">Cargando plan...</h1>
-        <p id="heroText">Estamos preparando tu acceso para que continúes leyendo sin interrupciones.</p>
-
-        <div class="visual-shell">
-          <div class="cover-art">
-            <div class="cover-label">
-              <small id="coverKicker">Plan</small>
-              <strong id="coverTitle">Nébula</strong>
-            </div>
-          </div>
-
-          <div class="mini-bullets">
-            <div id="mini1">Acceso inmediato al completar tu pago.</div>
-            <div id="mini2">Tu progreso quedará asociado a tu cuenta.</div>
-            <div id="mini3">Pago protegido y flujo simple.</div>
-          </div>
+    <section class="pay-layout">
+      <article class="pay-visual">
+        <div class="visual-copy">
+          <h1 id="heroTitle">Cargando plan...</h1>
+          <p id="heroText">Estamos preparando tu acceso para que continúes leyendo sin interrupciones.</p>
         </div>
 
-        <div class="footer-note" id="footerNote">El acceso se activará según el plan que elijas.</div>
+        <div class="visual-bottom">
+          <span class="visual-pill" id="mini1">Acceso inmediato</span>
+          <span class="visual-pill" id="mini2">Progreso guardado</span>
+          <span class="visual-pill" id="mini3">Pago seguro</span>
+        </div>
       </article>
 
-      <aside class="card">
-        <div class="chip-row" id="chipRow"></div>
-        <h2 class="plan-title" id="title">Cargando...</h2>
-        <p class="plan-copy" id="desc">Preparando detalle del plan.</p>
+      <aside class="pay-panel">
+        <div class="panel-card price-card">
+          <span class="launch-tag" id="launchTag">PRECIO LANZAMIENTO</span>
 
-        <div class="price-row">
-          <span class="old-price" id="old"></span>
-          <strong class="new-price" id="price"></strong>
-          <span class="currency" id="currency">CLP</span>
+          <div class="price-row">
+            <span class="old-price" id="old"></span>
+            <strong class="new-price" id="price"></strong>
+          </div>
+
+          <p class="price-copy" id="priceText"></p>
         </div>
 
-        <div class="desc" id="priceText"></div>
-        <div class="feature-list" id="featureList"></div>
-        <div class="trust" id="trustBadges"></div>
+        <div class="panel-card">
+          <h2 class="panel-title" id="premiumTitle">Membresía Premium</h2>
+          <p class="panel-text" id="premiumText">Acceso completo al catálogo, lectura sin bloqueos y nuevas novelas todas las semanas.</p>
+        </div>
 
-        <a id="payBtn" class="btn btn-primary" href="#" onclick="iniciarPago(); return false;"></a>
-        <a id="secondaryBtn" class="btn btn-secondary" href="javascript:history.back()" style="margin-top:12px;">Volver a Nébula</a>
+        <div class="panel-card">
+          <h2 class="panel-title" id="individualTitle">Compra individual</h2>
+          <p class="panel-text" id="individualText">Compra solo esta novela y desbloquea sus capítulos.</p>
+        </div>
 
-        <p class="note" id="noteText">Serás redirigido al flujo de pago correspondiente.</p>
+        <div class="panel-card">
+          <div class="pay-secure" id="secureText">💳 Pago seguro con Mercado Pago</div>
+        </div>
+
+        <button id="payBtn" class="pay-main-btn" onclick="iniciarPago()">
+          Continuar al pago
+        </button>
+
+        <button class="pay-alt-btn" onclick="history.back()">
+          Volver a Nébula
+        </button>
+
+        <p class="pay-footer-note" id="noteText">
+          Accede al catálogo, compra novelas y sigue leyendo donde quedaste.
+        </p>
       </aside>
     </section>
   </div>
@@ -214,6 +591,7 @@
   const canvas = document.getElementById('stars-canvas');
   const ctx = canvas.getContext('2d');
   let stars = [];
+
   function resizeStarsCanvas(){
     const dpr = window.devicePixelRatio || 1;
     canvas.width = window.innerWidth * dpr;
@@ -223,14 +601,22 @@
     ctx.setTransform(dpr,0,0,dpr,0,0);
     createStars();
   }
+
   function createStars(){
     stars = [];
     const area = window.innerWidth * window.innerHeight;
     const amount = Math.max(70, Math.floor(area / 14000));
     for(let i=0;i<amount;i++){
-      stars.push({x:Math.random()*window.innerWidth,y:Math.random()*window.innerHeight,r:Math.random()*1.5+.4,speed:Math.random()*.25+.05,alpha:Math.random()*.7+.15});
+      stars.push({
+        x:Math.random()*window.innerWidth,
+        y:Math.random()*window.innerHeight,
+        r:Math.random()*1.5+.4,
+        speed:Math.random()*.25+.05,
+        alpha:Math.random()*.7+.15
+      });
     }
   }
+
   function animateStars(){
     ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
     for(const s of stars){
@@ -239,10 +625,14 @@
       ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
       ctx.fill();
       s.y += s.speed;
-      if(s.y > window.innerHeight + 2){s.y = -2;s.x = Math.random()*window.innerWidth;}
+      if(s.y > window.innerHeight + 2){
+        s.y = -2;
+        s.x = Math.random()*window.innerWidth;
+      }
     }
     requestAnimationFrame(animateStars);
   }
+
   window.addEventListener('resize', resizeStarsCanvas);
   resizeStarsCanvas();
   animateStars();
@@ -252,82 +642,53 @@
   const params = new URLSearchParams(window.location.search);
   const tipo = params.get("tipo");
 
-  const chipRow = document.getElementById("chipRow");
-  const featureList = document.getElementById("featureList");
-  const trustBadges = document.getElementById("trustBadges");
-  const title = document.getElementById("title");
-  const oldPrice = document.getElementById("old");
-  const price = document.getElementById("price");
-  const desc = document.getElementById("desc");
-  const payBtn = document.getElementById("payBtn");
   const heroTitle = document.getElementById("heroTitle");
   const heroText = document.getElementById("heroText");
-  const coverKicker = document.getElementById("coverKicker");
-  const coverTitle = document.getElementById("coverTitle");
   const mini1 = document.getElementById("mini1");
   const mini2 = document.getElementById("mini2");
   const mini3 = document.getElementById("mini3");
-  const footerNote = document.getElementById("footerNote");
+  const oldPrice = document.getElementById("old");
+  const price = document.getElementById("price");
   const priceText = document.getElementById("priceText");
+  const premiumTitle = document.getElementById("premiumTitle");
+  const premiumText = document.getElementById("premiumText");
+  const individualTitle = document.getElementById("individualTitle");
+  const individualText = document.getElementById("individualText");
+  const payBtn = document.getElementById("payBtn");
   const noteText = document.getElementById("noteText");
 
-  function setChips(items){ chipRow.innerHTML = items.map(item => `<span class="chip ${item.className || ''}">${item.label}</span>`).join(""); }
-  function setFeatures(items){ featureList.innerHTML = items.map(item => `<div>${item}</div>`).join(""); }
-  function setTrust(items){ trustBadges.innerHTML = items.map(item => `<span>${item}</span>`).join(""); }
-
   if(tipo === "individual"){
-    heroTitle.innerText = "Desbloquea esta historia y sigue leyendo";
-    heroText.innerText = "Activa el acceso completo de esta novela o temporada con un pago único y continúa exactamente donde te quedaste.";
-    coverKicker.innerText = "Desbloqueo individual";
-    coverTitle.innerText = "Historia completa";
-    mini1.innerText = "Pago único con acceso inmediato.";
-    mini2.innerText = "Tus primeros 3 capítulos siguen gratis.";
-    mini3.innerText = "Ideal para desbloquear solo la historia que te atrapó.";
-    footerNote.innerText = "Este plan está pensado para lectores que quieren seguir una historia puntual sin contratar membresía mensual.";
-    setChips([{label:"Oferta activa", className:"accent"},{label:"Pago único"},{label:"Acceso inmediato"}]);
-    title.innerText = "Desbloqueo individual";
+    heroTitle.innerText = "Sigue leyendo sin interrupciones";
+    heroText.innerText = "Desbloquea esta historia con un pago único y continúa exactamente donde te quedaste dentro de Nébula.";
+    mini1.innerText = "Nuevas historias";
+    mini2.innerText = "Progreso guardado";
+    mini3.innerText = "Pago seguro";
     oldPrice.innerText = "$1.500";
     price.innerText = "$990";
-    desc.innerText = "Acceso completo a la historia o temporada seleccionada.";
-    priceText.innerText = "Promoción especial por tiempo limitado.";
-    setFeatures([
-      "Acceso completo inmediato a la novela o temporada.",
-      "Primeros 3 capítulos gratis para engancharte.",
-      "Tu progreso queda guardado en tu cuenta.",
-      "Disponible en celular, tablet, notebook y PC."
-    ]);
-    setTrust(["Mercado Pago", "Pago seguro", "Acceso inmediato"]);
-    noteText.innerText = "Serás redirigido al checkout del desbloqueo individual.";
-    payBtn.innerText = "Pagar desbloqueo por $990";
-    payBtn.href = "#";
+    priceText.innerHTML = "Antes $1.500. Ahora solo $990 por esta novela.<br>Premium antes $6.990, ahora $4.990.";
+    premiumTitle.innerText = "Membresía Premium";
+    premiumText.innerText = "Acceso completo al catálogo, lectura sin bloqueos y nuevas novelas todas las semanas.";
+    individualTitle.innerText = "Compra individual";
+    individualText.innerText = "Compra solo esta novela y desbloquea sus capítulos.";
+    payBtn.innerText = "Iniciar pago y continuar";
+    noteText.innerText = "Accede al catálogo, compra novelas y sigue leyendo donde quedaste.";
   } else {
     heroTitle.innerText = "Pasa a Premium y desbloquea más";
-    heroText.innerText = "Obtén la mejor relación precio-contenido para seguir descubriendo historias nuevas cada semana dentro de Nébula.";
-    coverKicker.innerText = "Premium mensual";
-    coverTitle.innerText = "Más historias";
-    mini1.innerText = "Acceso pensado para lectores frecuentes.";
-    mini2.innerText = "Más valor para seguir descubriendo contenido.";
-    mini3.innerText = "Ideal si lees varias historias al mes.";
-    footerNote.innerText = "Premium te da una experiencia más amplia dentro de Nébula y está diseñado para quienes quieren seguir explorando constantemente.";
-    setChips([{label:"Premium mensual", className:"blue"},{label:"Mejor opción", className:"accent"},{label:"Contenido constante"}]);
-    title.innerText = "Plan Premium";
+    heroText.innerText = "Obtén la mejor relación precio-contenido para descubrir más historias y leer sin límites dentro de Nébula.";
+    mini1.innerText = "Más historias";
+    mini2.innerText = "Mejor valor";
+    mini3.innerText = "Membresía activa";
     oldPrice.innerText = "$6.990";
     price.innerText = "$4.990";
-    desc.innerText = "La mejor opción para lectores frecuentes de Nébula.";
-    priceText.innerText = "Promoción especial para acceder a una experiencia más completa.";
-    setFeatures([
-      "Sigue descubriendo nuevas novelas cada semana.",
-      "Progreso guardado y experiencia más completa.",
-      "Ideal si lees varias historias al mes.",
-      "Diseñado para aprovechar mejor el universo Nébula."
-    ]);
-    setTrust(["Mercado Pago", "Pago seguro", "Membresía activa"]);
-    noteText.innerText = "Serás redirigido al checkout del plan Premium.";
-    payBtn.innerText = "Pasar a premium por $4.990";
-    payBtn.href = "#";
+    priceText.innerHTML = "Activa tu membresía y desbloquea una experiencia más completa dentro de Nébula.";
+    premiumTitle.innerText = "Membresía Premium";
+    premiumText.innerText = "Ideal para lectores frecuentes que quieren seguir descubriendo nuevas novelas cada semana.";
+    individualTitle.innerText = "Compra individual";
+    individualText.innerText = "También puedes optar por desbloquear una sola novela con pago único.";
+    payBtn.innerText = "Pasar a premium";
+    noteText.innerText = "Obtén acceso continuo y aprovecha mejor el universo Nébula.";
   }
-
-</script> <!-- 🔥 ESTE ERA EL ERROR, FALTABA ESTO -->
+</script>
 
 <script>
 const API_BASE = "https://api-mvtstimkcq-uc.a.run.app";
@@ -381,3 +742,5 @@ async function iniciarPago() {
   }
 }
 </script>
+</body>
+</html>
