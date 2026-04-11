@@ -2699,17 +2699,57 @@ accountLogoutBtn?.addEventListener('click', handleLogout);
 logoutBtn?.addEventListener('click', handleLogout);
 
 /* ===== AUTH ===== */
+/* ===== AUTH ===== */
 onAuthStateChanged(auth, async (user) => {
-  console.log("🔥 USER AUTH:", user); // 👈 AQUÍ EXACTO
-  if (!user) return updateLoggedOutUI();
+  console.log("🔥 USER AUTH:", user);
+
+  if (!user) {
+    updateLoggedOutUI();
+    return;
+  }
 
   try {
-    const snap = await ensureUserDocument(user);
-    updateLoggedInUI(user, snap.data());
+    const userRef = doc(db, 'users', user.uid);
+    const snap = await getDoc(userRef);
+
+    let data = {};
+
+    if (snap.exists()) {
+      data = snap.data();
+    } else {
+      await setDoc(userRef, {
+        uid: user.uid,
+        email: user.email || '',
+        name: user.displayName || 'Usuario Nébula',
+        avatar: '🌌',
+        plan: 'free',
+        subscription: 'free',
+        coins: 0,
+        unlockedNovels: [],
+        purchasedNovels: [],
+        readChapters: [],
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp()
+      });
+
+      const newSnap = await getDoc(userRef);
+      data = newSnap.exists() ? newSnap.data() : {};
+    }
+
+    console.log("🔥 DATA FINAL:", data);
+    console.log("🪙 COINS FINAL:", data?.coins);
+
+    updateLoggedInUI(user, data);
   } catch (e) {
-      console.error("ERROR FIRESTORE:", e);
-      // 🔥 NO BOTAR LA SESIÓN
-      updateLoggedInUI(user, {}); 
+    console.error("ERROR FIRESTORE:", e);
+    updateLoggedInUI(user, {
+      name: user.displayName || 'Usuario',
+      email: user.email || '',
+      plan: 'free',
+      subscription: 'free',
+      coins: 0,
+      readChapters: []
+    });
   }
 });
 </script>
