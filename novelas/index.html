@@ -1017,7 +1017,7 @@
   const auth = getAuth(firebaseApp);
   const db = getFirestore(firebaseApp);
 
-  const API_BASE_URL = "https://api-mvtstimkcq-uc.a.run.app?v=2";
+  const API_BASE_URL = "https://api-mvtstimkcq-uc.a.run.app";
 
   const params = new URLSearchParams(window.location.search);
   const novelId = params.get("id");
@@ -1097,7 +1097,10 @@
       const data = snap.data();
       const plan = String(data.plan || "free").toLowerCase();
       const subscription = String(data.subscription || plan || "free").toLowerCase();
-      const isPremium = plan === "premium" || subscription === "premium";
+      const isPremium =
+        data.premiumActive === true ||
+        plan === "premium" ||
+        subscription === "premium";
 
       return {
         isLogged: true,
@@ -1787,30 +1790,7 @@ const useCoinBtnTop = document.getElementById("useCoinBtnTop");
       });
     }
 
-    if (buyCoinBtn) {
-      buyCoinBtn.addEventListener("click", async () => {
-        const currentUser = auth.currentUser;
-
-        if (!currentUser) {
-          window.location.href = "../login.html";
-          return;
-        }
-
-        try {
-          buyCoinBtn.disabled = true;
-          buyCoinBtn.textContent = "Redirigiendo a Mercado Pago...";
-          await createCoinPurchase(currentUser);
-        } catch (error) {
-          console.error(error);
-          alert(error.message || "No se pudo iniciar la compra del coin.");
-          buyCoinBtn.disabled = false;
-          buyCoinBtn.textContent = "Comprar 1 Coin por $990";
-        }
-      });
-    }
-
-    
-if (useCoinBtnTop) {
+    if (useCoinBtnTop) {
   useCoinBtnTop.addEventListener("click", async () => {
     const currentUser = auth.currentUser;
     if (!currentUser) {
@@ -1826,24 +1806,6 @@ if (useCoinBtnTop) {
       alert(error.message || "No se pudo desbloquear la novela.");
       useCoinBtnTop.disabled = false;
       useCoinBtnTop.textContent = "🪙 Desbloquear toda la temporada con tu Coin";
-    }
-  });
-}
-
-if (buyCoinBtnTop) {
-  buyCoinBtnTop.addEventListener("click", async () => {
-    const currentUser = auth.currentUser;
-    if (!currentUser) {
-      window.location.href = "../login.html";
-      return;
-    }
-    try {
-      buyCoinBtnTop.disabled = true;
-      buyCoinBtnTop.textContent = "Redirigiendo...";
-      await createCoinPurchase(currentUser);
-    } catch (error) {
-      alert(error.message);
-      buyCoinBtnTop.disabled = false;
     }
   });
 }
