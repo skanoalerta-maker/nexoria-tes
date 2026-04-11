@@ -24,10 +24,6 @@ const WEBHOOK_URL =
   process.env.WEBHOOK_URL ||
   "https://api-mvtstimkcq-uc.a.run.app/webhook";
 
-/**
- * Limpia títulos para evitar problemas de encoding en Mercado Pago.
- * En tu web puedes mostrar "Código Nébula", pero a MP conviene enviar texto plano.
- */
 function sanitizeTitle(value = "") {
   return String(value)
     .normalize("NFD")
@@ -35,6 +31,10 @@ function sanitizeTitle(value = "") {
     .replace(/[—–]/g, "-")
     .replace(/[^\x20-\x7E]/g, "")
     .trim();
+}
+
+function normalizeNovelId(novelId) {
+  return novelId ? String(novelId).replace(/-t\d+$/i, "") : null;
 }
 
 app.get("/", (req, res) => {
@@ -66,8 +66,8 @@ app.post("/create-preference", async (req, res) => {
       title,
       price,
       quantity = 1,
-      type = "single_purchase", // single_purchase | premium
-      novelId = null,           // obligatorio solo para compra individual
+      type = "single_purchase", // single_purchase | premium | coin
+      novelId = null,
       userId = null,
       email = null,
     } = req.body || {};
@@ -86,8 +86,8 @@ app.post("/create-preference", async (req, res) => {
       });
     }
 
-    // Compra individual requiere novelId. Premium no.
-    if (type !== "premium" && !novelId) {
+    // Solo compra individual requiere novelId
+    if (type === "single_purchase" && !novelId) {
       return res.status(400).json({
         ok: false,
         error: "Falta novelId para la compra individual.",
@@ -115,7 +115,7 @@ app.post("/create-preference", async (req, res) => {
 
     const externalReference = [
       type || "purchase",
-      novelId || "premium",
+      novelId || "general",
       userId,
       Date.now(),
     ].join("_");
@@ -145,7 +145,6 @@ app.post("/create-preference", async (req, res) => {
       },
     };
 
-    // Solo manda payer si hay email
     if (email) {
       mpBody.payer = {
         email: String(email),
@@ -249,7 +248,6 @@ async function processApprovedPayment(paymentData) {
   const paymentRef = db.collection("payments").doc(paymentId);
   const existingPayment = await paymentRef.get();
 
-  // Evita reprocesar el mismo pago
   if (existingPayment.exists && existingPayment.data()?.processed === true) {
     return { alreadyProcessed: true };
   }
@@ -276,7 +274,6 @@ async function processApprovedPayment(paymentData) {
     { merge: true }
   );
 
-  // Si no esta aprobado, solo registramos estado
   if (status !== "approved") {
     await paymentRef.set(
       {
@@ -293,28 +290,40 @@ async function processApprovedPayment(paymentData) {
     throw new Error("userId no encontrado en metadata.");
   }
 
-  // Compra individual: desbloquea solo esa novela
   if (type === "single_purchase" || type === "novel") {
     if (!novelId) {
       throw new Error("novelId no encontrado en metadata.");
     }
 
+    const baseNovelId = normalizeNovelId(novelId);
+
     await db.collection("users").doc(userId).set(
       {
-        purchasedNovels: admin.firestore.FieldValue.arrayUnion(novelId),
+        unlockedNovels: admin.firestore.FieldValue.arrayUnion(baseNovelId),
         updatedAt: admin.firestore.FieldValue.serverTimestamp(),
       },
       { merge: true }
     );
   }
 
-  // Premium: activa acceso total
   if (type === "premium") {
     await db.collection("users").doc(userId).set(
       {
         plan: "premium",
         subscription: "premium",
         premiumActive: true,
+        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+      },
+      { merge: true }
+    );
+  }
+
+  if (type === "coin") {
+    const coinsToAdd = Math.max(1, Math.floor(amount / 990));
+
+    await db.collection("users").doc(userId).set(
+      {
+        coins: admin.firestore.FieldValue.increment(coinsToAdd),
         updatedAt: admin.firestore.FieldValue.serverTimestamp(),
       },
       { merge: true }
@@ -379,7 +388,7 @@ app.post("/webhook", async (req, res) => {
       return res.status(200).send("ok");
     }
 
-    // Ignora otros eventos que no sean paymentconst WEBHOOK_URL =
+    // Ignora otros eventos que no sean payment
     if (topic && topic !== "payment") {
       return res.status(200).send("ok");
     }
