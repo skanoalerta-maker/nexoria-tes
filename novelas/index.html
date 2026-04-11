@@ -595,6 +595,26 @@
       min-width:min(100%, 320px);
     }
 
+    .btn-gold{
+      color:#171105;
+      background:linear-gradient(135deg, #ffec9e 0%, #ffd54a 38%, #ffbf1f 100%);
+      border:1px solid rgba(255,212,74,.48);
+      box-shadow:0 18px 34px rgba(255,191,31,.20), 0 0 0 1px rgba(255,255,255,.14) inset;
+      text-shadow:0 1px 0 rgba(255,255,255,.28);
+      font-weight:900;
+    }
+
+    .btn-gold:hover{
+      transform:translateY(-1px);
+      box-shadow:0 22px 40px rgba(255,191,31,.28), 0 0 0 1px rgba(255,255,255,.18) inset;
+    }
+
+    .mini-badge.gold{
+      background:linear-gradient(135deg, rgba(255,212,74,.18), rgba(255,191,31,.12));
+      border:1px solid rgba(255,212,74,.34);
+      color:#fff6cf;
+    }
+
     .chapters-section{
       padding:10px 0 60px;
     }
@@ -971,7 +991,6 @@
     getFirestore,
     doc,
     getDoc,
-    setDoc,
     runTransaction,
     serverTimestamp
   } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
@@ -1046,7 +1065,9 @@
         isLogged: false,
         isPremium: false,
         plan: "free",
-        subscription: "free"
+        subscription: "free",
+        coins: 0,
+        unlockedNovels: []
       };
     }
 
@@ -1059,7 +1080,9 @@
           isLogged: true,
           isPremium: false,
           plan: "free",
-          subscription: "free"
+          subscription: "free",
+          coins: 0,
+          unlockedNovels: []
         };
       }
 
@@ -1072,7 +1095,9 @@
         isLogged: true,
         isPremium,
         plan,
-        subscription
+        subscription,
+        coins: Number(data.coins || 0),
+        unlockedNovels: Array.isArray(data.unlockedNovels) ? data.unlockedNovels : []
       };
     } catch (error) {
       console.error("Error leyendo acceso del usuario:", error);
@@ -1080,7 +1105,9 @@
         isLogged: true,
         isPremium: false,
         plan: "free",
-        subscription: "free"
+        subscription: "free",
+        coins: 0,
+        unlockedNovels: []
       };
     }
   }
@@ -1145,6 +1172,55 @@
     }
 
     window.location.href = data.init_point;
+  }
+
+
+  async function createCoinPurchase(currentUser) {
+    const data = await postJson(`${API_BASE_URL}/create-preference`, {
+      title: "Nébula – 1 Coin",
+      price: 990,
+      quantity: 1,
+      type: "coin",
+      novelId: null,
+      userId: currentUser.uid,
+      email: currentUser.email
+    });
+
+    if (!data.ok || !data.init_point) {
+      throw new Error(data.error || "No se pudo crear la compra del coin.");
+    }
+
+    window.location.href = data.init_point;
+  }
+
+  async function useCoinForNovel(currentUser, currentNovelId) {
+    const userRef = doc(db, "users", currentUser.uid);
+
+    await runTransaction(db, async (transaction) => {
+      const snap = await transaction.get(userRef);
+
+      if (!snap.exists()) {
+        throw new Error("No se encontró tu cuenta de usuario.");
+      }
+
+      const data = snap.data() || {};
+      const coins = Number(data.coins || 0);
+      const unlockedNovels = Array.isArray(data.unlockedNovels) ? data.unlockedNovels : [];
+
+      if (unlockedNovels.includes(currentNovelId)) {
+        return;
+      }
+
+      if (coins <= 0) {
+        throw new Error("No tienes coins disponibles.");
+      }
+
+      transaction.update(userRef, {
+        coins: coins - 1,
+        unlockedNovels: [...unlockedNovels, currentNovelId],
+        updatedAt: serverTimestamp()
+      });
+    });
   }
 
   function paintStars(stars, value) {
@@ -1294,6 +1370,7 @@
     const chapters = getOrderedChapters(novel.chapters);
     const freeChapters = Number(novel.freeChapters ?? 3);
     const progressKey = "nebula-progress-" + novelId;
+    const hasUnlockedThisNovel = Array.isArray(accessState.unlockedNovels) && accessState.unlockedNovels.includes(novelId);
 
     if (!chapters.length) {
       app.innerHTML = `
@@ -1327,6 +1404,7 @@
     function chapterIsAccessible(index) {
       const position = index + 1;
       if (accessState.isPremium) return true;
+      if (hasUnlockedThisNovel) return true;
       return position <= freeChapters;
     }
 
@@ -1338,15 +1416,19 @@
 
       const statusClass = isLocked
         ? "status-locked"
-        : isFree
-          ? "status-free"
-          : "status-premium";
+        : hasUnlockedThisNovel && !accessState.isPremium && !isFree
+          ? "status-premium"
+          : isFree
+            ? "status-free"
+            : "status-premium";
 
       const statusText = isLocked
         ? "Bloqueado"
-        : isFree
-          ? "Gratis"
-          : "Premium";
+        : hasUnlockedThisNovel && !accessState.isPremium && !isFree
+          ? "Desbloqueado"
+          : isFree
+            ? "Gratis"
+            : "Premium";
 
       const chapterPath = getChapterPath(chapter);
 
@@ -1377,21 +1459,27 @@
 
     const accessTitle = accessState.isPremium
       ? "Tu acceso premium está activo"
-      : accessState.isLogged
-        ? "Tu cuenta está en modo free"
-        : "Estás explorando como visitante";
+      : hasUnlockedThisNovel
+        ? "Esta novela ya fue desbloqueada con coin"
+        : accessState.isLogged
+          ? "Tu cuenta está en modo free"
+          : "Estás explorando como visitante";
 
     const accessText = accessState.isPremium
       ? "Puedes leer todos los capítulos de esta novela sin restricciones."
-      : accessState.isLogged
-        ? `Tienes acceso gratis a los primeros ${freeChapters} capítulos. El resto se desbloquea con Premium.`
-        : `Puedes leer gratis los primeros ${freeChapters} capítulos. Para seguir, inicia sesión y luego activa Premium o compra acceso cuando conectemos pagos.`;
+      : hasUnlockedThisNovel
+        ? "Ya puedes leer todos los capítulos de esta novela gracias a tu desbloqueo con coin."
+        : accessState.isLogged
+          ? `Tienes acceso gratis a los primeros ${freeChapters} capítulos. El resto se desbloquea con 1 coin o Premium.`
+          : `Puedes leer gratis los primeros ${freeChapters} capítulos. Para seguir, inicia sesión y luego usa 1 coin o activa Premium.`;
 
     const accessStateLabel = accessState.isPremium
       ? "Historia desbloqueada"
-      : `Solo primeros ${freeChapters} capítulos`;
+      : hasUnlockedThisNovel
+        ? "Desbloqueada con coin"
+        : `Solo primeros ${freeChapters} capítulos`;
 
-    const mainActionLabel = accessState.isPremium
+    const mainActionLabel = accessState.isPremium || hasUnlockedThisNovel
       ? "Seguir leyendo"
       : "Comenzar lectura";
 
@@ -1411,6 +1499,7 @@
           <div class="header-actions">
             <a class="back-link" href="../index.html">← Volver a Nébula</a>
             <div class="mini-badge">Lectura por capítulos</div>
+            <div class="mini-badge gold">🪙 Coins disponibles: ${accessState.coins}</div>
             <div class="user-chip">${escapeHtml(getLocalUserIcon())} ${escapeHtml(getLocalUserName())}</div>
           </div>
         </div>
@@ -1468,8 +1557,8 @@
                 </div>
 
                 <div class="value-card">
-                  <small>Experiencia</small>
-                  <strong>Lectura optimizada para móvil, tablet y PC</strong>
+                  <small>Coins disponibles</small>
+                  <strong>${accessState.coins} Coin${accessState.coins === 1 ? "" : "s"}</strong>
                 </div>
               </div>
 
@@ -1572,12 +1661,13 @@
 
                   <span class="premium-pill">Pago con Mercado Pago</span>
                   <span class="premium-pill">Acceso inmediato</span>
+                  <span class="premium-pill">🪙 Coins disponibles: ${accessState.coins}</span>
                 </div>
 
                 <div class="premium-note">
-                  <strong>Acceso completo + contenido en crecimiento</strong>
+                  <strong>Elige cómo desbloquear esta novela</strong>
                   <span>
-                    Desbloqueas esta historia y todas las nuevas novelas semanales en Nébula.
+                    Con Premium accedes a todo Nébula. Con 1 coin desbloqueas esta novela completa y queda guardada en tu cuenta.
                   </span>
                 </div>
               </div>
@@ -1585,11 +1675,26 @@
               ${
                 accessState.isPremium
                   ? `<button class="btn btn-primary" type="button" disabled>Ya eres Premium</button>`
-                  : `
-                    <div class="payment-buttons">
-                      <span class="mini-badge">🔒 Acceso premium requerido</span>
-                    </div>
-                  `
+                  : hasUnlockedThisNovel
+                    ? `<button class="btn btn-gold" type="button" disabled>Novela desbloqueada con coin</button>`
+                    : !accessState.isLogged
+                      ? `
+                        <div class="payment-buttons">
+                          <span class="mini-badge">🔒 Inicia sesión para usar coins</span>
+                          <a class="btn btn-secondary" href="../login.html">Iniciar sesión</a>
+                        </div>
+                      `
+                      : `
+                        <div class="payment-buttons">
+                          <span class="mini-badge gold">🪙 Coins disponibles: ${accessState.coins}</span>
+                          ${
+                            accessState.coins > 0
+                              ? `<button class="btn btn-gold" type="button" id="useCoinBtn">Usar 1 Coin en esta novela</button>`
+                              : `<button class="btn btn-gold" type="button" id="buyCoinBtn">Comprar 1 Coin por $990</button>`
+                          }
+                          <button class="btn btn-primary" type="button" id="premiumPayBtn">Hazte Premium por $4.990</button>
+                        </div>
+                      `
               }
             </div>
           </div>
@@ -1604,7 +1709,8 @@
     const continueBtn = document.getElementById("continueBtn");
     const startBtn = document.getElementById("startBtn");
     const premiumPayBtn = document.getElementById("premiumPayBtn");
-    const novelPayBtn = document.getElementById("novelPayBtn");
+    const buyCoinBtn = document.getElementById("buyCoinBtn");
+    const useCoinBtn = document.getElementById("useCoinBtn");
     const ratingStars = Array.from(document.querySelectorAll(".rating-star"));
     const ratingAverage = document.getElementById("ratingAverage");
     const ratingTotal = document.getElementById("ratingTotal");
@@ -1650,8 +1756,8 @@
       });
     }
 
-    if (novelPayBtn) {
-      novelPayBtn.addEventListener("click", async () => {
+    if (buyCoinBtn) {
+      buyCoinBtn.addEventListener("click", async () => {
         const currentUser = auth.currentUser;
 
         if (!currentUser) {
@@ -1660,17 +1766,41 @@
         }
 
         try {
-          novelPayBtn.disabled = true;
-          novelPayBtn.textContent = "Redirigiendo a Mercado Pago...";
-          await createNovelPayment(currentUser, novel);
+          buyCoinBtn.disabled = true;
+          buyCoinBtn.textContent = "Redirigiendo a Mercado Pago...";
+          await createCoinPurchase(currentUser);
         } catch (error) {
           console.error(error);
-          alert(error.message || "No se pudo iniciar el pago de la novela.");
-          novelPayBtn.disabled = false;
-          novelPayBtn.textContent = "Comprar esta novela por $990";
+          alert(error.message || "No se pudo iniciar la compra del coin.");
+          buyCoinBtn.disabled = false;
+          buyCoinBtn.textContent = "Comprar 1 Coin por $990";
         }
       });
     }
+
+    if (useCoinBtn) {
+      useCoinBtn.addEventListener("click", async () => {
+        const currentUser = auth.currentUser;
+
+        if (!currentUser) {
+          window.location.href = "../login.html";
+          return;
+        }
+
+        try {
+          useCoinBtn.disabled = true;
+          useCoinBtn.textContent = "Desbloqueando novela...";
+          await useCoinForNovel(currentUser, novelId);
+          window.location.reload();
+        } catch (error) {
+          console.error(error);
+          alert(error.message || "No se pudo usar el coin en esta novela.");
+          useCoinBtn.disabled = false;
+          useCoinBtn.textContent = "Usar 1 Coin en esta novela";
+        }
+      });
+    }
+
 
     let ratingState = await loadRatingData(novelId, currentUser);
     renderRatingUI(ratingState, ratingStars, ratingAverage, ratingTotal, ratingStatus);
@@ -1763,3 +1893,4 @@
   </script>
 </body>
 </html>
+
