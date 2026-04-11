@@ -2553,9 +2553,18 @@ async function ensureUserDocument(user){
       email: user.email || '',
       name: user.displayName || 'Usuario Nébula',
       avatar: '🌌',
+
+      // 🔥 PLAN
       plan: 'free',
       subscription: 'free',
+
+      // 🪙 SISTEMA COINS (NUEVO)
+      coins: 0,
+      unlockedNovels: [],
+
+      // 📖 PROGRESO
       readChapters: [],
+
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp()
     });
@@ -2563,7 +2572,6 @@ async function ensureUserDocument(user){
 
   return await getDoc(userRef);
 }
-
 /* ===== UI STATES ===== */
 function updateLoggedOutUI(){
   headerLoginLink?.classList.remove('hidden-panel');
