@@ -1194,34 +1194,43 @@
   }
 
   async function useCoinForNovel(currentUser, currentNovelId) {
-    const userRef = doc(db, "users", currentUser.uid);
+  const userRef = doc(db, "users", currentUser.uid);
 
-    await runTransaction(db, async (transaction) => {
-      const snap = await transaction.get(userRef);
+  await runTransaction(db, async (transaction) => {
+    const snap = await transaction.get(userRef);
 
-      if (!snap.exists()) {
-        throw new Error("No se encontró tu cuenta de usuario.");
-      }
+    if (!snap.exists()) {
+      throw new Error("No se encontró tu cuenta de usuario.");
+    }
 
-      const data = snap.data() || {};
-      const coins = Number(data.coins || 0);
-      const unlockedNovels = Array.isArray(data.unlockedNovels) ? data.unlockedNovels : [];
+    const data = snap.data() || {};
+    const coins = Number(data.coins || 0);
+    const unlockedNovels = Array.isArray(data.unlockedNovels)
+      ? data.unlockedNovels
+      : [];
 
-      if (unlockedNovels.includes(currentNovelId)) {
-        return;
-      }
+    // 🔥 CONVERTIR A ID BASE (SIN TEMPORADA)
+    // codigo-nebula-t1 → codigo-nebula
+    const unlockId = currentNovelId.replace(/-t\d+$/, "");
 
-      if (coins <= 0) {
-        throw new Error("No tienes coins disponibles.");
-      }
+    // 🚫 SI YA ESTÁ DESBLOQUEADA LA NOVELA, NO HACER NADA
+    if (unlockedNovels.includes(unlockId)) {
+      return;
+    }
 
-      transaction.update(userRef, {
-        coins: coins - 1,
-        unlockedNovels: [...unlockedNovels, currentNovelId],
-        updatedAt: serverTimestamp()
-      });
+    // 🚫 SI NO TIENE COINS
+    if (coins <= 0) {
+      throw new Error("No tienes coins disponibles.");
+    }
+
+    // 💰 DESCONTAR COIN + GUARDAR NOVELA DESBLOQUEADA
+    transaction.update(userRef, {
+      coins: coins - 1,
+      unlockedNovels: [...unlockedNovels, unlockId],
+      updatedAt: serverTimestamp()
     });
-  }
+  });
+}
 
   function paintStars(stars, value) {
     stars.forEach((star) => {
