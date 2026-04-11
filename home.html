@@ -2700,6 +2700,7 @@ logoutBtn?.addEventListener('click', handleLogout);
 
 /* ===== AUTH ===== */
 onAuthStateChanged(auth, async (user) => {
+  console.log("🔥 USER AUTH:", user); // 👈 AQUÍ EXACTO
   if (!user) return updateLoggedOutUI();
 
   try {
