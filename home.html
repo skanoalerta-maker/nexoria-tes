@@ -2655,6 +2655,10 @@ function updateLoggedInUI(user, data){
   const coins = Number(data?.coins || 0);
   const readCount = Array.isArray(data?.readChapters) ? data.readChapters.length : 0;
 
+  console.log('UID ACTIVO:', user.uid);
+  console.log('DATA FIRESTORE:', data);
+  console.log('COINS FIRESTORE:', data?.coins);
+
   headerLoginLink?.classList.add('hidden-panel');
   accountMenu?.classList.remove('hidden-panel');
 
