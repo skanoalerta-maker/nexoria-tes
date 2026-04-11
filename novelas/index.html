@@ -609,6 +609,14 @@
       box-shadow:0 22px 40px rgba(255,191,31,.28), 0 0 0 1px rgba(255,255,255,.18) inset;
     }
 
+    .btn-coin-hero{
+      min-height:64px;
+      padding:0 28px;
+      font-size:1.05rem;
+      font-weight:900;
+      box-shadow:0 22px 42px rgba(255,191,31,.24), 0 0 0 1px rgba(255,255,255,.14) inset;
+    }
+
     .mini-badge.gold{
       background:linear-gradient(135deg, rgba(255,212,74,.18), rgba(255,191,31,.12));
       border:1px solid rgba(255,212,74,.34);
@@ -1629,7 +1637,7 @@ const hasUnlockedThisNovel =
   ${
     accessState.isLogged && !accessState.isPremium && !hasUnlockedThisNovel
       ? accessState.coins > 0
-        ? `<button class="btn btn-gold" id="useCoinBtnTop">🪙 Desbloquear toda la temporada</button>`
+        ? `<button class="btn btn-gold btn-coin-hero" id="useCoinBtnTop">🪙 Desbloquear toda la temporada con tu Coin</button>`
         : `<a class="btn btn-secondary" href="../index.html">Ir al inicio para conseguir coins</a>`
       : ""
   }
@@ -1815,8 +1823,9 @@ if (useCoinBtnTop) {
       await useCoinForNovel(currentUser, novelId);
       window.location.reload();
     } catch (error) {
-      alert(error.message);
+      alert(error.message || "No se pudo desbloquear la novela.");
       useCoinBtnTop.disabled = false;
+      useCoinBtnTop.textContent = "🪙 Desbloquear toda la temporada con tu Coin";
     }
   });
 }
