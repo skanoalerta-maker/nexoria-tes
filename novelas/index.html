@@ -1623,9 +1623,17 @@ const hasUnlockedThisNovel =
               </section>
 
               <div class="hero-actions">
-                <a class="btn btn-primary" href="${getChapterPath(chapters[0])}" id="startBtn">${mainActionLabel}</a>
-                <button class="btn btn-secondary" type="button" id="continueBtn">Seguir donde ibas</button>
-              </div>
+  <a class="btn btn-primary" href="${getChapterPath(chapters[0])}" id="startBtn">${mainActionLabel}</a>
+  <button class="btn btn-secondary" type="button" id="continueBtn">Seguir donde ibas</button>
+
+  ${
+    accessState.isLogged && !accessState.isPremium && !hasUnlockedThisNovel
+      ? accessState.coins > 0
+        ? `<button class="btn btn-gold" id="useCoinBtnTop">🪙 Desbloquear toda la temporada</button>`
+        : `<button class="btn btn-gold" id="buyCoinBtnTop">🪙 Comprar 1 Coin</button>`
+      : ""
+  }
+</div>
             </div>
           </div>
         </section>
@@ -1726,6 +1734,8 @@ const hasUnlockedThisNovel =
     const premiumPayBtn = document.getElementById("premiumPayBtn");
     const buyCoinBtn = document.getElementById("buyCoinBtn");
     const useCoinBtn = document.getElementById("useCoinBtn");
+const useCoinBtnTop = document.getElementById("useCoinBtnTop");
+const buyCoinBtnTop = document.getElementById("buyCoinBtnTop");
     const ratingStars = Array.from(document.querySelectorAll(".rating-star"));
     const ratingAverage = document.getElementById("ratingAverage");
     const ratingTotal = document.getElementById("ratingTotal");
@@ -1793,7 +1803,45 @@ const hasUnlockedThisNovel =
       });
     }
 
-    if (useCoinBtn) {
+    
+if (useCoinBtnTop) {
+  useCoinBtnTop.addEventListener("click", async () => {
+    const currentUser = auth.currentUser;
+    if (!currentUser) {
+      window.location.href = "../login.html";
+      return;
+    }
+    try {
+      useCoinBtnTop.disabled = true;
+      useCoinBtnTop.textContent = "Desbloqueando...";
+      await useCoinForNovel(currentUser, novelId);
+      window.location.reload();
+    } catch (error) {
+      alert(error.message);
+      useCoinBtnTop.disabled = false;
+    }
+  });
+}
+
+if (buyCoinBtnTop) {
+  buyCoinBtnTop.addEventListener("click", async () => {
+    const currentUser = auth.currentUser;
+    if (!currentUser) {
+      window.location.href = "../login.html";
+      return;
+    }
+    try {
+      buyCoinBtnTop.disabled = true;
+      buyCoinBtnTop.textContent = "Redirigiendo...";
+      await createCoinPurchase(currentUser);
+    } catch (error) {
+      alert(error.message);
+      buyCoinBtnTop.disabled = false;
+    }
+  });
+}
+
+if (useCoinBtn) {
       useCoinBtn.addEventListener("click", async () => {
         const currentUser = auth.currentUser;
 
@@ -1908,4 +1956,3 @@ const hasUnlockedThisNovel =
   </script>
 </body>
 </html>
-
