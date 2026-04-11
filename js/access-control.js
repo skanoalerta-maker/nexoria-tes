@@ -1,4 +1,48 @@
 (function () {
+  const firebaseConfig = {
+    apiKey: "AIzaSyDccMk1KLoCwXWG2g4r1sOI6qEt_7d5gTw",
+    authDomain: "dyh-nebula.firebaseapp.com",
+    projectId: "dyh-nebula",
+    storageBucket: "dyh-nebula.firebasestorage.app",
+    messagingSenderId: "230506596749",
+    appId: "1:230506596749:web:d7ffcf38de039c9629d5c4"
+  };
+
+  const API_BASE = "https://api-mvtstimkcq-uc.a.run.app";
+
+  let firebaseReady = null;
+
+  async function getFirebase() {
+    if (firebaseReady) return firebaseReady;
+
+    firebaseReady = (async () => {
+      const [
+        appMod,
+        authMod,
+        firestoreMod
+      ] = await Promise.all([
+        import("https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js"),
+        import("https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js"),
+        import("https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js")
+      ]);
+
+      const { initializeApp, getApps, getApp } = appMod;
+      const { getAuth } = authMod;
+      const { getFirestore, doc, getDoc } = firestoreMod;
+
+      const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      const db = getFirestore(app);
+
+      return { auth, db, doc, getDoc };
+    })();
+
+    return firebaseReady;
+  }
+
+  function normalizeNovelId(novelId) {
+    return novelId ? String(novelId).replace(/-t\d+$/i, "") : null;
+  }
 
   function getChapterNumberFromPath() {
     const match = window.location.pathname.match(/capitulo(\d+)\.html/i);
@@ -43,8 +87,30 @@
       return "pinochet-t1";
     }
 
-    if (path.includes("/thriller de corrupción/el precio del silencio/")) {
+    if (
+      path.includes("/thriller de corrupción/el precio del silencio/") ||
+      path.includes("/thriller de corrupci#u00f3n/el precio del silencio/")
+    ) {
       return "el-precio-del-silencio-t1";
+    }
+
+    if (
+      path.includes("/thriller de corrupción/codigos-de-calle/") ||
+      path.includes("/thriller de corrupci#u00f3n/codigos-de-calle/")
+    ) {
+      return "codigos-de-calle-t1";
+    }
+
+    if (path.includes("/accion/mision-peligrosa/")) {
+      return "mision-peligrosa-t1";
+    }
+
+    if (path.includes("/comedia/suegro-a-la-deriva/")) {
+      return "suegro-a-la-deriva-t1";
+    }
+
+    if (path.includes("/futurista/area51_protocolo_oculto/")) {
+      return "area51-protocolo-oculto-t1";
     }
 
     return null;
@@ -52,35 +118,6 @@
 
   function getNovelId() {
     return getNovelIdFromQuery() || getNovelIdFromPath();
-  }
-
-  function getUserState() {
-    try {
-      const raw = localStorage.getItem("nebula-user-profile");
-      const parsed = raw ? JSON.parse(raw) : null;
-
-      return {
-        isLogged: !!parsed,
-        isPremium: parsed?.plan === "premium" || parsed?.subscription === "premium",
-        purchasedNovels: Array.isArray(parsed?.purchasedNovels) ? parsed.purchasedNovels : []
-      };
-    } catch {
-      return {
-        isLogged: false,
-        isPremium: false,
-        purchasedNovels: []
-      };
-    }
-  }
-
-  function hasAccessToNovel(novelId) {
-    const user = getUserState();
-
-    if (!novelId) return false;
-    if (user.isPremium) return true;
-    if (user.purchasedNovels.includes(novelId)) return true;
-
-    return false;
   }
 
   function getAppBasePath() {
@@ -127,7 +164,11 @@
       "ya-habias-estado-ahi-t1": { before: "$1.500", now: "$990" },
       "allende-t1": { before: "$1.500", now: "$990" },
       "pinochet-t1": { before: "$1.500", now: "$990" },
-      "el-precio-del-silencio-t1": { before: "$1.500", now: "$990" }
+      "el-precio-del-silencio-t1": { before: "$1.500", now: "$990" },
+      "codigos-de-calle-t1": { before: "$1.500", now: "$990" },
+      "mision-peligrosa-t1": { before: "$1.500", now: "$990" },
+      "suegro-a-la-deriva-t1": { before: "$1.500", now: "$990" },
+      "area51-protocolo-oculto-t1": { before: "$1.500", now: "$990" }
     };
 
     return {
@@ -147,7 +188,11 @@
       "ya-habias-estado-ahi-t1": "Ya habías estado ahí — Temporada 1",
       "allende-t1": "Allende — Temporada 1",
       "pinochet-t1": "Pinochet — Temporada 1",
-      "el-precio-del-silencio-t1": "El precio del silencio — Temporada 1"
+      "el-precio-del-silencio-t1": "El precio del silencio — Temporada 1",
+      "codigos-de-calle-t1": "Códigos de calle — Temporada 1",
+      "mision-peligrosa-t1": "Misión Peligrosa — Temporada 1",
+      "suegro-a-la-deriva-t1": "Suegro a la deriva — Temporada 1",
+      "area51-protocolo-oculto-t1": "Area 51 — El Protocolo Oculto — Temporada 1"
     };
 
     return titles[novelId] || "Novela Nébula";
@@ -185,49 +230,256 @@
     `;
   }
 
-  const API_BASE = "https://api-mvtstimkcq-uc.a.run.app";
+  function getFallbackUserState() {
+    try {
+      const raw = localStorage.getItem("nebula-user-profile");
+      const parsed = raw ? JSON.parse(raw) : null;
+
+      const plan = String(parsed?.plan || "free").toLowerCase();
+      const subscription = String(parsed?.subscription || plan || "free").toLowerCase();
+
+      return {
+        isLogged: !!parsed,
+        isPremium:
+          parsed?.premiumActive === true ||
+          plan === "premium" ||
+          subscription === "premium",
+        plan,
+        subscription,
+        premiumActive: parsed?.premiumActive === true,
+        unlockedNovels: Array.isArray(parsed?.unlockedNovels)
+          ? parsed.unlockedNovels.map(normalizeNovelId).filter(Boolean)
+          : [],
+        coins: Number(parsed?.coins || 0),
+        uid: parsed?.uid || null,
+        email: parsed?.email || null,
+        name: parsed?.name || "Mi espacio",
+        icon: parsed?.icon || "🌌"
+      };
+    } catch {
+      return {
+        isLogged: false,
+        isPremium: false,
+        plan: "free",
+        subscription: "free",
+        premiumActive: false,
+        unlockedNovels: [],
+        coins: 0,
+        uid: null,
+        email: null,
+        name: "Mi espacio",
+        icon: "🌌"
+      };
+    }
+  }
+
+  function syncLocalProfile(user, data) {
+    try {
+      const existing = getFallbackUserState();
+
+      const payload = {
+        uid: user?.uid || existing.uid || "",
+        email: user?.email || data?.email || existing.email || "",
+        name: data?.name || user?.displayName || existing.name || "Mi espacio",
+        icon: data?.avatar || existing.icon || "🌌",
+        plan: String(data?.plan || existing.plan || "free").toLowerCase(),
+        subscription: String(data?.subscription || data?.plan || existing.subscription || "free").toLowerCase(),
+        premiumActive: data?.premiumActive === true,
+        coins: Number(data?.coins || 0),
+        unlockedNovels: Array.isArray(data?.unlockedNovels)
+          ? data.unlockedNovels.map(normalizeNovelId).filter(Boolean)
+          : existing.unlockedNovels || []
+      };
+
+      localStorage.setItem("nebula-user-profile", JSON.stringify(payload));
+      localStorage.setItem("nebula_user_uid", payload.uid || "");
+      localStorage.setItem("nebula_user_email", payload.email || "");
+    } catch (error) {
+      console.error("No se pudo sincronizar nebula-user-profile:", error);
+    }
+  }
+
+  async function waitForAuthUser(auth, timeoutMs = 1200) {
+    if (auth.currentUser) return auth.currentUser;
+
+    return await new Promise((resolve) => {
+      let resolved = false;
+      const timer = setTimeout(() => {
+        if (resolved) return;
+        resolved = true;
+        unsubscribe();
+        resolve(auth.currentUser || null);
+      }, timeoutMs);
+
+      const unsubscribe = auth.onAuthStateChanged((user) => {
+        if (resolved) return;
+        resolved = true;
+        clearTimeout(timer);
+        unsubscribe();
+        resolve(user || null);
+      });
+    });
+  }
+
+  async function getUserState() {
+    const fallback = getFallbackUserState();
+
+    try {
+      const { auth, db, doc, getDoc } = await getFirebase();
+      const user = await waitForAuthUser(auth);
+
+      if (!user) {
+        return fallback;
+      }
+
+      const userRef = doc(db, "users", user.uid);
+      const snap = await getDoc(userRef);
+
+      if (!snap.exists()) {
+        const state = {
+          isLogged: true,
+          isPremium: false,
+          plan: "free",
+          subscription: "free",
+          premiumActive: false,
+          unlockedNovels: [],
+          coins: 0,
+          uid: user.uid,
+          email: user.email || "",
+          name: user.displayName || fallback.name || "Mi espacio",
+          icon: fallback.icon || "🌌"
+        };
+
+        syncLocalProfile(user, state);
+        return state;
+      }
+
+      const data = snap.data() || {};
+      const plan = String(data.plan || "free").toLowerCase();
+      const subscription = String(data.subscription || plan || "free").toLowerCase();
+      const premiumActive = data.premiumActive === true;
+      const unlockedNovels = Array.isArray(data.unlockedNovels)
+        ? data.unlockedNovels.map(normalizeNovelId).filter(Boolean)
+        : [];
+
+      const state = {
+        isLogged: true,
+        isPremium: premiumActive || plan === "premium" || subscription === "premium",
+        plan,
+        subscription,
+        premiumActive,
+        unlockedNovels,
+        coins: Number(data.coins || 0),
+        uid: user.uid,
+        email: user.email || data.email || "",
+        name: data.name || user.displayName || fallback.name || "Mi espacio",
+        icon: data.avatar || fallback.icon || "🌌"
+      };
+
+      syncLocalProfile(user, data);
+      return state;
+    } catch (error) {
+      console.error("Error leyendo estado real del usuario:", error);
+      return fallback;
+    }
+  }
+
+  function hasAccessToNovel(userState, novelId) {
+    if (!novelId) return false;
+    if (userState.isPremium) return true;
+
+    const baseId = normalizeNovelId(novelId);
+    if (!baseId) return false;
+
+    if (
+      Array.isArray(userState.unlockedNovels) &&
+      userState.unlockedNovels.includes(baseId)
+    ) {
+      return true;
+    }
+
+    return false;
+  }
+
+  async function postJson(url, payload) {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+
+    const rawText = await res.text();
+
+    let data;
+    try {
+      data = JSON.parse(rawText);
+    } catch (error) {
+      console.error("Respuesta no válida del servidor:", rawText);
+      throw new Error("El servidor no devolvió una respuesta válida.");
+    }
+
+    if (!res.ok) {
+      throw new Error(data.error || data.message || "Error del servidor.");
+    }
+
+    return data;
+  }
+
+  function goToLogin() {
+    const basePath = getAppBasePath();
+    const loginPath = basePath ? `${basePath}/login.html` : "/login.html";
+    window.location.href = loginPath;
+  }
+
+  async function getAuthenticatedUserOrRedirect() {
+    const { auth } = await getFirebase();
+    const user = await waitForAuthUser(auth);
+
+    if (!user) {
+      goToLogin();
+      return null;
+    }
+
+    return user;
+  }
 
   async function startPremiumPayment() {
     try {
-      const userId = "8DccbiG8PigdEBnm4uMRqmWyd6r2";
-      const email = "dhasociados25@gmail.com";
+      const user = await getAuthenticatedUserOrRedirect();
+      if (!user) return;
 
       const payload = {
-        title: "Nebula Premium Mensual",
+        title: "Nébula Premium Mensual",
         price: 4990,
         quantity: 1,
         type: "premium",
-        userId,
-        email
+        userId: user.uid,
+        email: user.email || ""
       };
 
-      const res = await fetch(`${API_BASE}/create-preference`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(payload)
-      });
+      const data = await postJson(`${API_BASE}/create-preference`, payload);
+      const redirectUrl = data.init_point || data.initPoint;
 
-      const data = await res.json();
-
-      if (data.ok) {
-        window.location.href = data.initPoint;
-      } else {
-        alert("Error al iniciar pago premium");
+      if (!data.ok || !redirectUrl) {
+        throw new Error(data.error || "No se pudo iniciar el pago premium.");
       }
-    } catch (err) {
-      alert("Error de conexión");
+
+      window.location.href = redirectUrl;
+    } catch (error) {
+      console.error(error);
+      alert(error.message || "Error al iniciar pago premium.");
     }
   }
 
   async function startIndividualPayment(novelId) {
     try {
-      const userId = "8DccbiG8PigdEBnm4uMRqmWyd6r2";
-      const email = "dhasociados25@gmail.com";
+      const user = await getAuthenticatedUserOrRedirect();
+      if (!user) return;
 
       if (!novelId) {
-        alert("No se detectó la novela");
+        alert("No se detectó la novela.");
         return;
       }
 
@@ -237,38 +489,31 @@
         quantity: 1,
         type: "single_purchase",
         novelId,
-        userId,
-        email
+        userId: user.uid,
+        email: user.email || ""
       };
 
-      const res = await fetch(`${API_BASE}/create-preference`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(payload)
-      });
+      const data = await postJson(`${API_BASE}/create-preference`, payload);
+      const redirectUrl = data.init_point || data.initPoint;
 
-      const data = await res.json();
-
-      if (data.ok) {
-        window.location.href = data.initPoint;
-      } else {
-        alert("Error al iniciar compra individual");
+      if (!data.ok || !redirectUrl) {
+        throw new Error(data.error || "No se pudo iniciar la compra individual.");
       }
-    } catch (err) {
-      alert("Error de conexión");
+
+      window.location.href = redirectUrl;
+    } catch (error) {
+      console.error(error);
+      alert(error.message || "Error al iniciar compra individual.");
     }
   }
 
   window.nebulaStartPremiumPayment = startPremiumPayment;
   window.nebulaStartIndividualPayment = () => startIndividualPayment(getNovelId());
 
-  function showPaywall(novelId, chapterNumber) {
+  function showPaywall(novelId, chapterNumber, userState) {
     const basePath = getAppBasePath();
     const covers = getCoverPaths(basePath);
     const pricing = getPricing(novelId);
-    const novelTitle = getNovelTitle(novelId);
 
     document.body.innerHTML = `
       <style>
@@ -581,7 +826,8 @@
         }
 
         .nebula-primary-btn,
-        .nebula-secondary-btn{
+        .nebula-secondary-btn,
+        .nebula-login-btn{
           display:flex;
           align-items:center;
           justify-content:center;
@@ -593,7 +839,8 @@
         }
 
         .nebula-primary-btn:hover,
-        .nebula-secondary-btn:hover{
+        .nebula-secondary-btn:hover,
+        .nebula-login-btn:hover{
           transform:translateY(-1px);
         }
 
@@ -614,6 +861,22 @@
           color:#ffffff;
           font-size:.96rem;
           font-weight:800;
+        }
+
+        .nebula-login-btn{
+          min-height:50px;
+          background:linear-gradient(135deg, #2a82ff 0%, #4aa7ff 100%);
+          color:#fff;
+          font-size:.96rem;
+          font-weight:900;
+          box-shadow:0 12px 26px rgba(38,121,255,.22);
+        }
+
+        .nebula-user-line{
+          margin:0 0 16px;
+          color:#dce7f8;
+          font-size:.92rem;
+          line-height:1.5;
         }
 
         .nebula-footer-copy{
@@ -716,6 +979,10 @@
               Elige una de las opciones para seguir con esta novela.
             </p>
 
+            <p class="nebula-user-line">
+              Usuario: <strong>${userState.isLogged ? (userState.name || "Mi espacio") : "Invitado"}</strong>
+            </p>
+
             <div class="nebula-urgency">
               🔥 Acceso inmediato al continuar
             </div>
@@ -759,13 +1026,23 @@
             </div>
 
             <div class="nebula-action-group">
-              <button class="nebula-primary-btn" onclick="window.nebulaStartPremiumPayment()">
-                Hazte premium por ${pricing.premium.now}
-              </button>
+              ${
+                userState.isLogged
+                  ? `
+                    <button class="nebula-primary-btn" onclick="window.nebulaStartPremiumPayment()">
+                      Hazte premium por ${pricing.premium.now}
+                    </button>
 
-              <button class="nebula-secondary-btn" onclick="window.nebulaStartIndividualPayment()">
-                Comprar esta novela por ${pricing.individual.now}
-              </button>
+                    <button class="nebula-secondary-btn" onclick="window.nebulaStartIndividualPayment()">
+                      Comprar esta novela por ${pricing.individual.now}
+                    </button>
+                  `
+                  : `
+                    <button class="nebula-login-btn" onclick="window.nebulaGoToLogin()">
+                      Inicia sesión para desbloquear
+                    </button>
+                  `
+              }
             </div>
 
             <p class="nebula-footer-copy">
@@ -794,14 +1071,14 @@
         text-align:center;
         font-family:Inter,Arial,sans-serif;
       ">
-        ⚠️ Último capítulo gratuito. El siguiente requiere acceso premium.
+        ⚠️ Último capítulo gratuito. El siguiente requiere acceso premium o compra individual.
       </div>
     `;
 
     document.body.prepend(notice);
   }
 
-  function initAccessControl() {
+  async function initAccessControl() {
     const chapterNumber = getChapterNumberFromPath();
     const novelId = getNovelId();
 
@@ -809,15 +1086,24 @@
 
     if (chapterNumber <= 3) return;
 
-    if (!hasAccessToNovel(novelId)) {
-      showPaywall(novelId, chapterNumber);
+    const userState = await getUserState();
+
+    if (!hasAccessToNovel(userState, novelId)) {
+      showPaywall(novelId, chapterNumber, userState);
     }
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initAccessControl);
-  } else {
-    initAccessControl();
-  }
+  window.nebulaGoToLogin = goToLogin;
 
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => {
+      initAccessControl().catch((error) => {
+        console.error("Error iniciando access-control:", error);
+      });
+    });
+  } else {
+    initAccessControl().catch((error) => {
+      console.error("Error iniciando access-control:", error);
+    });
+  }
 })();
