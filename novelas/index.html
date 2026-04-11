@@ -1174,6 +1174,22 @@
     window.location.href = data.init_point;
   }
 
+
+  async function createCoinPurchase(currentUser) {
+    const data = await postJson(`${API_BASE_URL}/create-preference`, {
+      title: "Nébula – 1 Coin",
+      price: 990,
+      quantity: 1,
+      type: "coin",
+      novelId: null,
+      userId: currentUser.uid,
+      email: currentUser.email
+    });
+
+    if (!data.ok || !data.init_point) {
+      throw new Error(data.error || "No se pudo crear la compra del coin.");
+    }
+
     window.location.href = data.init_point;
   }
 
@@ -1613,7 +1629,7 @@ const hasUnlockedThisNovel =
   ${
     accessState.isLogged && !accessState.isPremium && !hasUnlockedThisNovel
       ? accessState.coins > 0
-        ? `<button class="btn btn-gold" id="useCoinBtnTop">🪙 Desbloquear toda la temporada con tu Coin</button>`
+        ? `<button class="btn btn-gold" id="useCoinBtnTop">🪙 Desbloquear toda la temporada</button>`
         : `<a class="btn btn-secondary" href="../index.html">Ir al inicio para conseguir coins</a>`
       : ""
   }
@@ -1716,7 +1732,7 @@ const hasUnlockedThisNovel =
     const continueBtn = document.getElementById("continueBtn");
     const startBtn = document.getElementById("startBtn");
     const premiumPayBtn = document.getElementById("premiumPayBtn");
-        const useCoinBtn = document.getElementById("useCoinBtn");
+    const useCoinBtn = document.getElementById("useCoinBtn");
 const useCoinBtnTop = document.getElementById("useCoinBtnTop");
     const ratingStars = Array.from(document.querySelectorAll(".rating-star"));
     const ratingAverage = document.getElementById("ratingAverage");
@@ -1763,6 +1779,15 @@ const useCoinBtnTop = document.getElementById("useCoinBtnTop");
       });
     }
 
+    if (buyCoinBtn) {
+      buyCoinBtn.addEventListener("click", async () => {
+        const currentUser = auth.currentUser;
+
+        if (!currentUser) {
+          window.location.href = "../login.html";
+          return;
+        }
+
         try {
           buyCoinBtn.disabled = true;
           buyCoinBtn.textContent = "Redirigiendo a Mercado Pago...";
@@ -1792,10 +1817,17 @@ if (useCoinBtnTop) {
     } catch (error) {
       alert(error.message);
       useCoinBtnTop.disabled = false;
-      useCoinBtnTop.textContent = "🪙 Desbloquear toda la temporada con tu Coin";
     }
   });
 }
+
+if (buyCoinBtnTop) {
+  buyCoinBtnTop.addEventListener("click", async () => {
+    const currentUser = auth.currentUser;
+    if (!currentUser) {
+      window.location.href = "../login.html";
+      return;
+    }
     try {
       buyCoinBtnTop.disabled = true;
       buyCoinBtnTop.textContent = "Redirigiendo...";
