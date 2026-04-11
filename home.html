@@ -2612,6 +2612,14 @@ function updateLoggedInUI(user, data){
   headerLoginLink?.classList.add('hidden-panel');
   accountMenu?.classList.remove('hidden-panel');
 
+function updateLoggedInUI(user, data){
+  const name = user.displayName || user.email.split('@')[0];
+  const membership = getMembershipLabelFromData(data);
+  const avatar = getAvatarValue(user, data);
+
+  headerLoginLink?.classList.add('hidden-panel');
+  accountMenu?.classList.remove('hidden-panel');
+
   accountAvatar.textContent = avatar;
   accountAvatarLarge.textContent = avatar;
   accountName.textContent = name;
@@ -2622,9 +2630,11 @@ function updateLoggedInUI(user, data){
   userEmailText.textContent = user.email;
   userPlanPill.textContent = `Suscripción: ${membership}`;
   userStatePill.textContent = 'Activo';
-  userMembershipText.textContent = membership === 'Premium'
-    ? 'Acceso completo activo'
-    : 'Puedes mejorar a Premium';
+
+  // 🔥 AQUÍ EL CAMBIO
+  const coins = Number(data?.coins || 0);
+  userCoinsText.textContent = `${coins} Coin${coins === 1 ? '' : 's'}`;
+
   userAvatar.textContent = avatar;
 
   userGuestBox?.classList.add('hidden-panel');
