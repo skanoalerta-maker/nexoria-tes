@@ -2054,38 +2054,54 @@
       </div>
     </section>
 
-    <section class="section user-section" id="usuario-nebula">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <p class="section-kicker">Tu cuenta</p>
-            <h2>Mi espacio Nébula</h2>
+<section class="section user-section" id="usuario-nebula">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <p class="section-kicker">Tu cuenta</p>
+        <h2>Mi espacio Nébula</h2>
+      </div>
+      <p class="section-note">Tu lectura, tu avance y tu acceso en un solo lugar.</p>
+    </div>
+
+    <div class="user-shell">
+      <div class="user-main">
+        <div class="user-top">
+          <div class="user-avatar" id="userAvatar">🌌</div>
+          <div class="user-copy">
+            <h3 id="userGreeting">Usuario Nébula</h3>
+            <p id="userEmailText">
+              Inicia sesión para guardar tu progreso, continuar leyendo y ver tu membresía activa.
+            </p>
           </div>
-          <p class="section-note">Tu lectura, tu avance y tu acceso en un solo lugar.</p>
         </div>
 
-        <div class="user-shell">
-          <div class="user-main">
-            <div class="user-top">
-              <div class="user-avatar" id="userAvatar">🌌</div>
-              <div class="user-copy">
-                <h3 id="userGreeting">Usuario Nébula</h3>
-                <p id="userEmailText">Inicia sesión para guardar tu progreso, continuar leyendo y ver tu membresía activa.</p>
-              </div>
-            </div>
+        <!-- 🔥 ESTADO RÁPIDO -->
+        <div class="user-status-row">
+          <span class="user-pill" id="userPlanPill">Suscripción: Free</span>
+          <span class="user-pill" id="userStatePill">Estado: Invitado</span>
+          <span class="user-pill" id="userProgressPill">Capítulos leídos: 0</span>
+          <span class="user-pill" id="userCoinsPill">Coins: 0</span>
+        </div>
 
-            <div class="user-status-row">
-              <span class="user-pill" id="userPlanPill">Suscripción: Free</span>
-              <span class="user-pill" id="userStatePill">Estado: Invitado</span>
-              <span class="user-pill" id="userProgressPill">Capítulos leídos: 0</span>
-            </div>
-
-            <div class="user-stats">
-              <div class="user-stat"><small>Novelas vistas</small><strong id="userViewedStories">0 registradas</strong></div>
-              <div class="user-stat"><small>Último avance</small><strong id="userLastProgress">Aún sin progreso</strong></div>
-              <div class="user-stat"><small>Membresía</small><strong id="userMembershipText">Puedes desbloquear temporadas completas</strong></div>
-            </div>
+        <!-- 🔥 ESTADÍSTICAS -->
+        <div class="user-stats">
+          <div class="user-stat">
+            <small>Novelas vistas</small>
+            <strong id="userViewedStories">0 registradas</strong>
           </div>
+
+          <div class="user-stat">
+            <small>Último avance</small>
+            <strong id="userLastProgress">Aún sin progreso</strong>
+          </div>
+
+          <div class="user-stat">
+            <small>Coins disponibles</small>
+            <strong id="userCoinsText">0 Coins</strong>
+          </div>
+        </div>
+      </div>
 
           <div class="user-side">
             <div class="user-login-box" id="userGuestBox">
