@@ -1366,11 +1366,17 @@
       return;
     }
 
-    const novel = window.NEBULA_NOVELS[novelId];
-    const chapters = getOrderedChapters(novel.chapters);
-    const freeChapters = Number(novel.freeChapters ?? 3);
-    const progressKey = "nebula-progress-" + novelId;
-    const hasUnlockedThisNovel = Array.isArray(accessState.unlockedNovels) && accessState.unlockedNovels.includes(novelId);
+const novel = window.NEBULA_NOVELS[novelId];
+const chapters = getOrderedChapters(novel.chapters);
+const freeChapters = Number(novel.freeChapters ?? 3);
+const progressKey = "nebula-progress-" + novelId;
+
+// 1 coin = novela completa, aunque tenga temporadas
+const unlockId = novelId.replace(/-t\d+$/, "");
+
+const hasUnlockedThisNovel =
+  Array.isArray(accessState.unlockedNovels) &&
+  accessState.unlockedNovels.includes(unlockId);
 
     if (!chapters.length) {
       app.innerHTML = `
