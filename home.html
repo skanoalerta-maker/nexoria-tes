@@ -2514,7 +2514,7 @@ const userEmailText = document.getElementById('userEmailText');
 const userPlanPill = document.getElementById('userPlanPill');
 const userStatePill = document.getElementById('userStatePill');
 const userProgressPill = document.getElementById('userProgressPill');
-const userMembershipText = document.getElementById('userMembershipText');
+const userCoinsText = document.getElementById('userCoinsText');
 const userAvatar = document.getElementById('userAvatar');
 const userGuestBox = document.getElementById('userGuestBox');
 const userLoggedBox = document.getElementById('userLoggedBox');
@@ -2597,7 +2597,7 @@ function updateLoggedOutUI(){
   userEmailText.textContent = 'Inicia sesión para guardar tu progreso';
   userPlanPill.textContent = 'Suscripción: Free';
   userStatePill.textContent = 'Estado: Invitado';
-  userMembershipText.textContent = 'Puedes desbloquear temporadas completas';
+  userCoinsText.textContent = (data.coins || 0) + ' Coins';
   userAvatar.textContent = 'N';
 
   userGuestBox?.classList.remove('hidden-panel');
