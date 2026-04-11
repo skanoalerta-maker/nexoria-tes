@@ -2067,12 +2067,35 @@
     <div class="user-shell">
       <div class="user-main">
         <div class="user-top">
-          <div class="user-avatar" id="userAvatar">🌌</div>
+          <div class="user-avatar" id="userAvatar" style="
+            font-size:1.8rem;
+            font-weight:900;
+            background:linear-gradient(135deg,#2a82ff,#9a66ff);
+            color:#fff;
+            box-shadow:0 0 25px rgba(80,150,255,.25);
+          ">N</div>
           <div class="user-copy">
-            <h3 id="userGreeting">Usuario Nébula</h3>
-            <p id="userEmailText">
-              Inicia sesión para guardar tu progreso, continuar leyendo y ver tu membresía activa.
+            <h3 id="userGreeting" style="font-size:1.6rem; font-weight:800; letter-spacing:-.02em;">
+              Tu cuenta Nébula
+            </h3>
+            <p id="userEmailText" style="color:#9fb5db; font-size:.95rem;">
+              Inicia sesión para sincronizar tu progreso, coins y contenido desbloqueado.
             </p>
+            <div id="userBadge" style="margin-top:10px; display:none;">
+              <span style="
+                display:inline-flex;
+                align-items:center;
+                gap:6px;
+                padding:6px 12px;
+                border-radius:999px;
+                background:linear-gradient(135deg,#ffd54a,#ffbf1f);
+                color:#000;
+                font-size:.8rem;
+                font-weight:800;
+              ">
+                ⭐ Usuario Premium
+              </span>
+            </div>
           </div>
         </div>
 
@@ -2606,23 +2629,29 @@ function updateLoggedOutUI(){
   accountPlan.textContent = 'Free';
   accountRead.textContent = '0 capítulos';
 
-  userGreeting.textContent = 'Usuario Nébula';
-  userEmailText.textContent = 'Inicia sesión para guardar tu progreso, continuar leyendo y ver tu membresía activa.';
+  userGreeting.textContent = 'Tu cuenta Nébula';
+  userEmailText.textContent = 'Inicia sesión para sincronizar tu progreso, coins y contenido desbloqueado.';
   userPlanPill.textContent = 'Suscripción: Free';
   userStatePill.textContent = 'Estado: Invitado';
   userProgressPill.textContent = 'Capítulos leídos: 0';
   userCoinsPill.textContent = 'Coins: 0';
   userCoinsText.textContent = '0 Coins';
-  userAvatar.textContent = '🌌';
+  userAvatar.textContent = 'N';
+  const badge = document.getElementById('userBadge');
+  if (badge) badge.style.display = 'none';
 
   userGuestBox?.classList.remove('hidden-panel');
   userLoggedBox?.classList.add('hidden-panel');
 }
 
 function updateLoggedInUI(user, data){
-  const name = data?.name || user.displayName || user.email.split('@')[0];
+  const name =
+    data?.name ||
+    user.displayName ||
+    (user.email ? user.email.split('@')[0] : 'Usuario');
+
   const membership = getMembershipLabelFromData(data);
-  const avatar = getAvatarValue(user, data);
+  const avatar = name.charAt(0).toUpperCase();
   const coins = Number(data?.coins || 0);
   const readCount = Array.isArray(data?.readChapters) ? data.readChapters.length : 0;
 
@@ -2645,10 +2674,14 @@ function updateLoggedInUI(user, data){
   userCoinsText.textContent = `${coins} Coin${coins === 1 ? '' : 's'}`;
   userAvatar.textContent = avatar;
 
+  const badge = document.getElementById('userBadge');
+  if (badge) {
+    badge.style.display = membership === 'Premium' ? 'block' : 'none';
+  }
+
   userGuestBox?.classList.add('hidden-panel');
   userLoggedBox?.classList.remove('hidden-panel');
 }
-
 
 /* ===== LOGOUT ===== */
 async function handleLogout(){
