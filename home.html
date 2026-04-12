@@ -544,6 +544,19 @@
     box-shadow:0 22px 40px rgba(255,191,31,.28), 0 0 0 1px rgba(255,255,255,.18) inset;
   }
 
+  .btn-coin-short{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+  }
+
+  .btn-coin-short .coin-icon{
+    font-size:1rem;
+    line-height:1;
+    flex-shrink:0;
+  }
+
   .btn[disabled]{
     opacity:.62;
     cursor:not-allowed;
@@ -1364,10 +1377,16 @@
   }
 
   .story-card-actions{
-    display:flex;
-    flex-wrap:wrap;
+    display:grid;
+    grid-template-columns:repeat(3, minmax(0, 1fr));
     gap:12px;
     margin-top:auto;
+  }
+
+  .story-card-actions .btn{
+    width:100%;
+    min-width:0;
+    padding:0 16px;
   }
 
   .pricing-grid{
@@ -1816,15 +1835,21 @@
 
     .hero-actions,
     .story-actions,
-    .story-card-actions,
     .made-by-actions{
       flex-direction:column;
     }
 
     .hero-actions .btn,
     .story-actions .btn,
-    .story-card-actions .btn,
     .made-by-actions .btn{
+      width:100%;
+    }
+
+    .story-card-actions{
+      grid-template-columns:1fr;
+    }
+
+    .story-card-actions .btn{
       width:100%;
     }
 
@@ -2339,8 +2364,8 @@
   <script>
     let novelas = [];
     let filtradas = [];
-    let nebulaCurrentUser = null;
-    let nebulaCurrentUserData = {
+    window.nebulaCurrentUser = null;
+    window.nebulaCurrentUserData = {
       coins: 0,
       unlockedNovels: [],
       subscription: 'free',
@@ -2395,12 +2420,12 @@
     function renderStarsHTML(rating){ const safe = Math.max(1, Math.min(5, Math.round(Number(rating) || 5))); return Array.from({length:5}, (_,i)=>`<span class="star ${i<safe?'active':''}">★</span>`).join(''); }
 
     function getCurrentUserCoins(){
-      return Number(nebulaCurrentUserData?.coins || 0);
+      return Number(window.nebulaCurrentUserData?.coins || 0);
     }
 
     function getUnlockedNovels(){
-      return Array.isArray(nebulaCurrentUserData?.unlockedNovels)
-        ? nebulaCurrentUserData.unlockedNovels
+      return Array.isArray(window.nebulaCurrentUserData?.unlockedNovels)
+        ? window.nebulaCurrentUserData.unlockedNovels
         : [];
     }
 
@@ -2483,7 +2508,7 @@
 
       storyGrid.innerHTML = items.map(novela => {
         const unlocked = isNovelUnlocked(novela);
-        const canUseCoin = !!nebulaCurrentUser && !unlocked && userCoins > 0;
+        const canUseCoin = !!window.nebulaCurrentUser && !unlocked && userCoins > 0;
 
         return `
           <article class="story-card">
@@ -2506,10 +2531,10 @@
                 <button class="btn btn-secondary" type="button" data-continue-id="${novela.id}">Seguir</button>
                 ${
                   unlocked
-                    ? `<button class="btn btn-gold" type="button" disabled>Desbloqueada</button>`
+                    ? `<button class="btn btn-gold btn-coin-short" type="button" disabled title="Novela desbloqueada con coins"><span class="coin-icon">🪙</span><span>Lista</span></button>`
                     : canUseCoin
-                      ? `<button class="btn btn-gold" type="button" data-use-coin-id="${novela.id}">Usar Coin (1)</button>`
-                      : `<button class="btn btn-gold" type="button" disabled>Usar Coin (1)</button>`
+                      ? `<button class="btn btn-gold btn-coin-short" type="button" data-use-coin-id="${novela.id}" title="Usar coins en esta novela"><span class="coin-icon">🪙</span><span>Usar</span></button>`
+                      : `<button class="btn btn-gold btn-coin-short" type="button" disabled title="Necesitas coins disponibles"><span class="coin-icon">🪙</span><span>Usar</span></button>`
                 }
               </div>
             </div>
@@ -2537,10 +2562,19 @@
 
       document.querySelectorAll('[data-use-coin-id]').forEach(btn => {
         btn.addEventListener('click', async () => {
-          if (typeof window.nebulaUseCoin !== 'function') return;
-          const ok = await window.nebulaUseCoin(btn.dataset.useCoinId);
-          if (ok) {
-            renderStories(filtradas);
+          if (typeof window.useCoinForNovel === 'function') {
+            const ok = await window.useCoinForNovel(btn.dataset.useCoinId);
+            if (ok && typeof window.nebulaRefreshCatalogCoins === 'function') {
+              window.nebulaRefreshCatalogCoins();
+            }
+            return;
+          }
+
+          if (typeof window.nebulaUseCoin === 'function') {
+            const ok = await window.nebulaUseCoin(btn.dataset.useCoinId);
+            if (ok) {
+              renderStories(filtradas);
+            }
           }
         });
       });
@@ -2615,6 +2649,7 @@
     window.addEventListener('resize', resizeStarsCanvas); resizeStarsCanvas(); animateStars();
   </script>
 
+  <script src="coin-manager.js"></script>
   <script src="js/access-control.js"></script>
 
   <script type="module">
@@ -2948,4 +2983,3 @@
   </script>
 </body>
 </html>
-
