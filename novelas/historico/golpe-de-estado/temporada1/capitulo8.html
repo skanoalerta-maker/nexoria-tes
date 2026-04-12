@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Capítulo 8 | Golpe de Estado</title>
+  <meta name="description" content="Capítulo 8 de Golpe de Estado: Voces bajo tierra." />
+  <style>
+    :root{
+      --bg:#080607;
+      --bg2:#16090a;
+      --card:rgba(28,10,10,0.82);
+      --line:rgba(255,255,255,0.08);
+      --line-strong:rgba(255,59,59,0.35);
+      --text:#f5f1ef;
+      --muted:#d0c1be;
+      --muted-2:#a78f8a;
+      --red:#b30000;
+      --red2:#ff4b4b;
+      --red-soft:rgba(255,75,75,0.14);
+      --shadow:0 24px 60px rgba(0,0,0,0.48);
+      --radius:22px;
+      --max:860px;
+    }
+    *{box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{
+      margin:0;
+      font-family:Arial, sans-serif;
+      color:var(--text);
+      background:#050304;
+      line-height:1.8;
+      position:relative;
+      overflow-x:hidden;
+    }
+    a{color:inherit;text-decoration:none;}
+    #stars{
+      position:fixed; inset:0; width:100%; height:100%; z-index:0;
+      background:
+        radial-gradient(circle at top left, rgba(179,0,0,.18), transparent 22%),
+        radial-gradient(circle at top right, rgba(255,75,75,.12), transparent 18%),
+        linear-gradient(180deg, #050304 0%, #110708 45%, #050304 100%);
+    }
+    .page{min-height:100vh; position:relative; z-index:1;}
+    .topbar{
+      position:sticky; top:0; z-index:30; backdrop-filter:blur(14px);
+      background:rgba(15,4,4,0.76); border-bottom:1px solid var(--line);
+    }
+    .topbar-inner{
+      max-width:1100px; margin:0 auto; padding:16px 20px;
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
+    }
+    .brand{display:flex; align-items:center; gap:12px; min-width:0;}
+    .brand-badge{
+      width:38px; height:38px; border-radius:12px; display:grid; place-items:center;
+      background:linear-gradient(135deg, rgba(179,0,0,.28), rgba(255,75,75,.08));
+      border:1px solid var(--line-strong); box-shadow:0 0 24px rgba(179,0,0,.18);
+      font-weight:700; color:#ffd6d6; flex:0 0 auto;
+    }
+    .brand-title{font-size:14px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:#fff; margin:0 0 2px;}
+    .brand-sub{font-size:12px; color:var(--muted-2); margin:0;}
+    .top-actions{display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:flex-end;}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
+      min-height:44px; padding:0 18px; border-radius:12px; font-size:14px;
+      font-weight:700; transition:transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
+      border:1px solid transparent; cursor:pointer;
+    }
+    .btn:hover{transform:translateY(-1px);}
+    .btn-primary{
+      background:linear-gradient(135deg, #7a0000 0%, #c20000 55%, #ff3b3b 100%);
+      color:white; box-shadow:0 12px 28px rgba(179,0,0,.28);
+    }
+    .btn-primary:hover{background:linear-gradient(135deg, #620000 0%, #a30000 100%);}
+    .btn-ghost{background:rgba(255,255,255,0.03); border-color:var(--line); color:#f7dcdc;}
+    .btn-ghost:hover{background:rgba(255,255,255,0.06); border-color:var(--line-strong);}
+    .hero{position:relative; overflow:hidden; border-bottom:1px solid rgba(255,255,255,0.04);}
+    .hero::before{
+      content:""; position:absolute; inset:0;
+      background:
+        linear-gradient(180deg, rgba(12,0,0,.62) 0%, rgba(9,0,0,.86) 78%, rgba(0,0,0,1) 100%),
+        url("../../../assets/covers/golpe-estado-bg.png");
+      background-size:cover; background-position:center; opacity:.38; filter:contrast(1.08) saturate(1.08);
+    }
+    .hero-inner{position:relative; z-index:1; max-width:1100px; margin:0 auto; padding:56px 20px 34px;}
+    .crumb{
+      display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px;
+      background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.06); color:var(--muted); font-size:13px; margin-bottom:18px;
+    }
+    .hero-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:28px; align-items:end;}
+    .hero-copy h1{margin:0 0 12px; font-size:clamp(34px, 6vw, 64px); line-height:1.02; letter-spacing:.02em; color:white; text-shadow:0 0 22px rgba(179,0,0,.22);}
+    .eyebrow{margin:0 0 14px; color:#ff8d8d; font-weight:700; letter-spacing:.14em; text-transform:uppercase; font-size:12px;}
+    .hero-copy p{margin:0; max-width:700px; color:#edd7d3; font-size:18px; line-height:1.75;}
+    .hero-side{display:flex; justify-content:flex-end;}
+    .chapter-card{
+      width:min(100%, 360px);
+      background:linear-gradient(180deg, rgba(26,10,10,.76), rgba(11,5,5,.92));
+      border:1px solid rgba(255,75,75,.22); border-radius:24px; box-shadow:var(--shadow); padding:22px; backdrop-filter:blur(16px);
+    }
+    .chapter-label{
+      display:inline-flex; align-items:center; gap:8px; padding:7px 12px; border-radius:999px;
+      background:var(--red-soft); border:1px solid rgba(255,75,75,.18); color:#ffb3b3;
+      font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; margin-bottom:14px;
+    }
+    .chapter-card h2{margin:0 0 10px; font-size:24px; line-height:1.15; color:white;}
+    .chapter-card p{margin:0 0 18px; color:var(--muted); font-size:15px; line-height:1.7;}
+    .meta{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:14px;}
+    .meta-item{padding:12px; border-radius:14px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.05);}
+    .meta-k{font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted-2); margin:0 0 6px;}
+    .meta-v{margin:0; font-size:13px; color:#fff2f2; font-weight:700;}
+    .content-wrap{max-width:var(--max); margin:0 auto; padding:28px 20px 80px;}
+    .reader{
+      position:relative; background:linear-gradient(180deg, rgba(18,8,8,.66), rgba(10,5,5,.82));
+      border:1px solid rgba(255,255,255,0.06); border-radius:22px; box-shadow:var(--shadow); overflow:hidden; backdrop-filter:blur(4px);
+    }
+    .reader-top{
+      display:flex; align-items:center; justify-content:space-between; gap:16px;
+      padding:18px 22px; border-bottom:1px solid var(--line); background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
+    }
+    .reader-top-left h3{margin:0 0 4px; font-size:18px; color:#fff5f4;}
+    .reader-top-left p{margin:0; color:var(--muted-2); font-size:13px;}
+    .reader-badge{
+      display:inline-flex; align-items:center; justify-content:center; min-height:34px; padding:0 12px; border-radius:999px;
+      background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06); color:#ffd4d4; font-size:12px; font-weight:700; white-space:nowrap;
+    }
+    .reader-body{padding:34px 26px 18px; position:relative;}
+    .story{max-width:720px; margin:0 auto; position:relative; z-index:2;}
+    .lead{
+      font-size:19px; line-height:1.9; color:#fff4f1; margin:0 0 26px; padding:18px 18px 18px 20px;
+      border-left:3px solid rgba(255,75,75,.5); background:rgba(28, 8, 8, 0.68); border-radius:0 14px 14px 0; backdrop-filter:blur(4px);
+    }
+    .story p{margin:0 0 22px; color:#f3e6e1; font-size:18px; line-height:1.95; letter-spacing:.01em; text-shadow:0 1px 2px rgba(0,0,0,.4);}
+    .story p strong{color:#ffffff; font-weight:700;}
+    .story .quote{
+      margin:34px 0; padding:20px 22px; border-radius:18px;
+      background:linear-gradient(180deg, rgba(179,0,0,.16), rgba(255,75,75,.08));
+      border:1px solid rgba(255,75,75,.16); color:#fff5f5; font-size:19px; line-height:1.7; text-align:center; box-shadow:0 12px 30px rgba(0,0,0,.18); backdrop-filter:blur(4px);
+    }
+    .story .divider{width:86px; height:1px; background:linear-gradient(90deg, transparent, rgba(255,75,75,.66), transparent); margin:34px auto;}
+    .reader-bottom{padding:24px 26px 28px; border-top:1px solid var(--line); display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;}
+    .reader-note{color:var(--muted-2); font-size:13px; margin:0;}
+    .nav-actions{display:flex; gap:12px; flex-wrap:wrap;}
+    @media (max-width: 900px){
+      .hero-grid{grid-template-columns:1fr;}
+      .hero-side{justify-content:flex-start;}
+      .chapter-card{width:100%; max-width:unset;}
+    }
+    @media (max-width: 640px){
+      .topbar-inner{padding:14px 14px;}
+      .hero-inner{padding:34px 14px 22px;}
+      .content-wrap{padding:20px 14px 60px;}
+      .reader-top,.reader-body,.reader-bottom{padding-left:16px; padding-right:16px;}
+      .reader-body{padding-top:24px;}
+      .hero-copy p,.story p,.lead{font-size:16px;}
+      .meta{grid-template-columns:1fr;}
+      .top-actions{width:100%;}
+      .btn{width:100%;}
+      .nav-actions{width:100%;}
+      .nav-actions .btn{flex:1 1 100%;}
+    }
+  </style>
+</head>
+<body>
+  <canvas id="stars"></canvas>
+
+  <div class="page">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand">
+          <div class="brand-badge">N</div>
+          <div>
+            <p class="brand-title" id="brandTitle">Golpe de Estado</p>
+            <p class="brand-sub" id="brandSub">Chile, 1973 · Thriller histórico original de Nébula</p>
+          </div>
+        </div>
+
+        <div class="top-actions">
+          <a id="topBackBtn" href="../../../home.html" class="btn btn-ghost">← Volver al home</a>
+          <a id="topNextBtn" href="capitulo9.html" class="btn btn-primary">Siguiente capítulo →</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="crumb" id="crumbText">Home / Golpe de Estado / Capítulo 8</div>
+
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow" id="heroEyebrow">Capítulo 8</p>
+            <h1 id="heroTitle">Voces bajo tierra</h1>
+            <p id="heroDescription">Bajo templos, imprentas y casas discretas nace una red de resistencia que no se construye con armas, sino con documentos, refugios y memoria.</p>
+          </div>
+
+          <div class="hero-side">
+            <aside class="chapter-card">
+              <div class="chapter-label" id="chapterLabel">Resistencia secreta</div>
+              <h2 id="cardTitle">Lo que se guarda para mañana</h2>
+              <p id="cardDescription">Mientras arriba manda el miedo, abajo se organiza la memoria.</p>
+
+              <div class="meta">
+                <div class="meta-item">
+                  <p class="meta-k">Estado</p>
+                  <p class="meta-v" id="metaState">Premium</p>
+                </div>
+                <div class="meta-item">
+                  <p class="meta-k">Género</p>
+                  <p class="meta-v" id="metaGenre">Histórico</p>
+                </div>
+                <div class="meta-item">
+                  <p class="meta-k">Saga</p>
+                  <p class="meta-v" id="metaSaga">Chile 1973</p>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="content-wrap">
+      <article class="reader">
+        <div class="reader-top">
+          <div class="reader-top-left">
+            <h3 id="readerTitle">Capítulo 8: Voces bajo tierra</h3>
+            <p id="readerSubtitle">Capítulo premium · La resistencia de los que no desaparecieron</p>
+          </div>
+          <div class="reader-badge" id="readerBadge">Acceso premium</div>
+        </div>
+
+        <div class="reader-body">
+          <div class="story">
+            <p class="lead">Bajo templos, imprentas y casas discretas nace una red de resistencia que no se construye con armas, sino con documentos, refugios y memoria. Tomás Rivas, Elena Fuentes y Gabriel Soto todavía no saben cuánto les costará atravesar este día, pero ya sienten que el país ha entrado en una zona donde las palabras cambian de significado: orden puede significar castigo, patria puede significar silencio y sobrevivir puede convertirse en una tarea moral mucho más dura de lo que cualquiera imaginó. En este capítulo, el golpe deja de ser noticia y se vuelve experiencia.</p>
+            <p>En {scene}. Tomás Rivas había aprendido a reconocer los cambios de una ciudad por su sonido, y aquella vez lo primero que notó fue que Santiago no respiraba igual. Las persianas no subían con normalidad, los colectivos pasaban con una prudencia extraña y hasta los perros parecían ladrar hacia una dirección precisa, como si algo enorme se acercara desde el centro. Él no tenía aún una explicación completa, pero sí una certeza física: el aire estaba cargado de mandato, de miedo y de una electricidad política que convertía cada esquina en una frontera. Desde una ventana abierta, una radio interrumpida repetía consignas inconclusas; desde otra, una mujer llamaba a un hijo que todavía no volvía. Ese modo de comenzar el día, con frases cortadas y puertas cerrándose antes de tiempo, le dio a Tomás la impresión de que el país entero estaba entrando por un túnel sin señalización. Nadie sabía cuánto duraría el trayecto, pero todos intuían que al otro lado no estaría el mismo Chile. Esa conciencia, todavía imprecisa, fue la primera herida del capítulo {num}, porque antes de la violencia visible aparece siempre una forma previa del derrumbe: la intuición de que el orden conocido ha dejado de existir.</p>
+            <p>La escena de {scene} no se parecía a una película ni a un discurso grandilocuente; se parecía más bien al trabajo silencioso de una máquina que empieza a cerrar engranajes. Elena Fuentes, acostumbrada a observar gestos mínimos en una sala de urgencia, entendió muy rápido que la gravedad no estaba solo en los heridos que empezaban a llegar, sino en el tipo de mirada con que llegaban. Algunos sostenían la mandíbula rígida para no llorar delante de extraños. Otros buscaban confirmar que el país seguía siendo real tocando los marcos de las puertas, las camillas, las tazas de té tibio que alguien repartía sin decir palabra. Elena vio rostros tiznados, manos temblorosas, uniformes tensos, pero sobre todo vio una pregunta repetida de mil formas: qué se suponía que debían hacer ahora las personas comunes cuando la violencia había sido legitimada desde arriba. En cada respuesta que intentaba improvisar, descubría el mismo vacío. Curar un corte, vendar una costilla o bajar una fiebre seguía siendo posible. Curar la sensación de que lo permitido se había expandido de golpe hasta incluir lo impensable, eso ya pertenecía a otro territorio. Por eso aquel momento de {title} no fue solo una escena, sino una grieta moral en la que empezaron a caer ciudadanos que jamás se habían preparado para vivir bajo la lógica del temor organizado.</p>
+            <p>Gabriel Soto, con el uniforme todavía nuevo en algunas costuras y viejo en el alma desde esa semana, entendió el peso de {scene} de una manera más brutal. Nadie le explicó nada con claridad; le entregaron instrucciones fragmentadas, gestos secos y una pedagogía hecha de gritos cortos. Aprendió rápido que en ciertos contextos la obediencia no se mide por el entusiasmo, sino por la velocidad con que uno entierra sus propias dudas. Sin embargo, Gabriel no pudo enterrar del todo la imagen de los civiles que veía de reojo: hombres de oficina confundidos con agitadores, madres retenidas por preguntar demasiado, jóvenes con la vista vendada a los que se trataba como si su sola existencia fuera una falta. Cada nueva orden le exigía participar menos con las manos que con el silencio, y descubrió que callar podía comprometer tanto como disparar. Esa revelación se quedó pegada a su nuca durante horas, como el sudor frío que deja la conciencia cuando empieza a oponerse al cuerpo. En el mundo que estaba naciendo, lo terrible no era solo lo que algunos hombres hacían, sino la facilidad con que toda una estructura convertía la duda en delito y la compasión en debilidad. Gabriel siguió caminando, siguió obedeciendo hacia afuera, pero por dentro comenzó a desmoronarse con una lucidez que ya no tendría vuelta.</p>
+            <p>Tomás tomó notas mentales de {scene} porque escribir en voz alta se había vuelto un riesgo, y aun así no podía permitirse dejar que el día se deslizara hacia el olvido. Vio rostros que no aparecerían en los diarios, escuchó nombres que pronto serían susurrados solo en cocinas o pasillos, y comprendió que la censura no empieza cuando se prohíbe un titular, sino cuando las personas dejan de sentirse autorizadas a contar lo que han visto. Por eso empezó a guardar frases exactas, olores, direcciones, colores del humo, marcas de botas en una escalera, la manera en que una mano buscaba otra bajo una mesa. Sabía que los grandes relatos históricos suelen aplastar estas minucias, y sin embargo intuía que ahí, precisamente ahí, estaba la verdad material del golpe: en los detalles que ningún comunicado oficial sabría inventar con la precisión de quien estuvo presente. Mientras caminaba, pensó que un país también puede ser asesinado por capas: primero se bombardean sus símbolos, luego se disciplinan sus cuerpos y finalmente se intenta expropiar su memoria. Su tarea, si lograba sobrevivir, sería luchar contra esa última etapa. No podía detener los aviones ni las patrullas, pero acaso sí podía impedir que el lenguaje del poder quedara como versión definitiva de lo ocurrido.</p>
+            <p>Alrededor de {scene}, la ciudad empezó a exhibir un fenómeno inquietante: la vida cotidiana no desaparecía por completo, solo se deformaba. Las panaderías abrían a medias; los vecinos bajaban a comprar lo indispensable sin quedarse conversando; las micros seguían avanzando, aunque cargaban un silencio espeso que convertía cada frenazo en sobresalto. Esa coexistencia entre normalidad aparente y miedo profundo fue, quizá, una de las formas más eficaces del nuevo orden. Porque obligaba a la población a seguir cumpliendo rutinas mientras aceptaba que la violencia ya estaba integrada al paisaje. Elena lo percibió cuando vio a una madre pedir gasas y, en la misma frase, preguntar si alguien había sabido de su marido detenido. Tomás lo percibió al encontrar kioscos con portadas alineadas que hablaban de calma mientras detrás del papel aún se sentía olor a ceniza. Y Gabriel lo comprendió al descubrir que algunos superiores hablaban de patriotismo con la misma tranquilidad con que ordenaban revisar casas o trasladar detenidos. La fractura histórica no siempre llega en forma de colapso total; a veces llega como una costura torcida que pretende mantener unido lo que en realidad ya fue partido. Y esa fue la sensación dominante de la jornada: seguir andando, seguir respirando, seguir comprando pan, pero hacerlo dentro de una realidad que acababa de perder su inocencia.</p>
+            <div class="divider"></div>
+            <div class="quote">La memoria no siempre tiene monumentos; a veces empieza en un subterráneo húmedo, con una mimeógrafa y manos temblorosas.</div>
+            <p>En medio de {scene}, una verdad se abrió paso con la paciencia cruel de lo irreversible: los más indefensos iban a cargar el peso más pesado. No serían solo los dirigentes visibles ni los militantes conocidos; también los hijos que esperaban detrás de una cortina, las mujeres que irían de oficina en oficina preguntando por un nombre, los ancianos a los que nadie había consultado sobre la guerra que ahora entraba a su barrio, los trabajadores que terminarían fichados por haber pertenecido a la reunión incorrecta o por haber sido denunciados por un vecino cobarde. Elena, desde su experiencia con cuerpos dañados, supo que el golpe no terminaría en un día de humo y sirenas. Lo verdaderamente hondo vendría después: la cola interminable de heridas lentas, de duelos suspendidos, de familias viviendo años enteros sin certificado, sin cuerpo y sin respuesta. Tomás empezó a entrevistar no solo hechos, sino consecuencias futuras; se dio cuenta de que cada testimonio estaba lleno de verbos en tiempo incierto: se lo llevaron, dijeron que volvería, quizás lo trasladaron, tal vez mañana. Gabriel, por su parte, comenzó a mirar a los detenidos como versiones posibles de sus propios vecinos, de su hermano, de sí mismo sin uniforme. Ese cruce íntimo hizo que el miedo dejara de ser abstracto. Ya no se trataba de política en el aire, sino de personas concretas absorbidas por una máquina que recién estaba mostrando la mitad de su rostro.</p>
+            <p>Lo que ocurrió en {scene} obligó a todos a redefinir la palabra patria, aunque nadie se atreviera a formularlo en voz alta. Para algunos mandos, patria empezó a significar disciplina, limpieza y silenciamiento. Para quienes quedaban abajo, patria se pareció más a un conjunto de personas frágiles intentando no perderse entre toques de queda, archivos destruidos y comunicados mentirosos. Tomás sintió rabia al ver esa palabra convertida en escudo para justificar lo injustificable. Elena sintió algo peor: la fatiga de asistir a víctimas en nombre de una nación que juraba salvarlas mientras las golpeaba. Gabriel sintió el conflicto más íntimo de todos, porque llevaba la patria cosida sobre el pecho mientras empezaba a descubrir que podía estar siendo usada contra la misma gente a la que decía proteger. Esa contradicción define el corazón moral de {title}. No hay heroísmos simples, no hay villanos de caricatura, no hay inocencia intacta después de cierto umbral. Solo queda la elección, repetida una y otra vez, entre colaborar con el olvido o pagar el costo de mirar de frente. Por eso cada paso del capítulo empuja a los personajes hacia una verdad dura: cuando el Estado decide volverse contra parte de su pueblo, los ciudadanos dejan de debatir ideas y empiezan a decidir cuánto de su humanidad podrán conservar sin quebrarse del todo.</p>
+            <p>Más tarde, cuando la oscuridad volvió a cubrir la ciudad y {scene} seguía vibrando en la memoria de todos, apareció la dimensión emocional que suele quedar fuera de los informes: el cansancio. No el cansancio del trabajo ni de una jornada larga, sino ese agotamiento moral de quien ha visto demasiado en demasiado poco tiempo. Elena llegó a una cocina, se apoyó en una mesa y recién entonces notó que tenía sangre seca en la manga. Tomás revisó sus apuntes y sintió que cada nombre escrito era una deuda nueva. Gabriel, en un camarote helado, fingió dormir mientras se preguntaba si seguir obedeciendo lo estaba convirtiendo en algo que después no podría explicar ni a su madre ni a sí mismo. Ese agotamiento no traía alivio; traía una comprensión más peligrosa. Les revelaba que lo vivido no era una excepción que acabaría sola, sino el prólogo de una estructura que podía perfeccionarse con el tiempo. Y justamente por eso surgió una decisión callada, no coordinada pero común: alguien tendría que seguir registrando, alguien tendría que seguir curando, alguien tendría que empezar a filtrar información. El miedo seguía allí, enorme, pero ya no era el único dueño del escenario. Sin anunciarlo todavía, empezó a formarse la resistencia íntima: esa voluntad de no permitir que el horror fuese también el autor único del relato.</p>
+            <p>La profundidad de {scene} se entendía mejor al escuchar a quienes apenas aparecían en el borde de la historia. Una vecina que escondía documentos en un frasco de harina. Un taxista que cambiaba de ruta para evitar un control y dejar a un desconocido dos cuadras más cerca de su casa. Un sacerdote que anotaba confesiones que no eran pecados, sino pruebas. Una profesora jubilada que quemaba libros no por renegar de ellos, sino para evitar que encontraran a su nieto. El golpe no avanzaba solo mediante tanques y decretos; avanzaba también obligando a los comunes a tomar decisiones desesperadas y moralmente injustas para seguir respirando un día más. Tomás supo entonces que su novela futura, si alguna vez la escribía, no podría quedar reducida a palacios ni comandancias. Debía contar también estas pequeñas maniobras de supervivencia, porque en ellas latía el verdadero espesor humano de la tragedia. Elena comprendió que curar no era solo cerrar heridas, sino escuchar relatos que nadie se animaba a repetir dos veces. Gabriel comprendió que toda institución que necesita que los decentes miren al suelo para funcionar ya ha confesado su propia corrupción. Esa suma de comprensiones parciales fue llevando a los tres hacia un punto inevitable: tarde o temprano tendrían que arriesgar algo más que su comodidad.</p>
+            <p>Hacia el final de {scene}, el miedo había cambiado de forma. Al principio era un golpe exterior, un estruendo, una noticia brutal. Luego se volvió rutina, sospecha, archivo, mirada ajena. Finalmente se instaló como una pregunta: qué harás tú, ahora que sabes. Esa pregunta atravesó a Tomás con la fuerza de una obligación profesional y moral. Atravesó a Elena como juramento de cuidado en medio de la barbarie. Atravesó a Gabriel como juicio silencioso contra su propia participación. Y esa es, en última instancia, la tensión que sostiene este capítulo. No se limita a narrar hechos duros, sino que empuja a sus personajes a dejar de ser espectadores. La historia de Chile en 1973, vista desde aquí, no es solo la crónica de una ruptura institucional. Es también la historia de miles de conciencias sometidas a prueba, de miles de personas a quienes les arrebataron la ilusión de neutralidad en apenas unos días. Cuando el capítulo se cierra, ninguno de ellos ha vencido al sistema, pero todos han cruzado una frontera interior. Ya no pueden decir que no entienden lo que está pasando. Y una vez que eso ocurre, el futuro deja de ser una continuación pasiva del presente: se convierte en una apuesta peligrosa por la memoria.</p>
+            <p>Si algo deja claro {scene}, es que los grandes quiebres históricos no concluyen cuando cesa el primer estruendo. Se expanden. Se filtran por las tuberías de la ciudad, por las listas, por las camas de hospital, por los archivos, por las puertas tocadas de madrugada, por las cocinas donde se apaga una radio para poder pronunciar un nombre. Tomás lo supo cuando decidió esconder copias de sus notas en lugares distintos. Elena lo supo cuando eligió quedarse, aun sabiendo que cada jornada la acercaba un poco más a la mira de los vigilantes. Gabriel lo supo cuando entendió que el uniforme ya no bastaba para darle una identidad limpia. Esa expansión del daño es lo que vuelve a {title} una pieza central dentro de la novela: aquí no solo se describe el golpe, sino la manera en que empieza a colonizar la vida completa. Pero también, y eso importa igual, aquí asoma la forma embrionaria de una respuesta. No una respuesta grandilocuente, sino una mezcla de obstinación, ternura y coraje. Personas comunes haciendo lo posible para que la noche no escriba sola la historia. Y en un tiempo así, donde todo parecía diseñado para aplastar, lo posible ya era muchísimo.</p>
+          </div>
+        </div>
+
+        <div class="reader-bottom">
+          <p class="reader-note" id="readerNote">A veces resistir consiste en guardar un nombre para el futuro.</p>
+
+          <div class="nav-actions">
+            <a id="bottomBackBtn" href="capitulo7.html" class="btn btn-ghost">← Capítulo 7</a>
+            <a id="bottomNextBtn" href="capitulo9.html" class="btn btn-primary">Leer capítulo 9 →</a>
+          </div>
+        </div>
+      </article>
+    </main>
+  </div>
+
+  <script>
+    const CHAPTER_CONFIG = {
+      novelTitle: "Golpe de Estado",
+      novelSubtitle: "Chile, 1973 · Thriller histórico original de Nébula",
+      chapterNumber: 8,
+      chapterTitle: "Voces bajo tierra",
+      novelHome: "../../../home.html",
+      previousChapter: "capitulo7.html",
+      nextChapter: "capitulo9.html"
+    };
+
+    const topBackBtn = document.getElementById("topBackBtn");
+    const bottomBackBtn = document.getElementById("bottomBackBtn");
+    const topNextBtn = document.getElementById("topNextBtn");
+    const bottomNextBtn = document.getElementById("bottomNextBtn");
+
+    function setBackButton(button) {
+      if (!CHAPTER_CONFIG.previousChapter) {
+        button.href = CHAPTER_CONFIG.novelHome;
+        button.textContent = "← Volver al home principal";
+      } else {
+        button.href = CHAPTER_CONFIG.previousChapter;
+        button.textContent = `← Capítulo ${CHAPTER_CONFIG.chapterNumber - 1}`;
+      }
+    }
+
+    function setNextButton(button) {
+      if (!CHAPTER_CONFIG.nextChapter) {
+        button.href = CHAPTER_CONFIG.novelHome;
+        button.textContent = "Volver al home principal →";
+      } else {
+        button.href = CHAPTER_CONFIG.nextChapter;
+        button.textContent = `Leer capítulo ${CHAPTER_CONFIG.chapterNumber + 1} →`;
+      }
+    }
+
+    setBackButton(topBackBtn);
+    setBackButton(bottomBackBtn);
+    setNextButton(topNextBtn);
+    setNextButton(bottomNextBtn);
+  </script>
+
+  <script>
+    const canvas = document.getElementById("stars");
+    const ctx = canvas.getContext("2d");
+    let stars = [];
+
+    function resize(){
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      createStars();
+    }
+
+    function createStars(){
+      stars = [];
+      const amount = Math.floor((canvas.width * canvas.height) / 12000);
+      for(let i = 0; i < amount; i++){
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 1.8 + 0.35,
+          speed: Math.random() * 0.6 + 0.15,
+          alpha: Math.random() * 0.7 + 0.2
+        });
+      }
+    }
+
+    function animate(){
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for(const s of stars){
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(255,180,180,${s.alpha})`;
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fill();
+
+        s.y += s.speed;
+        s.x += Math.sin(s.y * 0.01) * 0.2;
+
+        if(s.y > canvas.height){
+          s.y = -2;
+          s.x = Math.random() * canvas.width;
+        }
+        if(s.x > canvas.width) s.x = 0;
+        if(s.x < 0) s.x = canvas.width;
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener("resize", resize);
+    resize();
+    animate();
+  </script>
+
+  <script src="../../../js/access-control.js"></script>
+</body>
+</html>
