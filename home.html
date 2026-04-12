@@ -2746,7 +2746,7 @@
         const data = snap.data() || {};
         const currentCoins = Number(data.coins || 0);
         const unlockedNovels = Array.isArray(data.unlockedNovels) ? data.unlockedNovels : [];
-        const unlockId = String(novelId || '').replace(/-t\d+$/, '');
+        const unlockId = String(novelId || '');
 
         if (unlockedNovels.includes(unlockId)) {
           return true;
