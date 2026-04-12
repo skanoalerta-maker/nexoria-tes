@@ -243,7 +243,7 @@ window.NEBULA_NOVELS = {
   sagaTitle: "Pinochet",
   description: "Una novela histórica intensa sobre poder, control, decisiones militares y el impacto humano de un periodo que marcó para siempre la historia de Chile.",
   cover: "../assets/covers/pinochet_nebula_portada.png",
-  baseFolder: "historico/Pinochet",
+  baseFolder: "historico/pinochet",
   defaultSeason: "temporada1",
   defaultSeasonLabel: "Temporada 1",
   freeChapters: 3,
