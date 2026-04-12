@@ -530,6 +530,26 @@
     border-color:rgba(255,255,255,.14);
   }
 
+  .btn-gold{
+    color:#171105;
+    background:linear-gradient(135deg, #ffec9e 0%, #ffd54a 38%, #ffbf1f 100%);
+    border:1px solid rgba(255,212,74,.48);
+    box-shadow:0 18px 34px rgba(255,191,31,.20), 0 0 0 1px rgba(255,255,255,.14) inset;
+    text-shadow:0 1px 0 rgba(255,255,255,.28);
+    font-weight:900;
+  }
+
+  .btn-gold:hover{
+    transform:translateY(-1px);
+    box-shadow:0 22px 40px rgba(255,191,31,.28), 0 0 0 1px rgba(255,255,255,.18) inset;
+  }
+
+  .btn[disabled]{
+    opacity:.62;
+    cursor:not-allowed;
+    transform:none;
+  }
+
   .btn-ghost{
     min-height:54px;
     color:#fff;
@@ -1315,7 +1335,7 @@
 
   .story-mini-meta{
     display:grid;
-    grid-template-columns:repeat(2, minmax(0, 1fr));
+    grid-template-columns:repeat(3, minmax(0, 1fr));
     gap:12px;
   }
 
@@ -1456,43 +1476,35 @@
     font-weight:800;
     font-size:.92rem;
   }
-.pricing-card{
-  transition: all .25s ease;
-}
 
-.pricing-card:hover{
-  transform: translateY(-6px);
-  box-shadow:
-    0 30px 80px rgba(0,0,0,.45),
-    0 0 40px rgba(80,150,255,.12);
-}
+  .pricing-card{
+    transition: all .25s ease;
+  }
 
-.pricing-card.featured:hover{
-  box-shadow:
-    0 30px 80px rgba(0,0,0,.45),
-    0 0 50px rgba(255,213,74,.18);
-}
+  .pricing-card:hover{
+    transform: translateY(-6px);
+    box-shadow:
+      0 30px 80px rgba(0,0,0,.45),
+      0 0 40px rgba(80,150,255,.12);
+  }
 
-.pricing-actions{
-  margin-top:18px;
-}
+  .pricing-card.featured:hover{
+    box-shadow:
+      0 30px 80px rgba(0,0,0,.45),
+      0 0 50px rgba(255,213,74,.18);
+  }
 
-.pricing-actions .btn{
-  width:100%;
-  min-height:56px;
-  font-size:1rem;
-  border-radius:18px;
-}
+  .pricing-actions{
+    margin-top:18px;
+  }
 
-.btn-primary{
-  background:linear-gradient(135deg, #2a82ff, #4aa7ff);
-  box-shadow:0 20px 40px rgba(50,120,255,.25);
-}
+  .pricing-actions .btn{
+    width:100%;
+    min-height:56px;
+    font-size:1rem;
+    border-radius:18px;
+  }
 
-.btn-secondary{
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.12);
-}
   .empty-state{
     margin-top:20px;
     padding:22px;
@@ -2098,7 +2110,6 @@
           </div>
         </div>
 
-        <!-- 🔥 ESTADO RÁPIDO -->
         <div class="user-status-row">
           <span class="user-pill" id="userPlanPill">Suscripción: Free</span>
           <span class="user-pill" id="userStatePill">Estado: Invitado</span>
@@ -2106,7 +2117,6 @@
           <span class="user-pill" id="userCoinsPill">Coins: 0</span>
         </div>
 
-        <!-- 🔥 ESTADÍSTICAS -->
         <div class="user-stats">
           <div class="user-stat">
             <small>Novelas vistas</small>
@@ -2160,7 +2170,6 @@
     <section class="pricing-section">
   <div class="pricing-grid">
 
-<!-- PLAN COIN -->
 <article class="pricing-card pricing-card--individual">
   <div class="pricing-topline">
     <span class="pricing-chip">1 Coin = 1 novela</span>
@@ -2203,7 +2212,7 @@
     </button>
   </div>
 </article>
-<!-- PLAN PREMIUM -->
+
 <article class="pricing-card pricing-card featured pricing-card--premium">
   <div class="pricing-topline">
     <span class="pricing-chip premium-chip">Premium mensual</span>
@@ -2251,6 +2260,7 @@
 </section>
   </div>
 </section>
+
     <section class="section" id="generos">
       <div class="container">
         <div class="section-head">
@@ -2327,9 +2337,16 @@
 
   <script src="novelas/data.js"></script>
   <script>
-
     let novelas = [];
     let filtradas = [];
+    let nebulaCurrentUser = null;
+    let nebulaCurrentUserData = {
+      coins: 0,
+      unlockedNovels: [],
+      subscription: 'free',
+      plan: 'free'
+    };
+
     const storyGrid = document.getElementById("storyGrid");
     const genreGrid = document.getElementById("genreGrid");
     const emptyState = document.getElementById("emptyState");
@@ -2376,6 +2393,25 @@
     function increaseViews(novela){ const current = getStoredViews(novela); const next = current + 1; localStorage.setItem(getStorageViewsKey(novela.id), String(next)); novela.visitas = next; }
     function getRating(novela){ const val = Number(novela.rating || 5); return Number.isFinite(val) ? Math.max(1, Math.min(5, Math.round(val))) : 5; }
     function renderStarsHTML(rating){ const safe = Math.max(1, Math.min(5, Math.round(Number(rating) || 5))); return Array.from({length:5}, (_,i)=>`<span class="star ${i<safe?'active':''}">★</span>`).join(''); }
+
+    function getCurrentUserCoins(){
+      return Number(nebulaCurrentUserData?.coins || 0);
+    }
+
+    function getUnlockedNovels(){
+      return Array.isArray(nebulaCurrentUserData?.unlockedNovels)
+        ? nebulaCurrentUserData.unlockedNovels
+        : [];
+    }
+
+    function getUnlockId(novelaId){
+      return String(novelaId || '').replace(/-t\d+$/, '');
+    }
+
+    function isNovelUnlocked(novela){
+      return getUnlockedNovels().includes(getUnlockId(novela.id));
+    }
+
     function buildCatalogFromNebulaData(){
       const source = window.NEBULA_NOVELS;
       if (!source || typeof source !== 'object') return [];
@@ -2394,7 +2430,16 @@
         rating: Number(novel.rating || 5)
       }));
     }
-    function prepararNovelas(data){ return data.map((novela, index) => ({...novela, visitas:getStoredViews(novela), destacada: typeof novela.destacada==='boolean' ? novela.destacada : index===0, rating:getRating(novela)})); }
+
+    function prepararNovelas(data){
+      return data.map((novela, index) => ({
+        ...novela,
+        visitas:getStoredViews(novela),
+        destacada: typeof novela.destacada==='boolean' ? novela.destacada : index===0,
+        rating:getRating(novela)
+      }));
+    }
+
     function renderFeatured(){
       const destacada = novelas.find(n => n.destacada) || novelas[0];
       if (!destacada) return;
@@ -2412,80 +2457,152 @@
       document.getElementById('featuredReadLink').onclick = () => { saveInitialProgress(destacada); increaseViews(destacada); };
       document.getElementById('featuredContinueBtn').onclick = () => { saveInitialProgress(destacada); window.location.href = getContinuePath(destacada); };
     }
+
     function renderGenres(){
       const genres = [...new Set(novelas.map(n => n.genero))];
       genreGrid.innerHTML = genres.map(genre => {
         const total = novelas.filter(n => n.genero === genre).length;
         return `<button class="genre-card" type="button" data-genre="${genre}"><span>${capitalizar(genre)}</span><small>${total} historia${total!==1?'s':''}</small></button>`;
       }).join('');
-      document.querySelectorAll('.genre-card').forEach(btn => btn.addEventListener('click', ()=>{ storySearch.value = btn.dataset.genre; filtrarHistorias(); document.getElementById('catalogo').scrollIntoView({behavior:'smooth'}); }));
+      document.querySelectorAll('.genre-card').forEach(btn => btn.addEventListener('click', ()=>{
+        storySearch.value = btn.dataset.genre;
+        filtrarHistorias();
+        document.getElementById('catalogo').scrollIntoView({behavior:'smooth'});
+      }));
     }
+
     function renderStories(items){
-      if (!items.length){ storyGrid.innerHTML=''; emptyState.classList.remove('hidden'); return; }
+      if (!items.length){
+        storyGrid.innerHTML = '';
+        emptyState.classList.remove('hidden');
+        return;
+      }
+
       emptyState.classList.add('hidden');
-      storyGrid.innerHTML = items.map(novela => `
-        <article class="story-card">
-          <div class="story-cover-shell">
-            <img class="story-cover" src="${novela.portada}" alt="${novela.titulo}" />
-            <div class="story-cover-shadow"></div>
-            <div class="story-badges"><span>${capitalizar(novela.genero)}</span><span>${novela.temporada || 'Temporada 1'}</span></div>
-          </div>
-          <div class="story-body">
-            <div class="story-topline"><h3>${novela.titulo}</h3><small>${getStoredViews(novela)} visitas</small></div>
-            <div class="story-rating-line"><div class="stars">${renderStarsHTML(novela.rating)}</div><span class="rating-label">${novela.rating}.0 / 5</span></div>
-            <p>${novela.descripcion}</p>
-            <div class="story-mini-meta"><div><small>Gratis</small><strong>${novela.gratis || 3} capítulos</strong></div><div><small>Capítulos</small><strong>${novela.capitulos || 0} disponibles</strong></div></div>
-            <div class="story-card-actions">
-              <a class="btn btn-primary" href="${novela.ruta}" data-read-id="${novela.id}">Comenzar</a>
-              <button class="btn btn-secondary" type="button" data-continue-id="${novela.id}">Seguir</button>
+      const userCoins = getCurrentUserCoins();
+
+      storyGrid.innerHTML = items.map(novela => {
+        const unlocked = isNovelUnlocked(novela);
+        const canUseCoin = !!nebulaCurrentUser && !unlocked && userCoins > 0;
+
+        return `
+          <article class="story-card">
+            <div class="story-cover-shell">
+              <img class="story-cover" src="${novela.portada}" alt="${novela.titulo}" />
+              <div class="story-cover-shadow"></div>
+              <div class="story-badges"><span>${capitalizar(novela.genero)}</span><span>${novela.temporada || 'Temporada 1'}</span></div>
             </div>
-          </div>
-        </article>
-      `).join('');
+            <div class="story-body">
+              <div class="story-topline"><h3>${novela.titulo}</h3><small>${getStoredViews(novela)} visitas</small></div>
+              <div class="story-rating-line"><div class="stars">${renderStarsHTML(novela.rating)}</div><span class="rating-label">${novela.rating}.0 / 5</span></div>
+              <p>${novela.descripcion}</p>
+              <div class="story-mini-meta">
+                <div><small>Gratis</small><strong>${novela.gratis || 3} capítulos</strong></div>
+                <div><small>Capítulos</small><strong>${novela.capitulos || 0} disponibles</strong></div>
+                <div><small>Coins disponibles</small><strong>${userCoins} Coin${userCoins === 1 ? '' : 's'}</strong></div>
+              </div>
+              <div class="story-card-actions">
+                <a class="btn btn-primary" href="${novela.ruta}" data-read-id="${novela.id}">Comenzar</a>
+                <button class="btn btn-secondary" type="button" data-continue-id="${novela.id}">Seguir</button>
+                ${
+                  unlocked
+                    ? `<button class="btn btn-gold" type="button" disabled>Desbloqueada</button>`
+                    : canUseCoin
+                      ? `<button class="btn btn-gold" type="button" data-use-coin-id="${novela.id}">Usar Coin (1)</button>`
+                      : `<button class="btn btn-gold" type="button" disabled>Usar Coin (1)</button>`
+                }
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
+
       document.querySelectorAll('[data-read-id]').forEach(link => {
         const novela = novelas.find(n => n.id === link.dataset.readId);
         if (!novela) return;
-        link.addEventListener('click', ()=>{ saveInitialProgress(novela); increaseViews(novela); });
+        link.addEventListener('click', ()=>{
+          saveInitialProgress(novela);
+          increaseViews(novela);
+        });
       });
+
       document.querySelectorAll('[data-continue-id]').forEach(btn => {
         const novela = novelas.find(n => n.id === btn.dataset.continueId);
         if (!novela) return;
-        btn.addEventListener('click', ()=>{ saveInitialProgress(novela); window.location.href = getContinuePath(novela); });
+        btn.addEventListener('click', ()=>{
+          saveInitialProgress(novela);
+          window.location.href = getContinuePath(novela);
+        });
+      });
+
+      document.querySelectorAll('[data-use-coin-id]').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          if (typeof window.nebulaUseCoin !== 'function') return;
+          const ok = await window.nebulaUseCoin(btn.dataset.useCoinId);
+          if (ok) {
+            renderStories(filtradas);
+          }
+        });
       });
     }
+
     function filtrarHistorias(){
       const q = storySearch.value.trim().toLowerCase();
-      filtradas = novelas.filter(n => [n.titulo, n.genero, n.descripcion, n.temporada || '', String(n.capitulos||''), String(n.gratis||''), String(n.rating||'')].join(' ').toLowerCase().includes(q));
+      filtradas = novelas.filter(n =>
+        [n.titulo, n.genero, n.descripcion, n.temporada || '', String(n.capitulos||''), String(n.gratis||''), String(n.rating||'')]
+          .join(' ')
+          .toLowerCase()
+          .includes(q)
+      );
       renderStories(filtradas);
     }
+
     function getAllProgressEntries(){
-      const entries=[];
-      for(let i=0;i<localStorage.length;i++){ const key=localStorage.key(i); if(key && key.startsWith('nebula-progress-')) entries.push({key,value:localStorage.getItem(key)}); }
+      const entries = [];
+      for(let i=0;i<localStorage.length;i++){
+        const key = localStorage.key(i);
+        if(key && key.startsWith('nebula-progress-')) entries.push({key,value:localStorage.getItem(key)});
+      }
       return entries;
     }
+
     function updateUserReadingStats(){
       const progressEntries = getAllProgressEntries();
       const viewedStories = progressEntries.length;
-      const readChapters = progressEntries.reduce((acc, item)=>{ const match = String(item.value||'').match(/capitulo(\d+)\.html/i); return match ? acc + Number(match[1]||0) : acc; },0);
+      const readChapters = progressEntries.reduce((acc, item)=>{
+        const match = String(item.value||'').match(/capitulo(\d+)\.html/i);
+        return match ? acc + Number(match[1]||0) : acc;
+      },0);
+
       let lastProgressText = 'Aún sin progreso';
-      if(progressEntries.length){ const last = progressEntries[progressEntries.length-1]; const matchedNovel = novelas.find(n => last.key === getProgressKey(n.id)); if(matchedNovel) lastProgressText = matchedNovel.titulo; }
+      if(progressEntries.length){
+        const last = progressEntries[progressEntries.length-1];
+        const matchedNovel = novelas.find(n => last.key === getProgressKey(n.id));
+        if(matchedNovel) lastProgressText = matchedNovel.titulo;
+      }
+
       document.getElementById('userViewedStories').textContent = `${viewedStories} registradas`;
       document.getElementById('userProgressPill').textContent = `Capítulos leídos: ${readChapters}`;
       document.getElementById('userLastProgress').textContent = lastProgressText;
       return readChapters;
     }
-function cargarNovelas(){
-  const desdeDataJs = buildCatalogFromNebulaData();
-  novelas = prepararNovelas(desdeDataJs);
-  filtradas = [...novelas];
-  renderFeatured();
-  renderGenres();
-  renderStories(filtradas);
-  updateUserReadingStats();
-}
 
-storySearch.addEventListener('input', filtrarHistorias);
-cargarNovelas();
+    function cargarNovelas(){
+      const desdeDataJs = buildCatalogFromNebulaData();
+      novelas = prepararNovelas(desdeDataJs);
+      filtradas = [...novelas];
+      renderFeatured();
+      renderGenres();
+      renderStories(filtradas);
+      updateUserReadingStats();
+    }
+
+    window.nebulaRefreshCatalogCoins = function(){
+      renderStories(filtradas);
+    };
+
+    storySearch.addEventListener('input', filtrarHistorias);
+    cargarNovelas();
   </script>
 
   <script>
@@ -2496,315 +2613,339 @@ cargarNovelas();
     function createStars(){ stars=[]; const area = window.innerWidth * window.innerHeight; const amount = Math.max(70, Math.floor(area/14000)); for(let i=0;i<amount;i++){ stars.push({ x:Math.random()*window.innerWidth, y:Math.random()*window.innerHeight, r:Math.random()*1.5+.4, speed:Math.random()*.25+.05, alpha:Math.random()*.7+.15 }); } }
     function animateStars(){ ctx.clearRect(0,0,window.innerWidth,window.innerHeight); for(const s of stars){ ctx.beginPath(); ctx.fillStyle = `rgba(255,255,255,${s.alpha})`; ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fill(); s.y += s.speed; if(s.y > window.innerHeight + 2){ s.y = -2; s.x = Math.random()*window.innerWidth; } } requestAnimationFrame(animateStars); }
     window.addEventListener('resize', resizeStarsCanvas); resizeStarsCanvas(); animateStars();
-</script>
-<script src="js/access-control.js"></script>
-<script type="module">
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js';
-import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js';
-import { getFirestore, doc, getDoc, setDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js';
+  </script>
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDccMk1KLoCwXWG2g4r1sOI6qEt_7d5gTw",
-  authDomain: "dyh-nebula.firebaseapp.com",
-  projectId: "dyh-nebula",
-  storageBucket: "dyh-nebula.firebasestorage.app",
-  messagingSenderId: "230506596749",
-  appId: "1:230506596749:web:d7ffcf38de039c9629d5c4"
-};
-  
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-const API_BASE_URL = "https://api-mvtstimkcq-uc.a.run.app";
+  <script src="js/access-control.js"></script>
 
-async function postJson(url, payload){
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
-  });
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js';
+    import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js';
+    import { getFirestore, doc, getDoc, setDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js';
 
-  const rawText = await response.text();
+    const firebaseConfig = {
+      apiKey: "AIzaSyDccMk1KLoCwXWG2g4r1sOI6qEt_7d5gTw",
+      authDomain: "dyh-nebula.firebaseapp.com",
+      projectId: "dyh-nebula",
+      storageBucket: "dyh-nebula.firebasestorage.app",
+      messagingSenderId: "230506596749",
+      appId: "1:230506596749:web:d7ffcf38de039c9629d5c4"
+    };
 
-  let data;
-  try {
-    data = JSON.parse(rawText);
-  } catch (error) {
-    console.error('Respuesta no válida del servidor:', rawText);
-    throw new Error('El servidor no devolvió una respuesta válida.');
-  }
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    const API_BASE_URL = "https://api-mvtstimkcq-uc.a.run.app";
 
-  if (!response.ok) {
-    throw new Error(data.error || data.message || 'Error del servidor.');
-  }
-
-  return data;
-}
-
-window.buyCoin = async function(){
-  try {
-    const user = auth.currentUser;
-
-    if (!user) {
-      window.location.href = 'login.html';
-      return;
-    }
-
-    const data = await postJson(`${API_BASE_URL}/create-preference`, {
-      title: 'Nébula – 1 Coin',
-      price: 990,
-      quantity: 1,
-      type: 'coin',
-      novelId: null,
-      userId: user.uid,
-      email: user.email || ''
-    });
-
-    const redirectUrl = data.init_point || data.initPoint;
-
-    if (!data.ok || !redirectUrl) {
-      throw new Error(data.error || 'No se pudo iniciar la compra del coin.');
-    }
-
-    window.location.href = redirectUrl;
-  } catch (error) {
-    console.error(error);
-    alert(error.message || 'No se pudo iniciar la compra del coin.');
-  }
-};
-
-/* ===== ACCOUNT MENU ===== */
-const accountMenu = document.getElementById('accountMenu');
-const accountTrigger = document.getElementById('accountTrigger');
-const accountDropdown = document.getElementById('accountDropdown');
-const accountAvatar = document.getElementById('accountAvatar');
-const accountAvatarLarge = document.getElementById('accountAvatarLarge');
-const accountName = document.getElementById('accountName');
-const accountUserName = document.getElementById('accountUserName');
-const accountUserEmail = document.getElementById('accountUserEmail');
-const accountPlan = document.getElementById('accountPlan');
-const accountRead = document.getElementById('accountRead');
-const accountLogoutBtn = document.getElementById('accountLogoutBtn');
-
-/* ===== USER UI (FALTABAN ESTOS) ===== */
-const headerLoginLink = document.getElementById('headerLoginLink');
-const userGreeting = document.getElementById('userGreeting');
-const userEmailText = document.getElementById('userEmailText');
-const userPlanPill = document.getElementById('userPlanPill');
-const userStatePill = document.getElementById('userStatePill');
-const userProgressPill = document.getElementById('userProgressPill');
-const userCoinsPill = document.getElementById('userCoinsPill');
-const userCoinsText = document.getElementById('userCoinsText');
-const userAvatar = document.getElementById('userAvatar');
-const userGuestBox = document.getElementById('userGuestBox');
-const userLoggedBox = document.getElementById('userLoggedBox');
-const logoutBtn = document.getElementById('logoutBtn');
-
-/* ===== MENU EVENTS ===== */
-function closeAccountMenu(){
-  accountMenu?.classList.remove('open');
-  accountDropdown?.classList.add('hidden-panel');
-}
-
-function openAccountMenu(){
-  accountMenu?.classList.add('open');
-  accountDropdown?.classList.remove('hidden-panel');
-}
-
-accountTrigger?.addEventListener('click', (e) => {
-  e.stopPropagation();
-  if (accountDropdown?.classList.contains('hidden-panel')) openAccountMenu();
-  else closeAccountMenu();
-});
-
-document.addEventListener('click', (e) => {
-  if (accountMenu && !accountMenu.contains(e.target)) closeAccountMenu();
-});
-
-/* ===== PERFIL LOCAL ===== */
-function getLocalProfile(){
-  try { return JSON.parse(localStorage.getItem('nebula-user-profile')) || {}; }
-  catch { return {}; }
-}
-
-function getMembershipLabelFromData(data){
-  const raw = String(data?.subscription || data?.plan || 'free').toLowerCase();
-  return raw === 'premium' ? 'Premium' : 'Free';
-}
-
-function getAvatarValue(user, data = {}){
-  const localProfile = getLocalProfile();
-  const raw = data.avatar || localProfile.icon || user?.displayName || user?.email || 'N';
-  return String(raw).charAt(0).toUpperCase();
-}
-
-/* ===== FIRESTORE USER ===== */
-async function ensureUserDocument(user){
-  const userRef = doc(db, 'users', user.uid);
-  const snap = await getDoc(userRef);
-
-  if (!snap.exists()) {
-    await setDoc(userRef, {
-      uid: user.uid,
-      email: user.email || '',
-      name: user.displayName || 'Usuario Nébula',
-      avatar: '🌌',
-
-      // 🔥 PLAN
-      plan: 'free',
-      subscription: 'free',
-
-      // 🪙 SISTEMA COINS (NUEVO)
-      coins: 0,
-      unlockedNovels: [],
-
-      // 📖 PROGRESO
-      readChapters: [],
-
-      createdAt: serverTimestamp(),
-      updatedAt: serverTimestamp()
-    });
-  }
-
-  return await getDoc(userRef);
-}
-/* ===== UI STATES ===== */
-function updateLoggedOutUI(){
-  headerLoginLink?.classList.remove('hidden-panel');
-  accountMenu?.classList.add('hidden-panel');
-  closeAccountMenu();
-
-  accountAvatar.textContent = 'N';
-  accountAvatarLarge.textContent = 'N';
-  accountName.textContent = 'Lector';
-  accountUserName.textContent = 'Lector Nébula';
-  accountUserEmail.textContent = 'correo@ejemplo.com';
-  accountPlan.textContent = 'Free';
-  accountRead.textContent = '0 capítulos';
-
-  userGreeting.textContent = 'Tu cuenta Nébula';
-  userEmailText.textContent = 'Inicia sesión para sincronizar tu progreso, coins y contenido desbloqueado.';
-  userPlanPill.textContent = 'Suscripción: Free';
-  userStatePill.textContent = 'Estado: Invitado';
-  userProgressPill.textContent = 'Capítulos leídos: 0';
-  userCoinsPill.textContent = 'Coins: 0';
-  userCoinsText.textContent = '0 Coins';
-  userAvatar.textContent = 'N';
-  const badge = document.getElementById('userBadge');
-  if (badge) badge.style.display = 'none';
-
-  userGuestBox?.classList.remove('hidden-panel');
-  userLoggedBox?.classList.add('hidden-panel');
-}
-
-function updateLoggedInUI(user, data){
-  const name =
-    user.displayName ||
-    data?.name ||
-    (user.email ? user.email.split('@')[0] : 'Usuario');
-
-  const membership = getMembershipLabelFromData(data);
-  const avatar = name.charAt(0).toUpperCase();
-  const coins = Number(data?.coins || 0);
-  const readCount = Array.isArray(data?.readChapters) ? data.readChapters.length : 0;
-
-  console.log('UID ACTIVO:', user.uid);
-  console.log('DATA FIRESTORE:', data);
-  console.log('COINS FIRESTORE:', data?.coins);
-
-  headerLoginLink?.classList.add('hidden-panel');
-  accountMenu?.classList.remove('hidden-panel');
-
-  accountAvatar.textContent = avatar;
-  accountAvatarLarge.textContent = avatar;
-  accountName.textContent = name;
-  accountUserName.textContent = name;
-  accountUserEmail.textContent = user.email;
-  accountPlan.textContent = membership;
-  accountRead.textContent = `${readCount} capítulo${readCount === 1 ? '' : 's'}`;
-
-  userGreeting.textContent = name;
-  userEmailText.textContent = user.email;
-  userPlanPill.textContent = `Suscripción: ${membership}`;
-  userStatePill.textContent = 'Estado: Activo';
-  userCoinsPill.textContent = `Coins: ${coins}`;
-  userCoinsText.textContent = `${coins} Coin${coins === 1 ? '' : 's'}`;
-  userAvatar.textContent = avatar;
-
-  const badge = document.getElementById('userBadge');
-  if (badge) {
-    badge.style.display = membership === 'Premium' ? 'block' : 'none';
-  }
-
-  userGuestBox?.classList.add('hidden-panel');
-  userLoggedBox?.classList.remove('hidden-panel');
-}
-
-/* ===== LOGOUT ===== */
-async function handleLogout(){
-  await signOut(auth);
-  localStorage.removeItem('nebula-user-profile');
-  updateLoggedOutUI();
-  window.location.href = './index.html';
-}
-
-accountLogoutBtn?.addEventListener('click', handleLogout);
-logoutBtn?.addEventListener('click', handleLogout);
-
-/* ===== AUTH ===== */
-/* ===== AUTH ===== */
-onAuthStateChanged(auth, async (user) => {
-  console.log("🔥 USER AUTH:", user);
-
-  if (!user) {
-    updateLoggedOutUI();
-    return;
-  }
-
-  try {
-    const userRef = doc(db, 'users', user.uid);
-    const snap = await getDoc(userRef);
-
-    let data = {};
-
-    if (snap.exists()) {
-      data = snap.data();
-    } else {
-      await setDoc(userRef, {
-        uid: user.uid,
-        email: user.email || '',
-        name: user.displayName || 'Usuario Nébula',
-        avatar: '🌌',
-        plan: 'free',
-        subscription: 'free',
-        coins: 0,
-        unlockedNovels: [],
-        purchasedNovels: [],
-        readChapters: [],
-        createdAt: serverTimestamp(),
-        updatedAt: serverTimestamp()
+    async function postJson(url, payload){
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
       });
 
-      const newSnap = await getDoc(userRef);
-      data = newSnap.exists() ? newSnap.data() : {};
+      const rawText = await response.text();
+
+      let data;
+      try {
+        data = JSON.parse(rawText);
+      } catch (error) {
+        console.error('Respuesta no válida del servidor:', rawText);
+        throw new Error('El servidor no devolvió una respuesta válida.');
+      }
+
+      if (!response.ok) {
+        throw new Error(data.error || data.message || 'Error del servidor.');
+      }
+
+      return data;
     }
 
-    console.log("🔥 DATA FINAL:", data);
-    console.log("🪙 COINS FINAL:", data?.coins);
+    window.buyCoin = async function(){
+      try {
+        const user = auth.currentUser;
 
-    updateLoggedInUI(user, data);
-  } catch (e) {
-    console.error("ERROR FIRESTORE:", e);
-    updateLoggedInUI(user, {
-      name: user.displayName || 'Usuario',
-      email: user.email || '',
-      plan: 'free',
-      subscription: 'free',
-      coins: 0,
-      readChapters: []
+        if (!user) {
+          window.location.href = 'login.html';
+          return;
+        }
+
+        const data = await postJson(`${API_BASE_URL}/create-preference`, {
+          title: 'Nébula – 1 Coin',
+          price: 990,
+          quantity: 1,
+          type: 'coin',
+          novelId: null,
+          userId: user.uid,
+          email: user.email || ''
+        });
+
+        const redirectUrl = data.init_point || data.initPoint;
+
+        if (!data.ok || !redirectUrl) {
+          throw new Error(data.error || 'No se pudo iniciar la compra del coin.');
+        }
+
+        window.location.href = redirectUrl;
+      } catch (error) {
+        console.error(error);
+        alert(error.message || 'No se pudo iniciar la compra del coin.');
+      }
+    };
+
+    window.nebulaUseCoin = async function(novelId){
+      try {
+        const user = auth.currentUser;
+
+        if (!user) {
+          window.location.href = 'login.html';
+          return false;
+        }
+
+        const userRef = doc(db, 'users', user.uid);
+        const snap = await getDoc(userRef);
+
+        if (!snap.exists()) {
+          throw new Error('No se encontró tu cuenta.');
+        }
+
+        const data = snap.data() || {};
+        const currentCoins = Number(data.coins || 0);
+        const unlockedNovels = Array.isArray(data.unlockedNovels) ? data.unlockedNovels : [];
+        const unlockId = String(novelId || '').replace(/-t\d+$/, '');
+
+        if (unlockedNovels.includes(unlockId)) {
+          return true;
+        }
+
+        if (currentCoins <= 0) {
+          throw new Error('No tienes coins disponibles.');
+        }
+
+        await setDoc(userRef, {
+          coins: currentCoins - 1,
+          unlockedNovels: [...unlockedNovels, unlockId],
+          updatedAt: serverTimestamp()
+        }, { merge: true });
+
+        window.nebulaCurrentUserData = {
+          ...(window.nebulaCurrentUserData || {}),
+          ...data,
+          coins: currentCoins - 1,
+          unlockedNovels: [...unlockedNovels, unlockId]
+        };
+
+        if (typeof window.nebulaRefreshCatalogCoins === 'function') {
+          window.nebulaRefreshCatalogCoins();
+        }
+
+        return true;
+      } catch (error) {
+        console.error(error);
+        alert(error.message || 'No se pudo usar el coin.');
+        return false;
+      }
+    };
+
+    const accountMenu = document.getElementById('accountMenu');
+    const accountTrigger = document.getElementById('accountTrigger');
+    const accountDropdown = document.getElementById('accountDropdown');
+    const accountAvatar = document.getElementById('accountAvatar');
+    const accountAvatarLarge = document.getElementById('accountAvatarLarge');
+    const accountName = document.getElementById('accountName');
+    const accountUserName = document.getElementById('accountUserName');
+    const accountUserEmail = document.getElementById('accountUserEmail');
+    const accountPlan = document.getElementById('accountPlan');
+    const accountRead = document.getElementById('accountRead');
+    const accountLogoutBtn = document.getElementById('accountLogoutBtn');
+
+    const headerLoginLink = document.getElementById('headerLoginLink');
+    const userGreeting = document.getElementById('userGreeting');
+    const userEmailText = document.getElementById('userEmailText');
+    const userPlanPill = document.getElementById('userPlanPill');
+    const userStatePill = document.getElementById('userStatePill');
+    const userProgressPill = document.getElementById('userProgressPill');
+    const userCoinsPill = document.getElementById('userCoinsPill');
+    const userCoinsText = document.getElementById('userCoinsText');
+    const userAvatar = document.getElementById('userAvatar');
+    const userGuestBox = document.getElementById('userGuestBox');
+    const userLoggedBox = document.getElementById('userLoggedBox');
+    const logoutBtn = document.getElementById('logoutBtn');
+
+    function closeAccountMenu(){
+      accountMenu?.classList.remove('open');
+      accountDropdown?.classList.add('hidden-panel');
+    }
+
+    function openAccountMenu(){
+      accountMenu?.classList.add('open');
+      accountDropdown?.classList.remove('hidden-panel');
+    }
+
+    accountTrigger?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (accountDropdown?.classList.contains('hidden-panel')) openAccountMenu();
+      else closeAccountMenu();
     });
-  }
-});
-</script>
+
+    document.addEventListener('click', (e) => {
+      if (accountMenu && !accountMenu.contains(e.target)) closeAccountMenu();
+    });
+
+    function getMembershipLabelFromData(data){
+      const raw = String(data?.subscription || data?.plan || 'free').toLowerCase();
+      return raw === 'premium' ? 'Premium' : 'Free';
+    }
+
+    function updateLoggedOutUI(){
+      headerLoginLink?.classList.remove('hidden-panel');
+      accountMenu?.classList.add('hidden-panel');
+      closeAccountMenu();
+
+      accountAvatar.textContent = 'N';
+      accountAvatarLarge.textContent = 'N';
+      accountName.textContent = 'Lector';
+      accountUserName.textContent = 'Lector Nébula';
+      accountUserEmail.textContent = 'correo@ejemplo.com';
+      accountPlan.textContent = 'Free';
+      accountRead.textContent = '0 capítulos';
+
+      userGreeting.textContent = 'Tu cuenta Nébula';
+      userEmailText.textContent = 'Inicia sesión para sincronizar tu progreso, coins y contenido desbloqueado.';
+      userPlanPill.textContent = 'Suscripción: Free';
+      userStatePill.textContent = 'Estado: Invitado';
+      userProgressPill.textContent = 'Capítulos leídos: 0';
+      userCoinsPill.textContent = 'Coins: 0';
+      userCoinsText.textContent = '0 Coins';
+      userAvatar.textContent = 'N';
+      const badge = document.getElementById('userBadge');
+      if (badge) badge.style.display = 'none';
+
+      window.nebulaCurrentUser = null;
+      window.nebulaCurrentUserData = {
+        coins: 0,
+        unlockedNovels: [],
+        subscription: 'free',
+        plan: 'free'
+      };
+
+      userGuestBox?.classList.remove('hidden-panel');
+      userLoggedBox?.classList.add('hidden-panel');
+
+      if (typeof window.nebulaRefreshCatalogCoins === 'function') {
+        window.nebulaRefreshCatalogCoins();
+      }
+    }
+
+    function updateLoggedInUI(user, data){
+      const name =
+        user.displayName ||
+        data?.name ||
+        (user.email ? user.email.split('@')[0] : 'Usuario');
+
+      const membership = getMembershipLabelFromData(data);
+      const avatar = name.charAt(0).toUpperCase();
+      const coins = Number(data?.coins || 0);
+      const readCount = Array.isArray(data?.readChapters) ? data.readChapters.length : 0;
+
+      headerLoginLink?.classList.add('hidden-panel');
+      accountMenu?.classList.remove('hidden-panel');
+
+      accountAvatar.textContent = avatar;
+      accountAvatarLarge.textContent = avatar;
+      accountName.textContent = name;
+      accountUserName.textContent = name;
+      accountUserEmail.textContent = user.email;
+      accountPlan.textContent = membership;
+      accountRead.textContent = `${readCount} capítulo${readCount === 1 ? '' : 's'}`;
+
+      userGreeting.textContent = name;
+      userEmailText.textContent = user.email;
+      userPlanPill.textContent = `Suscripción: ${membership}`;
+      userStatePill.textContent = 'Estado: Activo';
+      userCoinsPill.textContent = `Coins: ${coins}`;
+      userCoinsText.textContent = `${coins} Coin${coins === 1 ? '' : 's'}`;
+      userAvatar.textContent = avatar;
+
+      const badge = document.getElementById('userBadge');
+      if (badge) {
+        badge.style.display = membership === 'Premium' ? 'block' : 'none';
+      }
+
+      window.nebulaCurrentUser = user;
+      window.nebulaCurrentUserData = {
+        coins,
+        unlockedNovels: Array.isArray(data?.unlockedNovels) ? data.unlockedNovels : [],
+        subscription: data?.subscription || 'free',
+        plan: data?.plan || 'free'
+      };
+
+      userGuestBox?.classList.add('hidden-panel');
+      userLoggedBox?.classList.remove('hidden-panel');
+
+      if (typeof window.nebulaRefreshCatalogCoins === 'function') {
+        window.nebulaRefreshCatalogCoins();
+      }
+    }
+
+    async function handleLogout(){
+      await signOut(auth);
+      localStorage.removeItem('nebula-user-profile');
+      updateLoggedOutUI();
+      window.location.href = './index.html';
+    }
+
+    accountLogoutBtn?.addEventListener('click', handleLogout);
+    logoutBtn?.addEventListener('click', handleLogout);
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        updateLoggedOutUI();
+        return;
+      }
+
+      try {
+        const userRef = doc(db, 'users', user.uid);
+        const snap = await getDoc(userRef);
+
+        let data = {};
+
+        if (snap.exists()) {
+          data = snap.data();
+        } else {
+          await setDoc(userRef, {
+            uid: user.uid,
+            email: user.email || '',
+            name: user.displayName || 'Usuario Nébula',
+            avatar: '🌌',
+            plan: 'free',
+            subscription: 'free',
+            coins: 0,
+            unlockedNovels: [],
+            purchasedNovels: [],
+            readChapters: [],
+            createdAt: serverTimestamp(),
+            updatedAt: serverTimestamp()
+          });
+
+          const newSnap = await getDoc(userRef);
+          data = newSnap.exists() ? newSnap.data() : {};
+        }
+
+        updateLoggedInUI(user, data);
+      } catch (e) {
+        console.error("ERROR FIRESTORE:", e);
+        updateLoggedInUI(user, {
+          name: user.displayName || 'Usuario',
+          email: user.email || '',
+          plan: 'free',
+          subscription: 'free',
+          coins: 0,
+          unlockedNovels: [],
+          readChapters: []
+        });
+      }
+    });
+  </script>
 </body>
 </html>
+
