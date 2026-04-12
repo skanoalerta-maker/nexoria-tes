@@ -232,35 +232,35 @@ window.NEBULA_NOVELS = {
     ]
   },
 
-  "pinochet-t1": {
-    id: "pinochet-t1",
-    title: "Pinochet  Temporada 1",
-    sagaTitle: "Pinochet",
-    description: "Una novela histórica intensa sobre poder, control, decisiones militares y el impacto humano de un periodo que marcó para siempre la historia de Chile.",
-    cover: "../assets/covers/pinochet_nebula_portada.png",
-    baseFolder: "Pinochet",
-    defaultSeason: "temporada1",
-    defaultSeasonLabel: "Temporada 1",
-    freeChapters: 3,
-    price: "$1.500 CLP",
-    rating: 5,
-    visitas: 2000,
-    tags: ["Historia", "Militar", "Política", "Temporada 1"],
-    chapters: [
-      { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 1", description: "Inicio de una historia marcada por poder y ruptura." },
-      { num: 2, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 2", description: "La tensión política crece." },
-      { num: 3, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 3", description: "La historia entra en un punto de no retorno." },
-      { num: 4, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 4", description: "La historia continúa." },
-      { num: 5, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 5", description: "La historia continúa." },
-      { num: 6, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 6", description: "La historia continúa." },
-      { num: 7, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 7", description: "La historia continúa." },
-      { num: 8, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 8", description: "La historia continúa." },
-      { num: 9, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 9", description: "La tensión alcanza un punto irreversible." },
-      { num: 10, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 10", description: "El poder se consolida mientras el país cambia para siempre." },
-      { num: 11, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 11", description: "Las consecuencias humanas ya no pueden ocultarse." },
-      { num: 12, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 12", description: "El cierre de temporada deja una herida abierta sobre Chile." }
-    ]
-  },
+"pinochet-t1": {
+  id: "pinochet-t1",
+  title: "Pinochet  Temporada 1",
+  sagaTitle: "Pinochet",
+  description: "Una novela histórica intensa sobre poder, control, decisiones militares y el impacto humano de un periodo que marcó para siempre la historia de Chile.",
+  cover: "../assets/covers/pinochet_nebula_portada.png",
+  baseFolder: "pinochet",
+  defaultSeason: "temporada1",
+  defaultSeasonLabel: "Temporada 1",
+  freeChapters: 3,
+  price: "$1.500 CLP",
+  rating: 5,
+  visitas: 2000,
+  tags: ["Historia", "Militar", "Política", "Temporada 1"],
+  chapters: [
+    { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 1", description: "Inicio de una historia marcada por poder y ruptura." },
+    { num: 2, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 2", description: "La tensión política crece." },
+    { num: 3, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 3", description: "La historia entra en un punto de no retorno." },
+    { num: 4, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 4", description: "La historia continúa." },
+    { num: 5, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 5", description: "La historia continúa." },
+    { num: 6, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 6", description: "La historia continúa." },
+    { num: 7, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 7", description: "La historia continúa." },
+    { num: 8, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 8", description: "La historia continúa." },
+    { num: 9, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 9", description: "La tensión alcanza un punto irreversible." },
+    { num: 10, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 10", description: "El poder se consolida mientras el país cambia para siempre." },
+    { num: 11, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 11", description: "Las consecuencias humanas ya no pueden ocultarse." },
+    { num: 12, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 12", description: "El cierre de temporada deja una herida abierta sobre Chile." }
+  ]
+},
 
   "allende-t1": {
     id: "allende-t1",
