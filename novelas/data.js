@@ -78,26 +78,41 @@ window.NEBULA_NOVELS = {
     { num: 17, season: "temporada2", seasonLabel: "Temporada 2", title: "La ventana abierta", description: "Con el tiempo agotándose, solo queda una oportunidad para entrar sin quedar atrapados al otro lado." }
   ]
 },
+
   "despues-de-tu-adios-t1": {
-    id: "despues-de-tu-adios-t1",
-    title: "Después de tu adiós  Temporada 1",
-    sagaTitle: "Después de tu adiós",
-    description: "Una novela emocional sobre recuerdos, ausencia y todo lo que sigue vivo después de una despedida.",
-    cover: "../assets/covers/despues-de-tu-adios.jpg",
-    baseFolder: "romance/despues-de-tu-adios",
-    defaultSeason: "temporada1",
-    defaultSeasonLabel: "Temporada 1",
-    freeChapters: 3,
-    price: "$1.500 CLP",
-    rating: 4,
-    visitas: 1187,
-    tags: ["Romance", "Emocional", "Drama", "Temporada 1"],
-    chapters: [
-      { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "La llamada que no debía llegar", description: "Una voz del pasado reabre emociones que parecían enterradas." },
-      { num: 2, season: "temporada1", seasonLabel: "Temporada 1", title: "El peso del recuerdo", description: "Cada objeto, cada rincón y cada silencio empiezan a devolver escenas que todavía duelen." },
-      { num: 3, season: "temporada1", seasonLabel: "Temporada 1", title: "Lo que dejaste aquí", description: "No todo lo que se pierde desaparece; algunas ausencias toman más espacio que una presencia." }
-    ]
-  },
+  id: "despues-de-tu-adios-t1",
+  title: "Después de tu adiós  Temporada 1",
+  sagaTitle: "Después de tu adiós",
+  description: "Una novela emocional sobre recuerdos, ausencia y todo lo que sigue vivo después de una despedida.",
+  cover: "../assets/covers/despues-de-tu-adios.jpg",
+  baseFolder: "romance/despues-de-tu-adios",
+  defaultSeason: "temporada1",
+  defaultSeasonLabel: "Temporada 1",
+  freeChapters: 3,
+  price: "$1.500 CLP",
+  rating: 4,
+  visitas: 1187,
+  tags: ["Romance", "Emocional", "Drama", "Temporada 1"],
+  chapters: [
+    { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "La llamada que no debía llegar", description: "Una voz del pasado reabre emociones que parecían enterradas." },
+    { num: 2, season: "temporada1", seasonLabel: "Temporada 1", title: "El peso del recuerdo", description: "Cada objeto, cada rincón y cada silencio empiezan a devolver escenas que todavía duelen." },
+    { num: 3, season: "temporada1", seasonLabel: "Temporada 1", title: "Lo que dejaste aquí", description: "No todo lo que se pierde desaparece; algunas ausencias toman más espacio que una presencia." },
+    { num: 4, season: "temporada1", seasonLabel: "Temporada 1", title: "Volver a verte", description: "El reencuentro no trae respuestas, solo más preguntas que no estaban listas para ser enfrentadas." },
+    { num: 5, season: "temporada1", seasonLabel: "Temporada 1", title: "La versión que fuimos", description: "Recordar no siempre es mirar atrás: a veces es revivir exactamente lo que se intentó olvidar." },
+    { num: 6, season: "temporada1", seasonLabel: "Temporada 1", title: "Entre lo que duele y lo que queda", description: "Las emociones empiezan a mezclarse, confundiendo lo que fue con lo que todavía existe." },
+    { num: 7, season: "temporada1", seasonLabel: "Temporada 1", title: "Las cosas que no dijimos", description: "El silencio entre ellos empieza a pesar más que cualquier palabra que pudieron haber dicho." },
+    { num: 8, season: "temporada1", seasonLabel: "Temporada 1", title: "Lo que nunca terminó", description: "No todo final es definitivo, y algunas historias se niegan a cerrarse por completo." },
+    { num: 9, season: "temporada1", seasonLabel: "Temporada 1", title: "La herida abierta", description: "Volver a sentir no siempre es sanar: a veces es descubrir que nunca dejó de doler." },
+    { num: 10, season: "temporada1", seasonLabel: "Temporada 1", title: "Cerca otra vez", description: "La distancia desaparece, pero con ella también se pierden las certezas que habían construido." },
+    { num: 11, season: "temporada1", seasonLabel: "Temporada 1", title: "Lo que aún me haces sentir", description: "Emilia empieza a cuestionarse si realmente dejó de amar o solo aprendió a ocultarlo." },
+    { num: 12, season: "temporada1", seasonLabel: "Temporada 1", title: "Romper o quedarse", description: "Cada decisión empieza a sentirse como un punto de no retorno." },
+    { num: 13, season: "temporada1", seasonLabel: "Temporada 1", title: "El miedo a repetir", description: "El pasado no solo duele: también advierte, y esa advertencia puede destruir cualquier intento." },
+    { num: 14, season: "temporada1", seasonLabel: "Temporada 1", title: "La verdad que evitamos", description: "Ambos empiezan a enfrentar lo que realmente ocurrió entre ellos." },
+    { num: 15, season: "temporada1", seasonLabel: "Temporada 1", title: "Lo que nunca superamos", description: "Aceptar que algo sigue vivo puede ser más difícil que dejarlo morir." },
+    { num: 16, season: "temporada1", seasonLabel: "Temporada 1", title: "El último intento", description: "Una decisión final se aproxima, cargada de todo lo que no pudieron resolver antes." },
+    { num: 17, season: "temporada1", seasonLabel: "Temporada 1", title: "Después de tu adiós", description: "El cierre no responde todo, pero deja claro que algunas historias no terminan… solo cambian de forma." }
+  ]
+},
 
   "no-debi-enamorarme-t1": {
     id: "no-debi-enamorarme-t1",
