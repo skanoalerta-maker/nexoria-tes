@@ -307,26 +307,40 @@ window.NEBULA_NOVELS = {
   ]
 },
 
-  "golpe-de-estado-t1": {
-    id: "golpe-de-estado-t1",
-    title: "Golpe de Estado  Temporada 1",
-    sagaTitle: "Golpe de Estado",
-    description: "Una historia política, social y humana sobre la fractura de un país, la tensión del poder y los días que cambiaron Chile para siempre.",
-    cover: "../assets/covers/golpe_estado_nebula.png",
-    baseFolder: "historia/golpe-de-estado",
-    defaultSeason: "temporada1",
-    defaultSeasonLabel: "Temporada 1",
-    freeChapters: 3,
-    price: "$1.500 CLP",
-    rating: 5,
-    visitas: 0,
-    tags: ["Historia", "Política", "Drama", "Temporada 1"],
-    chapters: [
-      { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "La antesala", description: "Las tensiones se acumulan en silencio mientras el país se acerca a una ruptura irreversible." },
-      { num: 2, season: "temporada1", seasonLabel: "Temporada 1", title: "La orden", description: "Los movimientos militares dejan claro que ya no hay vuelta atrás." },
-      { num: 3, season: "temporada1", seasonLabel: "Temporada 1", title: "El día que cambió todo", description: "Las calles, el poder y la historia colisionan en una jornada imposible de olvidar." }
-    ]
-  },
+"golpe-de-estado-t1": {
+  id: "golpe-de-estado-t1",
+  title: "Golpe de Estado  Temporada 1",
+  sagaTitle: "Golpe de Estado",
+  description: "Una historia política, social y humana sobre la fractura de un país, la tensión del poder y los días que cambiaron Chile para siempre.",
+  cover: "../assets/covers/golpe_estado_nebula.png",
+  baseFolder: "historico/golpe-de-estado",
+  defaultSeason: "temporada1",
+  defaultSeasonLabel: "Temporada 1",
+  freeChapters: 3,
+  price: "$1.500 CLP",
+  rating: 5,
+  visitas: 0,
+  tags: ["Historia", "Política", "Drama", "Temporada 1"],
+  chapters: [
+    { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "La antesala", description: "Las tensiones se acumulan en silencio mientras el país se acerca a una ruptura irreversible." },
+    { num: 2, season: "temporada1", seasonLabel: "Temporada 1", title: "La orden", description: "Los movimientos militares dejan claro que ya no hay vuelta atrás." },
+    { num: 3, season: "temporada1", seasonLabel: "Temporada 1", title: "El día que cambió todo", description: "Las calles, el poder y la historia colisionan en una jornada imposible de olvidar." },
+    { num: 4, season: "temporada1", seasonLabel: "Temporada 1", title: "Humo sobre Santiago", description: "La ciudad despierta entre sirenas, miedo y edificios marcados por la violencia." },
+    { num: 5, season: "temporada1", seasonLabel: "Temporada 1", title: "Las voces apagadas", description: "Las radios cambian de tono y el silencio comienza a instalarse como una orden." },
+    { num: 6, season: "temporada1", seasonLabel: "Temporada 1", title: "Bajo toque de queda", description: "La noche cae con una dureza nueva, dejando a las familias atrapadas por el temor." },
+    { num: 7, season: "temporada1", seasonLabel: "Temporada 1", title: "Los nombres que faltan", description: "Las ausencias empiezan a sentirse en barrios, oficinas y casas que ya no vuelven a ser iguales." },
+    { num: 8, season: "temporada1", seasonLabel: "Temporada 1", title: "La cadena del mando", description: "Las decisiones bajan como acero desde arriba y nadie quiere cargar con la culpa completa." },
+    { num: 9, season: "temporada1", seasonLabel: "Temporada 1", title: "Detrás de los muros", description: "Los recintos de detención esconden historias que el país tardará décadas en enfrentar." },
+    { num: 10, season: "temporada1", seasonLabel: "Temporada 1", title: "La patria dividida", description: "Entre la obediencia, el miedo y la rabia, Chile comienza a fracturarse en dos memorias opuestas." },
+    { num: 11, season: "temporada1", seasonLabel: "Temporada 1", title: "La maquinaria del miedo", description: "El control deja de ser militar y empieza a convertirse en sistema." },
+    { num: 12, season: "temporada1", seasonLabel: "Temporada 1", title: "Los que miraron a otro lado", description: "No todos empuñaron armas; algunos ayudaron simplemente callando." },
+    { num: 13, season: "temporada1", seasonLabel: "Temporada 1", title: "Cenizas en La Moneda", description: "El símbolo del poder destruido se transforma en una herida abierta para toda una generación." },
+    { num: 14, season: "temporada1", seasonLabel: "Temporada 1", title: "La ciudad sitiada", description: "Santiago ya no se reconoce a sí misma mientras el nuevo orden endurece sus métodos." },
+    { num: 15, season: "temporada1", seasonLabel: "Temporada 1", title: "La memoria clandestina", description: "Cuando hablar se vuelve peligroso, recordar se convierte en un acto de resistencia." },
+    { num: 16, season: "temporada1", seasonLabel: "Temporada 1", title: "El precio del poder", description: "Las consecuencias humanas del golpe revelan el verdadero costo de imponer la fuerza." },
+    { num: 17, season: "temporada1", seasonLabel: "Temporada 1", title: "El eco de las ruinas", description: "El final de la temporada deja claro que el golpe no terminó ese día: apenas comenzó una era más oscura." }
+  ]
+},
 
   "el-precio-del-silencio-t1": {
     id: "el-precio-del-silencio-t1",
