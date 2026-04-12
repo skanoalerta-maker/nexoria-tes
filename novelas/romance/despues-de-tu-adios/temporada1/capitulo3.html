@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Capítulo 3 | Después de tu adiós</title>
+<meta content="Capítulo 3 de Después de tu adiós: Donde siempre." name="description"/>
+<style>    :root{
+      --bg:#0a0b10;--bg2:#131722;--card:rgba(20,24,35,.9);--line:rgba(255,255,255,.08);--text:#f7f7fb;--muted:#b8bfd1;--muted2:#8f98b0;--accent:#b91c1c;--accent2:#ef4444;--shadow:0 24px 60px rgba(0,0,0,.42);--radius:22px;--max:980px;}
+    *{box-sizing:border-box} html{scroll-behavior:smooth}
+    body{margin:0;font-family:Arial,sans-serif;color:var(--text);background:radial-gradient(circle at top left, rgba(185,28,28,.08), transparent 24%),radial-gradient(circle at top right, rgba(239,68,68,.05), transparent 22%),linear-gradient(180deg, #07080d 0%, #10131d 48%, #0a0b10 100%);line-height:1.8;overflow-x:hidden;position:relative;}
+    a{color:inherit;text-decoration:none}.page{min-height:100vh;position:relative;z-index:1;}
+    .topbar{position:sticky;top:0;z-index:30;backdrop-filter:blur(14px);background:rgba(7,8,13,.72);border-bottom:1px solid var(--line);}
+    .topbar-inner{max-width:1100px;margin:0 auto;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:14px;}
+    .brand{display:flex;align-items:center;gap:12px;min-width:0;}
+    .brand-badge{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg, rgba(185,28,28,.22), rgba(239,68,68,.08));border:1px solid rgba(239,68,68,.18);box-shadow:0 0 24px rgba(185,28,28,.12);font-weight:700;color:#ffd2d2;flex:0 0 auto;}
+    .brand-title{font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#fff1f1;margin:0 0 2px;}
+    .brand-sub{font-size:12px;color:var(--muted2);margin:0;}
+    .top-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end;}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:12px;font-size:14px;font-weight:700;transition:transform .18s ease, background .18s ease, border-color .18s ease;border:1px solid transparent;cursor:pointer;}
+    .btn:hover{transform:translateY(-1px)} .btn-primary{background:linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);color:#fff;box-shadow:0 12px 28px rgba(185,28,28,.25);}
+    .btn-ghost{background:rgba(255,255,255,.03);border-color:var(--line);color:#f2eaea;}
+    .hero{position:relative;overflow:hidden;border-bottom:1px solid rgba(255,255,255,.04);}
+    .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg, rgba(7,8,13,.52) 0%, rgba(7,8,13,.88) 82%, rgba(7,8,13,1) 100%),url("despues-de-tu-adios-generica.jpg");background-size:cover;background-position:center;opacity:.36;filter:saturate(.95);}
+    .hero-inner{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:56px 20px 34px;}
+    .crumb{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);color:var(--muted);font-size:13px;margin-bottom:18px;}
+    .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:end;}
+    .hero-copy h1{margin:0 0 12px;font-size:clamp(34px, 6vw, 64px);line-height:1.02;letter-spacing:.02em;color:white;text-shadow:0 0 22px rgba(185,28,28,.18);}
+    .eyebrow{margin:0 0 14px;color:#ffb1b1;font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:12px;}
+    .hero-copy p{margin:0;max-width:700px;color:#eadede;font-size:18px;line-height:1.75;}
+    .hero-side{display:flex;justify-content:flex-end;}
+    .chapter-card{width:min(100%,360px);background:linear-gradient(180deg, rgba(20,24,35,.85), rgba(12,14,22,.92));border:1px solid rgba(239,68,68,.16);border-radius:24px;box-shadow:var(--shadow);padding:22px;backdrop-filter:blur(16px);}
+    .chapter-label{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.14);color:#ffbdbd;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px;}
+    .chapter-card h2{margin:0 0 10px;font-size:24px;line-height:1.15;color:white;}
+    .chapter-card p{margin:0 0 18px;color:var(--muted);font-size:15px;line-height:1.7;}
+    .meta{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px;}
+    .meta-item{padding:12px;border-radius:14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);}
+    .meta-k{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted2);margin:0 0 6px;}
+    .meta-v{margin:0;font-size:13px;color:#fff1f1;font-weight:700;}
+    .content-wrap{max-width:var(--max);margin:0 auto;padding:24px 18px 70px;}
+    .reader{position:relative;background:linear-gradient(180deg, rgba(20,24,35,.80), rgba(10,12,18,.90));border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;}
+    .reader-top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 22px;border-bottom:1px solid var(--line);background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));}
+    .reader-top-left h3{margin:0 0 4px;font-size:18px;color:#fff7f7;} .reader-top-left p{margin:0;color:var(--muted2);font-size:13px;}
+    .reader-badge{display:inline-flex;align-items:center;justify-content:center;min-height:34px;padding:0 12px;border-radius:999px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);color:#ffe2e2;font-size:12px;font-weight:700;white-space:nowrap;}
+    .reader-body{padding:30px 24px 18px;}
+    .lead{font-size:19px;line-height:1.85;color:#fff1f1;margin:0 0 24px;padding:18px 18px 18px 20px;border-left:3px solid rgba(239,68,68,.42);background:rgba(239,68,68,.06);border-radius:0 14px 14px 0;}
+    .story p{margin:0 0 20px;color:#e7dede;font-size:17px;line-height:1.9;letter-spacing:.01em;}
+    .story .quote{margin:30px 0;padding:18px 20px;border-radius:18px;background:linear-gradient(180deg, rgba(185,28,28,.10), rgba(239,68,68,.04));border:1px solid rgba(239,68,68,.12);color:#fff3f3;font-size:18px;line-height:1.6;text-align:center;box-shadow:0 12px 30px rgba(0,0,0,.18);}
+    .story .divider{width:86px;height:1px;background:linear-gradient(90deg, transparent, rgba(239,68,68,.6), transparent);margin:30px auto;}
+    .reader-bottom{padding:22px 24px 26px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;}
+    .reader-note{color:var(--muted2);font-size:13px;margin:0;} .nav-actions{display:flex;gap:12px;flex-wrap:wrap;} .footer-space{height:20px}
+    @media (max-width:900px){.hero-grid{grid-template-columns:1fr}.hero-side{justify-content:flex-start}.chapter-card{width:100%;max-width:unset}}
+    @media (max-width:640px){.topbar-inner{padding:14px}.hero-inner{padding:30px 14px 20px}.content-wrap{padding:16px 12px 50px}.reader{border-radius:16px}.reader-top,.reader-body,.reader-bottom{padding-left:16px;padding-right:16px}.reader-body{padding-top:22px}.hero-copy h1{font-size:30px}.hero-copy p{font-size:15px;line-height:1.65}.chapter-card{padding:16px}.chapter-card h2{font-size:21px}.meta{grid-template-columns:1fr}.lead{font-size:16px;line-height:1.75}.story p{font-size:15px;line-height:1.78}.story .quote{font-size:16px;padding:16px}.top-actions,.nav-actions{width:100%}.btn,.nav-actions .btn{width:100%;flex:1 1 100%}}
+</style>
+</head>
+<body>
+<div class="page">
+<header class="topbar">
+<div class="topbar-inner">
+<div class="brand">
+<div class="brand-badge">R</div>
+<div class="brand-text">
+<p class="brand-title">Después de tu adiós</p>
+<p class="brand-sub">Historia de romance</p>
+</div>
+</div>
+<div class="top-actions">
+<a class="btn btn-ghost" href="capitulo2.html">← Capítulo 2</a>
+<a class="btn btn-primary" href="capitulo4.html">Seguir con la historia →</a>
+</div>
+</div>
+</header>
+<section class="hero">
+<div class="hero-inner">
+<div class="crumb">Romance / Capítulo 3</div>
+<div class="hero-grid">
+<div class="hero-copy">
+<p class="eyebrow">Romance</p>
+<h1>Después de tu adiós</h1>
+<p>Volver al lugar donde empezó todo no garantiza una segunda oportunidad. Pero sí obliga a mirar lo que todavía sigue vivo.</p>
+</div>
+<div class="hero-side">
+<aside class="chapter-card">
+<div class="chapter-label">Encuentro</div>
+<h2>Donde siempre</h2>
+<p>Emilia acepta ver a Tomás en la vieja librería-café donde se conocieron. El reencuentro tiene la delicadeza de lo conocido y la tensión de todo lo que quedó pendiente.</p>
+<div class="meta">
+<div class="meta-item"><p class="meta-k">Estado</p><p class="meta-v">Gratis</p></div>
+<div class="meta-item"><p class="meta-k">Ritmo</p><p class="meta-v">Romance</p></div>
+<div class="meta-item"><p class="meta-k">Clave</p><p class="meta-v">Temporada 1</p></div>
+</div>
+</aside>
+</div>
+</div>
+</div>
+</section>
+<main class="content-wrap">
+<article class="reader">
+<div class="reader-top">
+<div class="reader-top-left">
+<h3>Capítulo 3: Donde siempre</h3>
+<p>Romance · A veces el amor vuelve primero a un lugar antes de volver a un cuerpo</p>
+</div>
+<div class="reader-badge">Capítulo abierto</div>
+</div>
+<div class="reader-body">
+<div class="story"><p class="lead">La campanilla de la puerta suena con esa música mínima que Emilia había olvidado y, al mismo tiempo, recordado demasiadas veces. Tomás levanta la vista. No se pone de pie de inmediato, como si necesitara un segundo para creer que ella de verdad está ahí. Después se incorpora tan rápido que casi golpea la mesa con la rodilla. Ninguno sonríe primero. Durante una fracción de segundo los dos se quedan inmóviles, mirándose con la extraña intimidad de quienes se conocen el cuerpo, las manías y las heridas, pero llevan meses sin saber nada el uno del otro. Emilia siente que el aire tiene un espesor distinto. No es incomodidad pura; tampoco calma. Es una tensión fina, cargada de historia.</p><p>“Hola”, dice él. Emilia asiente antes de contestar, como si necesitara confirmar que la voz no la va a traicionar. “Hola”. Una palabra pequeña, casi ridícula para todo lo que contiene. Tomás le corre la silla. Ella se sienta. El gesto podría parecer galante si no estuviera atravesado por una memoria mucho más compleja. Antes él hacía eso sin que significara nada. Ahora cada movimiento tiene un peso adicional, una lectura posible, una intención examinada. Piden café. Hablan del clima. De la librería, que cambió la distribución de las mesas. Del barrio, que ahora tiene un edificio nuevo donde antes había un estacionamiento. Ese inicio banal no les parece cobarde; les parece necesario. Hay emociones que no admiten ser abiertas sin una capa previa de aire.</p><p>Emilia lo mira con una concentración casi clínica. Tomás está más delgado. Tiene una ojeras que no recordaba y el pelo un poco más largo, cayéndole sobre la frente con un descuido que antes le habría dado ganas de tocar. Sigue moviendo la mano derecha cuando habla, como si dibujara lo que piensa. Sigue frunciendo levemente la boca antes de decir algo que teme decir mal. Lo más extraño no es reconocerlo. Lo más extraño es darse cuenta de que el tiempo sí hizo su trabajo, aunque no lo suficiente. Hay en él algo distinto, una gravedad nueva, pero también algo intacto que vuelve peligroso todo el encuentro.</p><p>Tomás la observa con el mismo cuidado. “Te ves bien”, dice, y Emilia casi se ríe de la frase, no porque sea falsa sino porque resulta brutalmente insuficiente. Podría decirle que ese “bien” costó meses de llanto, insomnio, conversaciones con Lucía, caminatas sin rumbo, un intento torpe de terapia, domingos enteros aprendiendo a no escribirle. Podría decirle que estar bien fue un trabajo. En lugar de eso responde: “Estoy distinta”. Y él asiente con una seriedad que la desarma. “Sí”, dice. “Eso también se nota”. No hay coqueteo en esa afirmación. Hay reconocimiento. Quizá incluso admiración. Emilia no sabe qué hacer con eso.</p><p>La conversación avanza hacia terrenos más reales con una lentitud casi ceremonial. Hablan de trabajo. Ella le cuenta del ascenso reciente, de la carga nueva, del cansancio que a veces disfraza de eficiencia. Él le habla de su padre, mejor que antes, aunque todavía delicado. Le cuenta que cambió de área, que vive en otro departamento, que dejó de tocar guitarra por meses y recién hace poco volvió a hacerlo. Emilia escucha cada dato como quien toma temperatura al agua antes de entrar. Ninguno está mintiendo, pero tampoco han llegado al centro. Ambos lo saben. Y, sin embargo, ese rodeo no es una pérdida de tiempo. Es la forma adulta de acercarse a un tema que antes les explotó en las manos.</p><div class="quote">Volver a un lugar compartido no repite el pasado.<br/>Solo obliga a preguntarse qué parte de él sigue viva.</div><div class="divider"></div><p>En un momento, mientras ella revuelve el café aunque ya no queda azúcar por disolver, Tomás dice en voz baja: “Pensé muchas veces en escribirte y no lo hice porque me parecía injusto aparecer cuando ya no tenía nada claro”. Emilia apoya la cucharita. Lo mira. No siente alivio al escucharlo. Siente el dolor viejo reorganizándose. “Y ahora sí tienes algo claro?”, pregunta. Él sostiene la mirada. “Sí. Que no quería seguir fingiendo que dejarte ir fue algo que entendí del todo”. La frase queda entre ambos como una pieza pesada. Emilia siente la tentación de defenderse con ironía, pero no la usa. Está cansada de protegerse con inteligencia.</p><p>El problema con Tomás siempre fue ese: cuando finalmente decía la verdad, la decía de una manera que no pedía aplauso ni absolución. Solo presencia. Y Emilia descubre que esa forma de hablar le sigue tocando una parte muy profunda. Porque durante meses estuvo segura de que lo más grave había sido que él la eligiera menos. Ahora empieza a ver que también hubo algo más triste: él tampoco supo elegirse bien a sí mismo en ese tiempo. La compasión que esa idea despierta la irrita. No quiere ablandarse tan rápido. No quiere convertir la fragilidad ajena en excusa. Pero tampoco puede hacer como si no la viera.</p><p>Cuando la mesera les lleva una segunda ronda de café sin que la hayan pedido aún, Emilia se da cuenta de que hace casi una hora están ahí. El tiempo se ha movido raro, como suele pasar en las conversaciones que contienen demasiadas capas. Afuera empieza a llover suave. La lluvia golpea los ventanales con una insistencia que vuelve el interior más íntimo, más recogido, como si la ciudad los hubiera aislado del resto por un momento. Tomás mira hacia la calle y sonríe apenas. “Siempre nos llueve encima”, dice. Emilia odia que el comentario la enternezca. “No romantices el clima”, responde. Y por primera vez los dos sonríen de verdad.</p><p>Esa sonrisa compartida no repara nada, pero cambia la temperatura del encuentro. Ya no están solo cuidándose de una herida. También están recordando cómo se hablaban antes de que todo se dañara. Es un gesto mínimo y, sin embargo, inmenso. Tomás le cuenta que durante meses evitó esa librería porque sabía que podía encontrarla incluso si no estaba. Emilia entiende exactamente a qué se refiere. Hay lugares que se vuelven la silueta de una persona. “Yo también la evitaba”, admite. Él baja la vista, como si esa confesión tuviera más importancia de la que quiere mostrar. “Pensé que solo yo hacía esas tonteras”, dice. “No”, contesta ella. “No eras solo tú”.</p><div class="quote">No fue la librería lo que los dejó sin aire.<br/>Fue comprobar que todavía podían reconocerse en silencio.</div><div class="divider"></div><p>El encuentro empieza a moverse entonces desde el control hacia algo más peligroso: la sinceridad espontánea. Hablan de libros que dejaron a medias, de canciones que arruinaron por sobreescucharlas juntos, de la forma en que ambos se acostumbraron a no mirar ciertas esquinas de la ciudad. Nada de eso resuelve el núcleo, pero lo rodea con humanidad. Emilia siente que, por primera vez desde la ruptura, Tomás vuelve a parecerle una persona completa y no un evento traumático. Eso la alivia y la asusta en proporciones idénticas. Porque una vez que el otro vuelve a ser humano, el amor deja de ser una batalla simple.</p><p>Cuando llega la hora de pagar, ninguno hace el gesto automático de antes. Hay una duda leve, absurda, sobre cómo dividir la cuenta. Emilia saca la billetera primero. Tomás no insiste por orgullo ni por caballerosidad mal entendida. Solo dice: “Mitad y mitad”. Ella asiente. El detalle la impacta más de lo que esperaba. Antes él habría pagado sin preguntar. Hoy parece entender que la igualdad también puede ser una forma de cuidado. Ese cambio pequeño le dice algo importante: quizá no es solo el tiempo lo que pasó sobre ellos. Quizá también hubo aprendizaje.</p><p>Salen juntos bajo el alero y se quedan mirando la lluvia cerrada. Las veredas brillan. Los autos arrastran luces líquidas. Tomás le ofrece llevarla en auto, pero Emilia dice que tomará un taxi. No es rechazo; es necesidad de conservar un borde. Se quedan en silencio unos segundos, demasiado cerca, sin tocarse. Él respira hondo. “Gracias por venir”, dice. Ella debería responder algo sobrio, definitivo, equilibrado. En cambio pregunta: “¿Y si no hubiera venido?”. Tomás se toma un segundo antes de contestar. “Habría seguido pensando en ti igual. Solo que con menos dignidad”. Emilia suelta una risa breve que, para su propia sorpresa, suena feliz.</p><p>El taxi tarda en llegar. La lluvia no cede. Tomás se quita la chaqueta y se la ofrece para cubrirle los hombros. Emilia duda, pero acepta. El gesto tiene una intimidad peligrosa porque no parece ensayado. Solo parece antiguo, conocido, casi doméstico. Mientras espera, siente el peso tibio de esa chaqueta sobre la piel y entiende que el problema ya no es decidir si todavía siente algo. Eso quedó claro desde antes de entrar. El problema real será determinar si eso que siente pertenece al pasado o tiene un lugar honesto en el futuro.</p><div class="quote">Hay citas que no empiezan una historia nueva.<br/>Empiezan el trabajo de merecerla.</div><div class="divider"></div><p>En el fondo, lo que se movía entre ellos no era solo nostalgia ni deseo. Era una forma más precisa de intimidad, nacida del hecho de que ambos habían conocido ya la pérdida y, aun así, seguían sentándose frente al otro con voluntad de verdad. Emilia descubría que su fortaleza no estaba en no necesitar nada, sino en poder decir qué necesitaba sin avergonzarse. Tomás comprendía que amar no podía seguir significando administrar el vínculo según su propio miedo. Ese aprendizaje compartido no se veía desde fuera como un gran acontecimiento, pero por dentro tenía la dimensión exacta de las cosas que cambian un destino amoroso completo.</p><p>En el fondo, lo que se movía entre ellos no era solo nostalgia ni deseo. Era una forma más precisa de intimidad, nacida del hecho de que ambos habían conocido ya la pérdida y, aun así, seguían sentándose frente al otro con voluntad de verdad. Emilia descubría que su fortaleza no estaba en no necesitar nada, sino en poder decir qué necesitaba sin avergonzarse. Tomás comprendía que amar no podía seguir significando administrar el vínculo según su propio miedo. Ese aprendizaje compartido no se veía desde fuera como un gran acontecimiento, pero por dentro tenía la dimensión exacta de las cosas que cambian un destino amoroso completo.</p><p>En el fondo, lo que se movía entre ellos no era solo nostalgia ni deseo. Era una forma más precisa de intimidad, nacida del hecho de que ambos habían conocido ya la pérdida y, aun así, seguían sentándose frente al otro con voluntad de verdad. Emilia descubría que su fortaleza no estaba en no necesitar nada, sino en poder decir qué necesitaba sin avergonzarse. Tomás comprendía que amar no podía seguir significando administrar el vínculo según su propio miedo. Ese aprendizaje compartido no se veía desde fuera como un gran acontecimiento, pero por dentro tenía la dimensión exacta de las cosas que cambian un destino amoroso completo.</p><p>Cuando el taxi finalmente aparece, Emilia abre la puerta y se gira hacia él con la mano en el borde del auto. Podría irse sin más. Sería elegante. Sería prudente. Sin embargo, lo mira un segundo extra. Tomás entiende algo en ese silencio y no lo rompe. “Nos vemos?”, pregunta al fin, sin presionar, sin adornar. Emilia no responde de inmediato. Mira la lluvia, la librería detrás, la ciudad entera reflejada en el pavimento mojado. Después dice: “Puede ser”. No es una promesa, pero tampoco una despedida. Y esa ambigüedad, en labios de Emilia, ya es una forma de esperanza. Mientras el auto arranca, Tomás queda quieto bajo la lluvia, viéndola irse con la misma intensidad con que alguna vez la vio llegar. Y ella, desde la ventanilla, sabe que la historia acaba de volverse mucho más difícil de detener.</p><p>El corazón de esta etapa estaba en algo más difícil que el simple deseo: la constancia emocional. Emilia y Tomás empezaban a descubrir que el romance puro no vive solo de las escenas memorables, sino también de la decisión repetida de hablar a tiempo, escuchar completo y sostenerse incluso cuando el miedo vuelve a querer ordenar la historia. Esa conciencia no les quitaba vértigo; se lo daba en una forma más adulta, más honda y, precisamente por eso, más poderosa.</p></div>
+</div>
+<div class="reader-bottom">
+<p class="reader-note">Hay sitios que no guardan recuerdos: guardan versiones completas de quienes fuimos.</p>
+<div class="nav-actions">
+<a class="btn btn-ghost" href="capitulo2.html">← Capítulo 2</a>
+<a class="btn btn-primary" href="capitulo4.html">Continuar al capítulo 4 →</a>
+</div>
+</div>
+</article>
+<div class="footer-space"></div>
+</main>
+</div>
+</body>
+</html>

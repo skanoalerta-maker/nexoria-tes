@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Capítulo 1 | Después de tu adiós</title>
+<meta content="Capítulo 1 de Después de tu adiós: La llamada que no debía llegar." name="description"/>
+<style>    :root{
+      --bg:#0a0b10;--bg2:#131722;--card:rgba(20,24,35,.9);--line:rgba(255,255,255,.08);--text:#f7f7fb;--muted:#b8bfd1;--muted2:#8f98b0;--accent:#b91c1c;--accent2:#ef4444;--shadow:0 24px 60px rgba(0,0,0,.42);--radius:22px;--max:980px;}
+    *{box-sizing:border-box} html{scroll-behavior:smooth}
+    body{margin:0;font-family:Arial,sans-serif;color:var(--text);background:radial-gradient(circle at top left, rgba(185,28,28,.08), transparent 24%),radial-gradient(circle at top right, rgba(239,68,68,.05), transparent 22%),linear-gradient(180deg, #07080d 0%, #10131d 48%, #0a0b10 100%);line-height:1.8;overflow-x:hidden;position:relative;}
+    a{color:inherit;text-decoration:none}.page{min-height:100vh;position:relative;z-index:1;}
+    .topbar{position:sticky;top:0;z-index:30;backdrop-filter:blur(14px);background:rgba(7,8,13,.72);border-bottom:1px solid var(--line);}
+    .topbar-inner{max-width:1100px;margin:0 auto;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:14px;}
+    .brand{display:flex;align-items:center;gap:12px;min-width:0;}
+    .brand-badge{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg, rgba(185,28,28,.22), rgba(239,68,68,.08));border:1px solid rgba(239,68,68,.18);box-shadow:0 0 24px rgba(185,28,28,.12);font-weight:700;color:#ffd2d2;flex:0 0 auto;}
+    .brand-title{font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#fff1f1;margin:0 0 2px;}
+    .brand-sub{font-size:12px;color:var(--muted2);margin:0;}
+    .top-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end;}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:12px;font-size:14px;font-weight:700;transition:transform .18s ease, background .18s ease, border-color .18s ease;border:1px solid transparent;cursor:pointer;}
+    .btn:hover{transform:translateY(-1px)} .btn-primary{background:linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);color:#fff;box-shadow:0 12px 28px rgba(185,28,28,.25);}
+    .btn-ghost{background:rgba(255,255,255,.03);border-color:var(--line);color:#f2eaea;}
+    .hero{position:relative;overflow:hidden;border-bottom:1px solid rgba(255,255,255,.04);}
+    .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg, rgba(7,8,13,.52) 0%, rgba(7,8,13,.88) 82%, rgba(7,8,13,1) 100%),url("despues-de-tu-adios-generica.jpg");background-size:cover;background-position:center;opacity:.36;filter:saturate(.95);}
+    .hero-inner{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:56px 20px 34px;}
+    .crumb{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);color:var(--muted);font-size:13px;margin-bottom:18px;}
+    .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:end;}
+    .hero-copy h1{margin:0 0 12px;font-size:clamp(34px, 6vw, 64px);line-height:1.02;letter-spacing:.02em;color:white;text-shadow:0 0 22px rgba(185,28,28,.18);}
+    .eyebrow{margin:0 0 14px;color:#ffb1b1;font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:12px;}
+    .hero-copy p{margin:0;max-width:700px;color:#eadede;font-size:18px;line-height:1.75;}
+    .hero-side{display:flex;justify-content:flex-end;}
+    .chapter-card{width:min(100%,360px);background:linear-gradient(180deg, rgba(20,24,35,.85), rgba(12,14,22,.92));border:1px solid rgba(239,68,68,.16);border-radius:24px;box-shadow:var(--shadow);padding:22px;backdrop-filter:blur(16px);}
+    .chapter-label{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.14);color:#ffbdbd;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px;}
+    .chapter-card h2{margin:0 0 10px;font-size:24px;line-height:1.15;color:white;}
+    .chapter-card p{margin:0 0 18px;color:var(--muted);font-size:15px;line-height:1.7;}
+    .meta{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px;}
+    .meta-item{padding:12px;border-radius:14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);}
+    .meta-k{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted2);margin:0 0 6px;}
+    .meta-v{margin:0;font-size:13px;color:#fff1f1;font-weight:700;}
+    .content-wrap{max-width:var(--max);margin:0 auto;padding:24px 18px 70px;}
+    .reader{position:relative;background:linear-gradient(180deg, rgba(20,24,35,.80), rgba(10,12,18,.90));border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;}
+    .reader-top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 22px;border-bottom:1px solid var(--line);background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));}
+    .reader-top-left h3{margin:0 0 4px;font-size:18px;color:#fff7f7;} .reader-top-left p{margin:0;color:var(--muted2);font-size:13px;}
+    .reader-badge{display:inline-flex;align-items:center;justify-content:center;min-height:34px;padding:0 12px;border-radius:999px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);color:#ffe2e2;font-size:12px;font-weight:700;white-space:nowrap;}
+    .reader-body{padding:30px 24px 18px;}
+    .lead{font-size:19px;line-height:1.85;color:#fff1f1;margin:0 0 24px;padding:18px 18px 18px 20px;border-left:3px solid rgba(239,68,68,.42);background:rgba(239,68,68,.06);border-radius:0 14px 14px 0;}
+    .story p{margin:0 0 20px;color:#e7dede;font-size:17px;line-height:1.9;letter-spacing:.01em;}
+    .story .quote{margin:30px 0;padding:18px 20px;border-radius:18px;background:linear-gradient(180deg, rgba(185,28,28,.10), rgba(239,68,68,.04));border:1px solid rgba(239,68,68,.12);color:#fff3f3;font-size:18px;line-height:1.6;text-align:center;box-shadow:0 12px 30px rgba(0,0,0,.18);}
+    .story .divider{width:86px;height:1px;background:linear-gradient(90deg, transparent, rgba(239,68,68,.6), transparent);margin:30px auto;}
+    .reader-bottom{padding:22px 24px 26px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;}
+    .reader-note{color:var(--muted2);font-size:13px;margin:0;} .nav-actions{display:flex;gap:12px;flex-wrap:wrap;} .footer-space{height:20px}
+    @media (max-width:900px){.hero-grid{grid-template-columns:1fr}.hero-side{justify-content:flex-start}.chapter-card{width:100%;max-width:unset}}
+    @media (max-width:640px){.topbar-inner{padding:14px}.hero-inner{padding:30px 14px 20px}.content-wrap{padding:16px 12px 50px}.reader{border-radius:16px}.reader-top,.reader-body,.reader-bottom{padding-left:16px;padding-right:16px}.reader-body{padding-top:22px}.hero-copy h1{font-size:30px}.hero-copy p{font-size:15px;line-height:1.65}.chapter-card{padding:16px}.chapter-card h2{font-size:21px}.meta{grid-template-columns:1fr}.lead{font-size:16px;line-height:1.75}.story p{font-size:15px;line-height:1.78}.story .quote{font-size:16px;padding:16px}.top-actions,.nav-actions{width:100%}.btn,.nav-actions .btn{width:100%;flex:1 1 100%}}
+</style>
+</head>
+<body>
+<div class="page">
+<header class="topbar">
+<div class="topbar-inner">
+<div class="brand">
+<div class="brand-badge">R</div>
+<div class="brand-text">
+<p class="brand-title">Después de tu adiós</p>
+<p class="brand-sub">Historia de romance</p>
+</div>
+</div>
+<div class="top-actions">
+<a class="btn btn-ghost" href="home.html">← Volver al home</a>
+<a class="btn btn-primary" href="capitulo2.html">Seguir con la historia →</a>
+</div>
+</div>
+</header>
+<section class="hero">
+<div class="hero-inner">
+<div class="crumb">Romance / Capítulo 1</div>
+<div class="hero-grid">
+<div class="hero-copy">
+<p class="eyebrow">Romance</p>
+<h1>Después de tu adiós</h1>
+<p>Algunas despedidas no terminan el amor. Solo lo dejan suspendido en un lugar donde todo sigue doliendo.</p>
+</div>
+<div class="hero-side">
+<aside class="chapter-card">
+<div class="chapter-label">Inicio</div>
+<h2>La llamada que no debía llegar</h2>
+<p>Emilia había convertido el duelo en rutina. Pero una llamada de Tomás rompe el equilibrio exacto de la ausencia y la obliga a mirar de frente todo lo que seguía sin cerrar.</p>
+<div class="meta">
+<div class="meta-item"><p class="meta-k">Estado</p><p class="meta-v">Gratis</p></div>
+<div class="meta-item"><p class="meta-k">Ritmo</p><p class="meta-v">Romance</p></div>
+<div class="meta-item"><p class="meta-k">Clave</p><p class="meta-v">Temporada 1</p></div>
+</div>
+</aside>
+</div>
+</div>
+</div>
+</section>
+<main class="content-wrap">
+<article class="reader">
+<div class="reader-top">
+<div class="reader-top-left">
+<h3>Capítulo 1: La llamada que no debía llegar</h3>
+<p>Romance · El pasado a veces regresa con una voz demasiado conocida</p>
+</div>
+<div class="reader-badge">Capítulo abierto</div>
+</div>
+<div class="reader-body">
+<div class="story"><p class="lead">La noche en que Tomás volvió a llamar, Emilia estaba doblando ropa recién salida de la secadora y pensando, con la disciplina fría de quien se entrena a sí misma, que el martes se parecía demasiado al lunes y que eso, por fin, era una forma de paz. Había tardado meses en conseguir que los días dejaran de dolerle por sorpresa. Había ordenado los horarios, cambiado el camino al trabajo, movido una lámpara de sitio, borrado conversaciones, escondido fotos en carpetas que ya no abría. Su vida no era feliz en el sentido luminoso de la palabra, pero sí estable, y la estabilidad después de una ruptura había empezado a parecerle una victoria suficiente. Por eso, cuando el teléfono vibró sobre la mesa y vio el nombre que juró no volver a ver encendido en su pantalla, lo primero que sintió no fue emoción, sino una especie de vértigo callado, como si alguien hubiera abierto una ventana en mitad del invierno.</p><p>Tomás. Nada más. El mismo nombre corto, idéntico a como aparecía dos años atrás, antes de que entre ellos todo se partiera de un modo tan limpio y tan brutal que durante semanas Emilia fue incapaz de explicarlo sin traicionarse. Lo miró sonar y no tocó el celular. Lo dejó vibrar hasta que se apagó, con el corazón latiéndole alto, torpe, adolescente, como si el cuerpo llevara una memoria más terca que la dignidad. Después se quedó quieta, con la camiseta en la mano, y entendió que el problema del amor no era haber sentido demasiado. El problema era que el cuerpo aprendía a vivir sin una persona, pero nunca desaprendía del todo quién lo había hecho temblar primero.</p><p>La última vez que se vieron, Tomás no lloró. Emilia sí. Él habló poco, con esa serenidad equivocada que siempre le había parecido una forma elegante de la cobardía. Le dijo que no sabía cómo seguir sosteniendo una relación mientras todo en su vida se estaba desmoronando; mencionó a su padre enfermo, las deudas de la casa, el trabajo que lo absorbía, el cansancio. Dijo que la amaba, y esa fue quizá la parte más cruel, porque el amor, dicho en el momento equivocado, a veces suena más a renuncia que a promesa. Emilia recordaba con nitidez la rabia helada de aquella tarde: la cafetería casi vacía, la cuchara golpeando una taza, el cielo gris sobre la ventana. Recordaba haber pensado que si él la amaba, entonces no entendía nada del amor.</p><p>Después de la llamada, intentó volver a la tarea mínima de doblar ropa, pero la tela empezó a parecerle absurda entre las manos. Dejó todo sobre la cama y caminó hasta la cocina para servirse agua. Ni siquiera tenía sed; necesitaba hacer algo que tuviera una secuencia conocida: abrir el vaso, girar la llave, esperar el sonido del agua, apoyar ambas manos en la encimera. Desde ahí miró la ventana del edificio de enfrente, donde una mujer regaba plantas con una calma que Emilia envidió. Afuera seguía existiendo un mundo sin Tomás, un mundo donde las vecinas cuidaban helechos, pasaban microbuses, ladraban perros y los martes terminaban como cualquier otro día. Dentro de ella, en cambio, algo había sido tocado con apenas un gesto y ya no sabía cómo volver a colocarse en su sitio.</p><p>Cuando el celular vibró por segunda vez, no fue una llamada. Fue un mensaje. “No espero que respondas. Solo quería saber si estás bien”. Emilia lo leyó tres veces, como si el orden de las palabras pudiera cambiar algo. Se sorprendió odiando esa prudencia. No quería que él fuera respetuoso, no quería que llegara con delicadeza, no quería que se presentara como un hombre razonable que simplemente preguntaba por su bienestar. Quería, al menos por un instante, que la realidad se pareciera a la violencia que ella había tenido que soportar cuando él se fue. Quería que su regreso hiciera el mismo ruido que hizo su ausencia. Pero los hombres que rompen un corazón rara vez vuelven con estruendo; casi siempre regresan con modales.</p><div class="quote">No fue la llamada lo que la desarmó.<br/>Fue descubrir que todavía reconocía su respiración antes de que dijera su nombre.</div><div class="divider"></div><p>Lucía, su mejor amiga, había dicho una vez que el problema de Emilia con Tomás nunca fue que lo quisiera demasiado, sino que lo entendía incluso cuando no quería entenderlo. Esa noche comprobó que Lucía tenía razón. Porque aun dolida, aun resentida, aun cansada de haber cargado sola con el cierre de una historia que nunca cerró del todo, Emilia podía imaginarlo escribiendo ese mensaje desde un lugar verdadero. Podía verlo dudando antes de presionar enviar. Podía sentir, con una precisión insoportable, el peso que había detrás de una frase tan pequeña. Y esa capacidad de imaginarlo por dentro le pareció peligrosa. No por romántica, sino porque recordaba exactamente por qué Tomás había sido tan importante: con él nunca le bastó ver la superficie.</p><p>Abrió la conversación y encontró arriba el cementerio digital de los mensajes viejos. Fotos de pan mal cortado, audios de madrugada, insultos cariñosos, horarios cruzados, planes imposibles, la vida pequeña que habían construido a punta de detalles. Se le cerró la garganta. Había pasado meses evitando ese archivo mínimo del amor. Pensó en bloquearlo. Pensó en borrar el hilo entero. Pensó en dejar el teléfono boca abajo y fingir que ya no era la mujer que había amado ahí adentro. Pero no hizo ninguna de esas cosas. Se quedó mirando. Tal vez porque ciertas heridas no duelen por lo que pasó, sino por la cantidad de ternura que todavía guardan.</p><p>Emilia se sentó en el suelo del living, apoyando la espalda contra el sofá, y recordó el inicio. A Tomás lo conoció una tarde absurda, de esas sin promesa, en una librería pequeña donde ambos buscaron el mismo ejemplar y terminaron conversando cuarenta minutos junto a una repisa de poesía que ninguno de los dos iba realmente a comprar. Él tenía una manera desordenada de hablar cuando algo le importaba, como si las ideas se le adelantaran a la voz. Ella, que suele medir cada palabra, sintió alivio en esa torpeza encantadora. Desde entonces todo entre ellos ocurrió con una naturalidad que daba miedo: las caminatas largas, las llamadas inútiles, el modo en que el cuerpo aprendía rápido las costumbres ajenas. Amar a Tomás nunca había sido una decisión; había sido una deriva.</p><p>La ruptura, en cambio, sí fue una decisión, y por eso dolió de un modo más humillante. Si el amor había llegado sin pedir permiso, el final entró firmado. Emilia vivió semanas enteras preguntándose si lo más insoportable era haber sido dejada o haber sido comprendida demasiado tarde. Porque Tomás no se fue con crueldad. Se fue con razones. Y las razones, cuando una sigue amando, son peores que la mentira. No dejan a quién odiar de forma limpia. No permiten simplificar al otro. Obligan a convivir con una verdad incómoda: a veces una persona te hiere sin dejar de quererte.</p><div class="quote">Hay amores que no se acaban el día en que terminan.<br/>Se quedan esperando en los rincones de la costumbre.</div><div class="divider"></div><p>Volvió al mensaje y lo leyó una vez más. “Solo quería saber si estás bien”. Podía no responder. Eso sería lo correcto, lo adulto, lo defendible. Podía proteger la calma construida con tanto esfuerzo. Podía sostener la versión de sí misma que ya no necesitaba nada de él. Sin embargo, debajo de todas esas posibilidades había otra más honesta: no saber. No saber por qué ahora. No saber de dónde venía ese impulso. No saber si estaba bien de verdad o si simplemente se había acostumbrado a funcionar con una tristeza ordenada. Y el no saber, descubrió con enojo, seguía teniendo la forma exacta de Tomás.</p><p>La lluvia empezó a golpear suave en la ventana, primero como un roce, luego con más constancia. Emilia apoyó el celular sobre la rodilla y se quedó escuchándola. El departamento olía a jabón, a tela tibia, a una vida recién acomodada. Todo estaba en su sitio salvo ella. Miró alrededor buscando una prueba de que no necesitaba responder. La encontró en todas partes: en la mesa que compró sola, en el trabajo que sostuvo durante el último año, en la cuenta de luz pagada a tiempo, en la planta que no se le murió pese a su torpeza. Había aprendido a quedarse consigo misma. Y precisamente por eso la pregunta cambió. Ya no era si podía vivir sin Tomás. Era si quería seguir fingiendo que la historia no había dejado una puerta entreabierta.</p><p>Respondió una sola palabra: “Sí”. Apenas la envió, el corazón volvió a subirle a la garganta. Era absurdo que tres letras tuvieran semejante poder, pero el amor suele esconderse en los lugares más pequeños. Pasaron dos minutos antes de que él contestara. “Me alegra. Yo no sabía si tenía derecho a escribirte”. Emilia soltó una risa breve, incrédula, amarga y tierna al mismo tiempo. Derecho. Qué palabra tan fría para lo que alguna vez habían sido. Pensó en no seguir. Pensó que con eso bastaba. Sin embargo, después de unos segundos, escribió otra frase, más peligrosa, más honesta: “¿Por qué ahora?”.</p><p>La respuesta tardó más. Lo suficiente para que Emilia imaginara que él había decidido no entrar ahí, no remover, no arriesgar. Pero apareció. “Porque nunca dejé de pensar en ti y me cansé de fingir que eso no importaba”. Ella cerró los ojos. No lloró. Ni siquiera se movió. Solo cerró los ojos y dejó que la frase la cruzara de un lado a otro. No porque fuera hermosa, sino porque era demasiado tarde y demasiado exacta. Ese era siempre el problema con Tomás: llegaba tarde, pero llegaba diciendo la verdad. Y una verdad tardía puede ser tan devastadora como una mentira a tiempo.</p><div class="quote">El miedo no era escuchar a Tomás otra vez.<br/>El miedo era confirmar que el silencio nunca la había curado.</div><div class="divider"></div><p>En el fondo, lo que se movía entre ellos no era solo nostalgia ni deseo. Era una forma más precisa de intimidad, nacida del hecho de que ambos habían conocido ya la pérdida y, aun así, seguían sentándose frente al otro con voluntad de verdad. Emilia descubría que su fortaleza no estaba en no necesitar nada, sino en poder decir qué necesitaba sin avergonzarse. Tomás comprendía que amar no podía seguir significando administrar el vínculo según su propio miedo. Ese aprendizaje compartido no se veía desde fuera como un gran acontecimiento, pero por dentro tenía la dimensión exacta de las cosas que cambian un destino amoroso completo.</p><p>En el fondo, lo que se movía entre ellos no era solo nostalgia ni deseo. Era una forma más precisa de intimidad, nacida del hecho de que ambos habían conocido ya la pérdida y, aun así, seguían sentándose frente al otro con voluntad de verdad. Emilia descubría que su fortaleza no estaba en no necesitar nada, sino en poder decir qué necesitaba sin avergonzarse. Tomás comprendía que amar no podía seguir significando administrar el vínculo según su propio miedo. Ese aprendizaje compartido no se veía desde fuera como un gran acontecimiento, pero por dentro tenía la dimensión exacta de las cosas que cambian un destino amoroso completo.</p><p>Se quedó con el teléfono entre las manos durante largos minutos, sin decidir todavía qué hacer con lo que acababa de abrir. Afuera la lluvia ya caía con fuerza. Adentro, la casa seguía intacta, pero Emilia ya no estaba igual. Supo que esa noche no iba a dormirse temprano ni a terminar de doblar la ropa ni a mantener la disciplina de los días idénticos. Supo que la tranquilidad que había llamado paz era más frágil de lo que imaginaba. Y, aun así, no se arrepintió de responder. Porque a veces el principio de una segunda historia no llega como una certeza, sino como una grieta. Y Emilia, con miedo y con rabia y con una curiosidad que no quería admitir, acababa de escuchar la primera fisura.</p><p>El corazón de esta etapa estaba en algo más difícil que el simple deseo: la constancia emocional. Emilia y Tomás empezaban a descubrir que el romance puro no vive solo de las escenas memorables, sino también de la decisión repetida de hablar a tiempo, escuchar completo y sostenerse incluso cuando el miedo vuelve a querer ordenar la historia. Esa conciencia no les quitaba vértigo; se lo daba en una forma más adulta, más honda y, precisamente por eso, más poderosa.</p></div>
+</div>
+<div class="reader-bottom">
+<p class="reader-note">A veces una historia no vuelve con una promesa, sino con una interrupción tan pequeña que basta para romper meses enteros de silencio.</p>
+<div class="nav-actions">
+<a class="btn btn-ghost" href="home.html">← Volver al home</a>
+<a class="btn btn-primary" href="capitulo2.html">Seguir con la historia →</a>
+</div>
+</div>
+</article>
+<div class="footer-space"></div>
+</main>
+</div>
+</body>
+</html>
