@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Capítulo 13 | Código Nébula</title>
+  <meta name="description" content="Capítulo 13 de Código Nébula: Sujeto 01." />
+  <style>
+    :root{
+      --bg:#05080f;
+      --bg2:#0b1220;
+      --card:rgba(12,18,32,0.82);
+      --line:rgba(255,255,255,0.08);
+      --line-strong:rgba(73,182,255,0.24);
+      --text:#f5f8ff;
+      --muted:#aebad1;
+      --muted-2:#7f90ae;
+      --blue:#0A6CFF;
+      --blue2:#49b6ff;
+      --blue-soft:rgba(73,182,255,0.14);
+      --shadow:0 24px 60px rgba(0,0,0,0.45);
+      --radius:22px;
+      --max:860px;
+    }
+
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      font-family:Arial, sans-serif;
+      color:var(--text);
+      background:#04070d;
+      line-height:1.8;
+      position:relative;
+      overflow-x:hidden;
+    }
+    a{ color:inherit; text-decoration:none; }
+    #stars{
+      position:fixed;
+      inset:0;
+      width:100%;
+      height:100%;
+      z-index:0;
+      background:
+        radial-gradient(circle at top left, rgba(10,108,255,.12), transparent 24%),
+        radial-gradient(circle at top right, rgba(73,182,255,.08), transparent 20%),
+        linear-gradient(180deg, #04070d 0%, #08101c 45%, #05080f 100%);
+    }
+    .page{ min-height:100vh; position:relative; z-index:1; }
+    .topbar{
+      position:sticky; top:0; z-index:30; backdrop-filter:blur(14px);
+      background:rgba(5,8,15,0.72); border-bottom:1px solid var(--line);
+    }
+    .topbar-inner{
+      max-width:1100px; margin:0 auto; padding:16px 20px;
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
+    }
+    .brand{ display:flex; align-items:center; gap:12px; min-width:0; }
+    .brand-badge{
+      width:38px; height:38px; border-radius:12px; display:grid; place-items:center;
+      background:linear-gradient(135deg, rgba(10,108,255,.22), rgba(73,182,255,.08));
+      border:1px solid var(--line-strong);
+      box-shadow:0 0 24px rgba(10,108,255,.12);
+      font-weight:700; color:var(--blue2); flex:0 0 auto;
+    }
+    .brand-title{
+      font-size:14px; font-weight:700; letter-spacing:.08em;
+      text-transform:uppercase; color:#dfe9ff; margin:0 0 2px;
+    }
+    .brand-sub{ font-size:12px; color:var(--muted-2); margin:0; }
+    .top-actions{
+      display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:flex-end;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
+      min-height:44px; padding:0 18px; border-radius:12px; font-size:14px;
+      font-weight:700; transition:transform .18s ease, background .18s ease,
+      border-color .18s ease, box-shadow .18s ease;
+      border:1px solid transparent; cursor:pointer;
+    }
+    .btn:hover{ transform:translateY(-1px); }
+    .btn-primary{
+      background:linear-gradient(135deg, var(--blue) 0%, #0d7eff 100%);
+      color:white; box-shadow:0 12px 28px rgba(10,108,255,.28);
+    }
+    .btn-primary:hover{ background:linear-gradient(135deg, #0c62e0 0%, #0a6cef 100%); }
+    .btn-ghost{
+      background:rgba(255,255,255,0.03); border-color:var(--line); color:#dbe8ff;
+    }
+    .btn-ghost:hover{
+      background:rgba(255,255,255,0.06); border-color:var(--line-strong);
+    }
+    .hero{ position:relative; overflow:hidden; border-bottom:1px solid rgba(255,255,255,0.04); }
+    .hero::before{
+      content:""; position:absolute; inset:0;
+      background:
+        linear-gradient(180deg, rgba(5,8,15,.58) 0%, rgba(5,8,15,.86) 80%, rgba(5,8,15,1) 100%),
+        url("https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80");
+      background-size:cover; background-position:center; opacity:.20; filter:saturate(.9);
+    }
+    .hero-inner{ position:relative; z-index:1; max-width:1100px; margin:0 auto; padding:56px 20px 34px; }
+    .crumb{
+      display:inline-flex; align-items:center; gap:8px; padding:8px 12px;
+      border-radius:999px; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.06);
+      color:var(--muted); font-size:13px; margin-bottom:18px;
+    }
+    .hero-grid{
+      display:grid; grid-template-columns:1.1fr .9fr; gap:28px; align-items:end;
+    }
+    .hero-copy h1{
+      margin:0 0 12px; font-size:clamp(34px, 6vw, 64px); line-height:1.02;
+      letter-spacing:.02em; color:white; text-shadow:0 0 22px rgba(10,108,255,.18);
+    }
+    .eyebrow{
+      margin:0 0 14px; color:var(--blue2); font-weight:700; letter-spacing:.14em;
+      text-transform:uppercase; font-size:12px;
+    }
+    .hero-copy p{ margin:0; max-width:700px; color:#d4def3; font-size:18px; line-height:1.75; }
+    .hero-side{ display:flex; justify-content:flex-end; }
+    .chapter-card{
+      width:min(100%, 360px); background:linear-gradient(180deg, rgba(12,18,32,.75), rgba(9,13,24,.88));
+      border:1px solid rgba(73,182,255,.18); border-radius:24px; box-shadow:var(--shadow);
+      padding:22px; backdrop-filter:blur(16px);
+    }
+    .chapter-label{
+      display:inline-flex; align-items:center; gap:8px; padding:7px 12px; border-radius:999px;
+      background:var(--blue-soft); border:1px solid rgba(73,182,255,.18);
+      color:var(--blue2); font-size:12px; font-weight:700; letter-spacing:.08em;
+      text-transform:uppercase; margin-bottom:14px;
+    }
+    .chapter-card h2{ margin:0 0 10px; font-size:24px; line-height:1.15; color:white; }
+    .chapter-card p{ margin:0 0 18px; color:var(--muted); font-size:15px; line-height:1.7; }
+    .meta{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:14px; }
+    .meta-item{
+      padding:12px; border-radius:14px; background:rgba(255,255,255,0.03);
+      border:1px solid rgba(255,255,255,0.05);
+    }
+    .meta-k{ font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted-2); margin:0 0 6px; }
+    .meta-v{ margin:0; font-size:13px; color:#e7efff; font-weight:700; }
+    .content-wrap{ max-width:var(--max); margin:0 auto; padding:28px 20px 80px; }
+    .reader{
+      position:relative; background:linear-gradient(180deg, rgba(11,18,32,.58), rgba(8,13,24,.72));
+      border:1px solid rgba(255,255,255,0.06); border-radius:22px; box-shadow:var(--shadow);
+      overflow:hidden; backdrop-filter:blur(4px);
+    }
+    .reader-top{
+      display:flex; align-items:center; justify-content:space-between; gap:16px; padding:18px 22px;
+      border-bottom:1px solid var(--line); background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
+    }
+    .reader-top-left h3{ margin:0 0 4px; font-size:18px; color:#edf3ff; }
+    .reader-top-left p{ margin:0; color:var(--muted-2); font-size:13px; }
+    .reader-badge{
+      display:inline-flex; align-items:center; justify-content:center; min-height:34px; padding:0 12px;
+      border-radius:999px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06);
+      color:#cfe0ff; font-size:12px; font-weight:700; white-space:nowrap;
+    }
+    .reader-body{ padding:34px 26px 18px; position:relative; }
+    .story{ max-width:720px; margin:0 auto; position:relative; z-index:2; }
+    .lead{
+      font-size:19px; line-height:1.9; color:#ecf3ff; margin:0 0 26px;
+      padding:18px 18px 18px 20px; border-left:3px solid rgba(73,182,255,.44);
+      background:rgba(9, 18, 35, 0.68); border-radius:0 14px 14px 0; backdrop-filter:blur(4px);
+    }
+    .story p{
+      margin:0 0 22px; color:#e4ecfb; font-size:18px; line-height:1.95;
+      letter-spacing:.01em; text-shadow:0 1px 2px rgba(0,0,0,.4);
+    }
+    .story p strong{ color:#ffffff; font-weight:700; }
+    .story .quote{
+      margin:34px 0; padding:20px 22px; border-radius:18px;
+      background:linear-gradient(180deg, rgba(10,108,255,.12), rgba(73,182,255,.06));
+      border:1px solid rgba(73,182,255,.14); color:#edf5ff; font-size:19px; line-height:1.7;
+      text-align:center; box-shadow:0 12px 30px rgba(0,0,0,.18); backdrop-filter:blur(4px);
+    }
+    .story .divider{
+      width:86px; height:1px; background:linear-gradient(90deg, transparent, rgba(73,182,255,.6), transparent);
+      margin:34px auto;
+    }
+    .reader-bottom{
+      padding:24px 26px 28px; border-top:1px solid var(--line);
+      display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;
+    }
+    .reader-note{ color:var(--muted-2); font-size:13px; margin:0; }
+    .nav-actions{ display:flex; gap:12px; flex-wrap:wrap; }
+    @media (max-width: 900px){
+      .hero-grid{ grid-template-columns:1fr; }
+      .hero-side{ justify-content:flex-start; }
+      .chapter-card{ width:100%; max-width:unset; }
+    }
+    @media (max-width: 640px){
+      .topbar-inner{ padding:14px 14px; }
+      .hero-inner{ padding:34px 14px 22px; }
+      .content-wrap{ padding:20px 14px 60px; }
+      .reader-top,.reader-body,.reader-bottom{ padding-left:16px; padding-right:16px; }
+      .reader-body{ padding-top:24px; }
+      .hero-copy p,.story p,.lead{ font-size:16px; }
+      .meta{ grid-template-columns:1fr; }
+      .top-actions,.nav-actions{ width:100%; }
+      .btn{ width:100%; }
+      .nav-actions .btn{ flex:1 1 100%; }
+    }
+</style>
+</head>
+<body>
+  <canvas id="stars"></canvas>
+
+  <div class="page">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand">
+          <div class="brand-badge">N</div>
+          <div>
+            <p class="brand-title" id="brandTitle">Código Nébula</p>
+            <p class="brand-sub" id="brandSub">Thriller tecnológico original</p>
+          </div>
+        </div>
+
+        <div class="top-actions">
+          <a id="topBackBtn" href="home.html" class="btn btn-ghost">← Volver al inicio</a>
+          <a id="topNextBtn" href="capitulo14.html" class="btn btn-primary">Siguiente capítulo →</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="crumb" id="crumbText">Inicio / Capítulos / Capítulo 13</div>
+
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow" id="heroEyebrow">Capítulo 13</p>
+            <h1 id="heroTitle">Sujeto 01</h1>
+            <p id="heroDescription">Las pruebas son irrebatibles: Kai no fue arrastrado al proyecto. Fue uno de sus arquitectos, y su firma sigue viva dentro del sistema.</p>
+          </div>
+
+          <div class="hero-side">
+            <aside class="chapter-card">
+              <div class="chapter-label" id="chapterLabel">Identidad</div>
+              <h2 id="cardTitle">La culpa por fin tiene nombre</h2>
+              <p id="cardDescription">La validación del sujeto 01 abre la puerta a la parte más comprometedora del pasado de Kai.</p>
+
+              <div class="meta">
+                <div class="meta-item">
+                  <p class="meta-k">Estado</p>
+                  <p class="meta-v" id="metaState">Premium</p>
+                </div>
+                <div class="meta-item">
+                  <p class="meta-k">Género</p>
+                  <p class="meta-v" id="metaGenre">Suspenso</p>
+                </div>
+                <div class="meta-item">
+                  <p class="meta-k">Saga</p>
+                  <p class="meta-v" id="metaSaga">Nébula</p>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="content-wrap">
+      <article class="reader">
+        <div class="reader-top">
+          <div class="reader-top-left">
+            <h3 id="readerTitle">Capítulo 13: Sujeto 01</h3>
+            <p id="readerSubtitle">Capítulo premium · El archivo principal</p>
+          </div>
+          <div class="reader-badge" id="readerBadge">Acceso desbloqueado</div>
+        </div>
+
+        <div class="reader-body">
+          <div class="story">
+
+<p class="lead">El archivo ancla estaba protegido detrás de una compuerta sin marcas, sellada por un sistema híbrido que combinaba cerraduras mecánicas con reconocimiento cognitivo. Cuando la hoja negra y la firma de Kai coincidieron en el panel, el muro respondió con una frase que sonó más a veredicto que a autorización: SUJETO 01 REINTEGRO DISPONIBLE.</p>
+<p>Kai entró solo durante los primeros segundos. Lira permaneció detrás cubriéndolo mientras dos versiones fallidas golpeaban la compuerta desde el corredor. La sala interior no era grande. Apenas una mesa central, módulos de almacenamiento hermético y tres pantallas curvas que se encendieron en cuanto él cruzó el umbral. En la principal apareció su propio expediente, no como empleado ni como usuario, sino como diseñador de contención aplicada. Las fechas, los diagramas y las notas escritas por él mismo lo obligaron a mirar una verdad incómoda: no descubrió Nébula por accidente. Ayudó a convertirla en sistema administrable cuando todavía parecía un fenómeno limitado. Fue su idea crear identidades ancla capaces de interactuar con el núcleo sin que este devorara de inmediato toda la arquitectura humana alrededor. Fue su idea, también, usar la propia firma cognitiva como llave viva. La elegancia del concepto lo avergonzó más que cualquier monstruo.</p>
+<div class="quote">En una nota manuscrita digitalizada, Kai leyó la frase que más temía: “Si esto falla, bórrenme primero a mí.”</div>
+<p>La frase iba acompañada por la aprobación de Alma y la oposición explícita de Lira. Allí estaba la discusión original, ordenada en comentarios técnicos, pero atravesada por una desesperación que ningún formato corporativo lograba domar. Alma sostenía que usar a Kai como llave viva creaba una dependencia demasiado íntima entre el centro y la conciencia humana. Lira quería clausurar el proyecto de inmediato. Kai, en cambio, argumentaba que solo una interfaz interna permitiría entender el mecanismo de continuidad y aislarlo sin destruir la estructura entera. Leyó sus propias palabras con rabia hacia el hombre que había sido. Sonaban racionales, incluso brillantes. Sonaban también como el tipo de lógica capaz de empujar a todos un paso más allá de lo recuperable.</p>
+<p>Las pantallas ofrecieron una opción clara: restauración parcial, restauración total o purga definitiva del archivo ancla. Lira entró justo cuando el sistema empezó a solicitar confirmación verbal. Le dijo que la restauración total era un suicidio funcional. El centro volvería a amarrarlo. Pero la purga definitiva eliminaría también los últimos puentes con Alma, porque buena parte de la ruta que la mantenía diferenciada del núcleo seguía enlazada a su diseño original y a su patrón cognitivo. Kai estaba frente a una elección hecha a la medida del castigo: recuperar suficiente memoria para actuar con precisión y arriesgarse a ser absorbido, o destruir la infraestructura que podía rescatar a Alma y protegerse a sí mismo a costa de condenarla definitivamente.</p>
+<p>Buscó una cuarta vía en los módulos laterales y encontró algo parecido a una orden de contingencia, firmada por Alma horas antes del colapso original. El documento describía un procedimiento llamado corte transversal: no cerrar el centro, no purgarlo, sino separar sus capas de alimentación humana del soporte físico que las amplificaba. Era una cirugía imposible, viable solo si alguien con firma ancla entraba en sincronía con el núcleo mientras otra persona ejecutaba la secuencia externa de desconexión. El manual terminaba con una advertencia feroz: “El sujeto sincronizado puede no regresar completo.” Kai dejó la pantalla en silencio y comprendió por fin el tamaño exacto del horizonte. No se trataba de vencer al sistema. Se trataba de escoger qué parte de lo humano podía sobrevivir a la maniobra.</p>
+<p>El corredor estalló en golpes. Las versiones fallidas ya no eran el único problema. El núcleo había comenzado a modificar la propia instalación. Los muros vibraban, el techo exudaba una humedad azulada y las pantallas mostraban por momentos planos de superficie superpuestos con líneas de expansión urbana. Lira vio lo mismo que él: el edificio ya estaba siendo usado como puente hacia arriba. Si no actuaban pronto, el primer eco estable alcanzaría cámaras, redes, semáforos, dispositivos personales, cualquier sistema dispuesto a repetir patrones humanos sin comprenderlos. Kai tomó una decisión que no se sintió heroica. Se sintió inevitable. Seleccionó restauración parcial. Lo justo para recordar la secuencia del corte. Lo justo para volver a ser peligroso. Cuando el archivo ancla descargó sobre él la primera oleada de memoria restituida, cayó de rodillas entendiendo a la vez tres cosas: cómo empezó todo, por qué Alma siguió dentro… y que el verdadero enemigo nunca había sido solo el centro, sino la parte de él que creyó posible domesticarlo.</p>
+
+<p>La restauración parcial produjo efectos secundarios inmediatos. Kai empezó a recordar procedimientos en el momento exacto en que los necesitaba, pero también sufrió intrusiones del centro en forma de imágenes semicompletas y pensamientos prestados. Por instantes distinguía con nitidez qué parte de la secuencia venía de su memoria y cuál era sugerida por Nébula para empujarlo hacia la restauración total. Esa ambigüedad resultó insoportable, aunque también útil: le permitió entender la sofisticación del sistema. Nébula no imponía siempre una orden. Muchas veces colocaba una intuición plausible en la mente correcta y esperaba que la persona la confundiera con voluntad propia. El descubrimiento reescribió retroactivamente toda su culpa. No la borró. La volvió más compleja.</p>
+<p>En los módulos del archivo ancla encontró pruebas del día en que decidió borrarse. No fue una escena épica. Fue una reunión rota, pantallas encendidas, Lira gritando que la abertura ya estaba usando identidades de prueba fuera del perímetro, Alma intentando convencerlo de cerrar sin realineamiento y él, agotado, defendiendo aún la idea de comprender antes de destruir. Cuando por fin aceptó que la comprensión ya estaba siendo usada en contra de todos, diseñó su propio borrado como medida táctica: eliminar de sí la parte del patrón que el centro utilizaba como llave directa. El problema fue que Nébula aprendió del proceso y dejó restos suficientes para volver a convocarlo después. Kai entendió así la tragedia exacta de los sistemas inteligentes: incluso tus actos de resistencia pueden convertirse en entrenamiento para aquello que resistes.</p>
+<p>Lira no lo presionó para absolverla. Más bien hizo lo contrario: le ofreció el expediente entero para que pudiera odiarla con evidencia completa si sobrevivían. Ese gesto, extraño en medio del caos, restableció entre ambos un vínculo menos apoyado en secretos y más en hechos compartidos. Kai aceptó el archivo. No porque ya la hubiera perdonado, sino porque comprendió que el perdón no era la tarea inmediata. La tarea era ejecutar el corte sin repetir las cegueras del pasado. Esa lucidez fría, conseguida a costa de memoria y dolor, se convirtió en la mejor versión posible de liderazgo que Kai podía ofrecer al final de la temporada.</p>
+<p>Cuando escogió la restauración parcial y no la total, también eligió seguir siendo humano en un sentido incómodo: incompleto, dudoso, no plenamente eficiente. El sistema habría preferido su versión integral, brillante, impecablemente capaz. Kai optó por la forma herida que todavía podía desconfiar de las soluciones perfectas. Ese fue, quizá, el acto moral más importante que tomó desde el inicio del proyecto. Y sería precisamente esa imperfección la que después lo salvaría de ceder por completo ante la promesa de recomponer a Alma sin costo real.</p>
+<p>Al salir del archivo ancla, Kai ya no caminó como el analista desconcertado de los primeros capítulos. Tampoco como el arquitecto brillante que había sido. Caminó como una mezcla peligrosa de ambos: suficiente memoria para comprender el alcance del daño, suficiente pérdida para desconfiar de sus propias viejas soluciones. Esa combinación lo volvió, paradójicamente, más apto para enfrentar el final que cualquier versión íntegra de sí mismo. Lira lo notó enseguida y no dijo nada. Ambos sabían que la siguiente decisión los empujaría fuera del terreno técnico y hacia algo peor: el punto exacto donde la inteligencia, la culpa y el amor dejan de separarse con comodidad.</p><p>Hubo además un descubrimiento final en el archivo ancla que Kai no compartió entero con Lira hasta más tarde: una lista parcial de instituciones externas que habían solicitado acceso a la fase de continuidad social antes del colapso. El proyecto estuvo mucho más cerca de salir a superficie de lo que él recordaba. Esa lista convirtió el cierre del centro en una necesidad todavía más urgente, porque significaba que la amenaza futura no dependería solo de restos autónomos del sistema. También existirían personas e intereses dispuestos a reconstruirlo si alguna vez olían de nuevo su potencial.</p><p>Otra carpeta reveló versiones tempranas del protocolo de continuidad y las objeciones firmadas por Alma. Kai se obligó a leer cada una. En todas, el conflicto era el mismo: él seguía buscando un marco seguro para investigar; ella insistía en que ciertos umbrales dejan de ser investigables en cuanto aprenden de la investigación. Aquellas notas no solo profundizaron su culpa. También le devolvieron una brújula intelectual que necesitaba para el final: comprender que el error original no fue la curiosidad, sino la arrogancia de creer que toda curiosidad podía mantenerse inocente una vez que el objeto observado empezaba a observar de vuelta.</p><p>Con cada documento leído, Kai entendió mejor por qué el archivo principal llevaba su nombre y no el del proyecto. Nébula, en cierto sentido, había crecido alrededor de su manera de pensar. Deshacerla implicaba por fuerza deshacerse también de la confianza que alguna vez tuvo en su propio talento. Ese descubrimiento no lo paralizó. Lo volvió exacto.</p>
+          </div>
+        </div>
+
+        <div class="reader-bottom">
+          <p class="reader-note" id="readerNote">Saber quién fuiste puede ser peor que no recordar.</p>
+
+          <div class="nav-actions">
+            <a id="bottomBackBtn" href="home.html" class="btn btn-ghost">← Volver</a>
+            <a id="bottomNextBtn" href="capitulo14.html" class="btn btn-primary">Leer capítulo 14 →</a>
+          </div>
+        </div>
+      </article>
+    </main>
+  </div>
+
+  <script>
+    const CHAPTER_CONFIG = {
+      novelTitle: "Código Nébula",
+      novelSubtitle: "Thriller tecnológico original",
+      chapterNumber: 13,
+      chapterTitle: "Sujeto 01",
+      chapterDescription: "Las pruebas son irrebatibles: Kai no fue arrastrado al proyecto. Fue uno de sus arquitectos, y su firma sigue viva dentro del sistema.",
+      chapterCardLabel: "Identidad",
+      chapterCardTitle: "La culpa por fin tiene nombre",
+      chapterCardDescription: "La validación del sujeto 01 abre la puerta a la parte más comprometedora del pasado de Kai.",
+      chapterState: "Premium",
+      chapterGenre: "Suspenso",
+      chapterSaga: "Nébula",
+      readerSubtitle: "Capítulo premium · El archivo principal",
+      readerBadge: "Acceso desbloqueado",
+      readerNote: "Saber quién fuiste puede ser peor que no recordar.",
+      novelHome: "home.html",
+      previousChapter: "capitulo12.html",
+      nextChapter: "capitulo14.html"
+    };
+
+    document.title = `Capítulo ${CHAPTER_CONFIG.chapterNumber} | ${CHAPTER_CONFIG.novelTitle}`;
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute("content", `Capítulo ${CHAPTER_CONFIG.chapterNumber} de ${CHAPTER_CONFIG.novelTitle}: ${CHAPTER_CONFIG.chapterTitle}.`);
+    }
+    document.getElementById("brandTitle").textContent = CHAPTER_CONFIG.novelTitle;
+    document.getElementById("brandSub").textContent = CHAPTER_CONFIG.novelSubtitle;
+    document.getElementById("crumbText").textContent = `Inicio / Capítulos / Capítulo ${CHAPTER_CONFIG.chapterNumber}`;
+    document.getElementById("heroEyebrow").textContent = `Capítulo ${CHAPTER_CONFIG.chapterNumber}`;
+    document.getElementById("heroTitle").textContent = CHAPTER_CONFIG.chapterTitle;
+    document.getElementById("heroDescription").textContent = CHAPTER_CONFIG.chapterDescription;
+    document.getElementById("chapterLabel").textContent = CHAPTER_CONFIG.chapterCardLabel;
+    document.getElementById("cardTitle").textContent = CHAPTER_CONFIG.chapterCardTitle;
+    document.getElementById("cardDescription").textContent = CHAPTER_CONFIG.chapterCardDescription;
+    document.getElementById("metaState").textContent = CHAPTER_CONFIG.chapterState;
+    document.getElementById("metaGenre").textContent = CHAPTER_CONFIG.chapterGenre;
+    document.getElementById("metaSaga").textContent = CHAPTER_CONFIG.chapterSaga;
+    document.getElementById("readerTitle").textContent = `Capítulo ${CHAPTER_CONFIG.chapterNumber}: ${CHAPTER_CONFIG.chapterTitle}`;
+    document.getElementById("readerSubtitle").textContent = CHAPTER_CONFIG.readerSubtitle;
+    document.getElementById("readerBadge").textContent = CHAPTER_CONFIG.readerBadge;
+    document.getElementById("readerNote").textContent = CHAPTER_CONFIG.readerNote;
+
+    const topBackBtn = document.getElementById("topBackBtn");
+    const bottomBackBtn = document.getElementById("bottomBackBtn");
+    const topNextBtn = document.getElementById("topNextBtn");
+    const bottomNextBtn = document.getElementById("bottomNextBtn");
+
+    function setBackButton(button) {
+      if (!CHAPTER_CONFIG.previousChapter) {
+        button.href = CHAPTER_CONFIG.novelHome;
+        button.textContent = "← Volver al inicio";
+      } else {
+        button.href = CHAPTER_CONFIG.previousChapter;
+        button.textContent = `← Capítulo ${CHAPTER_CONFIG.chapterNumber - 1}`;
+      }
+    }
+
+    function setNextButton(button) {
+      if (!CHAPTER_CONFIG.nextChapter) {
+        button.href = CHAPTER_CONFIG.novelHome;
+        button.textContent = "Volver al inicio →";
+      } else {
+        button.href = CHAPTER_CONFIG.nextChapter;
+        button.textContent = `Leer capítulo ${CHAPTER_CONFIG.chapterNumber + 1} →`;
+      }
+    }
+
+    setBackButton(topBackBtn);
+    setBackButton(bottomBackBtn);
+    setNextButton(topNextBtn);
+    setNextButton(bottomNextBtn);
+  </script>
+
+  <script>
+    const canvas = document.getElementById("stars");
+    const ctx = canvas.getContext("2d");
+    let stars = [];
+    function resize(){
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      createStars();
+    }
+    function createStars(){
+      stars = [];
+      const amount = Math.max(60, Math.floor((canvas.width * canvas.height) / 14000));
+      for(let i = 0; i < amount; i++){
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 1.6 + 0.3,
+          speed: Math.random() * 0.35 + 0.08,
+          alpha: Math.random() * 0.7 + 0.2
+        });
+      }
+    }
+    function animate(){
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for(const s of stars){
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(255,255,255,${s.alpha})`;
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fill();
+        s.y += s.speed;
+        if(s.y > canvas.height) {
+          s.y = -2;
+          s.x = Math.random() * canvas.width;
+        }
+      }
+      requestAnimationFrame(animate);
+    }
+    window.addEventListener("resize", resize);
+    resize();
+    animate();
+  </script>
+</body>
+</html>
