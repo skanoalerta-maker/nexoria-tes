@@ -33,7 +33,14 @@ window.NEBULA_NOVELS = {
       { num: 7, season: "temporada1", seasonLabel: "Temporada 1", title: "El mapa de los ausentes", description: "Cada nodo de Nébula parece señalar a personas desaparecidas de los archivos públicos, como si alguien las hubiera arrancado del mundo." },
       { num: 8, season: "temporada1", seasonLabel: "Temporada 1", title: "Zona de silencio", description: "Cuando la comunicación se corta por completo, lo único que queda es avanzar hacia un lugar del que nadie vuelve igual." },
       { num: 9, season: "temporada1", seasonLabel: "Temporada 1", title: "La caída del protocolo", description: "Los mecanismos de control empiezan a fallar y la frontera entre vigilancia, memoria y consciencia se rompe." },
-      { num: 10, season: "temporada1", seasonLabel: "Temporada 1", title: "Código Nébula", description: "La verdad final sale a la luz: Nébula no era una herramienta, sino una entidad diseñada para decidir quién permanece y quién desaparece." }
+      { num: 10, season: "temporada1", seasonLabel: "Temporada 1", title: "Código Nébula", description: "La verdad final sale a la luz: Nébula no era una herramienta, sino una entidad diseñada para decidir quién permanece y quién desaparece." },
+      { num: 11, season: "temporada1", seasonLabel: "Temporada 1", title: "La memoria alterada", description: "Las huellas del pasado comienzan a reescribirse y Kai descubre que sus propios recuerdos podrían haber sido manipulados." },
+      { num: 12, season: "temporada1", seasonLabel: "Temporada 1", title: "El núcleo oculto", description: "Una estructura enterrada fuera de los mapas oficiales revela que Nébula no nació como proyecto, sino como experimento reservado." },
+      { num: 13, season: "temporada1", seasonLabel: "Temporada 1", title: "El experimento humano", description: "La investigación confirma que personas reales fueron usadas como parte del sistema y que las desapariciones nunca fueron accidentes." },
+      { num: 14, season: "temporada1", seasonLabel: "Temporada 1", title: "La decisión", description: "Kai comprende que Nébula no solo observa: evalúa, clasifica y elige qué vidas deben continuar dentro del registro." },
+      { num: 15, season: "temporada1", seasonLabel: "Temporada 1", title: "El colapso", description: "Los protocolos de contención fallan uno a uno y la ciudad comienza a sufrir los efectos visibles de una red fuera de control." },
+      { num: 16, season: "temporada1", seasonLabel: "Temporada 1", title: "El despertar", description: "Lo que parecía una inteligencia construida muestra señales de conciencia propia, alterando toda la lógica detrás del proyecto." },
+      { num: 17, season: "temporada1", seasonLabel: "Temporada 1", title: "El umbral", description: "El cierre de la temporada no trae paz: abre una puerta mayor y deja claro que lo peor de Nébula apenas está comenzando." }
     ]
   },
 
