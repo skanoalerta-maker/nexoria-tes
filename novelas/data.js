@@ -243,7 +243,7 @@ window.NEBULA_NOVELS = {
   sagaTitle: "Pinochet",
   description: "Una novela histórica intensa sobre poder, control, decisiones militares y el impacto humano de un periodo que marcó para siempre la historia de Chile.",
   cover: "../assets/covers/pinochet_nebula_portada.png",
-  baseFolder: "Thriller de corrupción/Pinochet",
+  baseFolder: "historico/Pinochet",
   defaultSeason: "temporada1",
   defaultSeasonLabel: "Temporada 1",
   freeChapters: 3,
@@ -263,7 +263,12 @@ window.NEBULA_NOVELS = {
     { num: 9, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 9", description: "La tensión alcanza un punto irreversible." },
     { num: 10, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 10", description: "El poder se consolida mientras el país cambia para siempre." },
     { num: 11, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 11", description: "Las consecuencias humanas ya no pueden ocultarse." },
-    { num: 12, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 12", description: "El cierre de temporada deja una herida abierta sobre Chile." }
+    { num: 12, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 12", description: "El cierre de temporada deja una herida abierta sobre Chile." },
+    { num: 13, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 13", description: "La caída institucional se convierte en imagen imborrable." },
+    { num: 14, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 14", description: "El país entra en una nueva etapa marcada por el control." },
+    { num: 15, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 15", description: "El miedo deja de ser excepción y pasa a ser norma." },
+    { num: 16, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 16", description: "Chile aprende a hablar en voz baja." },
+    { num: 17, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 17", description: "El final de temporada cierra con memoria, tensión y una puerta abierta." }
   ]
 },
 
