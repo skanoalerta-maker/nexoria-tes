@@ -1333,7 +1333,7 @@
     const freeChapters = Number(novel.freeChapters ?? 3);
     const progressKey = "nebula-progress-" + novelId;
 
-    const unlockId = novelId.replace(/-t\d+$/, "");
+    const unlockId = novelId;
 
     const hasUnlockedThisNovel =
       Array.isArray(accessState.unlockedNovels) &&
@@ -1797,5 +1797,6 @@
     resizeStarsCanvas();
     animateStars();
   </script>
+  <script src="../coin-manager.js"></script>
 </body>
 </html>
