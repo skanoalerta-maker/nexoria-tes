@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Capítulo 16 | Luci</title>
+  <meta
+    name="description"
+    content="Capítulo 16 de Luci: La decisión."
+  />
+
+  <style>
+    :root{
+      --bg:#140406;
+      --bg2:#22070c;
+      --card:rgba(28,10,14,0.82);
+      --line:rgba(255,255,255,0.08);
+      --line-strong:rgba(255,74,110,0.26);
+      --text:#fff5f7;
+      --muted:#f0b7c2;
+      --muted-2:#d88a98;
+      --blue:#d91f4e;
+      --blue2:#ff5b7d;
+      --blue-soft:rgba(255,91,125,0.14);
+      --shadow:0 24px 60px rgba(0,0,0,0.45);
+      --radius:22px;
+      --max:860px;
+    }
+
+    *{
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      margin:0;
+      font-family:Arial, sans-serif;
+      color:var(--text);
+      background:#120306;
+      line-height:1.8;
+      position:relative;
+      overflow-x:hidden;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    #stars{
+      position:fixed;
+      inset:0;
+      width:100%;
+      height:100%;
+      z-index:0;
+      background:
+        radial-gradient(circle at top left, rgba(217,31,78,.16), transparent 24%),
+        radial-gradient(circle at top right, rgba(255,91,125,.10), transparent 20%),
+        linear-gradient(180deg, #120306 0%, #1b060a 45%, #140406 100%);
+    }
+
+    .page{
+      min-height:100vh;
+      position:relative;
+      z-index:1;
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:30;
+      backdrop-filter:blur(14px);
+      background:rgba(20,4,6,0.72);
+      border-bottom:1px solid var(--line);
+    }
+
+    .topbar-inner{
+      max-width:1100px;
+      margin:0 auto;
+      padding:16px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+    }
+
+    .brand-badge{
+      width:38px;
+      height:38px;
+      border-radius:12px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg, rgba(217,31,78,.24), rgba(255,91,125,.10));
+      border:1px solid var(--line-strong);
+      box-shadow:0 0 24px rgba(217,31,78,.16);
+      font-weight:700;
+      color:var(--blue2);
+      flex:0 0 auto;
+    }
+
+    .brand-title{
+      font-size:14px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:#ffe7ec;
+      margin:0 0 2px;
+    }
+
+    .brand-sub{
+      font-size:12px;
+      color:var(--muted-2);
+      margin:0;
+    }
+
+    .top-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      min-height:44px;
+      padding:0 18px;
+      border-radius:12px;
+      font-size:14px;
+      font-weight:700;
+      transition:transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
+      border:1px solid transparent;
+      cursor:pointer;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+    }
+
+    .btn-primary{
+      background:linear-gradient(135deg, var(--blue) 0%, #ff4068 100%);
+      color:white;
+      box-shadow:0 12px 28px rgba(217,31,78,.28);
+    }
+
+    .btn-primary:hover{
+      background:linear-gradient(135deg, #bb173f 0%, #e9385d 100%);
+    }
+
+    .btn-ghost{
+      background:rgba(255,255,255,0.03);
+      border-color:var(--line);
+      color:#ffd9e2;
+    }
+
+    .btn-ghost:hover{
+      background:rgba(255,255,255,0.06);
+      border-color:var(--line-strong);
+    }
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      border-bottom:1px solid rgba(255,255,255,0.04);
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(180deg, rgba(20,4,6,.60) 0%, rgba(20,4,6,.88) 80%, rgba(20,4,6,1) 100%),
+        url("https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=1600&q=80");
+      background-size:cover;
+      background-position:center;
+      opacity:.20;
+      filter:saturate(.9);
+    }
+
+    .hero-inner{
+      position:relative;
+      z-index:1;
+      max-width:1100px;
+      margin:0 auto;
+      padding:56px 20px 34px;
+    }
+
+    .crumb{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.06);
+      color:var(--muted);
+      font-size:13px;
+      margin-bottom:18px;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:28px;
+      align-items:end;
+    }
+
+    .hero-copy h1{
+      margin:0 0 12px;
+      font-size:clamp(34px, 6vw, 64px);
+      line-height:1.02;
+      letter-spacing:.02em;
+      color:white;
+      text-shadow:0 0 22px rgba(217,31,78,.18);
+    }
+
+    .eyebrow{
+      margin:0 0 14px;
+      color:var(--blue2);
+      font-weight:700;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      font-size:12px;
+    }
+
+    .hero-copy p{
+      margin:0;
+      max-width:700px;
+      color:#ffd7df;
+      font-size:18px;
+      line-height:1.75;
+    }
+
+    .hero-side{
+      display:flex;
+      justify-content:flex-end;
+    }
+
+    .chapter-card{
+      width:min(100%, 360px);
+      background:linear-gradient(180deg, rgba(28,10,14,.78), rgba(18,7,10,.90));
+      border:1px solid rgba(255,91,125,.18);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      padding:22px;
+      backdrop-filter:blur(16px);
+    }
+
+    .chapter-label{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 12px;
+      border-radius:999px;
+      background:var(--blue-soft);
+      border:1px solid rgba(255,91,125,.18);
+      color:var(--blue2);
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:14px;
+    }
+
+    .chapter-card h2{
+      margin:0 0 10px;
+      font-size:24px;
+      line-height:1.15;
+      color:white;
+    }
+
+    .chapter-card p{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.7;
+    }
+
+    .meta{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .meta-item{
+      padding:12px;
+      border-radius:14px;
+      background:rgba(255,255,255,0.03);
+      border:1px solid rgba(255,255,255,0.05);
+    }
+
+    .meta-k{
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:var(--muted-2);
+      margin:0 0 6px;
+    }
+
+    .meta-v{
+      margin:0;
+      font-size:13px;
+      color:#ffeaf0;
+      font-weight:700;
+    }
+
+    .content-wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:28px 20px 80px;
+    }
+
+    .reader{
+      position:relative;
+      background:linear-gradient(180deg, rgba(23,9,13,.60), rgba(16,6,9,.74));
+      border:1px solid rgba(255,255,255,0.06);
+      border-radius:22px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      backdrop-filter:blur(4px);
+    }
+
+    .reader-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:18px 22px;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
+    }
+
+    .reader-top-left h3{
+      margin:0 0 4px;
+      font-size:18px;
+      color:#fff1f4;
+    }
+
+    .reader-top-left p{
+      margin:0;
+      color:var(--muted-2);
+      font-size:13px;
+    }
+
+    .reader-badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:34px;
+      padding:0 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.03);
+      border:1px solid rgba(255,255,255,0.06);
+      color:#ffd7df;
+      font-size:12px;
+      font-weight:700;
+      white-space:nowrap;
+    }
+
+    .reader-body{
+      padding:34px 26px 18px;
+      position:relative;
+    }
+
+    .story{
+      max-width:720px;
+      margin:0 auto;
+      position:relative;
+      z-index:2;
+    }
+
+    .lead{
+      font-size:19px;
+      line-height:1.9;
+      color:#fff1f4;
+      margin:0 0 26px;
+      padding:18px 18px 18px 20px;
+      border-left:3px solid rgba(255,91,125,.44);
+      background:rgba(34,8,14,0.68);
+      border-radius:0 14px 14px 0;
+      backdrop-filter:blur(4px);
+    }
+
+    .story p{
+      margin:0 0 22px;
+      color:#ffe5ea;
+      font-size:18px;
+      line-height:1.95;
+      letter-spacing:.01em;
+      text-shadow:0 1px 2px rgba(0,0,0,.4);
+    }
+
+    .story p strong{
+      color:#ffffff;
+      font-weight:700;
+    }
+
+    .story .quote{
+      margin:34px 0;
+      padding:20px 22px;
+      border-radius:18px;
+      background:linear-gradient(180deg, rgba(217,31,78,.12), rgba(255,91,125,.06));
+      border:1px solid rgba(255,91,125,.14);
+      color:#fff2f5;
+      font-size:19px;
+      line-height:1.7;
+      text-align:center;
+      box-shadow:0 12px 30px rgba(0,0,0,.18);
+      backdrop-filter:blur(4px);
+    }
+
+    .story .divider{
+      width:86px;
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(255,91,125,.6), transparent);
+      margin:34px auto;
+    }
+
+    .reader-bottom{
+      padding:24px 26px 28px;
+      border-top:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .reader-note{
+      color:var(--muted-2);
+      font-size:13px;
+      margin:0;
+    }
+
+    .nav-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    @media (max-width: 900px){
+      .hero-grid{
+        grid-template-columns:1fr;
+      }
+
+      .hero-side{
+        justify-content:flex-start;
+      }
+
+      .chapter-card{
+        width:100%;
+        max-width:unset;
+      }
+    }
+
+    @media (max-width: 640px){
+      .topbar-inner{
+        padding:14px 14px;
+      }
+
+      .hero-inner{
+        padding:34px 14px 22px;
+      }
+
+      .content-wrap{
+        padding:20px 14px 60px;
+      }
+
+      .reader-top,
+      .reader-body,
+      .reader-bottom{
+        padding-left:16px;
+        padding-right:16px;
+      }
+
+      .reader-body{
+        padding-top:24px;
+      }
+
+      .hero-copy p,
+      .story p,
+      .lead{
+        font-size:16px;
+      }
+
+      .meta{
+        grid-template-columns:1fr;
+      }
+
+      .top-actions{
+        width:100%;
+      }
+
+      .btn{
+        width:100%;
+      }
+
+      .nav-actions{
+        width:100%;
+      }
+
+      .nav-actions .btn{
+        flex:1 1 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="stars"></canvas>
+
+  <div class="page">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand">
+          <div class="brand-badge">N</div>
+          <div>
+            <p class="brand-title">Luci</p>
+            <p class="brand-sub">Romance dramático original</p>
+          </div>
+        </div>
+
+        <div class="top-actions">
+          <a href="capitulo15.html" class="btn btn-ghost">← Capítulo anterior</a>
+          <a href="capitulo17.html" class="btn btn-primary">Siguiente capítulo →</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="crumb">Inicio / Capítulos / Capítulo 16</div>
+
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">Capítulo 16</p>
+            <h1>La decisión</h1>
+            <p>
+              Llega una opción médica arriesgada. Entre esperanzas, miedos y probabilidades crueles, Luci debe elegir cómo quiere enfrentar el último gran intento.
+            </p>
+          </div>
+
+          <div class="hero-side">
+            <aside class="chapter-card">
+              <div class="chapter-label">Historia conectada</div>
+              <h2>No todo milagro se parece a una salvación</h2>
+              <p>
+                Llega una opción médica arriesgada. Entre esperanzas, miedos y probabilidades crueles, Luci debe elegir cómo quiere enfrentar el último gran intento.
+              </p>
+
+              <div class="meta">
+                <div class="meta-item">
+                  <p class="meta-k">Estado</p>
+                  <p class="meta-v">Disponible</p>
+                </div>
+                <div class="meta-item">
+                  <p class="meta-k">Género</p>
+                  <p class="meta-v">Romance dramático
+</p>
+                </div>
+                <div class="meta-item">
+                  <p class="meta-k">Saga</p>
+                  <p class="meta-v">Luci
+</p>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="content-wrap">
+      <article class="reader">
+        <div class="reader-top">
+          <div class="reader-top-left">
+            <h3>Capítulo 16: La decisión</h3>
+            <p>Lectura continua · Historia conectada</p>
+          </div>
+          <div class="reader-badge">Acceso completo</div>
+        </div>
+
+        <div class="reader-body">
+          <div class="story">
+            <p class="lead">
+              La propuesta médica llegó un lunes gris, de esos que parecen hechos para malas noticias incluso antes de que alguien abra la boca.
+            </p>
+
+            <p>
+              La doctora habló de una opción nueva. Un procedimiento agresivo. Riesgoso. Con una probabilidad incierta, pero real, de estabilizar lo que hasta entonces seguía avanzando demasiado rápido.
+            </p>
+
+            <p>
+              No era un milagro. Nadie usó esa palabra. Era algo peor y mejor a la vez: una posibilidad.
+            </p>
+
+            <p>
+              Su madre escuchó con el cuerpo inclinado hacia adelante, como si pudiera empujar el resultado a fuerza de atención. Bruno permaneció callado. Luci sintió que cada frase se convertía en peso dentro del pecho.
+            </p>
+
+            <p>
+              Después de la consulta, salieron a la cafetería del hospital y se sentaron los tres frente a una mesa que ninguno parecía ver.
+            </p>
+
+
+            <div class="divider"></div>
+
+            <p class="quote">—¿Qué significa “riesgoso”? —preguntó su madre al fin, con la voz quebrada de tanto contenerse.</p>
+
+            <p>
+              Luci respondió antes que nadie.
+            </p>
+
+            <p class="quote">—Significa que puede salir mal.</p>
+
+            <p>
+              El silencio siguiente fue brutal.
+            </p>
+
+            <p>
+              Bruno apoyó las manos sobre la mesa.
+            </p>
+
+
+            <div class="divider"></div>
+
+            <p class="quote">—También puede salir bien.</p>
+
+            <p>
+              Nadie discutió eso. Pero tampoco bastó.
+            </p>
+
+            <p>
+              Esa noche Luci no quiso hablar con nadie durante horas. Se encerró en el cuarto con la libreta y el ruido del ventilador. Pensó en su madre, agotada de pelear. Pensó en Bruno, sosteniendo esperanza con las manos sangradas. Pensó en sí misma, tan cansada de sentir que cada decisión venía con una forma distinta de despedida.
+            </p>
+
+            <p>
+              Al final fue su madre quien entró sin preguntar y se sentó junto a ella en la cama.
+            </p>
+
+            <p class="quote">—No voy a decidir por ti —dijo—. Esta vez no.</p>
+
+
+            <div class="divider"></div>
+
+            <p>
+              Luci la miró con los ojos llenos de miedo.
+            </p>
+
+            <p class="quote">—¿Y si digo que no?</p>
+
+            <p class="quote">—Te voy a amar igual.</p>
+
+            <p class="quote">—¿Y si digo que sí y sale mal?</p>
+
+            <p>
+              Su madre respiró hondo. Después le acomodó el pelo detrás de la oreja como siempre hacía cuando la veía retroceder hacia la niña que había sido.
+            </p>
+
+
+            <div class="divider"></div>
+
+            <p class="quote">—También te voy a amar igual.</p>
+
+            <p>
+              Luci lloró entonces. No como quien se rinde. Como quien por fin acepta lo imposible de la elección.
+            </p>
+
+            <p>
+              Más tarde habló con Bruno en el patio. El cielo estaba limpio y cruelmente hermoso.
+            </p>
+
+            <p class="quote">—Tengo rabia —le confesó ella—. Rabia de que todo tenga que ser tan definitivo.</p>
+
+            <p class="quote">—Lo sé.</p>
+
+
+            <div class="divider"></div>
+
+            <p class="quote">—No quiero morir por miedo. Pero tampoco quiero vivir por obligación.</p>
+
+            <p>
+              Bruno sostuvo su mirada largamente.
+            </p>
+
+            <p class="quote">—Entonces decide por deseo. Aunque sea pequeño. Aunque sea un deseo roto. Pero que sea tuyo.</p>
+
+            <p>
+              Esa frase la acompañó hasta la madrugada.
+            </p>
+
+            <p>
+              Al amanecer, Luci ya sabía la respuesta.
+            </p>
+
+
+            <div class="divider"></div>
+
+            <p>
+              Aceptaría.
+            </p>
+
+            <p>
+              No porque creyera ciegamente en la medicina. No porque el mundo de pronto le pareciera justo. Sino porque, debajo del cansancio, todavía quedaba una parte de ella que quería seguir intentando.
+            </p>
+
+            <p>
+              Cuando se lo dijo a su madre, ambas lloraron. Cuando se lo dijo a Bruno, él la abrazó con la fuerza exacta para no quebrarla.
+            </p>
+
+            <p class="quote">—Vamos a cruzar esto juntos —susurró.</p>
+
+            <p>
+              Luci cerró los ojos sobre su pecho.
+            </p>
+
+
+            <div class="divider"></div>
+
+            <p>
+              Sabía que no toda decisión valiente parecía una victoria. A veces apenas parecía no rendirse.
+            </p>
+
+            <p>
+              <strong>No todo milagro se parece a una salvación. A veces se parece simplemente a elegir seguir peleando.</strong>
+            </p>
+          </div>
+        </div>
+
+        <div class="reader-bottom">
+          <p class="reader-note">
+            Continúa la historia: cada capítulo deja una grieta más profunda y una razón más fuerte para seguir leyendo.
+          </p>
+
+          <div class="nav-actions">
+            <a href="capitulo15.html" class="btn btn-ghost">← Capítulo anterior</a>
+            <a href="capitulo17.html" class="btn btn-primary">Leer capítulo 17 →</a>
+          </div>
+        </div>
+      </article>
+    </main>
+  </div>
+
+  <script>
+    const canvas = document.getElementById("stars");
+    const ctx = canvas.getContext("2d");
+    let stars = [];
+
+    function resize(){
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      createStars();
+    }
+
+    function createStars(){
+      stars = [];
+      const amount = Math.floor((canvas.width * canvas.height) / 14000);
+      for(let i = 0; i < amount; i++){
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 1.6 + 0.3,
+          speed: Math.random() * 0.35 + 0.08,
+          alpha: Math.random() * 0.7 + 0.2
+        });
+      }
+    }
+
+    function animate(){
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for(const s of stars){
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(255,255,255,${s.alpha})`;
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fill();
+
+        s.y += s.speed;
+
+        if(s.y > canvas.height){
+          s.y = -2;
+          s.x = Math.random() * canvas.width;
+        }
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener("resize", resize);
+    resize();
+    animate();
+  </script>
+  <!-- 🔒 CONTROL DE ACCESO -->
+  <script src="../../../../js/access-control.js"></script>
+</body>
+</html>
