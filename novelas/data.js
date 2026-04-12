@@ -85,7 +85,7 @@ window.NEBULA_NOVELS = {
   sagaTitle: "Después de tu adiós",
   description: "Una novela emocional sobre recuerdos, ausencia y todo lo que sigue vivo después de una despedida.",
   cover: "../assets/covers/despues-de-tu-adios.jpg",
-  baseFolder: "romance/despues_de_tu_adios",
+  baseFolder: "romance/despues-de-tu-adios",
   defaultSeason: "temporada1",
   defaultSeasonLabel: "Temporada 1",
   freeChapters: 3,
