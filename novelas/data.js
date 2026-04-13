@@ -21,7 +21,7 @@ window.NEBULA_NOVELS = {
     freeChapters: 3,
     price: "$1.500 CLP",
     rating: 5,
-    visitas: 1542,
+    visitas: 120,
     tags: ["Futurista", "Tecnología", "Suspenso", "Temporada 1"],
     chapters: [
       { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "El pulso de la anomalía", description: "Una señal imposible aparece en la red y marca el inicio de una cadena de eventos que nadie logra explicar." },
@@ -56,7 +56,7 @@ window.NEBULA_NOVELS = {
   freeChapters: 3,
   price: "$1.500 CLP",
   rating: 5,
-  visitas: 980,
+  visitas: 180,
   tags: ["Futurista", "Tecnología", "Suspenso", "Temporada 2"],
   chapters: [
     { num: 1, season: "temporada2", seasonLabel: "Temporada 2", title: "Reinicio", description: "Después de la caída del protocolo, la red vuelve a encenderse desde un lugar inesperado." },
@@ -91,7 +91,7 @@ window.NEBULA_NOVELS = {
   freeChapters: 3,
   price: "$1.500 CLP",
   rating: 4,
-  visitas: 1187,
+  visitas: 127,
   tags: ["Romance", "Emocional", "Drama", "Temporada 1"],
   chapters: [
     { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "La llamada que no debía llegar", description: "Una voz del pasado reabre emociones que parecían enterradas." },
@@ -126,7 +126,7 @@ window.NEBULA_NOVELS = {
   freeChapters: 3,
   price: "$1.500 CLP",
   rating: 4,
-  visitas: 2100,
+  visitas: 122,
   tags: ["Romance", "Drama", "Pasión", "Temporada 1"],
   chapters: [
     { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "La primera mirada", description: "Todo parece normal hasta que una mirada cambia el ritmo de lo que ambos creían controlar." },
@@ -161,7 +161,7 @@ window.NEBULA_NOVELS = {
     freeChapters: 3,
     price: "$1.500 CLP",
     rating: 4,
-    visitas: 1300,
+    visitas: 120,
     tags: ["Romance", "Drama", "Pasión", "Temporada 2"],
     chapters: [
       { num: 1, season: "temporada2", seasonLabel: "Temporada 2", title: "Capítulo 1", description: "Nueva temporada, nuevas consecuencias." },
@@ -191,7 +191,7 @@ window.NEBULA_NOVELS = {
     freeChapters: 3,
     price: "$1.500 CLP",
     rating: 5,
-    visitas: 842,
+    visitas: 124,
     tags: ["Terror", "Tecnológico", "Suspenso", "Temporada 1"],
     chapters: [
       { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "02:17", description: "El primer mensaje llega a una hora exacta y con una información que nadie más podría tener." },
@@ -221,7 +221,7 @@ window.NEBULA_NOVELS = {
     freeChapters: 3,
     price: "$1.500 CLP",
     rating: 5,
-    visitas: 1100,
+    visitas: 130,
     tags: ["Terror", "Psicológico", "Suspenso", "Temporada 1"],
     chapters: [
       { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "Algo no está igual", description: "Volver a casa se siente distinto desde el primer segundo, aunque todavía no hay una razón clara." },
@@ -249,7 +249,7 @@ window.NEBULA_NOVELS = {
   freeChapters: 3,
   price: "$1.500 CLP",
   rating: 5,
-  visitas: 2000,
+  visitas: 100,
   tags: ["Historia", "Militar", "Política", "Temporada 1"],
   chapters: [
     { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 1", description: "Inicio de una historia marcada por poder y ruptura." },
@@ -284,7 +284,7 @@ window.NEBULA_NOVELS = {
   freeChapters: 3,
   price: "$1.500 CLP",
   rating: 5,
-  visitas: 1800,
+  visitas: 120,
   tags: ["Historia", "Política", "Drama", "Temporada 1"],
   chapters: [
     { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "La victoria inesperada", description: "El triunfo abre una esperanza inmensa, pero también enciende el temor de quienes ya preparan resistencia." },
@@ -319,7 +319,7 @@ window.NEBULA_NOVELS = {
   freeChapters: 3,
   price: "$1.500 CLP",
   rating: 5,
-  visitas: 0,
+  visitas: 123,
   tags: ["Historia", "Política", "Drama", "Temporada 1"],
   chapters: [
     { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "La antesala", description: "Las tensiones se acumulan en silencio mientras el país se acerca a una ruptura irreversible." },
@@ -354,7 +354,7 @@ window.NEBULA_NOVELS = {
     freeChapters: 3,
     price: "$1.500 CLP",
     rating: 5,
-    visitas: 1600,
+    visitas: 165,
     tags: ["Thriller", "Corrupción", "Suspenso", "Temporada 1"],
     chapters: [
       { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 1", description: "Una grieta aparece en el sistema." },
@@ -389,7 +389,7 @@ window.NEBULA_NOVELS = {
     freeChapters: 3,
     price: "$1.500 CLP",
     rating: 5,
-    visitas: 0,
+    visitas: 145,
     tags: ["Comedia", "Drama", "Familia", "Temporada 1"],
     chapters: [
       { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "El viaje que nadie quería", description: "Un paseo familiar comienza mal desde el primer minuto y deja claro que nadie saldrá igual." },
@@ -424,7 +424,7 @@ window.NEBULA_NOVELS = {
   freeChapters: 3,
   price: "$1.500 CLP",
   rating: 5,
-  visitas: 0,
+  visitas: 130,
   tags: ["Romance", "Drama", "Emocional"],
   chapters: [
     { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "El comienzo", description: "Todo empezó con una mirada que ninguno de los dos esperaba." },
@@ -459,7 +459,7 @@ window.NEBULA_NOVELS = {
   freeChapters: 3,
   price: "$1.500 CLP",
   rating: 5,
-  visitas: 0,
+  visitas: 150,
   tags: ["Futurista", "Alienigena", "Conspiracion", "Suspenso", "Temporada 1"],
   chapters: [
     { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "La señal bajo la arena", description: "Una transmision enterrada bajo el desierto activa un protocolo que llevaba decadas dormido." },
@@ -494,7 +494,7 @@ window.NEBULA_NOVELS = {
     freeChapters: 3,
     price: "$1.500 CLP",
     rating: 5,
-    visitas: 0,
+    visitas: 132,
     tags: ["Acción", "Militar", "Suspenso", "Costa", "Temporada 1"],
     chapters: [
       { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "La extracción fallida", description: "Una operación nocturna en la costa se sale de control en los primeros minutos y deja al equipo atrapado en territorio enemigo." },
@@ -529,7 +529,7 @@ window.NEBULA_NOVELS = {
     freeChapters: 3,
     price: "$1.500 CLP",
     rating: 5,
-    visitas: 0,
+    visitas: 128,
     tags: ["Thriller", "Calle", "Corrupción", "Suspenso", "Temporada 1"],
     chapters: [
       { num: 1, season: "temporada1", seasonLabel: "Temporada 1", title: "La noche del primer disparo", description: "Una ejecución en plena noche deja al descubierto que Santiago está a punto de explotar." },
