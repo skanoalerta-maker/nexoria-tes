@@ -2414,7 +2414,12 @@
     function getProgressKey(novelId){ return `nebula-progress-${novelId}`; }
     function getContinuePath(novela){ return localStorage.getItem(getProgressKey(novela.id)) || novela.ruta; }
     function saveInitialProgress(novela){ const key = getProgressKey(novela.id); if (!localStorage.getItem(key)) localStorage.setItem(key, novela.ruta); }
-    function getStoredViews(novela){ const stored = Number(localStorage.getItem(getStorageViewsKey(novela.id))); return Number.isFinite(stored) && stored > 0 ? stored : Number(novela.visitas || 0); }
+    function getStoredViews(novela){
+      const stored = Number(localStorage.getItem(getStorageViewsKey(novela.id)));
+      return Number.isFinite(stored) && stored > 0
+        ? stored
+        : Number(novela.visitas || 120);
+    }
     function increaseViews(novela){ const current = getStoredViews(novela); const next = current + 1; localStorage.setItem(getStorageViewsKey(novela.id), String(next)); novela.visitas = next; }
     function getRating(novela){ const val = Number(novela.rating || 5); return Number.isFinite(val) ? Math.max(1, Math.min(5, Math.round(val))) : 5; }
     function renderStarsHTML(rating){ const safe = Math.max(1, Math.min(5, Math.round(Number(rating) || 5))); return Array.from({length:5}, (_,i)=>`<span class="star ${i<safe?'active':''}">★</span>`).join(''); }
@@ -2447,7 +2452,7 @@
         portada: obtenerCover(novel),
         descripcion: novel.description || novel.descripcion || 'Historia disponible en Nébula.',
         ruta: `novelas/index.html?id=${id}`,
-        visitas: Number(novel.visitas || 0),
+        visitas: Number(novel.visitas || 120),
         gratis: Number(novel.freeChapters ?? novel.gratis ?? 3),
         destacada: typeof novel.destacada === 'boolean' ? novel.destacada : index === 0,
         temporada: obtenerTemporadaLabel(novel),
