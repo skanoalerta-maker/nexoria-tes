@@ -1,5 +1,3 @@
-// views-manager.js
-
 export function formatViews(n) {
   const value = Number(n || 0);
 
@@ -14,19 +12,18 @@ export function updateViews(novelId, baseViews = 120) {
 
   let extraViews = Number(localStorage.getItem(storageKey) || 0);
 
-  // evita duplicados en la misma sesión
   if (!sessionStorage.getItem(sessionKey)) {
     extraViews += 1;
     localStorage.setItem(storageKey, String(extraViews));
     sessionStorage.setItem(sessionKey, "true");
   }
 
-  return baseViews + extraViews;
+  return Number(baseViews || 120) + extraViews;
 }
 
 export function getViews(novelId, baseViews = 120) {
   const storageKey = "nebula_views_" + novelId;
   const extraViews = Number(localStorage.getItem(storageKey) || 0);
 
-  return baseViews + extraViews;
+  return Number(baseViews || 120) + extraViews;
 }
