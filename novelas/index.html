@@ -1529,173 +1529,169 @@
         </div>
       </header>
 
-      <main>
-        <section class="hero">
-          <div class="container hero-grid">
-            <div class="hero-cover-card">
-              <div class="hero-cover-wrap">
-                <img
-                  class="hero-cover"
-                  src="${escapeHtml(novel.cover)}"
-                  alt="${escapeHtml(novel.title)}"
-                />
-              </div>
+<main>
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-cover-card">
+        <div class="hero-cover-wrap">
+          <img
+            class="hero-cover"
+            src="${escapeHtml(novel.cover)}"
+            alt="${escapeHtml(novel.title)}"
+          />
+        </div>
+      </div>
+
+      <div class="hero-content">
+        <div class="story-tags">
+          ${(novel.tags || []).map(tag => `<span>${escapeHtml(tag)}</span>`).join("")}
+          <span>${chapters.length} capítulos</span>
+        </div>
+
+        <h1>${escapeHtml(novel.title)}</h1>
+
+        <p class="story-description">${escapeHtml(novel.description)}</p>
+
+        <div class="hero-meta">
+          <div class="meta-card">
+            <small>Lectura gratis</small>
+            <strong>Primeros ${freeChapters} capítulos</strong>
+          </div>
+
+          <div class="meta-card">
+            <small>Acceso completo</small>
+            <strong>${escapeHtml(novel.price || "$1.500 CLP")} o Premium</strong>
+          </div>
+
+          <div class="meta-card">
+            <small>Estado</small>
+            <strong id="accessState">${accessStateLabel}</strong>
+          </div>
+        </div>
+
+        <div class="value-strip">
+          <div class="value-card">
+            <small>Pago</small>
+            <strong>Mercado Pago</strong>
+          </div>
+
+          <div class="value-card">
+            <small>Acceso</small>
+            <strong>Premium desbloquea toda la novela</strong>
+          </div>
+        </div>
+
+        <section class="weekly-banner">
+          <div class="weekly-top">
+            <div class="weekly-chip">
+              <span class="weekly-dot"></span>
+              Plataforma activa
             </div>
 
-            <div class="hero-content">
-              <div class="story-tags">
-                ${(novel.tags || []).map(tag => `<span>${escapeHtml(tag)}</span>`).join("")}
-                <span>${chapters.length} capítulos</span>
-              </div>
-
-              <h1>${escapeHtml(novel.title)}</h1>
-
-              <p class="story-description">${escapeHtml(novel.description)}</p>
-
-              <div class="hero-meta">
-                <div class="meta-card">
-                  <small>Lectura gratis</small>
-                  <strong>Primeros ${freeChapters} capítulos</strong>
-                </div>
-
-                <div class="meta-card">
-                  <small>Acceso completo</small>
-                  <strong>${escapeHtml(novel.price || "$1.500 CLP")} o Premium</strong>
-                </div>
-
-                <div class="meta-card">
-                  <small>Estado</small>
-                  <strong id="accessState">${accessStateLabel}</strong>
-                </div>
-              </div>
-
-              <div class="value-strip">
-                <div class="value-card">
-                  <small>Pago</small>
-                  <strong>Mercado Pago</strong>
-                </div>
-
-                <div class="value-card">
-                  <small>Acceso</small>
-                  <strong>Premium desbloquea toda la novela</strong>
-                </div>
-              </div>
-
-              <section class="weekly-banner">
-                <div class="weekly-top">
-                  <div class="weekly-chip">
-                    <span class="weekly-dot"></span>
-                    Plataforma activa
-                  </div>
-
-                  <div class="weekly-chip">
-                    Membresía con valor constante
-                  </div>
-                </div>
-
-                <h3>Todos los jueves se subirán 2 nuevas novelas</h3>
-
-                <p>
-                  Nébula no se queda quieta. Tu acceso premium no solo desbloquea esta historia:
-                  también te conecta a una plataforma que seguirá creciendo cada semana con
-                  nuevas novelas para mantener viva la membresía.
-                </p>
-              </section>
-
-              <section class="access-banner">
-                <strong>${accessTitle}</strong>
-                <span>${accessText}</span>
-              </section>
-
-              <section class="novel-rating-box">
-                <h3>Valora esta novela</h3>
-
-                <div id="ratingStars" class="rating-stars">
-                  <button class="rating-star" data-value="1" type="button" aria-label="1 estrella">★</button>
-                  <button class="rating-star" data-value="2" type="button" aria-label="2 estrellas">★</button>
-                  <button class="rating-star" data-value="3" type="button" aria-label="3 estrellas">★</button>
-                  <button class="rating-star" data-value="4" type="button" aria-label="4 estrellas">★</button>
-                  <button class="rating-star" data-value="5" type="button" aria-label="5 estrellas">★</button>
-                </div>
-
-                <p class="rating-meta">
-                  Promedio: <strong id="ratingAverage">0.0</strong>
-                  · Votos: <strong id="ratingTotal">0</strong>
-                </p>
-
-                <p id="ratingStatus" class="rating-status">Cargando votación...</p>
-              </section>
-
-              <div class="hero-actions">
-                <a class="btn btn-primary" href="${getChapterPath(chapters[0])}" id="startBtn">${mainActionLabel}</a>
-                <button class="btn btn-secondary" type="button" id="continueBtn">Seguir donde ibas</button>
-              </div>
+            <div class="weekly-chip">
+              Membresía con valor constante
             </div>
           </div>
+
+          <h3>Todos los jueves se subirán 2 nuevas novelas</h3>
+
+          <p>
+            Nébula no se queda quieta. Tu acceso premium no solo desbloquea esta historia:
+            también te conecta a una plataforma que seguirá creciendo cada semana.
+          </p>
         </section>
 
-        <section class="chapters-section">
-          <div class="container">
-            <div class="section-head">
-              <div>
-                <h2>Capítulos disponibles</h2>
-              </div>
+        <section class="access-banner">
+          <strong>${accessTitle}</strong>
+          <span>${accessText}</span>
+        </section>
 
-              <p class="section-note">
-                Los primeros ${freeChapters} capítulos están disponibles gratis.
-                Desde el capítulo ${freeChapters + 1} en adelante, se desbloquean con acceso premium.
-              </p>
-            </div>
+        <section class="novel-rating-box">
+          <h3>Valora esta novela</h3>
 
-            <div class="chapters-grid" id="chaptersGrid">
-              ${chapters.map((chapter, index) => buildChapterCard(chapter, index)).join("")}
-            </div>
-
-            <div class="premium-box" id="premiumBox">
-              <div>
-                <h3>Continúa la historia completa</h3>
-                <p>
-                  Los primeros capítulos abren el conflicto, pero el resto de la historia
-                  profundiza el desenlace y revela todo lo que viene después en
-                  ${escapeHtml(novel.title)}.
-                </p>
-
-                <div class="premium-details">
-                  <span class="premium-pill">Acceso completo a la novela</span>
-                  <span class="premium-pill">${escapeHtml(novel.price || "$1.500 CLP")}</span>
-                  <span class="premium-pill">Premium desbloquea toda Nébula</span>
-                  <span class="premium-pill">Pago con Mercado Pago</span>
-                </div>
-
-                <div class="premium-note">
-                  <strong>Tono informativo</strong>
-                  <span>
-                    Puedes seguir con acceso premium para leer esta novela completa y el resto del catálogo sin restricciones.
-                  </span>
-                </div>
-              </div>
-
-              ${
-                accessState.isPremium
-                  ? `<button class="btn btn-primary" type="button" disabled>Ya eres Premium</button>`
-                  : hasUnlockedThisNovel
-                    ? `<button class="btn btn-gold" type="button" disabled>Novela desbloqueada</button>`
-                    : !accessState.isLogged
-                      ? `
-                        <div class="payment-buttons">
-                          <a class="btn btn-secondary" href="../login.html">Iniciar sesión</a>
-                        </div>
-                      `
-                      : `
-                        <div class="payment-buttons">
-                          <button class="btn btn-primary" type="button" id="premiumPayBtn">Hazte Premium por $4.990</button>
-                        </div>
-                      `
-              }
-            </div>
+          <div id="ratingStars" class="rating-stars">
+            <button class="rating-star" data-value="1">★</button>
+            <button class="rating-star" data-value="2">★</button>
+            <button class="rating-star" data-value="3">★</button>
+            <button class="rating-star" data-value="4">★</button>
+            <button class="rating-star" data-value="5">★</button>
           </div>
+
+          <p class="rating-meta">
+            Promedio: <strong id="ratingAverage">0.0</strong>
+            · Votos: <strong id="ratingTotal">0</strong>
+          </p>
+
+          <p id="ratingStatus">Cargando votación...</p>
         </section>
-      </main>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="${getChapterPath(chapters[0])}" id="startBtn">
+            ${mainActionLabel}
+          </a>
+          <button class="btn btn-secondary" id="continueBtn">
+            Seguir donde ibas
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapters-section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Capítulos disponibles</h2>
+
+        <p class="section-note">
+          Los primeros ${freeChapters} capítulos están disponibles gratis.
+          Desde el capítulo ${freeChapters + 1} se requiere acceso premium.
+        </p>
+      </div>
+
+      <div class="chapters-grid">
+        ${chapters.map((chapter, index) => buildChapterCard(chapter, index)).join("")}
+      </div>
+
+      <div class="premium-box" id="premiumBox">
+        <div style="width:100%;">
+          <h3>Continúa la historia completa</h3>
+
+          <p>
+            Los primeros capítulos abren el conflicto, pero el resto de la historia
+            revela todo lo que viene después en
+            ${escapeHtml(novel.title)}.
+          </p>
+
+          <div class="premium-details">
+            <span class="premium-pill">Acceso completo a la novela</span>
+            <span class="premium-pill">${escapeHtml(novel.price || "$1.500 CLP")}</span>
+            <span class="premium-pill">Premium desbloquea toda Nébula</span>
+            <span class="premium-pill">Pago con Mercado Pago</span>
+          </div>
+
+          <div class="premium-note" style="
+            margin-top:18px;
+            border:1px solid rgba(255,255,255,.08);
+          ">
+            <strong>Acceso premium</strong>
+            <span>
+              Activa tu membresía para continuar leyendo sin restricciones
+              y acceder a todo el catálogo de Nébula.
+            </span>
+          </div>
+
+          <div style="
+            margin-top:16px;
+            color:var(--muted-2);
+            font-size:.9rem;
+          ">
+            Disponible con membresía activa · Plataforma en crecimiento
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
 
       <div class="footer-space"></div>
     `;
