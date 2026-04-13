@@ -1059,6 +1059,7 @@
     runTransaction,
     serverTimestamp
   } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
+    import { updateViews, formatViews } from "../js/views-manager.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyDccMk1KLoCwXWG2g4r1sOI6qEt_7d5gTw",
@@ -1384,7 +1385,8 @@
       `;
       return;
     }
-
+    const totalViews = updateViews(novel.id, Number(novel.visitas || 120));
+    const formattedViews = formatViews(totalViews);
     const novel = window.NEBULA_NOVELS[novelId];
     const chapters = getOrderedChapters(novel.chapters);
     const freeChapters = Number(novel.freeChapters ?? 3);
@@ -1559,8 +1561,8 @@
           </div>
 
           <div class="meta-card">
-            <small>Acceso completo</small>
-            <strong>${escapeHtml(novel.price || "$1.500 CLP")} o Premium</strong>
+            <small>Lecturas</small>
+            <strong>${formattedViews} vistas</strong>
           </div>
 
           <div class="meta-card">
