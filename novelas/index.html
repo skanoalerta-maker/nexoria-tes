@@ -1385,9 +1385,9 @@
       `;
       return;
     }
+    const novel = window.NEBULA_NOVELS[novelId];
     const totalViews = updateViews(novel.id, Number(novel.visitas || 120));
     const formattedViews = formatViews(totalViews);
-    const novel = window.NEBULA_NOVELS[novelId];
     const chapters = getOrderedChapters(novel.chapters);
     const freeChapters = Number(novel.freeChapters ?? 3);
     const progressKey = "nebula-progress-" + novelId;
