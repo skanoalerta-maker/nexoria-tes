@@ -740,7 +740,7 @@
         </div>
       </div>
 
-      <button class="btn btn-secondary btn-login" onclick="goLogin()">Iniciar sesión</button>
+      <button class="btn btn-secondary btn-login" onclick="scrollCatalogo()">Explorar historias</button>
     </div>
   </header>
 
@@ -758,19 +758,19 @@
           <p>
             Descubre una experiencia de lectura visual, intensa y envolvente.
             En Nébula encontrarás romance, terror, historia y ciencia ficción
-            con una presentación premium, capítulos gratuitos para engancharte
+            con una presentación visual moderna, historias disponibles para comenzar
             y nuevas historias que mantienen viva la plataforma cada semana.
           </p>
 
           <div class="hero-actions">
-            <button class="btn btn-primary" onclick="start()">Comenzar ahora</button>
-            <button class="btn btn-secondary" onclick="goLogin()">Ya tengo cuenta</button>
+            <button class="btn btn-primary" onclick="scrollCatalogo()">Explorar historias</button>
+            <button class="btn btn-secondary" onclick="scrollCatalogo()">Ver catálogo</button>
           </div>
 
           <div class="hero-bullets">
             <div class="hero-bullet">
-              <small>Acceso inicial</small>
-              <strong>Primeros 3 capítulos gratis para descubrir cada historia</strong>
+              <small>Lectura libre</small>
+              <strong>Historias disponibles para descubrir el universo Nébula</strong>
             </div>
 
             <div class="hero-bullet">
@@ -807,7 +807,7 @@
             <div class="feature-points">
               <div>⚡ Narrativa envolvente y visual potente desde el primer capítulo.</div>
               <div>📖 Diseñada para que el lector quiera seguir leyendo sin salir de la plataforma.</div>
-              <div>🚀 Punto de entrada perfecto al estilo premium de Nébula.</div>
+              <div>🚀 Nuevas historias y temporadas agregadas constantemente.</div>
             </div>
           </div>
         </aside>
@@ -855,15 +855,15 @@
     <section class="cta">
       <div class="container">
         <div class="cta-card">
-          <h3>Empieza ahora y entra al universo Nébula</h3>
+          <h3>Explora el universo Nébula</h3>
           <p>
-            Crea tu cuenta, explora el catálogo y continúa leyendo desde cualquier dispositivo.
-            Si ya tienes acceso, entra directamente. Si vienes por primera vez, este es el mejor lugar para empezar.
+            Explora historias, descubre nuevos universos y disfruta una experiencia visual diseñada para lectores modernos.
+            Nébula será una plataforma gratuita que crecerá con nuevas novelas, temporadas y contenido constante.
           </p>
 
           <div class="cta-actions">
-            <button class="btn btn-primary" onclick="start()">Crear cuenta</button>
-            <button class="btn btn-secondary" onclick="goLogin()">Iniciar sesión</button>
+            <button class="btn btn-primary" onclick="scrollCatalogo()">Explorar historias</button>
+            <button class="btn btn-secondary" onclick="scrollCatalogo()">Ver novelas</button>
           </div>
         </div>
       </div>
@@ -875,12 +875,17 @@
   </footer>
 
   <script>
-  function start() {
-    window.location.href = "./login.html";
-  }
+  function scrollCatalogo() {
+    const section = document.querySelector(".section");
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
 
-  function goLogin() {
-    window.location.href = "./login.html";
+    window.scrollTo({
+      top: document.body.scrollHeight * 0.45,
+      behavior: "smooth"
+    });
   }
   </script>
 </body>
