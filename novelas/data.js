@@ -1,12 +1,3 @@
-window.NEBULA_BILLING = {
-  currency: "CLP",
-  premiumMonthlyPrice: 6990,
-  premiumMonthlyLabel: "$6.990 CLP",
-  individualNovelPrice: 1500,
-  individualNovelLabel: "$1.500 CLP",
-  premiumPlanId: "nebula-premium-monthly",
-  premiumName: "Nébula Premium Mensual"
-};
 
 window.NEBULA_NOVELS = {
   "codigo-nebula-t1": {
