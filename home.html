@@ -2,1969 +2,1018 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-  />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Nébula | Historias por capítulos</title>
   <meta
     name="description"
-    content="Nébula es una plataforma de historias por capítulos. Lee romance, terror, misterio, fantasía, comedia y más."
+    content="Nébula es una plataforma gratuita de historias por capítulos. Lee romance, terror, misterio, fantasía, comedia, historia y ciencia ficción."
   />
   <meta name="theme-color" content="#07101f" />
-<style>
-  :root{
-    --bg:#040816;
-    --bg2:#07101f;
-    --bg3:#0b1730;
-    --panel:rgba(8,18,40,.74);
-    --panel-strong:rgba(10,20,44,.92);
-    --panel-soft:rgba(14,24,48,.62);
-    --line:rgba(255,255,255,.08);
-    --line-strong:rgba(89,149,255,.22);
-    --text:#f8fbff;
-    --muted:#b8c4da;
-    --muted-2:#8ea3c8;
-    --blue:#3490ff;
-    --blue2:#66b8ff;
-    --violet:#9a66ff;
-    --cyan:#50dbff;
-    --gold:#ffd54a;
-    --gold-2:#ffbf1f;
-    --green:#4ee7a8;
-    --shadow:0 24px 70px rgba(0,0,0,.34);
-    --shadow-soft:0 18px 46px rgba(0,0,0,.24);
-    --radius:26px;
-    --radius-lg:32px;
-    --container:min(1280px, calc(100% - 32px));
-    --header-h:90px;
-  }
 
-  *{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-  }
-
-  html{
-    scroll-behavior:smooth;
-  }
-
-  body{
-    min-height:100vh;
-    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    color:var(--text);
-    background:
-      radial-gradient(circle at 12% 14%, rgba(76,109,255,.16), transparent 24%),
-      radial-gradient(circle at 84% 18%, rgba(166,90,255,.16), transparent 28%),
-      radial-gradient(circle at 26% 76%, rgba(67,201,255,.10), transparent 24%),
-      linear-gradient(180deg, #040816 0%, #07101f 42%, #09162e 100%);
-    overflow-x:hidden;
-    position:relative;
-  }
-
-  a{
-    color:inherit;
-    text-decoration:none;
-  }
-
-  button,
-  input{
-    font:inherit;
-  }
-
-  img{
-    display:block;
-    max-width:100%;
-  }
-
-  .container{
-    width:var(--container);
-    margin:0 auto;
-    position:relative;
-    z-index:2;
-  }
-
-  #stars-canvas{
-    position:fixed;
-    inset:0;
-    width:100%;
-    height:100%;
-    z-index:-35;
-    pointer-events:none;
-  }
-
-  .galaxy-bg,
-  .galaxy-bg::before,
-  .galaxy-bg::after{
-    content:"";
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    display:block;
-  }
-
-  .galaxy-bg{
-    z-index:-30;
-    overflow:hidden;
-  }
-
-  .galaxy-bg::before{
-    background-image:
-      radial-gradient(2px 2px at 8% 11%, rgba(255,255,255,.94), transparent 62%),
-      radial-gradient(1.5px 1.5px at 18% 67%, rgba(255,255,255,.88), transparent 62%),
-      radial-gradient(2px 2px at 27% 37%, rgba(255,255,255,.86), transparent 62%),
-      radial-gradient(1px 1px at 35% 82%, rgba(255,255,255,.72), transparent 62%),
-      radial-gradient(2px 2px at 46% 18%, rgba(255,255,255,.88), transparent 62%),
-      radial-gradient(1.5px 1.5px at 56% 56%, rgba(255,255,255,.74), transparent 62%),
-      radial-gradient(2px 2px at 66% 26%, rgba(255,255,255,.90), transparent 62%),
-      radial-gradient(1px 1px at 76% 74%, rgba(255,255,255,.70), transparent 62%),
-      radial-gradient(2px 2px at 85% 45%, rgba(255,255,255,.86), transparent 62%),
-      radial-gradient(1.5px 1.5px at 94% 14%, rgba(255,255,255,.82), transparent 62%),
-      radial-gradient(1px 1px at 12% 47%, rgba(161,224,255,.60), transparent 62%),
-      radial-gradient(1px 1px at 62% 84%, rgba(166,190,255,.55), transparent 62%);
-    opacity:.7;
-    animation: starsFloat 120s linear infinite;
-  }
-
-  .galaxy-bg::after{
-    background:
-      radial-gradient(circle at 18% 22%, rgba(75,122,255,.12), transparent 20%),
-      radial-gradient(circle at 78% 22%, rgba(174,84,255,.12), transparent 22%),
-      radial-gradient(circle at 68% 70%, rgba(58,194,255,.10), transparent 25%),
-      radial-gradient(circle at 30% 82%, rgba(124,255,220,.07), transparent 18%);
-    filter:blur(38px);
-    opacity:.95;
-    animation: nebulaDrift 22s ease-in-out infinite alternate;
-  }
-
-  .galaxy-layer{
-    position:fixed;
-    inset:0;
-    z-index:-29;
-    pointer-events:none;
-    background-image:
-      radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,.42), transparent 62%),
-      radial-gradient(1px 1px at 22% 40%, rgba(255,255,255,.34), transparent 62%),
-      radial-gradient(1px 1px at 34% 70%, rgba(255,255,255,.42), transparent 62%),
-      radial-gradient(1px 1px at 48% 30%, rgba(255,255,255,.34), transparent 62%),
-      radial-gradient(1px 1px at 59% 60%, rgba(255,255,255,.38), transparent 62%),
-      radial-gradient(1px 1px at 72% 16%, rgba(255,255,255,.44), transparent 62%),
-      radial-gradient(1px 1px at 82% 48%, rgba(255,255,255,.32), transparent 62%),
-      radial-gradient(1px 1px at 92% 78%, rgba(255,255,255,.35), transparent 62%);
-    opacity:.55;
-    animation: starsFloatReverse 180s linear infinite;
-  }
-
-  .bg-grid{
-    position:fixed;
-    inset:0;
-    z-index:-28;
-    pointer-events:none;
-    background:
-      linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
-    background-size:64px 64px;
-    mask-image:radial-gradient(circle at center, rgba(0,0,0,.95), transparent 88%);
-    opacity:.26;
-  }
-
-  .bg-orb{
-    position:fixed;
-    pointer-events:none;
-    border-radius:50%;
-    filter:blur(48px);
-    z-index:-27;
-    opacity:.36;
-  }
-
-  .orb-1{
-    width:420px;
-    height:420px;
-    top:14%;
-    right:-120px;
-    background:radial-gradient(circle, rgba(123,78,255,.36), transparent 68%);
-    animation: orbMove1 18s ease-in-out infinite alternate;
-  }
-
-  .orb-2{
-    width:360px;
-    height:360px;
-    left:-120px;
-    top:34%;
-    background:radial-gradient(circle, rgba(61,173,255,.28), transparent 68%);
-    animation: orbMove2 20s ease-in-out infinite alternate;
-  }
-
-  @keyframes starsFloat{
-    from{ transform:translateY(0); }
-    to{ transform:translateY(-120px); }
-  }
-
-  @keyframes starsFloatReverse{
-    from{ transform:translateY(0); }
-    to{ transform:translateY(85px); }
-  }
-
-  @keyframes nebulaDrift{
-    0%{ transform:scale(1) translate3d(0,0,0); }
-    100%{ transform:scale(1.07) translate3d(-1.5%, 1.5%, 0); }
-  }
-
-  @keyframes orbMove1{
-    from{ transform:translate3d(0,0,0); }
-    to{ transform:translate3d(-30px, 35px, 0); }
-  }
-
-  @keyframes orbMove2{
-    from{ transform:translate3d(0,0,0); }
-    to{ transform:translate3d(35px, -22px, 0); }
-  }
-
-  .site-header{
-    position:sticky;
-    top:0;
-    z-index:50;
-    backdrop-filter:blur(18px);
-    background:linear-gradient(180deg, rgba(4,10,24,.92), rgba(4,10,24,.72));
-    border-bottom:1px solid rgba(255,255,255,.05);
-  }
-
-  .nav-shell{
-    min-height:var(--header-h);
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:24px;
-    padding:12px 0;
-  }
-
-  .brand{
-    display:flex;
-    align-items:center;
-    gap:16px;
-    min-width:0;
-    flex-shrink:0;
-  }
-
-  .brand-logo{
-    width:180px;
-    height:auto;
-    object-fit:contain;
-    flex-shrink:0;
-    filter:
-      drop-shadow(0 0 18px rgba(118,160,255,.30))
-      drop-shadow(0 0 34px rgba(62,123,255,.24))
-      drop-shadow(0 0 54px rgba(133,102,255,.18));
-  }
-
-  .brand-copy{
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    min-width:0;
-  }
-
-  .brand-copy strong{
-    font-size:.66rem;
-    line-height:1;
-    letter-spacing:.13em;
-    white-space:nowrap;
-    text-shadow:0 0 18px rgba(76,142,255,.12);
-    opacity:.92;
-  }
-
-  .brand-copy span{
-    color:var(--muted);
-    font-size:.40rem;
-    margin-top:4px;
-    white-space:nowrap;
-    letter-spacing:.03em;
-    opacity:.78;
-  }
-
-  .top-nav{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:28px;
-    flex:1;
-    flex-wrap:wrap;
-  }
-
-  .top-nav a{
-    color:#d9e5f8;
-    font-weight:600;
-    font-size:1rem;
-    opacity:.92;
-    transition:.25s ease;
-  }
-
-  .top-nav a:hover{
-    color:#fff;
-    opacity:1;
-  }
-
-  .nav-actions{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    flex-shrink:0;
-  }
-
-  .account-menu{
-    position:relative;
-    display:flex;
-    align-items:center;
-  }
-
-  .account-trigger{
-    display:inline-flex;
-    align-items:center;
-    gap:12px;
-    min-height:54px;
-    padding:0 18px 0 14px;
-    border-radius:18px;
-    border:1px solid rgba(255,255,255,.10);
-    background:rgba(255,255,255,.04);
-    color:#fff;
-    backdrop-filter:blur(14px);
-    cursor:pointer;
-    transition:transform .2s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;
-    box-shadow:0 14px 28px rgba(0,0,0,.18);
-  }
-
-  .account-trigger:hover{
-    transform:translateY(-1px);
-    background:rgba(255,255,255,.07);
-    border-color:rgba(255,255,255,.16);
-  }
-
-  .account-avatar{
-    width:34px;
-    height:34px;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:linear-gradient(135deg, rgba(52,144,255,.30), rgba(154,102,255,.24));
-    border:1px solid rgba(255,255,255,.12);
-    color:#fff;
-    font-weight:800;
-    font-size:1rem;
-    flex-shrink:0;
-  }
-
-  .account-avatar.large{
-    width:52px;
-    height:52px;
-    font-size:1.35rem;
-  }
-
-  .account-name{
-    max-width:170px;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
-    font-weight:800;
-    font-size:1rem;
-    color:#f5f9ff;
-  }
-
-  .account-caret{
-    font-size:.9rem;
-    color:#d7e4fb;
-    opacity:.9;
-    transition:transform .2s ease;
-  }
-
-  .account-menu.open .account-caret{
-    transform:rotate(180deg);
-  }
-
-  .account-dropdown{
-    position:absolute;
-    top:calc(100% + 12px);
-    right:0;
-    width:320px;
-    padding:18px;
-    border-radius:24px;
-    background:linear-gradient(180deg, rgba(11,20,46,.97), rgba(8,15,34,.94));
-    border:1px solid rgba(255,255,255,.09);
-    box-shadow:0 24px 60px rgba(0,0,0,.34);
-    backdrop-filter:blur(18px);
-    z-index:80;
-  }
-
-  .account-dropdown-head{
-    display:flex;
-    align-items:center;
-    gap:14px;
-    padding-bottom:14px;
-    margin-bottom:14px;
-    border-bottom:1px solid rgba(255,255,255,.08);
-  }
-
-  .account-head-copy{
-    min-width:0;
-  }
-
-  .account-head-copy strong{
-    display:block;
-    font-size:1.08rem;
-    line-height:1.1;
-    color:#fff;
-    margin-bottom:5px;
-  }
-
-  .account-head-copy p{
-    color:#b9c7dd;
-    font-size:.94rem;
-    line-height:1.45;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
-  }
-
-  .account-stats{
-    display:grid;
-    gap:10px;
-    margin-bottom:14px;
-  }
-
-  .account-stat-line{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:12px;
-    padding:12px 14px;
-    border-radius:16px;
-    background:rgba(255,255,255,.04);
-    border:1px solid rgba(255,255,255,.06);
-  }
-
-  .account-stat-line span{
-    color:#9fb5db;
-    font-size:.9rem;
-  }
-
-  .account-stat-line strong{
-    color:#fff;
-    font-size:.96rem;
-    font-weight:800;
-  }
-
-  .account-links{
-    display:grid;
-    gap:8px;
-  }
-
-  .account-links a,
-  .account-links button{
-    width:100%;
-    min-height:46px;
-    display:flex;
-    align-items:center;
-    justify-content:flex-start;
-    padding:0 14px;
-    border-radius:14px;
-    background:rgba(255,255,255,.04);
-    border:1px solid rgba(255,255,255,.06);
-    color:#eef4ff;
-    font-weight:700;
-    text-decoration:none;
-    cursor:pointer;
-    transition:background .2s ease, border-color .2s ease, transform .2s ease;
-  }
-
-  .account-links a:hover,
-  .account-links button:hover{
-    background:rgba(255,255,255,.08);
-    border-color:rgba(255,255,255,.12);
-    transform:translateY(-1px);
-  }
-
-  .account-links button{
-    font:inherit;
-  }
-
-  .btn{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    gap:10px;
-    min-height:52px;
-    padding:0 24px;
-    border-radius:18px;
-    border:1px solid transparent;
-    font-weight:800;
-    font-size:1rem;
-    cursor:pointer;
-    transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
-    white-space:nowrap;
-  }
-
-  .btn:hover{
-    transform:translateY(-1px);
-  }
-
-  .btn-primary{
-    color:#fff;
-    background:linear-gradient(135deg, #2a82ff 0%, #4aa7ff 100%);
-    box-shadow:0 18px 34px rgba(38,121,255,.24);
-  }
-
-  .btn-primary:hover{
-    box-shadow:0 20px 36px rgba(38,121,255,.30);
-  }
-
-  .btn-secondary{
-    color:#fff;
-    background:rgba(255,255,255,.06);
-    border-color:rgba(255,255,255,.08);
-    backdrop-filter:blur(10px);
-  }
-
-  .btn-secondary:hover{
-    background:rgba(255,255,255,.09);
-    border-color:rgba(255,255,255,.14);
-  }
-
-  .btn-gold{
-    color:#171105;
-    background:linear-gradient(135deg, #ffec9e 0%, #ffd54a 38%, #ffbf1f 100%);
-    border:1px solid rgba(255,212,74,.48);
-    box-shadow:0 18px 34px rgba(255,191,31,.20), 0 0 0 1px rgba(255,255,255,.14) inset;
-    text-shadow:0 1px 0 rgba(255,255,255,.28);
-    font-weight:900;
-  }
-
-  .btn-gold:hover{
-    transform:translateY(-1px);
-    box-shadow:0 22px 40px rgba(255,191,31,.28), 0 0 0 1px rgba(255,255,255,.18) inset;
-  }
-
-  .btn-progreso-short{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    gap:8px;
-  }
-
-  .btn-progreso-short .progreso-icon{
-    font-size:1rem;
-    line-height:1;
-    flex-shrink:0;
-  }
-
-  .btn[disabled]{
-    opacity:.62;
-    cursor:not-allowed;
-    transform:none;
-  }
-
-  .btn-ghost{
-    min-height:54px;
-    color:#fff;
-    background:rgba(255,255,255,.03);
-    border:1px solid rgba(255,255,255,.09);
-    backdrop-filter:blur(12px);
-    padding:0 26px;
-  }
-
-  .hero{
-    padding:42px 0 26px;
-  }
-
-  .hero-grid{
-    display:grid;
-    grid-template-columns:minmax(0, 1.05fr) minmax(380px, .95fr);
-    gap:28px;
-    align-items:stretch;
-  }
-
-  .hero-copy{
-    min-height:100%;
-    padding:clamp(24px, 3vw, 40px);
-    border-radius:var(--radius-lg);
-    background:linear-gradient(180deg, rgba(9,18,42,.78), rgba(9,18,42,.48));
-    border:1px solid var(--line);
-    box-shadow:var(--shadow);
-    position:relative;
-    overflow:hidden;
-  }
-
-  .hero-copy::before{
-    content:"";
-    position:absolute;
-    inset:auto -10% -30% auto;
-    width:260px;
-    height:260px;
-    border-radius:50%;
-    background:radial-gradient(circle, rgba(59,147,255,.16), transparent 70%);
-    filter:blur(10px);
-    pointer-events:none;
-  }
-
-  .eyebrow{
-    display:inline-flex;
-    align-items:center;
-    min-height:34px;
-    padding:0 14px;
-    border-radius:999px;
-    background:rgba(255,255,255,.06);
-    border:1px solid rgba(255,255,255,.07);
-    color:#d8e7ff;
-    font-size:.84rem;
-    font-weight:700;
-    letter-spacing:.04em;
-    text-transform:uppercase;
-  }
-
-  .hero-copy h1{
-    margin-top:18px;
-    font-size:clamp(2rem, 5vw, 4.4rem);
-    line-height:.95;
-    letter-spacing:-.04em;
-    max-width:12ch;
-  }
-
-  .hero-copy h1 span{
-    display:block;
-    color:#9fd4ff;
-    margin-top:10px;
-  }
-
-  .hero-copy p{
-    margin-top:22px;
-    max-width:62ch;
-    color:var(--muted);
-    font-size:clamp(1rem, 1.5vw, 1.14rem);
-    line-height:1.75;
-  }
-
-  .weekly-launch-banner{
-    margin-top:24px;
-    position:relative;
-    overflow:hidden;
-    border-radius:26px;
-    border:1px solid rgba(255,255,255,.08);
-    background:
-      radial-gradient(circle at 15% 20%, rgba(94,125,255,.18), transparent 30%),
-      radial-gradient(circle at 82% 18%, rgba(155,102,255,.18), transparent 34%),
-      linear-gradient(135deg, rgba(15,27,62,.98), rgba(9,16,38,.92));
-    box-shadow:
-      0 24px 50px rgba(0,0,0,.26),
-      0 0 0 1px rgba(255,255,255,.03) inset;
-    padding:22px 22px 20px;
-  }
-
-  .weekly-launch-banner::after{
-    content:"";
-    position:absolute;
-    inset:auto -30px -40px auto;
-    width:180px;
-    height:180px;
-    border-radius:50%;
-    background:radial-gradient(circle, rgba(80,219,255,.16), transparent 68%);
-    filter:blur(12px);
-    pointer-events:none;
-  }
-
-  .weekly-launch-top{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:16px;
-    flex-wrap:wrap;
-    margin-bottom:12px;
-  }
-
-  .weekly-chip{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    min-height:36px;
-    padding:0 14px;
-    border-radius:999px;
-    background:rgba(255,255,255,.08);
-    border:1px solid rgba(255,255,255,.08);
-    color:#eaf3ff;
-    font-weight:800;
-    font-size:.86rem;
-    text-transform:uppercase;
-    letter-spacing:.06em;
-  }
-
-  .weekly-pulse{
-    width:10px;
-    height:10px;
-    border-radius:50%;
-    background:var(--green);
-    box-shadow:0 0 18px rgba(78,231,168,.72);
-    animation:pulseDot 1.7s ease-in-out infinite;
-    flex-shrink:0;
-  }
-
-  @keyframes pulseDot{
-    0%,100%{ transform:scale(1); opacity:1; }
-    50%{ transform:scale(1.35); opacity:.7; }
-  }
-
-  .weekly-launch-banner h3{
-    font-size:clamp(1.25rem, 2vw, 1.9rem);
-    line-height:1.08;
-    margin-bottom:10px;
-  }
-
-  .weekly-launch-banner p{
-    margin-top:0;
-    max-width:none;
-    color:#d6e4fb;
-    font-size:1rem;
-    line-height:1.75;
-  }
-
-  .weekly-launch-points{
-    display:grid;
-    grid-template-columns:repeat(3, minmax(0, 1fr));
-    gap:12px;
-    margin-top:16px;
-  }
-
-  .weekly-launch-points > div{
-    padding:16px 16px 14px;
-    border-radius:18px;
-    background:rgba(255,255,255,.05);
-    border:1px solid rgba(255,255,255,.07);
-    min-width:0;
-  }
-
-  .weekly-launch-points small{
-    display:block;
-    color:#9fb5db;
-    text-transform:uppercase;
-    letter-spacing:.05em;
-    font-size:.78rem;
-    margin-bottom:7px;
-  }
-
-  .weekly-launch-points strong{
-    font-size:1rem;
-    line-height:1.35;
-    display:block;
-  }
-
-  .hero-actions{
-    display:flex;
-    flex-wrap:wrap;
-    gap:14px;
-    margin-top:24px;
-  }
-
-  .hero-stats{
-    display:grid;
-    grid-template-columns:repeat(3, minmax(0, 1fr));
-    gap:14px;
-    margin-top:26px;
-  }
-
-  .stat-card{
-    padding:18px 18px 16px;
-    border-radius:20px;
-    background:rgba(255,255,255,.04);
-    border:1px solid rgba(255,255,255,.06);
-    box-shadow:var(--shadow-soft);
-    min-width:0;
-  }
-
-  .stat-card small{
-    display:block;
-    color:var(--muted-2);
-    font-size:.85rem;
-    margin-bottom:6px;
-  }
-
-  .stat-card strong{
-    font-size:1rem;
-    line-height:1.35;
-    word-break:break-word;
-  }
-
-  .hero-feature-card{
-    display:flex;
-    flex-direction:column;
-    min-width:0;
-    border-radius:var(--radius-lg);
-    overflow:hidden;
-    background:linear-gradient(180deg, rgba(8,16,36,.90), rgba(8,16,36,.75));
-    border:1px solid rgba(255,255,255,.07);
-    box-shadow:var(--shadow);
-    min-height:100%;
-  }
-
-  .hero-cover-wrap{
-    position:relative;
-    width:100%;
-    background:
-      radial-gradient(circle at center, rgba(83,127,255,.10), transparent 60%),
-      #050b1a;
-    aspect-ratio:16 / 10;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    overflow:hidden;
-    padding:12px;
-  }
-
-  .hero-cover{
-    width:100%;
-    height:100%;
-    object-fit:contain;
-    object-position:center;
-    background:#050b1a;
-  }
-
-  .hero-cover-overlay{
-    position:absolute;
-    inset:0;
-    background:
-      linear-gradient(180deg, rgba(0,0,0,.02), rgba(0,0,0,.08)),
-      linear-gradient(180deg, transparent 0%, transparent 65%, rgba(6,11,24,.20) 100%);
-    pointer-events:none;
-  }
-
-  .hero-feature-content{
-    display:flex;
-    flex-direction:column;
-    gap:18px;
-    padding:24px;
-    flex:1;
-  }
-
-  .story-tags{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-  }
-
-  .story-tags span{
-    display:inline-flex;
-    align-items:center;
-    min-height:36px;
-    padding:0 14px;
-    border-radius:999px;
-    background:rgba(255,255,255,.06);
-    border:1px solid rgba(255,255,255,.08);
-    color:#f0f6ff;
-    font-weight:700;
-    font-size:.92rem;
-  }
-
-  .hero-feature-content h2{
-    font-size:clamp(1.7rem, 2.5vw, 2.3rem);
-    line-height:1.05;
-  }
-
-  .hero-feature-content p{
-    color:var(--muted);
-    line-height:1.75;
-    font-size:1rem;
-  }
-
-  .feature-rating{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    flex-wrap:wrap;
-    margin-top:-4px;
-  }
-
-  .stars{
-    display:inline-flex;
-    align-items:center;
-    gap:4px;
-    line-height:1;
-  }
-
-  .star{
-    font-size:1.15rem;
-    color:rgba(255,255,255,.16);
-    text-shadow:none;
-    transition:.2s ease;
-  }
-
-  .star.active{
-    color:var(--gold);
-    text-shadow:0 0 10px rgba(255,213,74,.24);
-  }
-
-  .rating-label{
-    color:#dfe9fb;
-    font-weight:700;
-    font-size:.95rem;
-  }
-
-  .feature-meta{
-    display:grid;
-    grid-template-columns:repeat(2, minmax(0, 1fr));
-    gap:14px;
-  }
-
-  .feature-meta > div{
-    min-width:0;
-    padding:16px 18px;
-    border-radius:18px;
-    background:rgba(255,255,255,.04);
-    border:1px solid rgba(255,255,255,.06);
-  }
-
-  .feature-meta small{
-    display:block;
-    color:var(--muted-2);
-    margin-bottom:7px;
-    font-size:.84rem;
-    text-transform:uppercase;
-    letter-spacing:.04em;
-  }
-
-  .feature-meta strong{
-    font-size:1.05rem;
-    line-height:1.3;
-    word-break:break-word;
-  }
-
-  .story-actions{
-    display:flex;
-    flex-wrap:wrap;
-    gap:12px;
-    margin-top:auto;
-  }
-
-  .section{
-    padding:34px 0 18px;
-  }
-
-  .section-head{
-    display:flex;
-    align-items:flex-end;
-    justify-content:space-between;
-    gap:18px;
-    margin-bottom:22px;
-    flex-wrap:wrap;
-  }
-
-  .section-kicker{
-    color:#9ccfff;
-    text-transform:uppercase;
-    font-size:.84rem;
-    letter-spacing:.08em;
-    font-weight:800;
-    margin-bottom:8px;
-  }
-
-  .section-head h2{
-    font-size:clamp(1.65rem, 3vw, 2.7rem);
-    line-height:1;
-  }
-
-  .section-note{
-    color:var(--muted);
-    max-width:520px;
-    line-height:1.65;
-  }
-
-  .genre-grid{
-    display:grid;
-    grid-template-columns:repeat(4, minmax(0, 1fr));
-    gap:14px;
-  }
-
-  .genre-card{
-    min-height:88px;
-    padding:20px;
-    border-radius:22px;
-    border:1px solid rgba(255,255,255,.08);
-    background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
-    color:#fff;
-    cursor:pointer;
-    text-align:left;
-    box-shadow:var(--shadow-soft);
-    transition:transform .2s ease, border-color .2s ease, background .2s ease;
-  }
-
-  .genre-card:hover{
-    transform:translateY(-2px);
-    border-color:rgba(90,160,255,.24);
-    background:linear-gradient(180deg, rgba(42,112,255,.10), rgba(255,255,255,.04));
-  }
-
-  .genre-card span{
-    display:block;
-    font-size:1.08rem;
-    font-weight:800;
-  }
-
-  .genre-card small{
-    display:block;
-    color:var(--muted);
-    margin-top:8px;
-    font-size:.92rem;
-  }
-
-  .user-section{
-    padding:10px 0 16px;
-  }
-
-  .user-shell{
-    display:grid;
-    grid-template-columns:minmax(0, 1.1fr) minmax(290px, .9fr);
-    gap:20px;
-    padding:26px;
-    border-radius:30px;
-    background:linear-gradient(180deg, rgba(11,20,46,.86), rgba(10,18,40,.64));
-    border:1px solid rgba(255,255,255,.08);
-    box-shadow:var(--shadow);
-  }
-
-  .user-main{
-    min-width:0;
-  }
-
-  .user-top{
-    display:flex;
-    align-items:center;
-    gap:16px;
-    margin-bottom:18px;
-    flex-wrap:wrap;
-  }
-
-  .user-avatar{
-    width:76px;
-    height:76px;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:2rem;
-    font-weight:800;
-    background:linear-gradient(135deg, rgba(52,144,255,.24), rgba(154,102,255,.22));
-    border:1px solid rgba(255,255,255,.10);
-    box-shadow:0 0 28px rgba(52,144,255,.18);
-    flex-shrink:0;
-  }
-
-  .user-copy h3{
-    font-size:1.45rem;
-    line-height:1.1;
-    margin-bottom:6px;
-  }
-
-  .user-copy p{
-    color:var(--muted);
-    line-height:1.6;
-  }
-
-  .user-status-row{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    margin-top:14px;
-  }
-
-  .user-pill{
-    display:inline-flex;
-    align-items:center;
-    min-height:38px;
-    padding:0 14px;
-    border-radius:999px;
-    background:rgba(255,255,255,.06);
-    border:1px solid rgba(255,255,255,.08);
-    color:#e5efff;
-    font-weight:700;
-    font-size:.92rem;
-  }
-
-  .user-stats{
-    display:grid;
-    grid-template-columns:repeat(3, minmax(0, 1fr));
-    gap:12px;
-    margin-top:18px;
-  }
-
-  .user-stat{
-    padding:16px;
-    border-radius:18px;
-    background:rgba(255,255,255,.04);
-    border:1px solid rgba(255,255,255,.07);
-    min-width:0;
-  }
-
-  .user-stat small{
-    display:block;
-    color:var(--muted-2);
-    font-size:.82rem;
-    margin-bottom:7px;
-    text-transform:uppercase;
-    letter-spacing:.05em;
-  }
-
-  .user-stat strong{
-    display:block;
-    font-size:1rem;
-    line-height:1.3;
-    word-break:break-word;
-  }
-
-  .user-side{
-    display:flex;
-    flex-direction:column;
-    gap:14px;
-  }
-
-  .user-login-box,
-  .user-cta-card{
-    padding:20px;
-    border-radius:24px;
-    background:rgba(255,255,255,.04);
-    border:1px solid rgba(255,255,255,.07);
-    box-shadow:var(--shadow-soft);
-  }
-
-  .user-login-box h4,
-  .user-cta-card h4{
-    font-size:1.1rem;
-    margin-bottom:8px;
-  }
-
-  .user-login-box p,
-  .user-cta-card p{
-    color:var(--muted);
-    line-height:1.7;
-    margin-bottom:14px;
-  }
-
-  .hidden-panel{
-    display:none !important;
-  }
-
-  .catalog-tools{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    width:min(100%, 420px);
-  }
-
-  .search-box{
-    width:100%;
-    display:flex;
-    align-items:center;
-    gap:12px;
-    min-height:56px;
-    padding:0 18px;
-    border-radius:18px;
-    background:rgba(255,255,255,.05);
-    border:1px solid rgba(255,255,255,.08);
-    box-shadow:var(--shadow-soft);
-  }
-
-  .search-box svg{
-    width:20px;
-    height:20px;
-    fill:#b9c8df;
-    flex-shrink:0;
-  }
-
-  .search-box input{
-    width:100%;
-    background:transparent;
-    border:none;
-    outline:none;
-    color:#fff;
-    font-size:1rem;
-  }
-
-  .search-box input::placeholder{
-    color:#91a6c7;
-  }
-
-  .catalog-announcement{
-    margin:-4px 0 22px;
-    display:flex;
-    justify-content:center;
-  }
-
-  .catalog-announcement-box{
-    width:100%;
-    padding:18px 20px;
-    border-radius:22px;
-    border:1px solid rgba(255,255,255,.08);
-    background:
-      radial-gradient(circle at 10% 20%, rgba(82,140,255,.14), transparent 30%),
-      radial-gradient(circle at 90% 20%, rgba(154,102,255,.14), transparent 34%),
-      linear-gradient(135deg, rgba(10,18,42,.94), rgba(8,15,34,.92));
-    box-shadow:var(--shadow-soft);
-    text-align:center;
-  }
-
-  .catalog-announcement-box strong{
-    display:block;
-    font-size:1.08rem;
-    line-height:1.35;
-    margin-bottom:6px;
-  }
-
-  .catalog-announcement-box span{
-    color:var(--muted);
-    line-height:1.7;
-    display:block;
-  }
-
-  .story-grid{
-    display:grid;
-    grid-template-columns:repeat(3, minmax(0, 1fr));
-    gap:22px;
-  }
-
-  .story-card{
-    min-width:0;
-    display:flex;
-    flex-direction:column;
-    border-radius:30px;
-    overflow:hidden;
-    background:linear-gradient(180deg, rgba(7,16,37,.92), rgba(7,16,37,.78));
-    border:1px solid rgba(255,255,255,.07);
-    box-shadow:var(--shadow);
-    min-height:100%;
-  }
-
-  .story-cover-shell{
-    position:relative;
-    width:100%;
-    background:
-      radial-gradient(circle at center, rgba(91,126,255,.10), transparent 60%),
-      #050b1a;
-    aspect-ratio:16 / 10;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    overflow:hidden;
-    padding:12px;
-  }
-
-  .story-cover{
-    width:100%;
-    height:100%;
-    object-fit:contain;
-    object-position:center;
-    background:#050b1a;
-  }
-
-  .story-cover-shadow{
-    position:absolute;
-    inset:0;
-    background:
-      linear-gradient(180deg, rgba(0,0,0,.04), transparent 22%, transparent 70%, rgba(0,0,0,.14));
-    pointer-events:none;
-  }
-
-  .story-badges{
-    position:absolute;
-    top:16px;
-    left:16px;
-    right:16px;
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    pointer-events:none;
-  }
-
-  .story-badges span{
-    display:inline-flex;
-    align-items:center;
-    min-height:34px;
-    padding:0 14px;
-    border-radius:999px;
-    background:rgba(15,17,28,.72);
-    border:1px solid rgba(255,255,255,.08);
-    backdrop-filter:blur(12px);
-    color:#fff;
-    font-weight:800;
-    font-size:.9rem;
-    box-shadow:0 8px 18px rgba(0,0,0,.18);
-  }
-
-  .story-body{
-    display:flex;
-    flex-direction:column;
-    gap:16px;
-    padding:22px 22px 24px;
-    flex:1;
-    min-width:0;
-  }
-
-  .story-topline{
-    display:flex;
-    align-items:flex-start;
-    justify-content:space-between;
-    gap:12px;
-  }
-
-  .story-topline h3{
-    font-size:clamp(1.35rem, 2vw, 2rem);
-    line-height:1.05;
-    letter-spacing:-.02em;
-    min-width:0;
-  }
-
-  .story-topline small{
-    flex-shrink:0;
-    color:#9eb5d7;
-    font-size:.95rem;
-    margin-top:4px;
-    white-space:nowrap;
-  }
-
-  .story-rating-line{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:12px;
-    flex-wrap:wrap;
-    margin-top:-4px;
-  }
-
-  .story-rating-line .rating-label{
-    font-size:.9rem;
-    color:#d5e3fb;
-  }
-
-  .story-body p{
-    color:var(--muted);
-    line-height:1.72;
-    font-size:1rem;
-    flex:1;
-  }
-
-  .story-mini-meta{
-    display:grid;
-    grid-template-columns:repeat(3, minmax(0, 1fr));
-    gap:12px;
-  }
-
-  .story-mini-meta > div{
-    min-width:0;
-    padding:16px 16px 14px;
-    border-radius:20px;
-    background:rgba(255,255,255,.04);
-    border:1px solid rgba(255,255,255,.06);
-  }
-
-  .story-mini-meta small{
-    display:block;
-    color:var(--muted-2);
-    text-transform:uppercase;
-    letter-spacing:.05em;
-    font-size:.82rem;
-    margin-bottom:7px;
-  }
-
-  .story-mini-meta strong{
-    display:block;
-    font-size:1rem;
-    line-height:1.28;
-    word-break:break-word;
-  }
-
-  .story-card-actions{
-    display:grid;
-    grid-template-columns:repeat(3, minmax(0, 1fr));
-    gap:12px;
-    margin-top:auto;
-  }
-
-  .story-card-actions .btn{
-    width:100%;
-    min-width:0;
-    padding:0 16px;
-  }
-
-  .pricing-grid{
-    display:grid;
-    grid-template-columns:repeat(2, minmax(0, 1fr));
-    gap:22px;
-  }
-
-  .pricing-card{
-    padding:26px;
-    border-radius:30px;
-    background:linear-gradient(180deg, rgba(9,18,42,.88), rgba(9,18,42,.66));
-    border:1px solid rgba(255,255,255,.08);
-    box-shadow:var(--shadow);
-    min-width:0;
-    position:relative;
-    overflow:hidden;
-  }
-
-  .pricing-card.featured{
-    border-color:rgba(255,213,74,.18);
-    box-shadow:
-      0 24px 70px rgba(0,0,0,.34),
-      0 0 0 1px rgba(255,213,74,.08) inset;
-  }
-
-  .pricing-card h3{
-    font-size:1.55rem;
-    line-height:1.08;
-    margin-bottom:8px;
-  }
-
-  .pricing-card p{
-    color:var(--muted);
-    line-height:1.72;
-    margin-bottom:16px;
-  }
-
-  .pricing-chip{
-    display:inline-flex;
-    align-items:center;
-    min-height:36px;
-    padding:0 14px;
-    border-radius:999px;
-    background:rgba(255,255,255,.06);
-    border:1px solid rgba(255,255,255,.08);
-    color:#edf4ff;
-    font-weight:800;
-    font-size:.86rem;
-    text-transform:uppercase;
-    letter-spacing:.05em;
-    margin-bottom:14px;
-  }
-
-  .pricing-value{
-    display:flex;
-    align-items:flex-end;
-    gap:10px;
-    margin-bottom:16px;
-    flex-wrap:wrap;
-  }
-
-  .pricing-value strong{
-    font-size:clamp(2rem, 3vw, 3rem);
-    line-height:1;
-    letter-spacing:-.04em;
-  }
-
-  .pricing-value span{
-    color:var(--muted);
-    font-weight:700;
-    margin-bottom:3px;
-  }
-
-  .pricing-list{
-    display:grid;
-    gap:12px;
-    margin-bottom:20px;
-  }
-
-  .pricing-list div{
-    padding:14px 16px;
-    border-radius:18px;
-    background:rgba(255,255,255,.04);
-    border:1px solid rgba(255,255,255,.06);
-    color:#e5efff;
-    line-height:1.6;
-  }
-
-  .payment-trust{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    margin-top:10px;
-  }
-
-  .payment-badge{
-    display:inline-flex;
-    align-items:center;
-    min-height:38px;
-    padding:0 14px;
-    border-radius:999px;
-    background:rgba(255,255,255,.06);
-    border:1px solid rgba(255,255,255,.08);
-    color:#fff;
-    font-weight:800;
-    font-size:.92rem;
-  }
-
-  .pricing-card{
-    transition: all .25s ease;
-  }
-
-  .pricing-card:hover{
-    transform: translateY(-6px);
-    box-shadow:
-      0 30px 80px rgba(0,0,0,.45),
-      0 0 40px rgba(80,150,255,.12);
-  }
-
-  .pricing-card.featured:hover{
-    box-shadow:
-      0 30px 80px rgba(0,0,0,.45),
-      0 0 50px rgba(255,213,74,.18);
-  }
-
-  .pricing-actions{
-    margin-top:18px;
-  }
-
-  .pricing-actions .btn{
-    width:100%;
-    min-height:56px;
-    font-size:1rem;
-    border-radius:18px;
-  }
-
-  .empty-state{
-    margin-top:20px;
-    padding:22px;
-    border-radius:22px;
-    background:rgba(255,255,255,.04);
-    border:1px solid rgba(255,255,255,.06);
-    color:#cbd7ea;
-    text-align:center;
-  }
-
-  .hidden{
-    display:none !important;
-  }
-
-  .site-footer{
-    padding:42px 0 24px;
-  }
-
-  .footer-shell{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:18px;
-    padding:24px;
-    border-radius:28px;
-    border:1px solid rgba(255,255,255,.06);
-    background:rgba(255,255,255,.04);
-    flex-wrap:wrap;
-  }
-
-  .footer-shell strong{
-    display:block;
-    font-size:1.2rem;
-    margin-bottom:6px;
-    letter-spacing:.06em;
-  }
-
-  .footer-shell p{
-    color:var(--muted);
-  }
-
-  .footer-links{
-    display:flex;
-    flex-wrap:wrap;
-    gap:16px;
-  }
-
-  .footer-links a{
-    color:#dce7f8;
-    font-weight:700;
-  }
-
-  .made-by{
-    padding:0 0 60px;
-  }
-
-  .made-by-shell{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:22px;
-    padding:26px 28px;
-    border-radius:28px;
-    border:1px solid rgba(255,255,255,.06);
-    background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
-    box-shadow:var(--shadow-soft);
-    flex-wrap:wrap;
-  }
-
-  .made-by-left{
-    display:flex;
-    align-items:center;
-    gap:22px;
-    min-width:0;
-    flex:1;
-  }
-
-  .made-by-logo-box{
-    width:240px;
-    min-width:240px;
-    height:152px;
-    background:#ffffff;
-    border-radius:22px;
-    padding:14px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    box-shadow:
-      0 18px 40px rgba(0,0,0,.24),
-      0 0 0 1px rgba(255,255,255,.14);
-    flex-shrink:0;
-  }
-
-  .made-by-logo{
-    width:96%;
-    height:auto;
-    object-fit:contain;
-    background:none;
-    border:none;
-    padding:0;
-    box-shadow:none;
-    filter:none;
-  }
-
-  .made-by-copy{
-    min-width:0;
-  }
-
-  .made-by-kicker{
-    display:block;
-    color:#9ccfff;
-    font-size:.72rem;
-    letter-spacing:.1em;
-    text-transform:uppercase;
-    font-weight:800;
-    margin-bottom:6px;
-  }
-
-  .made-by-copy h3{
-    font-size:clamp(1rem, 1.6vw, 1.35rem);
-    line-height:1.1;
-    margin-bottom:6px;
-  }
-
-  .made-by-copy p{
-    color:var(--muted);
-    line-height:1.65;
-    max-width:720px;
-    font-size:.98rem;
-  }
-
-  .made-by-actions{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    flex-wrap:wrap;
-  }
-
-  @media (max-width: 1200px){
-    .hero-grid{
-      grid-template-columns:1fr;
-    }
-
-    .hero-copy h1{
-      max-width:15ch;
-    }
-
-    .genre-grid{
-      grid-template-columns:repeat(2, minmax(0, 1fr));
-    }
-
-    .story-grid,
-    .pricing-grid{
-      grid-template-columns:repeat(2, minmax(0, 1fr));
-    }
-
-    .user-shell{
-      grid-template-columns:1fr;
-    }
-  }
-
-  @media (max-width: 900px){
+  <style>
     :root{
-      --container:min(100% - 24px, 1000px);
-      --header-h:auto;
+      --bg:#040816;
+      --bg2:#07101f;
+      --panel:rgba(8,18,40,.76);
+      --panel-strong:rgba(10,20,44,.92);
+      --line:rgba(255,255,255,.08);
+      --text:#f8fbff;
+      --muted:#b8c4da;
+      --muted-2:#8ea3c8;
+      --blue:#3490ff;
+      --blue2:#66b8ff;
+      --violet:#9a66ff;
+      --gold:#ffd54a;
+      --green:#4ee7a8;
+      --shadow:0 24px 70px rgba(0,0,0,.34);
+      --shadow-soft:0 18px 46px rgba(0,0,0,.24);
+      --radius:26px;
+      --radius-lg:32px;
+      --container:min(1280px, calc(100% - 32px));
+    }
+
+    *{ box-sizing:border-box; margin:0; padding:0; }
+
+    html{ scroll-behavior:smooth; }
+
+    body{
+      min-height:100vh;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 12% 14%, rgba(76,109,255,.16), transparent 24%),
+        radial-gradient(circle at 84% 18%, rgba(166,90,255,.16), transparent 28%),
+        radial-gradient(circle at 26% 76%, rgba(67,201,255,.10), transparent 24%),
+        linear-gradient(180deg, #040816 0%, #07101f 42%, #09162e 100%);
+      overflow-x:hidden;
+      position:relative;
+    }
+
+    a{ color:inherit; text-decoration:none; }
+    button,input{ font:inherit; }
+    img{ display:block; max-width:100%; }
+
+    .container{
+      width:var(--container);
+      margin:0 auto;
+      position:relative;
+      z-index:2;
+    }
+
+    #stars-canvas{
+      position:fixed;
+      inset:0;
+      width:100%;
+      height:100%;
+      z-index:-35;
+      pointer-events:none;
+    }
+
+    .galaxy-bg,
+    .galaxy-bg::before,
+    .galaxy-bg::after{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      display:block;
+    }
+
+    .galaxy-bg{
+      z-index:-30;
+      overflow:hidden;
+    }
+
+    .galaxy-bg::before{
+      background-image:
+        radial-gradient(2px 2px at 8% 11%, rgba(255,255,255,.94), transparent 62%),
+        radial-gradient(1.5px 1.5px at 18% 67%, rgba(255,255,255,.88), transparent 62%),
+        radial-gradient(2px 2px at 27% 37%, rgba(255,255,255,.86), transparent 62%),
+        radial-gradient(1px 1px at 35% 82%, rgba(255,255,255,.72), transparent 62%),
+        radial-gradient(2px 2px at 46% 18%, rgba(255,255,255,.88), transparent 62%),
+        radial-gradient(1.5px 1.5px at 56% 56%, rgba(255,255,255,.74), transparent 62%),
+        radial-gradient(2px 2px at 66% 26%, rgba(255,255,255,.90), transparent 62%),
+        radial-gradient(1px 1px at 76% 74%, rgba(255,255,255,.70), transparent 62%),
+        radial-gradient(2px 2px at 85% 45%, rgba(255,255,255,.86), transparent 62%),
+        radial-gradient(1.5px 1.5px at 94% 14%, rgba(255,255,255,.82), transparent 62%);
+      opacity:.7;
+      animation:starsFloat 120s linear infinite;
+    }
+
+    .galaxy-bg::after{
+      background:
+        radial-gradient(circle at 18% 22%, rgba(75,122,255,.12), transparent 20%),
+        radial-gradient(circle at 78% 22%, rgba(174,84,255,.12), transparent 22%),
+        radial-gradient(circle at 68% 70%, rgba(58,194,255,.10), transparent 25%),
+        radial-gradient(circle at 30% 82%, rgba(124,255,220,.07), transparent 18%);
+      filter:blur(38px);
+      opacity:.95;
+      animation:nebulaDrift 22s ease-in-out infinite alternate;
+    }
+
+    .bg-grid{
+      position:fixed;
+      inset:0;
+      z-index:-28;
+      pointer-events:none;
+      background:
+        linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+      background-size:64px 64px;
+      mask-image:radial-gradient(circle at center, rgba(0,0,0,.95), transparent 88%);
+      opacity:.26;
+    }
+
+    @keyframes starsFloat{ from{ transform:translateY(0); } to{ transform:translateY(-120px); } }
+    @keyframes nebulaDrift{ from{ transform:scale(1) translate3d(0,0,0); } to{ transform:scale(1.07) translate3d(-1.5%, 1.5%, 0); } }
+
+    .site-header{
+      position:sticky;
+      top:0;
+      z-index:50;
+      backdrop-filter:blur(18px);
+      background:linear-gradient(180deg, rgba(4,10,24,.92), rgba(4,10,24,.72));
+      border-bottom:1px solid rgba(255,255,255,.05);
     }
 
     .nav-shell{
-      flex-wrap:wrap;
-      justify-content:center;
-      padding:12px 0 16px;
-      gap:14px 18px;
-    }
-
-    .brand{
-      width:100%;
-      justify-content:center;
-    }
-
-    .brand-logo{
-      width:150px;
-    }
-
-    .brand-copy strong{
-      font-size:.6rem;
-    }
-
-    .brand-copy span{
-      font-size:.38rem;
-    }
-
-    .top-nav{
-      order:3;
-      width:100%;
-      gap:18px;
-    }
-
-    .nav-actions{
-      order:2;
-    }
-
-    .hero{
-      padding:26px 0 20px;
-    }
-
-    .hero-copy,
-    .hero-feature-content{
-      padding:22px;
-    }
-
-    .weekly-launch-points,
-    .hero-stats,
-    .user-stats{
-      grid-template-columns:1fr;
-    }
-
-    .section{
-      padding:26px 0 12px;
-    }
-
-    .section-head{
-      align-items:flex-start;
-    }
-
-    .made-by-shell{
-      align-items:flex-start;
-    }
-
-    .made-by-logo-box{
-      width:220px;
-      min-width:220px;
-      height:138px;
-    }
-
-    .made-by-copy h3{
-      font-size:1.12rem;
-    }
-
-    .made-by-copy p{
-      font-size:.95rem;
-    }
-  }
-
-  @media (max-width: 680px){
-    :root{
-      --container:min(100% - 18px, 1000px);
-    }
-
-    .account-menu{
-      width:100%;
-    }
-
-    .account-trigger{
-      width:100%;
+      min-height:88px;
+      display:flex;
+      align-items:center;
       justify-content:space-between;
-    }
-
-    .account-name{
-      max-width:none;
-    }
-
-    .account-dropdown{
-      right:0;
-      left:0;
-      width:100%;
+      gap:24px;
+      padding:12px 0;
     }
 
     .brand{
-      gap:10px;
+      display:flex;
+      align-items:center;
+      gap:16px;
+      min-width:0;
+      flex-shrink:0;
     }
 
     .brand-logo{
-      width:128px;
+      width:170px;
+      height:auto;
+      object-fit:contain;
+      flex-shrink:0;
+      filter:
+        drop-shadow(0 0 18px rgba(118,160,255,.30))
+        drop-shadow(0 0 34px rgba(62,123,255,.24));
     }
 
     .brand-copy strong{
-      font-size:.54rem;
-      letter-spacing:.11em;
+      display:block;
+      font-size:.72rem;
+      line-height:1;
+      letter-spacing:.13em;
+      white-space:nowrap;
+      opacity:.92;
     }
 
     .brand-copy span{
-      font-size:.34rem;
+      display:block;
+      color:var(--muted);
+      font-size:.44rem;
+      margin-top:4px;
+      white-space:nowrap;
+      letter-spacing:.03em;
+      opacity:.78;
     }
 
     .top-nav{
-      gap:14px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:28px;
+      flex:1;
+      flex-wrap:wrap;
     }
 
     .top-nav a{
-      font-size:.94rem;
+      color:#d9e5f8;
+      font-weight:700;
+      font-size:1rem;
+      opacity:.92;
+      transition:.25s ease;
     }
 
-    .nav-actions{
-      width:100%;
+    .top-nav a:hover{ color:#fff; opacity:1; }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
       justify-content:center;
+      gap:10px;
+      min-height:52px;
+      padding:0 24px;
+      border-radius:18px;
+      border:1px solid transparent;
+      font-weight:900;
+      font-size:1rem;
+      cursor:pointer;
+      transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
+      white-space:nowrap;
     }
 
-    .btn-ghost{
-      width:100%;
+    .btn:hover{ transform:translateY(-1px); }
+
+    .btn-primary{
+      color:#fff;
+      background:linear-gradient(135deg, #2a82ff 0%, #4aa7ff 100%);
+      box-shadow:0 18px 34px rgba(38,121,255,.24);
+    }
+
+    .btn-secondary{
+      color:#fff;
+      background:rgba(255,255,255,.06);
+      border-color:rgba(255,255,255,.08);
+      backdrop-filter:blur(10px);
+    }
+
+    .btn-gold{
+      color:#171105;
+      background:linear-gradient(135deg, #ffec9e 0%, #ffd54a 38%, #ffbf1f 100%);
+      border:1px solid rgba(255,212,74,.48);
+      box-shadow:0 18px 34px rgba(255,191,31,.20), 0 0 0 1px rgba(255,255,255,.14) inset;
+    }
+
+    .hero{ padding:42px 0 26px; }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:minmax(0, 1.05fr) minmax(380px, .95fr);
+      gap:28px;
+      align-items:stretch;
     }
 
     .hero-copy{
-      padding:20px 18px;
+      min-height:100%;
+      padding:clamp(24px, 3vw, 40px);
+      border-radius:var(--radius-lg);
+      background:linear-gradient(180deg, rgba(9,18,42,.78), rgba(9,18,42,.48));
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      min-height:34px;
+      padding:0 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.07);
+      color:#d8e7ff;
+      font-size:.84rem;
+      font-weight:800;
+      letter-spacing:.04em;
+      text-transform:uppercase;
     }
 
     .hero-copy h1{
+      margin-top:18px;
+      font-size:clamp(2.15rem, 5vw, 4.4rem);
+      line-height:.95;
+      letter-spacing:-.04em;
+      max-width:12ch;
+    }
+
+    .hero-copy h1 span{
+      display:block;
+      color:#9fd4ff;
+      margin-top:10px;
+    }
+
+    .hero-copy p{
+      margin-top:22px;
+      max-width:62ch;
+      color:var(--muted);
+      font-size:clamp(1rem, 1.5vw, 1.14rem);
+      line-height:1.75;
+    }
+
+    .weekly-launch-banner{
+      margin-top:24px;
+      position:relative;
+      overflow:hidden;
+      border-radius:26px;
+      border:1px solid rgba(255,255,255,.08);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(94,125,255,.18), transparent 30%),
+        radial-gradient(circle at 82% 18%, rgba(155,102,255,.18), transparent 34%),
+        linear-gradient(135deg, rgba(15,27,62,.98), rgba(9,16,38,.92));
+      box-shadow:0 24px 50px rgba(0,0,0,.26);
+      padding:22px 22px 20px;
+    }
+
+    .weekly-launch-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+      margin-bottom:12px;
+    }
+
+    .weekly-chip{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      min-height:36px;
+      padding:0 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.08);
+      color:#eaf3ff;
+      font-weight:900;
+      font-size:.86rem;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+    }
+
+    .weekly-pulse{
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:var(--green);
+      box-shadow:0 0 18px rgba(78,231,168,.72);
+      animation:pulseDot 1.7s ease-in-out infinite;
+      flex-shrink:0;
+    }
+
+    @keyframes pulseDot{ 0%,100%{ transform:scale(1); opacity:1; } 50%{ transform:scale(1.35); opacity:.7; } }
+
+    .weekly-launch-banner h3{
+      font-size:clamp(1.25rem, 2vw, 1.9rem);
+      line-height:1.08;
+      margin-bottom:10px;
+    }
+
+    .weekly-launch-banner p{
+      margin-top:0;
       max-width:none;
+      color:#d6e4fb;
+      font-size:1rem;
+      line-height:1.75;
     }
 
-    .hero-actions,
-    .story-actions,
-    .made-by-actions{
+    .weekly-launch-points{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0, 1fr));
+      gap:12px;
+      margin-top:16px;
+    }
+
+    .weekly-launch-points > div{
+      padding:16px 16px 14px;
+      border-radius:18px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.07);
+      min-width:0;
+    }
+
+    .weekly-launch-points small{
+      display:block;
+      color:#9fb5db;
+      text-transform:uppercase;
+      letter-spacing:.05em;
+      font-size:.78rem;
+      margin-bottom:7px;
+    }
+
+    .weekly-launch-points strong{
+      font-size:1rem;
+      line-height:1.35;
+      display:block;
+    }
+
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      margin-top:24px;
+    }
+
+    .hero-stats{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0, 1fr));
+      gap:14px;
+      margin-top:26px;
+    }
+
+    .stat-card{
+      padding:18px 18px 16px;
+      border-radius:20px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.06);
+      box-shadow:var(--shadow-soft);
+      min-width:0;
+    }
+
+    .stat-card small{
+      display:block;
+      color:var(--muted-2);
+      font-size:.85rem;
+      margin-bottom:6px;
+    }
+
+    .stat-card strong{
+      font-size:1rem;
+      line-height:1.35;
+      word-break:break-word;
+    }
+
+    .hero-feature-card{
+      display:flex;
       flex-direction:column;
+      min-width:0;
+      border-radius:var(--radius-lg);
+      overflow:hidden;
+      background:linear-gradient(180deg, rgba(8,16,36,.90), rgba(8,16,36,.75));
+      border:1px solid rgba(255,255,255,.07);
+      box-shadow:var(--shadow);
+      min-height:100%;
     }
 
-    .hero-actions .btn,
-    .story-actions .btn,
-    .made-by-actions .btn{
+    .hero-cover-wrap{
+      position:relative;
       width:100%;
+      background:#050b1a;
+      aspect-ratio:16 / 10;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      padding:12px;
+    }
+
+    .hero-cover{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      object-position:center;
+      background:#050b1a;
+    }
+
+    .hero-feature-content{
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+      padding:24px;
+      flex:1;
+    }
+
+    .story-tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    .story-tags span{
+      display:inline-flex;
+      align-items:center;
+      min-height:36px;
+      padding:0 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.08);
+      color:#f0f6ff;
+      font-weight:800;
+      font-size:.92rem;
+    }
+
+    .hero-feature-content h2{
+      font-size:clamp(1.7rem, 2.5vw, 2.3rem);
+      line-height:1.05;
+    }
+
+    .hero-feature-content p{
+      color:var(--muted);
+      line-height:1.75;
+      font-size:1rem;
+    }
+
+    .feature-rating{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:-4px;
+    }
+
+    .stars{
+      display:inline-flex;
+      align-items:center;
+      gap:4px;
+      line-height:1;
+    }
+
+    .star{
+      font-size:1.15rem;
+      color:rgba(255,255,255,.16);
+      text-shadow:none;
+    }
+
+    .star.active{
+      color:var(--gold);
+      text-shadow:0 0 10px rgba(255,213,74,.24);
+    }
+
+    .rating-label{
+      color:#dfe9fb;
+      font-weight:800;
+      font-size:.95rem;
+    }
+
+    .feature-meta{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:14px;
+    }
+
+    .feature-meta > div{
+      min-width:0;
+      padding:16px 18px;
+      border-radius:18px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.06);
+    }
+
+    .feature-meta small{
+      display:block;
+      color:var(--muted-2);
+      margin-bottom:7px;
+      font-size:.84rem;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+    }
+
+    .feature-meta strong{
+      font-size:1.05rem;
+      line-height:1.3;
+      word-break:break-word;
+    }
+
+    .story-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:auto;
+    }
+
+    .section{
+      padding:34px 0 18px;
+    }
+
+    .section-head{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:18px;
+      margin-bottom:22px;
+      flex-wrap:wrap;
+    }
+
+    .section-kicker{
+      color:#9ccfff;
+      text-transform:uppercase;
+      font-size:.84rem;
+      letter-spacing:.08em;
+      font-weight:900;
+      margin-bottom:8px;
+    }
+
+    .section-head h2{
+      font-size:clamp(1.65rem, 3vw, 2.7rem);
+      line-height:1;
+    }
+
+    .section-note{
+      color:var(--muted);
+      max-width:560px;
+      line-height:1.65;
+    }
+
+    .catalog-tools{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      width:min(100%, 420px);
+    }
+
+    .search-box{
+      width:100%;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-height:56px;
+      padding:0 18px;
+      border-radius:18px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:var(--shadow-soft);
+    }
+
+    .search-box input{
+      width:100%;
+      background:transparent;
+      border:none;
+      outline:none;
+      color:#fff;
+      font-size:1rem;
+    }
+
+    .search-box input::placeholder{ color:#91a6c7; }
+
+    .genre-grid{
+      display:grid;
+      grid-template-columns:repeat(4, minmax(0, 1fr));
+      gap:14px;
+    }
+
+    .genre-card{
+      min-height:88px;
+      padding:20px;
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
+      color:#fff;
+      cursor:pointer;
+      text-align:left;
+      box-shadow:var(--shadow-soft);
+      transition:transform .2s ease, border-color .2s ease, background .2s ease;
+    }
+
+    .genre-card:hover{
+      transform:translateY(-2px);
+      border-color:rgba(90,160,255,.24);
+      background:linear-gradient(180deg, rgba(42,112,255,.10), rgba(255,255,255,.04));
+    }
+
+    .genre-card span{
+      display:block;
+      font-size:1.08rem;
+      font-weight:900;
+    }
+
+    .genre-card small{
+      display:block;
+      color:var(--muted);
+      margin-top:8px;
+      font-size:.92rem;
+    }
+
+    .catalog-announcement{
+      margin:-4px 0 22px;
+      display:flex;
+      justify-content:center;
+    }
+
+    .catalog-announcement-box{
+      width:100%;
+      padding:18px 20px;
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.08);
+      background:
+        radial-gradient(circle at 10% 20%, rgba(82,140,255,.14), transparent 30%),
+        radial-gradient(circle at 90% 20%, rgba(154,102,255,.14), transparent 34%),
+        linear-gradient(135deg, rgba(10,18,42,.94), rgba(8,15,34,.92));
+      box-shadow:var(--shadow-soft);
+      text-align:center;
+    }
+
+    .catalog-announcement-box strong{
+      display:block;
+      font-size:1.08rem;
+      line-height:1.35;
+      margin-bottom:6px;
+    }
+
+    .catalog-announcement-box span{
+      color:var(--muted);
+      line-height:1.7;
+      display:block;
+    }
+
+    .story-grid{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0, 1fr));
+      gap:22px;
+    }
+
+    .story-card{
+      min-width:0;
+      display:flex;
+      flex-direction:column;
+      border-radius:30px;
+      overflow:hidden;
+      background:linear-gradient(180deg, rgba(7,16,37,.92), rgba(7,16,37,.78));
+      border:1px solid rgba(255,255,255,.07);
+      box-shadow:var(--shadow);
+      min-height:100%;
+    }
+
+    .story-cover-shell{
+      position:relative;
+      width:100%;
+      background:#050b1a;
+      aspect-ratio:16 / 10;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      padding:12px;
+    }
+
+    .story-cover{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      object-position:center;
+      background:#050b1a;
+    }
+
+    .story-badges{
+      position:absolute;
+      top:16px;
+      left:16px;
+      right:16px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      pointer-events:none;
+    }
+
+    .story-badges span{
+      display:inline-flex;
+      align-items:center;
+      min-height:34px;
+      padding:0 14px;
+      border-radius:999px;
+      background:rgba(15,17,28,.72);
+      border:1px solid rgba(255,255,255,.08);
+      backdrop-filter:blur(12px);
+      color:#fff;
+      font-weight:900;
+      font-size:.9rem;
+      box-shadow:0 8px 18px rgba(0,0,0,.18);
+    }
+
+    .story-body{
+      display:flex;
+      flex-direction:column;
+      gap:16px;
+      padding:22px 22px 24px;
+      flex:1;
+      min-width:0;
+    }
+
+    .story-topline{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+    }
+
+    .story-topline h3{
+      font-size:clamp(1.35rem, 2vw, 2rem);
+      line-height:1.05;
+      letter-spacing:-.02em;
+      min-width:0;
+    }
+
+    .story-topline small{
+      flex-shrink:0;
+      color:#9eb5d7;
+      font-size:.95rem;
+      margin-top:4px;
+      white-space:nowrap;
+    }
+
+    .story-rating-line{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:-4px;
+    }
+
+    .story-body p{
+      color:var(--muted);
+      line-height:1.72;
+      font-size:1rem;
+      flex:1;
+    }
+
+    .story-mini-meta{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0, 1fr));
+      gap:12px;
+    }
+
+    .story-mini-meta > div{
+      min-width:0;
+      padding:16px 16px 14px;
+      border-radius:20px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.06);
+    }
+
+    .story-mini-meta small{
+      display:block;
+      color:var(--muted-2);
+      text-transform:uppercase;
+      letter-spacing:.05em;
+      font-size:.82rem;
+      margin-bottom:7px;
+    }
+
+    .story-mini-meta strong{
+      display:block;
+      font-size:1rem;
+      line-height:1.28;
+      word-break:break-word;
     }
 
     .story-card-actions{
-      grid-template-columns:1fr;
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:12px;
+      margin-top:auto;
     }
 
     .story-card-actions .btn{
       width:100%;
+      min-width:0;
+      padding:0 16px;
     }
 
-    .hero-feature-content{
-      padding:18px;
+    .support-grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:22px;
     }
 
-    .feature-meta,
-    .story-mini-meta,
-    .pricing-grid{
-      grid-template-columns:1fr;
+    .support-card{
+      padding:26px;
+      border-radius:30px;
+      background:linear-gradient(180deg, rgba(9,18,42,.88), rgba(9,18,42,.66));
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:var(--shadow);
+      min-width:0;
+      position:relative;
+      overflow:hidden;
     }
 
-    .genre-grid,
-    .story-grid{
-      grid-template-columns:1fr;
+    .support-card h3{
+      font-size:1.55rem;
+      line-height:1.08;
+      margin-bottom:8px;
     }
 
-    .story-topline{
-      flex-direction:column;
-      align-items:flex-start;
+    .support-card p{
+      color:var(--muted);
+      line-height:1.72;
+      margin-bottom:16px;
     }
 
-    .story-topline small{
-      white-space:normal;
+    .support-chip{
+      display:inline-flex;
+      align-items:center;
+      min-height:36px;
+      padding:0 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.08);
+      color:#edf4ff;
+      font-weight:900;
+      font-size:.86rem;
+      text-transform:uppercase;
+      letter-spacing:.05em;
+      margin-bottom:14px;
     }
 
-    .catalog-tools{
-      width:100%;
+    .support-list{
+      display:grid;
+      gap:12px;
+      margin-bottom:20px;
     }
 
-    .footer-shell,
-    .made-by-shell,
-    .user-shell{
-      padding:20px 18px;
+    .support-list div{
+      padding:14px 16px;
+      border-radius:18px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.06);
+      color:#e5efff;
+      line-height:1.6;
     }
 
-    .made-by-left{
-      flex-direction:column;
-      align-items:flex-start;
+    .empty-state{
+      margin-top:20px;
+      padding:22px;
+      border-radius:22px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.06);
+      color:#cbd7ea;
+      text-align:center;
     }
 
-    .made-by-logo-box{
-      width:205px;
-      min-width:205px;
-      height:128px;
-    }
-  }
+    .hidden{ display:none !important; }
 
-  @media (max-width: 420px){
-    .btn{
-      min-height:50px;
-      padding:0 18px;
-      font-size:.98rem;
+    .site-footer{
+      padding:42px 0 24px;
     }
 
-    .brand-logo{
-      width:116px;
+    .footer-shell{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:18px;
+      padding:24px;
+      border-radius:28px;
+      border:1px solid rgba(255,255,255,.06);
+      background:rgba(255,255,255,.04);
+      flex-wrap:wrap;
     }
 
-    .brand-copy strong{
-      font-size:.48rem;
+    .footer-shell strong{
+      display:block;
+      font-size:1.2rem;
+      margin-bottom:6px;
+      letter-spacing:.06em;
     }
 
-    .brand-copy span{
-      font-size:.31rem;
+    .footer-shell p{ color:var(--muted); }
+
+    .footer-links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:16px;
     }
 
-    .story-badges{
-      top:12px;
-      left:12px;
-      right:12px;
+    .footer-links a{
+      color:#dce7f8;
+      font-weight:800;
     }
 
-    .story-badges span,
-    .story-tags span{
-      font-size:.84rem;
-      min-height:32px;
-      padding:0 12px;
+    @media (max-width: 1200px){
+      .hero-grid{ grid-template-columns:1fr; }
+      .genre-grid{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
+      .story-grid{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
     }
 
-    .hero-cover-wrap,
-    .story-cover-shell{
-      aspect-ratio:4 / 3;
+    @media (max-width: 900px){
+      :root{ --container:min(100% - 24px, 1000px); }
+      .nav-shell{
+        flex-wrap:wrap;
+        justify-content:center;
+        padding:12px 0 16px;
+        gap:14px 18px;
+      }
+      .brand{ width:100%; justify-content:center; }
+      .brand-logo{ width:150px; }
+      .top-nav{ order:3; width:100%; gap:18px; }
+      .weekly-launch-points,.hero-stats{ grid-template-columns:1fr; }
+      .support-grid{ grid-template-columns:1fr; }
     }
 
-    .made-by-logo-box{
-      width:186px;
-      min-width:186px;
-      height:118px;
+    @media (max-width: 680px){
+      :root{ --container:min(100% - 18px, 1000px); }
+      .brand-logo{ width:128px; }
+      .brand-copy strong{ font-size:.54rem; }
+      .brand-copy span{ font-size:.34rem; }
+      .top-nav{ gap:14px; }
+      .top-nav a{ font-size:.94rem; }
+      .hero-copy{ padding:20px 18px; }
+      .hero-copy h1{ max-width:none; }
+      .hero-actions,.story-actions{ flex-direction:column; }
+      .hero-actions .btn,.story-actions .btn{ width:100%; }
+      .story-card-actions{ grid-template-columns:1fr; }
+      .feature-meta,.story-mini-meta,.genre-grid,.story-grid{ grid-template-columns:1fr; }
+      .story-topline{ flex-direction:column; align-items:flex-start; }
+      .catalog-tools{ width:100%; }
+      .footer-shell{ padding:20px 18px; }
     }
 
-    .made-by-copy h3{
-      font-size:1rem;
+    @media (max-width: 420px){
+      .btn{ min-height:50px; padding:0 18px; font-size:.98rem; }
+      .brand-logo{ width:116px; }
+      .story-badges{ top:12px; left:12px; right:12px; }
+      .story-badges span,.story-tags span{ font-size:.84rem; min-height:32px; padding:0 12px; }
+      .hero-cover-wrap,.story-cover-shell{ aspect-ratio:4 / 3; }
     }
-
-    .made-by-copy p{
-      font-size:.92rem;
-    }
-
-    .user-avatar{
-      width:64px;
-      height:64px;
-      font-size:1.7rem;
-    }
-  }
-</style>
+  </style>
 </head>
+
 <body>
   <canvas id="stars-canvas"></canvas>
   <div class="galaxy-bg"></div>
-  <div class="galaxy-layer"></div>
   <div class="bg-grid"></div>
-  <div class="bg-orb orb-1"></div>
-  <div class="bg-orb orb-2"></div>
 
   <header class="site-header">
     <div class="container nav-shell">
@@ -1976,72 +1025,50 @@
         </div>
       </a>
 
-<nav class="top-nav" aria-label="Principal">
-  <a href="#destacada">Destacada</a>
-  <a href="#catalogo">Catálogo</a>
-  <a href="#generos">Géneros</a>
-  <a href="#apoyo">Apoya Nébula</a>
-  <a href="#usuario-nebula">Mi espacio</a>
-</nav>
+      <nav class="top-nav" aria-label="Principal">
+        <a href="#destacada">Destacada</a>
+        <a href="#catalogo">Catálogo</a>
+        <a href="#generos">Géneros</a>
+        <a href="#apoyo">Apoya Nébula</a>
+      </nav>
 
-<div class="nav-actions">
-  <a href="#catalogo" class="btn btn-ghost">Explorar historias</a>
-
-  <div class="account-menu hidden-panel" id="accountMenu">
-    <button class="account-trigger" id="accountTrigger" type="button">
-      <span class="account-avatar" id="accountAvatar">N</span>
-      <span class="account-name" id="accountName">Lector</span>
-      <span class="account-caret">▾</span>
-    </button>
-
-    <div class="account-dropdown hidden-panel" id="accountDropdown">
-      <div class="account-dropdown-head">
-        <div class="account-avatar large" id="accountAvatarLarge">N</div>
-        <div class="account-head-copy">
-          <strong id="accountUserName">Lector Nébula</strong>
-          <p id="accountUserEmail">correo@ejemplo.com</p>
-        </div>
-      </div>
-
-      <div class="account-stats">
-        <div class="account-stat-line">
-          <span>Plan</span>
-          <strong id="accountPlan">Free</strong>
-        </div>
-        <div class="account-stat-line">
-          <span>Leídos</span>
-          <strong id="accountRead">0 capítulos</strong>
-        </div>
-      </div>
-
-      <div class="account-links">
-        <a href="#usuario-nebula">Mi espacio</a>
-        <a href="perfil.html">Mi perfil</a>
-        <button type="button" id="accountLogoutBtn">Cerrar sesión</button>
-      </div>
+      <a href="#catalogo" class="btn btn-secondary">Explorar historias</a>
     </div>
-  </div>
-</div>
-</header>
+  </header>
+
   <main>
     <section class="hero" id="destacada">
       <div class="container hero-grid">
         <div class="hero-copy">
           <div class="eyebrow">Plataforma de lectura</div>
-          <h1>Historias que te atrapan <span>desde el primer capítulo</span></h1>
-          <p>Explora novelas por géneros, guarda tu progreso y sigue leyendo desde cualquier dispositivo. Nébula está pensada para una experiencia moderna, limpia y adictiva.</p>
+
+          <h1>
+            Historias que te atrapan
+            <span>desde el primer capítulo</span>
+          </h1>
+
+          <p>
+            Explora novelas por géneros, entra directo a leer y descubre nuevos universos desde cualquier dispositivo.
+            Nébula está pensada para una experiencia moderna, gratuita y visual.
+          </p>
 
           <div class="weekly-launch-banner">
             <div class="weekly-launch-top">
               <div class="weekly-chip"><span class="weekly-pulse"></span>Novedades semanales</div>
               <div class="weekly-chip">Gratis + contenido constante</div>
             </div>
-            <h3>Todos los jueves se subirán 2 nuevas novelas</h3>
-            <p>Suspenso, romance, terror, historia y más. En Nébula siempre habrá algo nuevo que leer. La plataforma será gratuita y se sostendrá con anuncios dentro de la app.</p>
+
+            <h3>Todos los jueves se subirán nuevas historias</h3>
+
+            <p>
+              Suspenso, romance, terror, historia, acción y más. Nébula crecerá con apoyo de anuncios dentro de la app,
+              sin forzar pagos ni registro obligatorio en esta primera versión.
+            </p>
+
             <div class="weekly-launch-points">
-              <div><small>Ritmo fijo</small><strong>Cada jueves tendrás contenido nuevo esperándote</strong></div>
-              <div><small>Más valor</small><strong>2 nuevas novelas para mantener viva la plataforma</strong></div>
-              <div><small>Acceso abierto</small><strong>Lee historias sin acceso obligatoria</strong></div>
+              <div><small>Ritmo fijo</small><strong>Contenido nuevo para mantener viva la plataforma</strong></div>
+              <div><small>Acceso libre</small><strong>Entra al catálogo y comienza a leer sin bloqueo</strong></div>
+              <div><small>Modelo app</small><strong>Preparada para anuncios y videos recompensados</strong></div>
             </div>
           </div>
 
@@ -2060,198 +1087,81 @@
         <aside class="hero-feature-card" id="featuredCard">
           <div class="hero-cover-wrap">
             <img id="featuredCover" class="hero-cover" src="assets/covers/nebula.jpg" alt="Portada destacada" />
-            <div class="hero-cover-overlay"></div>
           </div>
+
           <div class="hero-feature-content">
             <div class="story-tags">
               <span id="featuredGenreTag">Futurista</span>
               <span id="featuredSeasonTag">Temporada 1</span>
             </div>
+
             <h2 id="featuredTitle">Código Nébula</h2>
+
             <div class="feature-rating">
               <div class="stars" id="featuredStars"></div>
               <span class="rating-label" id="featuredRatingLabel">0 / 5</span>
             </div>
-            <div style="margin-top:10px;">
-              <small style="color:#9fb5db;">Tu evaluación</small>
-              <div class="stars" id="userVoteStars"></div>
-            </div>
-            <p id="featuredDescription">Una historia futurista donde nada es lo que parece y cada capítulo abre una nueva grieta en el sistema.</p>
+
+            <p id="featuredDescription">
+              Una historia futurista donde nada es lo que parece y cada capítulo abre una nueva grieta en el sistema.
+            </p>
+
             <div class="feature-meta">
-              <div><small>Visitas</small><strong id="featuredViews">0</strong></div>
-              <div><small>Gratis</small><strong id="featuredFree">3 capítulos</strong></div>
+              <div><small>Lecturas</small><strong id="featuredViews">0 vistas</strong></div>
+              <div><small>Capítulos</small><strong id="featuredChapters">0 disponibles</strong></div>
             </div>
+
             <div class="story-actions">
               <a id="featuredReadLink" class="btn btn-primary" href="novelas/index.html?id=codigo-nebula-t1">Comenzar a leer</a>
-              <button id="featuredContinueBtn" class="btn btn-secondary" type="button">Seguir leyendo</button>
+              <a class="btn btn-secondary" href="#catalogo">Ver catálogo</a>
             </div>
           </div>
         </aside>
       </div>
     </section>
 
-<section class="section user-section" id="usuario-nebula">
-  <div class="container">
-    <div class="section-head">
-      <div>
-        <p class="section-kicker">Tu cuenta</p>
-        <h2>Mi espacio Nébula</h2>
-      </div>
-      <p class="section-note">Tu lectura, tu avance y tu acceso en un solo lugar.</p>
-    </div>
+    <section class="section" id="apoyo">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Modelo gratuito</p>
+            <h2>Nébula será gratis y se sostendrá con anuncios</h2>
+          </div>
+          <p class="section-note">
+            La primera versión de Nébula no tendrá pagos, coins ni bloqueo por premium. El objetivo es crecer,
+            atraer lectores y monetizar con videos/anuncios dentro de la app.
+          </p>
+        </div>
 
-    <div class="user-shell">
-      <div class="user-main">
-        <div class="user-top">
-          <div class="user-avatar" id="userAvatar" style="
-            font-size:1.8rem;
-            font-weight:900;
-            background:linear-gradient(135deg,#2a82ff,#9a66ff);
-            color:#fff;
-            box-shadow:0 0 25px rgba(80,150,255,.25);
-          ">N</div>
-          <div class="user-copy">
-            <h3 id="userGreeting" style="font-size:1.6rem; font-weight:800; letter-spacing:-.02em;">
-              Tu cuenta Nébula
-            </h3>
-            <p id="userEmailText" style="color:#9fb5db; font-size:.95rem;">
-              Inicia sesión de forma opcional para sincronizar tu progreso de lectura.
-            </p>
-            <div id="userBadge" style="margin-top:10px; display:none;">
-              <span style="
-                display:inline-flex;
-                align-items:center;
-                gap:6px;
-                padding:6px 12px;
-                border-radius:999px;
-                background:linear-gradient(135deg,#ffd54a,#ffbf1f);
-                color:#000;
-                font-size:.8rem;
-                font-weight:800;
-              ">
-                ⭐ Usuario Gratis
-              </span>
+        <div class="support-grid">
+          <article class="support-card">
+            <span class="support-chip">Acceso abierto</span>
+            <h3>Lee historias sin comprar acceso</h3>
+            <p>Explora novelas, temporadas y capítulos desde tu celular. La experiencia queda preparada para crecer con nuevas historias.</p>
+            <div class="support-list">
+              <div>📖 Historias por capítulos</div>
+              <div>🌌 Catálogo con géneros variados</div>
+              <div>📱 Compatible con celular, tablet, notebook y PC</div>
+              <div>🚀 Ideal para crecer con tráfico desde TikTok, Reels y Shorts</div>
             </div>
-          </div>
-        </div>
+            <a class="btn btn-primary" href="#catalogo">Explorar catálogo</a>
+          </article>
 
-        <div class="user-status-row">
-          <span class="user-pill" id="userPlanPill">Acceso: Gratis</span>
-          <span class="user-pill" id="userStatePill">Estado: Invitado</span>
-          <span class="user-pill" id="userProgressPill">Capítulos leídos: 0</span>
-          <span class="user-pill" id="userProgresoPill">Modo: Gratis</span>
-        </div>
-
-        <div class="user-stats">
-          <div class="user-stat">
-            <small>Novelas vistas</small>
-            <strong id="userViewedStories">0 registradas</strong>
-          </div>
-
-          <div class="user-stat">
-            <small>Último avance</small>
-            <strong id="userLastProgress">Aún sin progreso</strong>
-          </div>
-
-          <div class="user-stat">
-            <small>Modelo</small>
-            <strong id="userProgresoText">Gratis con anuncios</strong>
-          </div>
-        </div>
-      </div>
-
-          <div class="user-side">
-            
-<div class="user-login-box" id="userGuestBox">
-  <h4>Explora Nébula</h4>
-  <p>
-    Descubre historias, capítulos y nuevos universos. No necesitas crear una cuenta para comenzar a leer.
-  </p>
-
-  <a href="#catalogo" class="btn btn-primary">
-    Explorar historias
-  </a>
-</div>
-
-
-            <div class="user-cta-card hidden-panel" id="userLoggedBox">
-              <h4>Tu cuenta está activa</h4>
-              <p>Ya puedes seguir leyendo desde donde quedaste, mantener tu experiencia sincronizada.</p>
-              <div class="made-by-actions">
-                <a href="novelas/index.html?id=codigo-nebula-t1" class="btn btn-secondary">Seguir leyendo</a>
-                <button type="button" class="btn btn-primary" id="logoutBtn">Cerrar sesión</button>
-              </div>
+          <article class="support-card">
+            <span class="support-chip">Monetización futura</span>
+            <h3>Videos y anuncios dentro de la app</h3>
+            <p>La app Android podrá incorporar anuncios discretos o videos recompensados sin cobrarle al lector desde el inicio.</p>
+            <div class="support-list">
+              <div>🎬 Videos recompensados para contenido especial</div>
+              <div>📢 Banners o anuncios discretos dentro de la app</div>
+              <div>💡 Sin Mercado Pago en la primera versión</div>
+              <div>🔓 Sin bloqueo por progreso ni registro obligatorio</div>
             </div>
-          </div>
+            <a class="btn btn-secondary" href="#catalogo">Comenzar a leer</a>
+          </article>
         </div>
       </div>
     </section>
-
-<section class="section" id="apoyo">
-  <div class="container">
-    <div class="section-head">
-      <div>
-        <p class="section-kicker">Modelo gratuito</p>
-        <h2>Nébula será gratis y se sostendrá con anuncios</h2>
-      </div>
-      <p class="section-note">
-        La primera versión de Nébula no tendrá pagos ni acceso obligatoria. El objetivo es crecer, atraer lectores y monetizar con videos y anuncios dentro de la app.
-      </p>
-    </div>
-
-    <section class="pricing-section">
-      <div class="pricing-grid">
-        <article class="pricing-card pricing-card--individual">
-          <div class="pricing-topline">
-            <span class="pricing-chip">Acceso gratuito</span>
-            <span class="mini-pill">Sin pago inicial</span>
-          </div>
-
-          <h3>Lee historias sin comprar acceso</h3>
-
-          <p class="pricing-intro">
-            Explora novelas, temporadas y capítulos desde tu celular. La experiencia queda preparada para crecer con nuevas historias y contenido semanal.
-          </p>
-
-          <div class="pricing-list">
-            <div>📖 Historias por capítulos</div>
-            <div>🌌 Catálogo con géneros variados</div>
-            <div>📱 Compatible con celular, tablet, notebook y PC</div>
-            <div>🚀 Ideal para crecer con tráfico desde TikTok, Reels y Shorts</div>
-          </div>
-
-          <div class="pricing-actions">
-            <a class="btn btn-primary pricing-btn" href="#catalogo">Explorar catálogo</a>
-          </div>
-        </article>
-
-        <article class="pricing-card pricing-card featured pricing-card--gratis">
-          <div class="pricing-topline">
-            <span class="pricing-chip gratis-chip">Monetización futura</span>
-            <span class="mini-pill mini-pill--gold">App con videos</span>
-          </div>
-
-          <h3>Videos y anuncios dentro de la app</h3>
-
-          <p class="pricing-intro">
-            En la app Android se podrán incorporar anuncios y videos recompensados para apoyar la plataforma sin cobrarle al lector desde el inicio.
-          </p>
-
-          <div class="pricing-list">
-            <div>🎬 Videos recompensados para contenido especial</div>
-            <div>📢 Banners o anuncios discretos dentro de la app</div>
-            <div>💡 Sin Mercado Pago en la primera versión</div>
-            <div>🔓 Sin bloqueo por progreso ni acceso obligatoria</div>
-          </div>
-
-          <div class="pricing-actions">
-            <a class="btn btn-secondary pricing-btn" href="#catalogo">Comenzar a leer</a>
-          </div>
-        </article>
-      </div>
-    </section>
-  </div>
-</section>
 
     <section class="section" id="generos">
       <div class="container">
@@ -2260,8 +1170,9 @@
             <p class="section-kicker">Explora por categorías</p>
             <h2>Géneros</h2>
           </div>
-          <p class="section-note">Romance, terror, historia, futurista y más.</p>
+          <p class="section-note">Romance, terror, historia, futurista, acción, comedia y más.</p>
         </div>
+
         <div class="genre-grid" id="genreGrid"></div>
       </div>
     </section>
@@ -2273,19 +1184,22 @@
             <p class="section-kicker">Biblioteca principal</p>
             <h2>Historias disponibles</h2>
           </div>
+
           <div class="catalog-tools">
             <label class="search-box" for="storySearch">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 3a7.5 7.5 0 1 1 0 15a7.5 7.5 0 0 1 0-15Zm0 2a5.5 5.5 0 1 0 0 11a5.5 5.5 0 0 0 0-11Zm8.914 12.5l1.586 1.586l-1.414 1.414L18 18.914z"/></svg>
+              <span>🔎</span>
               <input type="search" id="storySearch" placeholder="Buscar novela o género..." autocomplete="off" />
             </label>
           </div>
         </div>
+
         <div class="catalog-announcement">
           <div class="catalog-announcement-box">
-            <strong>Todos los jueves se subirán 2 nuevas novelas para mantener Nébula siempre viva.</strong>
-            <span>Sigue descubriendo nuevas historias todas las semanas. Nébula crecerá gratis con apoyo de anuncios en la app.</span>
+            <strong>Nébula crecerá con nuevas historias para mantener viva la plataforma.</strong>
+            <span>Lee libremente, comparte las historias y vuelve cada semana por nuevo contenido.</span>
           </div>
         </div>
+
         <div class="story-grid" id="storyGrid"></div>
         <div class="empty-state hidden" id="emptyState">No se encontraron historias con esa búsqueda.</div>
       </div>
@@ -2296,8 +1210,9 @@
     <div class="container footer-shell">
       <div>
         <strong>NÉBULA</strong>
-        <p>Plataforma de historias por capítulos.</p>
+        <p>Plataforma gratuita de historias por capítulos.</p>
       </div>
+
       <div class="footer-links">
         <a href="#destacada">Inicio</a>
         <a href="#catalogo">Catálogo</a>
@@ -2307,543 +1222,269 @@
     </div>
   </footer>
 
-  <section class="made-by">
-    <div class="container">
-      <div class="made-by-shell">
-        <div class="made-by-left">
-          <div class="made-by-logo-box">
-            <img class="made-by-logo" src="assets/logo/logo-appfactory.png" alt="Logo AppFactory" />
-          </div>
-          <div class="made-by-copy">
-            <span class="made-by-kicker">Desarrollo digital</span>
-            <h3>Creado por AppFactory</h3>
-            <p>Esta plataforma fue diseñada y desarrollada por AppFactory para ofrecer una experiencia moderna, envolvente y optimizada en celular, tablet, notebook y PC.</p>
-          </div>
-        </div>
-        <div class="made-by-actions">
-          <a class="btn btn-secondary" href="#" target="_blank" rel="noopener noreferrer">Ver AppFactory</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <script src="novelas/data.js"></script>
-  <script>
-    let novelas = [];
-    let filtradas = [];
-    window.nebulaCurrentUser = null;
-    window.nebulaCurrentUserData = {
-      progreso: 0,
-      unlockedNovels: [],
-      subscription: 'free',
-      plan: 'free'
-    };
 
+  <script>
     const storyGrid = document.getElementById("storyGrid");
     const genreGrid = document.getElementById("genreGrid");
     const emptyState = document.getElementById("emptyState");
     const storySearch = document.getElementById("storySearch");
 
-    function capitalizar(texto){ return texto ? texto.charAt(0).toUpperCase() + texto.slice(1) : ""; }
-    function normalizarGenero(texto){
-      const value = String(texto || "").trim().toLowerCase();
-      if (!value) return "general";
-      if (value.includes("romance")) return "romance";
-      if (value.includes("terror")) return "terror";
-      if (value.includes("historia") || value.includes("militar") || value.includes("política") || value.includes("politica")) return "historia";
-      if (value.includes("futur") || value.includes("tecnolog")) return "futurista";
-      if (value.includes("suspenso")) return "suspenso";
+    let novelas = [];
+    let filtradas = [];
+
+    function normalizeCover(path) {
+      const value = String(path || "assets/covers/nebula.jpg");
+
+      if (value.startsWith("/nexoria-tes/")) return value;
+      if (value.startsWith("../")) return value.replace(/^\.\.\//, "");
+      if (value.startsWith("./")) return value.replace(/^\.\//, "");
       return value;
     }
-    function obtenerGeneroDesdeNovela(novel){
-      if (Array.isArray(novel.tags) && novel.tags.length) return normalizarGenero(novel.tags[0]);
-      const folder = String(novel.baseFolder || "").split("/")[0];
-      return normalizarGenero(folder || novel.genero || "general");
-    }
-    function obtenerTemporadaLabel(novel){
-      const chapters = Array.isArray(novel.chapters) ? novel.chapters : [];
-      const labels = [...new Set(chapters.map(ch => ch.seasonLabel || ch.season).filter(Boolean))];
-      if (labels.length > 1) return labels.join(" · ");
-      if (labels.length === 1) return labels[0];
-      return novel.defaultSeasonLabel || novel.temporada || "Temporada 1";
-    }
-    function obtenerCapitulosCount(novel){
-      if (Array.isArray(novel.chapters)) return novel.chapters.length;
-      if (Number.isFinite(Number(novel.capitulos))) return Number(novel.capitulos);
-      return 0;
-    }
-    function obtenerCover(novel){
-      const raw = String(novel.cover || novel.portada || "").trim();
-      if (!raw) return "assets/covers/nebula.jpg";
-      return raw.startsWith("../") ? raw.replace("../", "") : raw;
-    }
-    function getStorageViewsKey(novelId){ return `nebula-views-${novelId}`; }
-    function getProgressKey(novelId){ return `nebula-progress-${novelId}`; }
-    function getContinuePath(novela){ return localStorage.getItem(getProgressKey(novela.id)) || novela.ruta; }
-    function saveInitialProgress(novela){ const key = getProgressKey(novela.id); if (!localStorage.getItem(key)) localStorage.setItem(key, novela.ruta); }
-    function getStoredViews(novela){
-      const stored = Number(localStorage.getItem(getStorageViewsKey(novela.id)));
-      return Number.isFinite(stored) && stored > 0
-        ? stored
-        : Number(novela.visitas || 120);
-    }
-    function increaseViews(novela){ const current = getStoredViews(novela); const next = current + 1; localStorage.setItem(getStorageViewsKey(novela.id), String(next)); novela.visitas = next; }
-    function getRating(novela){ const val = Number(novela.rating || 5); return Number.isFinite(val) ? Math.max(1, Math.min(5, Math.round(val))) : 5; }
-    function renderStarsHTML(rating){ const safe = Math.max(1, Math.min(5, Math.round(Number(rating) || 5))); return Array.from({length:5}, (_,i)=>`<span class="star ${i<safe?'active':''}">★</span>`).join(''); }
 
-    function getCurrentUserProgreso(){
-      return Number(window.nebulaCurrentUserData?.progreso || 0);
+    function safeText(value) {
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
     }
 
-    function getUnlockedNovels(){
-      return Array.isArray(window.nebulaCurrentUserData?.unlockedNovels)
-        ? window.nebulaCurrentUserData.unlockedNovels
-        : [];
+    function formatViews(value) {
+      const number = Number(value || 0);
+      if (number >= 1000000) return (number / 1000000).toFixed(1).replace(".0", "") + "M";
+      if (number >= 1000) return (number / 1000).toFixed(1).replace(".0", "") + "K";
+      return String(number);
     }
 
-    function getUnlockId(novelaId){
-      return String(novelaId || '');
-    }
-
-    function isNovelUnlocked(novela){
-      return getUnlockedNovels().includes(getUnlockId(novela.id));
-    }
-
-    function buildCatalogFromNebulaData(){
-      const source = window.NEBULA_NOVELS;
-      if (!source || typeof source !== 'object') return [];
-      return Object.entries(source).map(([id, novel], index) => ({
-        id,
-        titulo: novel.title || novel.titulo || id,
-        genero: obtenerGeneroDesdeNovela(novel),
-        portada: obtenerCover(novel),
-        descripcion: novel.description || novel.descripcion || 'Historia disponible en Nébula.',
-        ruta: `novelas/index.html?id=${id}`,
-        visitas: Number(novel.visitas || 120),
-        gratis: Number(novel.freeChapters ?? novel.gratis ?? 3),
-        destacada: typeof novel.destacada === 'boolean' ? novel.destacada : index === 0,
-        temporada: obtenerTemporadaLabel(novel),
-        capitulos: obtenerCapitulosCount(novel),
-        rating: Number(novel.rating || 5)
-      }));
-    }
-
-    function prepararNovelas(data){
-      return data.map((novela, index) => ({
-        ...novela,
-        visitas:getStoredViews(novela),
-        destacada: typeof novela.destacada==='boolean' ? novela.destacada : index===0,
-        rating:getRating(novela)
-      }));
-    }
-
-    function renderFeatured(){
-      const destacada = novelas.find(n => n.destacada) || novelas[0];
-      if (!destacada) return;
-      document.getElementById('featuredCover').src = destacada.portada;
-      document.getElementById('featuredCover').alt = destacada.titulo;
-      document.getElementById('featuredGenreTag').textContent = capitalizar(destacada.genero);
-      document.getElementById('featuredSeasonTag').textContent = destacada.temporada || 'Temporada 1';
-      document.getElementById('featuredTitle').textContent = destacada.titulo;
-      document.getElementById('featuredDescription').textContent = destacada.descripcion;
-      document.getElementById('featuredViews').textContent = getStoredViews(destacada);
-      document.getElementById('featuredFree').textContent = `${destacada.gratis || 3} capítulos`;
-      document.getElementById('featuredReadLink').href = destacada.ruta;
-      document.getElementById('featuredStars').innerHTML = renderStarsHTML(destacada.rating);
-      document.getElementById('featuredRatingLabel').textContent = `${destacada.rating}.0 / 5`;
-      document.getElementById('featuredReadLink').onclick = () => { saveInitialProgress(destacada); increaseViews(destacada); };
-      document.getElementById('featuredContinueBtn').onclick = () => { saveInitialProgress(destacada); window.location.href = getContinuePath(destacada); };
-    }
-
-    function renderGenres(){
-      const genres = [...new Set(novelas.map(n => n.genero))];
-      genreGrid.innerHTML = genres.map(genre => {
-        const total = novelas.filter(n => n.genero === genre).length;
-        return `<button class="genre-card" type="button" data-genre="${genre}"><span>${capitalizar(genre)}</span><small>${total} historia${total!==1?'s':''}</small></button>`;
-      }).join('');
-      document.querySelectorAll('.genre-card').forEach(btn => btn.addEventListener('click', ()=>{
-        storySearch.value = btn.dataset.genre;
-        filtrarHistorias();
-        document.getElementById('catalogo').scrollIntoView({behavior:'smooth'});
-      }));
-    }
-
-    function renderStories(items){
-      if (!items.length){
-        storyGrid.innerHTML = '';
-        emptyState.classList.remove('hidden');
-        return;
+    function starsHTML(rating) {
+      const value = Math.max(0, Math.min(5, Number(rating || 0)));
+      let html = "";
+      for (let i = 1; i <= 5; i++) {
+        html += `<span class="star ${i <= value ? "active" : ""}">★</span>`;
       }
+      return html;
+    }
 
-      emptyState.classList.add('hidden');
+    function getPrimaryGenre(novel) {
+      return Array.isArray(novel.tags) && novel.tags.length ? novel.tags[0] : "Historia";
+    }
 
-      storyGrid.innerHTML = items.map(novela => {
+    function getSeasonLabel(novel) {
+      return novel.defaultSeasonLabel || "Temporada";
+    }
+
+    function getNovelLink(novel) {
+      return `novelas/index.html?id=${encodeURIComponent(novel.id)}`;
+    }
+
+    function getAllNovels() {
+      const source = window.NEBULA_NOVELS || {};
+      return Object.values(source).map((novel) => ({
+        ...novel,
+        cover: normalizeCover(novel.cover),
+        chapters: Array.isArray(novel.chapters) ? novel.chapters : [],
+        tags: Array.isArray(novel.tags) ? novel.tags : []
+      }));
+    }
+
+    function renderFeatured() {
+      if (!novelas.length) return;
+
+      const preferred = novelas.find(novel => novel.id === "codigo-nebula-t1") || novelas[0];
+
+      document.getElementById("featuredCover").src = preferred.cover;
+      document.getElementById("featuredCover").alt = preferred.title || "Novela destacada";
+      document.getElementById("featuredGenreTag").textContent = getPrimaryGenre(preferred);
+      document.getElementById("featuredSeasonTag").textContent = getSeasonLabel(preferred);
+      document.getElementById("featuredTitle").textContent = preferred.sagaTitle || preferred.title;
+      document.getElementById("featuredDescription").textContent = preferred.description || "";
+      document.getElementById("featuredStars").innerHTML = starsHTML(preferred.rating);
+      document.getElementById("featuredRatingLabel").textContent = `${Number(preferred.rating || 0)} / 5`;
+      document.getElementById("featuredViews").textContent = `${formatViews(preferred.visitas || 0)} vistas`;
+      document.getElementById("featuredChapters").textContent = `${preferred.chapters.length} disponibles`;
+      document.getElementById("featuredReadLink").href = getNovelLink(preferred);
+    }
+
+    function renderGenres() {
+      const map = new Map();
+
+      novelas.forEach(novel => {
+        (novel.tags || []).forEach(tag => {
+          const key = String(tag).trim();
+          if (!key) return;
+          map.set(key, (map.get(key) || 0) + 1);
+        });
+      });
+
+      const genres = Array.from(map.entries())
+        .sort((a, b) => a[0].localeCompare(b[0], "es"));
+
+      genreGrid.innerHTML = genres.map(([genre, count]) => `
+        <button class="genre-card" type="button" data-genre="${safeText(genre)}">
+          <span>${safeText(genre)}</span>
+          <small>${count} historia${count === 1 ? "" : "s"}</small>
+        </button>
+      `).join("");
+
+      genreGrid.querySelectorAll("[data-genre]").forEach(button => {
+        button.addEventListener("click", () => {
+          storySearch.value = button.dataset.genre || "";
+          filterStories();
+          document.getElementById("catalogo").scrollIntoView({ behavior: "smooth" });
+        });
+      });
+    }
+
+    function renderStories(list) {
+      emptyState.classList.toggle("hidden", list.length > 0);
+
+      storyGrid.innerHTML = list.map(novel => {
+        const link = getNovelLink(novel);
+        const genre = getPrimaryGenre(novel);
+        const chaptersCount = novel.chapters.length;
+
         return `
           <article class="story-card">
             <div class="story-cover-shell">
-              <img class="story-cover" src="${novela.portada}" alt="${novela.titulo}" />
-              <div class="story-cover-shadow"></div>
-              <div class="story-badges"><span>${capitalizar(novela.genero)}</span><span>${novela.temporada || 'Temporada 1'}</span></div>
-            </div>
-            <div class="story-body">
-              <div class="story-topline"><h3>${novela.titulo}</h3><small>${getStoredViews(novela)} visitas</small></div>
-              <div class="story-rating-line"><div class="stars">${renderStarsHTML(novela.rating)}</div><span class="rating-label">${novela.rating}.0 / 5</span></div>
-              <p>${novela.descripcion}</p>
-              <div class="story-mini-meta">
-                <div><small>Acceso</small><strong>Gratis</strong></div>
-                <div><small>Capítulos</small><strong>${novela.capitulos || 0} disponibles</strong></div>
-                <div><small>Modelo</small><strong>Con anuncios</strong></div>
+              <img class="story-cover" src="${safeText(novel.cover)}" alt="${safeText(novel.title)}" loading="lazy" />
+              <div class="story-badges">
+                <span>${safeText(genre)}</span>
+                <span>${safeText(getSeasonLabel(novel))}</span>
               </div>
+            </div>
+
+            <div class="story-body">
+              <div class="story-topline">
+                <h3>${safeText(novel.sagaTitle || novel.title)}</h3>
+                <small>${chaptersCount} capítulos</small>
+              </div>
+
+              <div class="story-rating-line">
+                <div class="stars">${starsHTML(novel.rating)}</div>
+                <span class="rating-label">${Number(novel.rating || 0)} / 5</span>
+              </div>
+
+              <p>${safeText(novel.description || "")}</p>
+
+              <div class="story-mini-meta">
+                <div>
+                  <small>Lectura</small>
+                  <strong>Gratis</strong>
+                </div>
+                <div>
+                  <small>Capítulos</small>
+                  <strong>${chaptersCount} disponibles</strong>
+                </div>
+                <div>
+                  <small>Modelo</small>
+                  <strong>Con anuncios</strong>
+                </div>
+              </div>
+
               <div class="story-card-actions">
-                <a class="btn btn-primary" href="${novela.ruta}" data-read-id="${novela.id}">Comenzar</a>
-                <button class="btn btn-secondary" type="button" data-continue-id="${novela.id}">Seguir</button>
-                <a class="btn btn-gold btn-progreso-short" href="${novela.ruta}" data-read-id="${novela.id}"><span>Leer gratis</span></a>
+                <a class="btn btn-primary" href="${safeText(link)}">Comenzar</a>
+                <a class="btn btn-secondary" href="${safeText(link)}">Ver capítulos</a>
               </div>
             </div>
           </article>
         `;
-      }).join('');
-
-      document.querySelectorAll('[data-read-id]').forEach(link => {
-        const novela = novelas.find(n => n.id === link.dataset.readId);
-        if (!novela) return;
-        link.addEventListener('click', ()=>{
-          saveInitialProgress(novela);
-          increaseViews(novela);
-        });
-      });
-
-      document.querySelectorAll('[data-continue-id]').forEach(btn => {
-        const novela = novelas.find(n => n.id === btn.dataset.continueId);
-        if (!novela) return;
-        btn.addEventListener('click', ()=>{
-          saveInitialProgress(novela);
-          window.location.href = getContinuePath(novela);
-        });
-      });
+      }).join("");
     }
 
-    function filtrarHistorias(){
-      const q = storySearch.value.trim().toLowerCase();
-      filtradas = novelas.filter(n =>
-        [n.titulo, n.genero, n.descripcion, n.temporada || '', String(n.capitulos||''), String(n.gratis||''), String(n.rating||'')]
-          .join(' ')
-          .toLowerCase()
-          .includes(q)
-      );
-      renderStories(filtradas);
-    }
+    function filterStories() {
+      const query = (storySearch.value || "").trim().toLowerCase();
 
-    function getAllProgressEntries(){
-      const entries = [];
-      for(let i=0;i<localStorage.length;i++){
-        const key = localStorage.key(i);
-        if(key && key.startsWith('nebula-progress-')) entries.push({key,value:localStorage.getItem(key)});
-      }
-      return entries;
-    }
-
-    function updateUserReadingStats(){
-      const progressEntries = getAllProgressEntries();
-      const viewedStories = progressEntries.length;
-      const readChapters = progressEntries.reduce((acc, item)=>{
-        const match = String(item.value||'').match(/capitulo(\d+)\.html/i);
-        return match ? acc + Number(match[1]||0) : acc;
-      },0);
-
-      let lastProgressText = 'Aún sin progreso';
-      if(progressEntries.length){
-        const last = progressEntries[progressEntries.length-1];
-        const matchedNovel = novelas.find(n => last.key === getProgressKey(n.id));
-        if(matchedNovel) lastProgressText = matchedNovel.titulo;
-      }
-
-      document.getElementById('userViewedStories').textContent = `${viewedStories} registradas`;
-      document.getElementById('userProgressPill').textContent = `Capítulos leídos: ${readChapters}`;
-      document.getElementById('userLastProgress').textContent = lastProgressText;
-      return readChapters;
-    }
-
-    function cargarNovelas(){
-      const desdeDataJs = buildCatalogFromNebulaData();
-      novelas = prepararNovelas(desdeDataJs);
-      filtradas = [...novelas];
-      renderFeatured();
-      renderGenres();
-      renderStories(filtradas);
-      updateUserReadingStats();
-    }
-
-    window.nebulaRefreshCatalogProgreso = function(){
-      renderStories(filtradas);
-    };
-
-    storySearch.addEventListener('input', filtrarHistorias);
-    cargarNovelas();
-  </script>
-
-  <script>
-    const canvas = document.getElementById('stars-canvas');
-    const ctx = canvas.getContext('2d');
-    let stars = [];
-    function resizeStarsCanvas(){ const dpr = window.devicePixelRatio || 1; canvas.width = window.innerWidth * dpr; canvas.height = window.innerHeight * dpr; canvas.style.width = window.innerWidth + 'px'; canvas.style.height = window.innerHeight + 'px'; ctx.setTransform(dpr,0,0,dpr,0,0); createStars(); }
-    function createStars(){ stars=[]; const area = window.innerWidth * window.innerHeight; const amount = Math.max(70, Math.floor(area/14000)); for(let i=0;i<amount;i++){ stars.push({ x:Math.random()*window.innerWidth, y:Math.random()*window.innerHeight, r:Math.random()*1.5+.4, speed:Math.random()*.25+.05, alpha:Math.random()*.7+.15 }); } }
-    function animateStars(){ ctx.clearRect(0,0,window.innerWidth,window.innerHeight); for(const s of stars){ ctx.beginPath(); ctx.fillStyle = `rgba(255,255,255,${s.alpha})`; ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fill(); s.y += s.speed; if(s.y > window.innerHeight + 2){ s.y = -2; s.x = Math.random()*window.innerWidth; } } requestAnimationFrame(animateStars); }
-    window.addEventListener('resize', resizeStarsCanvas); resizeStarsCanvas(); animateStars();
-  </script>
-
-  <script type="module">
-    import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js';
-    import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js';
-    import { getFirestore, doc, getDoc, setDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js';
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyDccMk1KLoCwXWG2g4r1sOI6qEt_7d5gTw",
-      authDomain: "dyh-nebula.firebaseapp.com",
-      projectId: "dyh-nebula",
-      storageBucket: "dyh-nebula.firebasestorage.app",
-      messagingSenderId: "230506596749",
-      appId: "1:230506596749:web:d7ffcf38de039c9629d5c4"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
-    const API_BASE_URL = "https://api-mvtstimkcq-uc.a.run.app";
-
-    async function postJson(url, payload){
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-
-      const rawText = await response.text();
-
-      let data;
-      try {
-        data = JSON.parse(rawText);
-      } catch (error) {
-        console.error('Respuesta no válida del servidor:', rawText);
-        throw new Error('El servidor no devolvió una respuesta válida.');
-      }
-
-      if (!response.ok) {
-        throw new Error(data.error || data.message || 'Error del servidor.');
-      }
-
-      return data;
-    }
-
-    window.buyProgreso = async function(){
-      alert('Nébula será gratuita en esta versión. Los pagos están desactivados.');
-      return false;
-    };
-
-    window.nebulaUseProgreso = async function(){
-      alert('Nébula será gratuita en esta versión. Los progreso están desactivados.');
-      return false;
-    };
-
-    const accountMenu = document.getElementById('accountMenu');
-    const accountTrigger = document.getElementById('accountTrigger');
-    const accountDropdown = document.getElementById('accountDropdown');
-    const accountAvatar = document.getElementById('accountAvatar');
-    const accountAvatarLarge = document.getElementById('accountAvatarLarge');
-    const accountName = document.getElementById('accountName');
-    const accountUserName = document.getElementById('accountUserName');
-    const accountUserEmail = document.getElementById('accountUserEmail');
-    const accountPlan = document.getElementById('accountPlan');
-    const accountRead = document.getElementById('accountRead');
-    const accountLogoutBtn = document.getElementById('accountLogoutBtn');
-
-    const headerLoginLink = document.getElementById('headerLoginLink');
-    const userGreeting = document.getElementById('userGreeting');
-    const userEmailText = document.getElementById('userEmailText');
-    const userPlanPill = document.getElementById('userPlanPill');
-    const userStatePill = document.getElementById('userStatePill');
-    const userProgressPill = document.getElementById('userProgressPill');
-    const userProgresoPill = document.getElementById('userProgresoPill');
-    const userProgresoText = document.getElementById('userProgresoText');
-    const userAvatar = document.getElementById('userAvatar');
-    const userGuestBox = document.getElementById('userGuestBox');
-    const userLoggedBox = document.getElementById('userLoggedBox');
-    const logoutBtn = document.getElementById('logoutBtn');
-
-    function closeAccountMenu(){
-      accountMenu?.classList.remove('open');
-      accountDropdown?.classList.add('hidden-panel');
-    }
-
-    function openAccountMenu(){
-      accountMenu?.classList.add('open');
-      accountDropdown?.classList.remove('hidden-panel');
-    }
-
-    accountTrigger?.addEventListener('click', (e) => {
-      e.stopPropagation();
-      if (accountDropdown?.classList.contains('hidden-panel')) openAccountMenu();
-      else closeAccountMenu();
-    });
-
-    document.addEventListener('click', (e) => {
-      if (accountMenu && !accountMenu.contains(e.target)) closeAccountMenu();
-    });
-
-    function getMembershipLabelFromData(data){
-      const raw = String(data?.subscription || data?.plan || 'free').toLowerCase();
-      return raw === 'gratis' ? 'Gratis' : 'Free';
-    }
-
-    function updateLoggedOutUI(){
-      headerLoginLink?.classList.remove('hidden-panel');
-      accountMenu?.classList.add('hidden-panel');
-      closeAccountMenu();
-
-      accountAvatar.textContent = 'N';
-      accountAvatarLarge.textContent = 'N';
-      accountName.textContent = 'Lector';
-      accountUserName.textContent = 'Lector Nébula';
-      accountUserEmail.textContent = 'correo@ejemplo.com';
-      accountPlan.textContent = 'Free';
-      accountRead.textContent = '0 capítulos';
-
-      userGreeting.textContent = 'Tu cuenta Nébula';
-      userEmailText.textContent = 'Inicia sesión de forma opcional para sincronizar tu progreso de lectura.';
-      userPlanPill.textContent = 'Acceso: Gratis';
-      userStatePill.textContent = 'Estado: Invitado';
-      userProgressPill.textContent = 'Capítulos leídos: 0';
-      userProgresoPill.textContent = 'Modo: Gratis';
-      userProgresoText.textContent = 'Gratis con anuncios';
-      userAvatar.textContent = 'N';
-      const badge = document.getElementById('userBadge');
-      if (badge) badge.style.display = 'none';
-
-      window.nebulaCurrentUser = null;
-      window.nebulaCurrentUserData = {
-        progreso: 0,
-        unlockedNovels: [],
-        subscription: 'free',
-        plan: 'free'
-      };
-
-      userGuestBox?.classList.remove('hidden-panel');
-      userLoggedBox?.classList.add('hidden-panel');
-
-      if (typeof window.nebulaRefreshCatalogProgreso === 'function') {
-        window.nebulaRefreshCatalogProgreso();
-      }
-    }
-
-    function updateLoggedInUI(user, data){
-      const name =
-        user.displayName ||
-        data?.name ||
-        (user.email ? user.email.split('@')[0] : 'Usuario');
-
-      const membership = getMembershipLabelFromData(data);
-      const avatar = name.charAt(0).toUpperCase();
-      const progreso = Number(data?.progreso || 0);
-      const readCount = Array.isArray(data?.readChapters) ? data.readChapters.length : 0;
-
-      headerLoginLink?.classList.add('hidden-panel');
-      accountMenu?.classList.remove('hidden-panel');
-
-      accountAvatar.textContent = avatar;
-      accountAvatarLarge.textContent = avatar;
-      accountName.textContent = name;
-      accountUserName.textContent = name;
-      accountUserEmail.textContent = user.email;
-      accountPlan.textContent = membership;
-      accountRead.textContent = `${readCount} capítulo${readCount === 1 ? '' : 's'}`;
-
-      userGreeting.textContent = name;
-      userEmailText.textContent = user.email;
-      userPlanPill.textContent = `Acceso: Gratis`;
-      userStatePill.textContent = 'Estado: Activo';
-      userProgresoPill.textContent = `Modo: Gratis`;
-      userProgresoText.textContent = 'Gratis con anuncios';
-      userAvatar.textContent = avatar;
-
-      const badge = document.getElementById('userBadge');
-      if (badge) {
-        badge.style.display = membership === 'Gratis' ? 'block' : 'none';
-      }
-
-      window.nebulaCurrentUser = user;
-      window.nebulaCurrentUserData = {
-        progreso,
-        unlockedNovels: Array.isArray(data?.unlockedNovels) ? data.unlockedNovels : [],
-        subscription: data?.subscription || 'free',
-        plan: data?.plan || 'free'
-      };
-
-      userGuestBox?.classList.add('hidden-panel');
-      userLoggedBox?.classList.remove('hidden-panel');
-
-      if (typeof window.nebulaRefreshCatalogProgreso === 'function') {
-        window.nebulaRefreshCatalogProgreso();
-      }
-    }
-
-    async function handleLogout(){
-      await signOut(auth);
-      localStorage.removeItem('nebula-user-profile');
-      updateLoggedOutUI();
-      window.location.href = './index.html';
-    }
-
-    accountLogoutBtn?.addEventListener('click', handleLogout);
-    logoutBtn?.addEventListener('click', handleLogout);
-
-    onAuthStateChanged(auth, async (user) => {
-      if (!user) {
-        updateLoggedOutUI();
+      if (!query) {
+        filtradas = [...novelas];
+        renderStories(filtradas);
         return;
       }
 
-      try {
-        const userRef = doc(db, 'users', user.uid);
-        const snap = await getDoc(userRef);
+      filtradas = novelas.filter(novel => {
+        const haystack = [
+          novel.id,
+          novel.title,
+          novel.sagaTitle,
+          novel.description,
+          ...(novel.tags || [])
+        ].join(" ").toLowerCase();
 
-        let data = {};
+        return haystack.includes(query);
+      });
 
-        if (snap.exists()) {
-          data = snap.data();
-        } else {
-          await setDoc(userRef, {
-            uid: user.uid,
-            email: user.email || '',
-            name: user.displayName || 'Usuario Nébula',
-            avatar: '🌌',
-            plan: 'free',
-            subscription: 'free',
-            progreso: 0,
-            unlockedNovels: [],
-            purchasedNovels: [],
-            readChapters: [],
-            createdAt: serverTimestamp(),
-            updatedAt: serverTimestamp()
-          });
+      renderStories(filtradas);
+    }
 
-          const newSnap = await getDoc(userRef);
-          data = newSnap.exists() ? newSnap.data() : {};
-        }
+    function initNebula() {
+      novelas = getAllNovels();
+      filtradas = [...novelas];
 
-        updateLoggedInUI(user, data);
-      } catch (e) {
-        console.error("ERROR FIRESTORE:", e);
-        updateLoggedInUI(user, {
-          name: user.displayName || 'Usuario',
-          email: user.email || '',
-          plan: 'free',
-          subscription: 'free',
-          progreso: 0,
-          unlockedNovels: [],
-          readChapters: []
+      renderFeatured();
+      renderGenres();
+      renderStories(filtradas);
+
+      storySearch.addEventListener("input", filterStories);
+    }
+
+    window.addEventListener("load", initNebula);
+  </script>
+
+  <script>
+    const canvas = document.getElementById("stars-canvas");
+    const ctx = canvas.getContext("2d");
+    let stars = [];
+
+    function resizeStarsCanvas() {
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
+      canvas.style.width = window.innerWidth + "px";
+      canvas.style.height = window.innerHeight + "px";
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      createStars();
+    }
+
+    function createStars() {
+      stars = [];
+      const area = window.innerWidth * window.innerHeight;
+      const amount = Math.max(70, Math.floor(area / 14000));
+
+      for (let i = 0; i < amount; i++) {
+        stars.push({
+          x: Math.random() * window.innerWidth,
+          y: Math.random() * window.innerHeight,
+          r: Math.random() * 1.5 + 0.4,
+          speed: Math.random() * 0.25 + 0.05,
+          alpha: Math.random() * 0.7 + 0.15
         });
       }
-    });
+    }
+
+    function animateStars() {
+      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+      for (const s of stars) {
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(255,255,255,${s.alpha})`;
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fill();
+
+        s.y += s.speed;
+
+        if (s.y > window.innerHeight + 2) {
+          s.y = -2;
+          s.x = Math.random() * window.innerWidth;
+        }
+      }
+
+      requestAnimationFrame(animateStars);
+    }
+
+    window.addEventListener("resize", resizeStarsCanvas);
+    resizeStarsCanvas();
+    animateStars();
   </script>
 </body>
 </html>
