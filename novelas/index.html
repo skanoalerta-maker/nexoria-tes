@@ -763,7 +763,7 @@
       color:#b5ffd1;
     }
 
-    .status-lectura libre{
+    .status-premium{
       background:rgba(69,126,255,.14);
       color:#d8e7ff;
     }
@@ -836,29 +836,29 @@
       display:none !important;
     }
 
-    .lectura libre-box{
+    .premium-box{
       display:none !important;
     }
 
-    .lectura libre-box h3{
+    .premium-box h3{
       font-size:1.35rem;
       margin-bottom:8px;
     }
 
-    .lectura libre-box p{
+    .premium-box p{
       color:var(--muted);
       line-height:1.7;
       max-width:720px;
     }
 
-    .lectura libre-details{
+    .premium-details{
       display:flex;
       flex-wrap:wrap;
       gap:10px;
       margin-top:14px;
     }
 
-    .lectura libre-pill{
+    .premium-pill{
       display:inline-flex;
       align-items:center;
       min-height:38px;
@@ -871,7 +871,7 @@
       font-size:.9rem;
     }
 
-    .lectura libre-note{
+    .premium-note{
       margin-top:16px;
       padding:18px;
       border-radius:22px;
@@ -879,13 +879,13 @@
       border:1px solid rgba(255,255,255,.07);
     }
 
-    .lectura libre-note strong{
+    .premium-note strong{
       display:block;
       margin-bottom:6px;
       font-size:1rem;
     }
 
-    .lectura libre-note span{
+    .premium-note span{
       display:block;
       color:var(--muted);
       line-height:1.7;
@@ -980,7 +980,7 @@
 
       .hero-actions .btn,
       .chapter-actions .chapter-link,
-      .lectura libre-box .btn{
+      .premium-box .btn{
         width:100%;
       }
 
@@ -989,8 +989,9 @@
         align-items:flex-start;
       }
 
-      .lectura libre-box{
-      display:none !important;
+      .premium-box{
+        display:none !important;
+      }
     }
   </style>
 </head>
@@ -1006,35 +1007,24 @@
 
   <script src="./data.js"></script>
 
-  <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
-  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
-  import {
-    getFirestore,
-    doc,
-    getDoc,
-    runTransaction,
-    serverTimestamp
-  } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
-    import { updateViews, formatViews } from "../js/views-manager.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyDccMk1KLoCwXWG2g4r1sOI6qEt_7d5gTw",
-    authDomain: "dyh-nebula.firebaseapp.com",
-    projectId: "dyh-nebula",
-    storageBucket: "dyh-nebula.firebasestorage.app",
-    messagingSenderId: "230506596749",
-    appId: "1:230506596749:web:d7ffcf38de039c9629d5c4",
-    measurementId: "G-KD5ZRFR8C9"
-  };
-
-  const firebaseApp = initializeApp(firebaseConfig);
-  const auth = getAuth(firebaseApp);
-  const db = getFirestore(firebaseApp);
-
-  const params = new URLSearchParams(window.location.search);
+  <script>const params = new URLSearchParams(window.location.search);
   const novelId = params.get("id");
   const app = document.getElementById("app");
+  function updateViews(novelId, initialValue) {
+    const key = "nebula-views-" + novelId;
+    const current = Number(localStorage.getItem(key) || initialValue || 0);
+    const next = current + 1;
+    localStorage.setItem(key, String(next));
+    return next;
+  }
+
+  function formatViews(value) {
+    const number = Number(value || 0);
+    if (number >= 1000000) return (number / 1000000).toFixed(1).replace(".0", "") + "M";
+    if (number >= 1000) return (number / 1000).toFixed(1).replace(".0", "") + "K";
+    return String(number);
+  }
+
 
   function escapeHtml(text) {
     return String(text ?? "")
@@ -1083,16 +1073,12 @@
   async function getUserAccessState(user) {
     return {
       isLogged: Boolean(user),
-      isLectura libre: false,
+      isPremium: false,
       plan: "free",
       subscription: "free",
       unlockedNovels: []
     };
   }
-
-    window.location.href = data.init_point;
-  }
-
   function paintStars(stars, value) {
     stars.forEach((star) => {
       const starValue = Number(star.dataset.value);
@@ -1101,36 +1087,14 @@
   }
 
   async function loadRatingData(novelId, user) {
-    const ratingRef = doc(db, "ratings", novelId);
-    const ratingSnap = await getDoc(ratingRef);
-
-    let totalVotes = 0;
-    let totalScore = 0;
-    let average = 0;
-
-    if (ratingSnap.exists()) {
-      const data = ratingSnap.data();
-      totalVotes = Number(data.totalVotes || 0);
-      totalScore = Number(data.totalScore || 0);
-      average = Number(data.average || 0);
-    }
-
-    let userVote = 0;
-
-    if (user) {
-      const voteRef = doc(db, "ratings", novelId, "votes", user.uid);
-      const voteSnap = await getDoc(voteRef);
-
-      if (voteSnap.exists()) {
-        userVote = Number(voteSnap.data().value || 0);
-      }
-    }
+    const key = "nebula-rating-" + novelId;
+    const saved = Number(localStorage.getItem(key) || 0);
 
     return {
-      totalVotes,
-      totalScore,
-      average,
-      userVote
+      totalVotes: saved > 0 ? 1 : 0,
+      totalScore: saved,
+      average: saved,
+      userVote: saved
     };
   }
 
@@ -1159,66 +1123,7 @@
   }
 
   async function submitVote(novelId, user, value) {
-    if (!user) {
-      throw new Error("El voto requiere iniciar sesión, pero la lectura está liberada.");
-    }
-
-    const ratingRef = doc(db, "ratings", novelId);
-    const voteRef = doc(db, "ratings", novelId, "votes", user.uid);
-
-    await runTransaction(db, async (transaction) => {
-      const ratingSnap = await transaction.get(ratingRef);
-      const voteSnap = await transaction.get(voteRef);
-
-      let totalVotes = 0;
-      let totalScore = 0;
-
-      if (ratingSnap.exists()) {
-        const data = ratingSnap.data();
-        totalVotes = Number(data.totalVotes || 0);
-        totalScore = Number(data.totalScore || 0);
-      }
-
-      let previousVote = 0;
-      let createdAtValue = serverTimestamp();
-
-      if (voteSnap.exists()) {
-        previousVote = Number(voteSnap.data().value || 0);
-        createdAtValue = voteSnap.data().createdAt || serverTimestamp();
-      }
-
-      if (previousVote > 0) {
-        totalScore = totalScore - previousVote + value;
-      } else {
-        totalVotes += 1;
-        totalScore += value;
-      }
-
-      const average = totalVotes > 0 ? totalScore / totalVotes : 0;
-
-      transaction.set(
-        ratingRef,
-        {
-          novelId,
-          totalVotes,
-          totalScore,
-          average,
-          updatedAt: serverTimestamp()
-        },
-        { merge: true }
-      );
-
-      transaction.set(
-        voteRef,
-        {
-          uid: user.uid,
-          value,
-          createdAt: createdAtValue,
-          updatedAt: serverTimestamp()
-        },
-        { merge: true }
-      );
-    });
+    localStorage.setItem("nebula-rating-" + novelId, String(value));
   }
 
   async function renderNovel(accessState, currentUser) {
@@ -1490,8 +1395,7 @@
         const value = Number(star.dataset.value);
 
         if (!currentUser) {
-          ratingStatus.textContent = "El voto requiere iniciar sesión, pero la lectura está liberada.";
-          return;
+          // La lectura está liberada y la valoración se guarda localmente.
         }
 
         try {
@@ -1509,9 +1413,9 @@
     document.title = `${novel.title} | Nébula`;
   }
 
-  onAuthStateChanged(auth, async (user) => {
-    const accessState = await getUserAccessState(user);
-    await renderNovel(accessState, user);
+  document.addEventListener("DOMContentLoaded", async () => {
+    const accessState = await getUserAccessState(null);
+    await renderNovel(accessState, null);
   });
 
   </script>
