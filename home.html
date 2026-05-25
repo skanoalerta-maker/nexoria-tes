@@ -544,14 +544,14 @@
     box-shadow:0 22px 40px rgba(255,191,31,.28), 0 0 0 1px rgba(255,255,255,.18) inset;
   }
 
-  .btn-coin-short{
+  .btn-progreso-short{
     display:inline-flex;
     align-items:center;
     justify-content:center;
     gap:8px;
   }
 
-  .btn-coin-short .coin-icon{
+  .btn-progreso-short .progreso-icon{
     font-size:1rem;
     line-height:1;
     flex-shrink:0;
@@ -1980,7 +1980,7 @@
   <a href="#destacada">Destacada</a>
   <a href="#catalogo">Catálogo</a>
   <a href="#generos">Géneros</a>
-  <a href="#membresia">Membresía</a>
+  <a href="#apoyo">Apoya Nébula</a>
   <a href="#usuario-nebula">Mi espacio</a>
 </nav>
 
@@ -2034,25 +2034,25 @@
           <div class="weekly-launch-banner">
             <div class="weekly-launch-top">
               <div class="weekly-chip"><span class="weekly-pulse"></span>Novedades semanales</div>
-              <div class="weekly-chip">Membresía activa = contenido constante</div>
+              <div class="weekly-chip">Gratis + contenido constante</div>
             </div>
             <h3>Todos los jueves se subirán 2 nuevas novelas</h3>
-            <p>Suspenso, romance, terror, historia y más. En Nébula siempre habrá algo nuevo que leer para que tu membresía siga valiendo la pena semana tras semana.</p>
+            <p>Suspenso, romance, terror, historia y más. En Nébula siempre habrá algo nuevo que leer. La plataforma será gratuita y se sostendrá con anuncios dentro de la app.</p>
             <div class="weekly-launch-points">
               <div><small>Ritmo fijo</small><strong>Cada jueves tendrás contenido nuevo esperándote</strong></div>
               <div><small>Más valor</small><strong>2 nuevas novelas para mantener viva la plataforma</strong></div>
-              <div><small>Acceso total</small><strong>Con tu membresía desbloqueas toda la experiencia</strong></div>
+              <div><small>Acceso abierto</small><strong>Lee historias sin acceso obligatoria</strong></div>
             </div>
           </div>
 
           <div class="hero-actions">
             <a class="btn btn-primary" href="#catalogo">Explorar historias</a>
-            <a class="btn btn-secondary" href="#membresia">Ver membresía</a>
+            <a class="btn btn-secondary" href="#apoyo">Cómo se sostiene</a>
           </div>
 
           <div class="hero-stats">
-            <div class="stat-card"><small>Lectura gratis</small><strong>Primeros 3 capítulos</strong></div>
-            <div class="stat-card"><small>Acceso premium</small><strong>$1.500 CLP</strong></div>
+            <div class="stat-card"><small>Lectura</small><strong>Acceso gratuito</strong></div>
+            <div class="stat-card"><small>Modelo</small><strong>Videos y anuncios</strong></div>
             <div class="stat-card"><small>Compatible</small><strong>PC · Móvil · Tablet</strong></div>
           </div>
         </div>
@@ -2115,7 +2115,7 @@
               Tu cuenta Nébula
             </h3>
             <p id="userEmailText" style="color:#9fb5db; font-size:.95rem;">
-              Inicia sesión para sincronizar tu progreso, coins y contenido desbloqueado.
+              Inicia sesión de forma opcional para sincronizar tu progreso de lectura.
             </p>
             <div id="userBadge" style="margin-top:10px; display:none;">
               <span style="
@@ -2129,17 +2129,17 @@
                 font-size:.8rem;
                 font-weight:800;
               ">
-                ⭐ Usuario Premium
+                ⭐ Usuario Gratis
               </span>
             </div>
           </div>
         </div>
 
         <div class="user-status-row">
-          <span class="user-pill" id="userPlanPill">Suscripción: Free</span>
+          <span class="user-pill" id="userPlanPill">Acceso: Gratis</span>
           <span class="user-pill" id="userStatePill">Estado: Invitado</span>
           <span class="user-pill" id="userProgressPill">Capítulos leídos: 0</span>
-          <span class="user-pill" id="userCoinsPill">Coins: 0</span>
+          <span class="user-pill" id="userProgresoPill">Modo: Gratis</span>
         </div>
 
         <div class="user-stats">
@@ -2154,8 +2154,8 @@
           </div>
 
           <div class="user-stat">
-            <small>Coins disponibles</small>
-            <strong id="userCoinsText">0 Coins</strong>
+            <small>Modelo</small>
+            <strong id="userProgresoText">Gratis con anuncios</strong>
           </div>
         </div>
       </div>
@@ -2163,13 +2163,13 @@
           <div class="user-side">
             <div class="user-login-box" id="userGuestBox">
               <h4>Accede a tu cuenta</h4>
-              <p>Crea o inicia tu sesión para que Nébula recuerde en qué capítulo ibas, qué contenido desbloqueaste y cuál es tu estado de membresía.</p>
+              <p>Crea o inicia tu sesión solo si quieres que Nébula recuerde en qué capítulo ibas. La lectura no depende de una acceso.</p>
               <a href="login.html" class="btn btn-primary">Iniciar sesión / Crear cuenta</a>
             </div>
 
             <div class="user-cta-card hidden-panel" id="userLoggedBox">
               <h4>Tu cuenta está activa</h4>
-              <p>Ya puedes seguir leyendo desde donde quedaste, revisar tu plan actual y mantener tu experiencia sincronizada.</p>
+              <p>Ya puedes seguir leyendo desde donde quedaste, mantener tu experiencia sincronizada.</p>
               <div class="made-by-actions">
                 <a href="novelas/index.html?id=codigo-nebula-t1" class="btn btn-secondary">Seguir leyendo</a>
                 <button type="button" class="btn btn-primary" id="logoutBtn">Cerrar sesión</button>
@@ -2180,109 +2180,69 @@
       </div>
     </section>
 
-<section class="section" id="membresia">
+<section class="section" id="apoyo">
   <div class="container">
     <div class="section-head">
       <div>
-        <p class="section-kicker">Acceso premium</p>
-        <h2>Membresía Nébula</h2>
+        <p class="section-kicker">Modelo gratuito</p>
+        <h2>Nébula será gratis y se sostendrá con anuncios</h2>
       </div>
       <p class="section-note">
-        Empieza gratis, engánchate con la historia y desbloquea la experiencia completa cuando quieras seguir.
+        La primera versión de Nébula no tendrá pagos ni acceso obligatoria. El objetivo es crecer, atraer lectores y monetizar con videos y anuncios dentro de la app.
       </p>
     </div>
 
     <section class="pricing-section">
-  <div class="pricing-grid">
+      <div class="pricing-grid">
+        <article class="pricing-card pricing-card--individual">
+          <div class="pricing-topline">
+            <span class="pricing-chip">Acceso gratuito</span>
+            <span class="mini-pill">Sin pago inicial</span>
+          </div>
 
-<article class="pricing-card pricing-card--individual">
-  <div class="pricing-topline">
-    <span class="pricing-chip">1 Coin = 1 novela</span>
-    <span class="mini-pill">Pago único</span>
-  </div>
+          <h3>Lee historias sin comprar acceso</h3>
 
-  <h3>Compra 1 Coin y desbloquea la novela que quieras</h3>
+          <p class="pricing-intro">
+            Explora novelas, temporadas y capítulos desde tu celular. La experiencia queda preparada para crecer con nuevas historias y contenido semanal.
+          </p>
 
-  <p class="pricing-intro">
-    Compra 1 Coin y úsalo para desbloquear una novela completa dentro de Nébula.
-    Tú decides en qué historia usarlo.
-  </p>
+          <div class="pricing-list">
+            <div>📖 Historias por capítulos</div>
+            <div>🌌 Catálogo con géneros variados</div>
+            <div>📱 Compatible con celular, tablet, notebook y PC</div>
+            <div>🚀 Ideal para crecer con tráfico desde TikTok, Reels y Shorts</div>
+          </div>
 
-  <div class="pricing-price-box">
-    <div class="pricing-value">
-      <span class="old-price">$1.500</span>
-      <strong>$990</strong>
-      <span class="currency">CLP</span>
-    </div>
-    <div class="offer-badge">🔥 Oferta limitada</div>
-  </div>
+          <div class="pricing-actions">
+            <a class="btn btn-primary pricing-btn" href="#catalogo">Explorar catálogo</a>
+          </div>
+        </article>
 
-  <div class="pricing-list">
-    <div>🪙 1 Coin desbloquea 1 novela completa</div>
-    <div>🔓 Tú eliges qué historia abrir</div>
-    <div>💾 El desbloqueo queda guardado en tu cuenta</div>
-    <div>📖 Primeros 3 capítulos gratis para engancharte</div>
-    <div>📱 Sigue leyendo en celular, tablet, notebook y PC</div>
-  </div>
+        <article class="pricing-card pricing-card featured pricing-card--gratis">
+          <div class="pricing-topline">
+            <span class="pricing-chip gratis-chip">Monetización futura</span>
+            <span class="mini-pill mini-pill--gold">App con videos</span>
+          </div>
 
-  <div class="payment-trust">
-    <span class="payment-badge">Mercado Pago</span>
-    <span class="payment-badge">Pago seguro</span>
-    <span class="payment-badge">Acceso inmediato</span>
-  </div>
+          <h3>Videos y anuncios dentro de la app</h3>
 
-  <div class="pricing-actions">
-    <button class="btn btn-secondary pricing-btn" type="button" onclick="buyCoin()">
-      Comprar 1 Coin por $990
-    </button>
-  </div>
-</article>
+          <p class="pricing-intro">
+            En la app Android se podrán incorporar anuncios y videos recompensados para apoyar la plataforma sin cobrarle al lector desde el inicio.
+          </p>
 
-<article class="pricing-card pricing-card featured pricing-card--premium">
-  <div class="pricing-topline">
-    <span class="pricing-chip premium-chip">Premium mensual</span>
-    <span class="mini-pill mini-pill--gold">Más popular</span>
-  </div>
+          <div class="pricing-list">
+            <div>🎬 Videos recompensados para contenido especial</div>
+            <div>📢 Banners o anuncios discretos dentro de la app</div>
+            <div>💡 Sin Mercado Pago en la primera versión</div>
+            <div>🔓 Sin bloqueo por progreso ni acceso obligatoria</div>
+          </div>
 
-  <h3>Pasa a premium</h3>
-
-  <p class="pricing-intro">
-    Accede a más historias, sigue leyendo sin límites y disfruta del mejor
-    valor para lectores frecuentes.
-  </p>
-
-  <div class="pricing-price-box pricing-price-box--premium">
-    <div class="pricing-value">
-      <span class="old-price">$6.990</span>
-      <strong>$4.990</strong>
-      <span class="currency">CLP</span>
-    </div>
-    <div class="offer-badge premium-offer">⭐ Mejor opción</div>
-  </div>
-
-  <div class="pricing-list">
-    <div>✨ Acceso premium a múltiples historias</div>
-    <div>📚 Sigue descubriendo nuevas novelas cada semana</div>
-    <div>💾 Progreso guardado en tu cuenta</div>
-    <div>⚡ Acceso rápido y experiencia más completa</div>
-    <div>🎯 Ideal si lees varias historias al mes</div>
-  </div>
-
-  <div class="payment-trust">
-    <span class="payment-badge">Mercado Pago</span>
-    <span class="payment-badge">Pago seguro</span>
-    <span class="payment-badge">Membresía activa</span>
-  </div>
-
-  <div class="pricing-actions">
-    <button class="btn btn-primary pricing-btn" type="button" onclick="window.nebulaStartPremiumPayment()">
-      Pasar a premium
-    </button>
-  </div>
-</article>
-
-  </div>
-</section>
+          <div class="pricing-actions">
+            <a class="btn btn-secondary pricing-btn" href="#catalogo">Comenzar a leer</a>
+          </div>
+        </article>
+      </div>
+    </section>
   </div>
 </section>
 
@@ -2316,7 +2276,7 @@
         <div class="catalog-announcement">
           <div class="catalog-announcement-box">
             <strong>Todos los jueves se subirán 2 nuevas novelas para mantener Nébula siempre viva.</strong>
-            <span>Mantén tu membresía activa y sigue descubriendo nuevas historias todas las semanas.</span>
+            <span>Sigue descubriendo nuevas historias todas las semanas. Nébula crecerá gratis con apoyo de anuncios en la app.</span>
           </div>
         </div>
         <div class="story-grid" id="storyGrid"></div>
@@ -2335,7 +2295,7 @@
         <a href="#destacada">Inicio</a>
         <a href="#catalogo">Catálogo</a>
         <a href="#generos">Géneros</a>
-        <a href="#membresia">Membresía</a>
+        <a href="#apoyo">Apoya Nébula</a>
       </div>
     </div>
   </footer>
@@ -2366,7 +2326,7 @@
     let filtradas = [];
     window.nebulaCurrentUser = null;
     window.nebulaCurrentUserData = {
-      coins: 0,
+      progreso: 0,
       unlockedNovels: [],
       subscription: 'free',
       plan: 'free'
@@ -2424,8 +2384,8 @@
     function getRating(novela){ const val = Number(novela.rating || 5); return Number.isFinite(val) ? Math.max(1, Math.min(5, Math.round(val))) : 5; }
     function renderStarsHTML(rating){ const safe = Math.max(1, Math.min(5, Math.round(Number(rating) || 5))); return Array.from({length:5}, (_,i)=>`<span class="star ${i<safe?'active':''}">★</span>`).join(''); }
 
-    function getCurrentUserCoins(){
-      return Number(window.nebulaCurrentUserData?.coins || 0);
+    function getCurrentUserProgreso(){
+      return Number(window.nebulaCurrentUserData?.progreso || 0);
     }
 
     function getUnlockedNovels(){
@@ -2509,12 +2469,8 @@
       }
 
       emptyState.classList.add('hidden');
-      const userCoins = getCurrentUserCoins();
 
       storyGrid.innerHTML = items.map(novela => {
-        const unlocked = isNovelUnlocked(novela);
-        const canUseCoin = !!window.nebulaCurrentUser && !unlocked && userCoins > 0;
-
         return `
           <article class="story-card">
             <div class="story-cover-shell">
@@ -2527,20 +2483,14 @@
               <div class="story-rating-line"><div class="stars">${renderStarsHTML(novela.rating)}</div><span class="rating-label">${novela.rating}.0 / 5</span></div>
               <p>${novela.descripcion}</p>
               <div class="story-mini-meta">
-                <div><small>Gratis</small><strong>${novela.gratis || 3} capítulos</strong></div>
+                <div><small>Acceso</small><strong>Gratis</strong></div>
                 <div><small>Capítulos</small><strong>${novela.capitulos || 0} disponibles</strong></div>
-                <div><small>Coins disponibles</small><strong>${userCoins} Coin${userCoins === 1 ? '' : 's'}</strong></div>
+                <div><small>Modelo</small><strong>Con anuncios</strong></div>
               </div>
               <div class="story-card-actions">
                 <a class="btn btn-primary" href="${novela.ruta}" data-read-id="${novela.id}">Comenzar</a>
                 <button class="btn btn-secondary" type="button" data-continue-id="${novela.id}">Seguir</button>
-                ${
-                  unlocked
-                    ? `<button class="btn btn-gold btn-coin-short" type="button" disabled title="Novela desbloqueada con coins"><span class="coin-icon">🪙</span><span>Lista</span></button>`
-                    : canUseCoin
-                      ? `<button class="btn btn-gold btn-coin-short" type="button" data-use-coin-id="${novela.id}" title="Usar coins en esta novela"><span class="coin-icon">🪙</span><span>Usar</span></button>`
-                      : `<button class="btn btn-gold btn-coin-short" type="button" disabled title="Necesitas coins disponibles"><span class="coin-icon">🪙</span><span>Usar</span></button>`
-                }
+                <a class="btn btn-gold btn-progreso-short" href="${novela.ruta}" data-read-id="${novela.id}"><span>Leer gratis</span></a>
               </div>
             </div>
           </article>
@@ -2562,25 +2512,6 @@
         btn.addEventListener('click', ()=>{
           saveInitialProgress(novela);
           window.location.href = getContinuePath(novela);
-        });
-      });
-
-      document.querySelectorAll('[data-use-coin-id]').forEach(btn => {
-        btn.addEventListener('click', async () => {
-          if (typeof window.useCoinForNovel === 'function') {
-            const ok = await window.useCoinForNovel(btn.dataset.useCoinId);
-            if (ok && typeof window.nebulaRefreshCatalogCoins === 'function') {
-              window.nebulaRefreshCatalogCoins();
-            }
-            return;
-          }
-
-          if (typeof window.nebulaUseCoin === 'function') {
-            const ok = await window.nebulaUseCoin(btn.dataset.useCoinId);
-            if (ok) {
-              renderStories(filtradas);
-            }
-          }
         });
       });
     }
@@ -2636,7 +2567,7 @@
       updateUserReadingStats();
     }
 
-    window.nebulaRefreshCatalogCoins = function(){
+    window.nebulaRefreshCatalogProgreso = function(){
       renderStories(filtradas);
     };
 
@@ -2653,9 +2584,6 @@
     function animateStars(){ ctx.clearRect(0,0,window.innerWidth,window.innerHeight); for(const s of stars){ ctx.beginPath(); ctx.fillStyle = `rgba(255,255,255,${s.alpha})`; ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fill(); s.y += s.speed; if(s.y > window.innerHeight + 2){ s.y = -2; s.x = Math.random()*window.innerWidth; } } requestAnimationFrame(animateStars); }
     window.addEventListener('resize', resizeStarsCanvas); resizeStarsCanvas(); animateStars();
   </script>
-
-  <script src="js/coin-manager.js"></script>
-  <script src="js/access-control.js"></script>
 
   <script type="module">
     import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js';
@@ -2700,90 +2628,14 @@
       return data;
     }
 
-    window.buyCoin = async function(){
-      try {
-        const user = auth.currentUser;
-
-        if (!user) {
-          window.location.href = 'login.html';
-          return;
-        }
-
-        const data = await postJson(`${API_BASE_URL}/create-preference`, {
-          title: 'Nébula – 1 Coin',
-          price: 990,
-          quantity: 1,
-          type: 'coin',
-          novelId: null,
-          userId: user.uid,
-          email: user.email || ''
-        });
-
-        const redirectUrl = data.init_point || data.initPoint;
-
-        if (!data.ok || !redirectUrl) {
-          throw new Error(data.error || 'No se pudo iniciar la compra del coin.');
-        }
-
-        window.location.href = redirectUrl;
-      } catch (error) {
-        console.error(error);
-        alert(error.message || 'No se pudo iniciar la compra del coin.');
-      }
+    window.buyProgreso = async function(){
+      alert('Nébula será gratuita en esta versión. Los pagos están desactivados.');
+      return false;
     };
 
-    window.nebulaUseCoin = async function(novelId){
-      try {
-        const user = auth.currentUser;
-
-        if (!user) {
-          window.location.href = 'login.html';
-          return false;
-        }
-
-        const userRef = doc(db, 'users', user.uid);
-        const snap = await getDoc(userRef);
-
-        if (!snap.exists()) {
-          throw new Error('No se encontró tu cuenta.');
-        }
-
-        const data = snap.data() || {};
-        const currentCoins = Number(data.coins || 0);
-        const unlockedNovels = Array.isArray(data.unlockedNovels) ? data.unlockedNovels : [];
-        const unlockId = String(novelId || '');
-
-        if (unlockedNovels.includes(unlockId)) {
-          return true;
-        }
-
-        if (currentCoins <= 0) {
-          throw new Error('No tienes coins disponibles.');
-        }
-
-        await setDoc(userRef, {
-          coins: currentCoins - 1,
-          unlockedNovels: [...unlockedNovels, unlockId],
-          updatedAt: serverTimestamp()
-        }, { merge: true });
-
-        window.nebulaCurrentUserData = {
-          ...(window.nebulaCurrentUserData || {}),
-          ...data,
-          coins: currentCoins - 1,
-          unlockedNovels: [...unlockedNovels, unlockId]
-        };
-
-        if (typeof window.nebulaRefreshCatalogCoins === 'function') {
-          window.nebulaRefreshCatalogCoins();
-        }
-
-        return true;
-      } catch (error) {
-        console.error(error);
-        alert(error.message || 'No se pudo usar el coin.');
-        return false;
-      }
+    window.nebulaUseProgreso = async function(){
+      alert('Nébula será gratuita en esta versión. Los progreso están desactivados.');
+      return false;
     };
 
     const accountMenu = document.getElementById('accountMenu');
@@ -2804,8 +2656,8 @@
     const userPlanPill = document.getElementById('userPlanPill');
     const userStatePill = document.getElementById('userStatePill');
     const userProgressPill = document.getElementById('userProgressPill');
-    const userCoinsPill = document.getElementById('userCoinsPill');
-    const userCoinsText = document.getElementById('userCoinsText');
+    const userProgresoPill = document.getElementById('userProgresoPill');
+    const userProgresoText = document.getElementById('userProgresoText');
     const userAvatar = document.getElementById('userAvatar');
     const userGuestBox = document.getElementById('userGuestBox');
     const userLoggedBox = document.getElementById('userLoggedBox');
@@ -2833,7 +2685,7 @@
 
     function getMembershipLabelFromData(data){
       const raw = String(data?.subscription || data?.plan || 'free').toLowerCase();
-      return raw === 'premium' ? 'Premium' : 'Free';
+      return raw === 'gratis' ? 'Gratis' : 'Free';
     }
 
     function updateLoggedOutUI(){
@@ -2850,19 +2702,19 @@
       accountRead.textContent = '0 capítulos';
 
       userGreeting.textContent = 'Tu cuenta Nébula';
-      userEmailText.textContent = 'Inicia sesión para sincronizar tu progreso, coins y contenido desbloqueado.';
-      userPlanPill.textContent = 'Suscripción: Free';
+      userEmailText.textContent = 'Inicia sesión de forma opcional para sincronizar tu progreso de lectura.';
+      userPlanPill.textContent = 'Acceso: Gratis';
       userStatePill.textContent = 'Estado: Invitado';
       userProgressPill.textContent = 'Capítulos leídos: 0';
-      userCoinsPill.textContent = 'Coins: 0';
-      userCoinsText.textContent = '0 Coins';
+      userProgresoPill.textContent = 'Modo: Gratis';
+      userProgresoText.textContent = 'Gratis con anuncios';
       userAvatar.textContent = 'N';
       const badge = document.getElementById('userBadge');
       if (badge) badge.style.display = 'none';
 
       window.nebulaCurrentUser = null;
       window.nebulaCurrentUserData = {
-        coins: 0,
+        progreso: 0,
         unlockedNovels: [],
         subscription: 'free',
         plan: 'free'
@@ -2871,8 +2723,8 @@
       userGuestBox?.classList.remove('hidden-panel');
       userLoggedBox?.classList.add('hidden-panel');
 
-      if (typeof window.nebulaRefreshCatalogCoins === 'function') {
-        window.nebulaRefreshCatalogCoins();
+      if (typeof window.nebulaRefreshCatalogProgreso === 'function') {
+        window.nebulaRefreshCatalogProgreso();
       }
     }
 
@@ -2884,7 +2736,7 @@
 
       const membership = getMembershipLabelFromData(data);
       const avatar = name.charAt(0).toUpperCase();
-      const coins = Number(data?.coins || 0);
+      const progreso = Number(data?.progreso || 0);
       const readCount = Array.isArray(data?.readChapters) ? data.readChapters.length : 0;
 
       headerLoginLink?.classList.add('hidden-panel');
@@ -2900,20 +2752,20 @@
 
       userGreeting.textContent = name;
       userEmailText.textContent = user.email;
-      userPlanPill.textContent = `Suscripción: ${membership}`;
+      userPlanPill.textContent = `Acceso: Gratis`;
       userStatePill.textContent = 'Estado: Activo';
-      userCoinsPill.textContent = `Coins: ${coins}`;
-      userCoinsText.textContent = `${coins} Coin${coins === 1 ? '' : 's'}`;
+      userProgresoPill.textContent = `Modo: Gratis`;
+      userProgresoText.textContent = 'Gratis con anuncios';
       userAvatar.textContent = avatar;
 
       const badge = document.getElementById('userBadge');
       if (badge) {
-        badge.style.display = membership === 'Premium' ? 'block' : 'none';
+        badge.style.display = membership === 'Gratis' ? 'block' : 'none';
       }
 
       window.nebulaCurrentUser = user;
       window.nebulaCurrentUserData = {
-        coins,
+        progreso,
         unlockedNovels: Array.isArray(data?.unlockedNovels) ? data.unlockedNovels : [],
         subscription: data?.subscription || 'free',
         plan: data?.plan || 'free'
@@ -2922,8 +2774,8 @@
       userGuestBox?.classList.add('hidden-panel');
       userLoggedBox?.classList.remove('hidden-panel');
 
-      if (typeof window.nebulaRefreshCatalogCoins === 'function') {
-        window.nebulaRefreshCatalogCoins();
+      if (typeof window.nebulaRefreshCatalogProgreso === 'function') {
+        window.nebulaRefreshCatalogProgreso();
       }
     }
 
@@ -2959,7 +2811,7 @@
             avatar: '🌌',
             plan: 'free',
             subscription: 'free',
-            coins: 0,
+            progreso: 0,
             unlockedNovels: [],
             purchasedNovels: [],
             readChapters: [],
@@ -2979,7 +2831,7 @@
           email: user.email || '',
           plan: 'free',
           subscription: 'free',
-          coins: 0,
+          progreso: 0,
           unlockedNovels: [],
           readChapters: []
         });
