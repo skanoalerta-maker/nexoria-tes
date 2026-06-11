@@ -1109,6 +1109,184 @@
       font-size:.9rem;
     }
 
+
+    /* ===== AJUSTE PROFESIONAL ANDROID / PORTADAS VERTICALES ===== */
+    .site-header{
+      transform:translateY(0);
+      transition:transform .28s ease, opacity .28s ease, background .28s ease;
+    }
+
+    .site-header.header-hidden{
+      transform:translateY(-110%);
+      opacity:0;
+      pointer-events:none;
+    }
+
+    .nav-shell{
+      min-height:64px;
+      padding:8px 0;
+    }
+
+    .brand-logo{
+      width:126px;
+    }
+
+    .top-nav{
+      gap:14px;
+    }
+
+    .top-nav a{
+      font-size:.9rem;
+      padding:8px 10px;
+      border-radius:999px;
+      background:rgba(255,255,255,.045);
+      border:1px solid rgba(255,255,255,.055);
+    }
+
+    .nav-search-btn{
+      min-height:42px;
+      padding:0 16px;
+      border-radius:999px;
+      font-size:.92rem;
+    }
+
+    .hero{
+      padding-top:24px;
+    }
+
+    .hero-grid{
+      grid-template-columns:minmax(0, .92fr) minmax(300px, .45fr);
+      align-items:start;
+    }
+
+    .hero-cover-wrap,
+    .story-cover-shell{
+      aspect-ratio:2 / 3;
+      padding:0;
+      background:#050b1a;
+    }
+
+    .hero-cover,
+    .story-cover{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center;
+      background:#050b1a;
+    }
+
+    .hero-feature-card{
+      max-width:390px;
+      justify-self:center;
+    }
+
+    .catalog-section{
+      padding-top:30px;
+    }
+
+    .catalog-section .section-head{
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      margin-bottom:18px;
+    }
+
+    .catalog-section .section-head > div{
+      width:100%;
+    }
+
+    .catalog-section .section-kicker{
+      color:#66b8ff;
+    }
+
+    .catalog-tools{
+      width:min(100%, 720px);
+      margin:0 auto;
+    }
+
+    .search-box{
+      min-height:64px;
+      border-radius:999px;
+      background:linear-gradient(135deg, rgba(255,255,255,.095), rgba(255,255,255,.045));
+      border:1px solid rgba(102,184,255,.22);
+      box-shadow:0 18px 42px rgba(0,0,0,.24), 0 0 0 1px rgba(255,255,255,.035) inset;
+    }
+
+    .search-box span{
+      font-size:1.2rem;
+    }
+
+    .search-box input{
+      font-size:1.05rem;
+      font-weight:700;
+    }
+
+    .catalog-announcement{
+      display:none;
+    }
+
+    .story-grid{
+      grid-template-columns:repeat(auto-fill, minmax(210px, 1fr));
+      gap:18px;
+      align-items:start;
+    }
+
+    .story-card{
+      border-radius:24px;
+      box-shadow:0 18px 48px rgba(0,0,0,.28);
+    }
+
+    .story-body{
+      gap:12px;
+      padding:16px;
+    }
+
+    .story-topline h3{
+      font-size:1.18rem;
+      line-height:1.12;
+    }
+
+    .story-topline small,
+    .story-rating-line,
+    .story-mini-meta{
+      display:none;
+    }
+
+    .story-body p{
+      font-size:.92rem;
+      line-height:1.52;
+      display:-webkit-box;
+      -webkit-line-clamp:3;
+      -webkit-box-orient:vertical;
+      overflow:hidden;
+    }
+
+    .story-card-actions{
+      grid-template-columns:1fr;
+    }
+
+    .story-card-actions .btn-secondary{
+      display:none;
+    }
+
+    .next-season-cover{
+      aspect-ratio:2 / 3;
+      max-height:none;
+    }
+
+    .next-season-cover img{
+      object-fit:cover;
+      object-position:center;
+    }
+
+    .next-seasons-grid{
+      grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+    }
+
+    .section-head{
+      margin-bottom:18px;
+    }
+
     @media (max-width: 1200px){
       .hero-grid{ grid-template-columns:1fr; }
       .genre-grid{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
@@ -1169,6 +1347,130 @@
       .story-badges span,.story-tags span{ font-size:.84rem; min-height:32px; padding:0 12px; }
       .hero-cover-wrap,.story-cover-shell{ aspect-ratio:4 / 3; }
     }
+  
+    @media (max-width: 680px){
+      :root{ --container:min(100% - 14px, 1000px); }
+      .site-header{
+        position:fixed;
+        top:0;
+        left:0;
+        right:0;
+        background:linear-gradient(180deg, rgba(4,10,24,.96), rgba(4,10,24,.76));
+      }
+      body{ padding-top:60px; }
+      .nav-shell{
+        min-height:56px;
+        flex-wrap:nowrap;
+        justify-content:space-between;
+        gap:8px;
+      }
+      .brand{
+        width:auto;
+        justify-content:flex-start;
+        gap:8px;
+      }
+      .brand-logo{ width:86px; }
+      .brand-copy{ display:none; }
+      .top-nav{
+        order:0;
+        width:auto;
+        flex:1;
+        justify-content:flex-end;
+        gap:6px;
+        overflow:hidden;
+      }
+      .top-nav a{
+        font-size:.76rem;
+        padding:7px 8px;
+      }
+      .nav-search-btn{
+        display:none;
+      }
+      .hero-grid{
+        grid-template-columns:1fr;
+        gap:16px;
+      }
+      .hero-copy{
+        padding:18px 16px;
+        border-radius:24px;
+      }
+      .hero-copy h1{
+        font-size:2.08rem;
+        line-height:.98;
+      }
+      .weekly-launch-points,
+      .hero-stats{
+        grid-template-columns:1fr;
+      }
+      .hero-feature-card{
+        max-width:290px;
+        margin:0 auto;
+      }
+      .hero-cover-wrap,
+      .story-cover-shell,
+      .next-season-cover{
+        aspect-ratio:2 / 3 !important;
+        padding:0 !important;
+      }
+      .story-grid{
+        grid-template-columns:repeat(2, minmax(0, 1fr)) !important;
+        gap:12px;
+      }
+      .story-card{
+        border-radius:18px;
+      }
+      .story-body{
+        padding:12px;
+        gap:10px;
+      }
+      .story-topline h3{
+        font-size:.98rem;
+      }
+      .story-body p{
+        font-size:.82rem;
+        -webkit-line-clamp:2;
+      }
+      .story-card-actions .btn{
+        min-height:42px;
+        font-size:.86rem;
+        border-radius:14px;
+      }
+      .story-badges{
+        top:8px;
+        left:8px;
+        right:8px;
+      }
+      .story-badges span{
+        min-height:26px;
+        padding:0 9px;
+        font-size:.7rem;
+      }
+      .search-box{
+        min-height:58px;
+        padding:0 16px;
+      }
+      .support-grid{
+        grid-template-columns:1fr;
+      }
+      .footer-shell{
+        display:none;
+      }
+      .site-footer{
+        padding:10px 0 18px;
+      }
+    }
+
+    @media (max-width: 420px){
+      .story-grid{
+        grid-template-columns:repeat(2, minmax(0, 1fr)) !important;
+      }
+      .hero-cover-wrap,
+      .story-cover-shell,
+      .next-season-cover{
+        aspect-ratio:2 / 3 !important;
+      }
+    }
+
   </style>
 </head>
 
@@ -1188,15 +1490,12 @@
       </a>
 
       <nav class="top-nav" aria-label="Principal">
-        <a href="#destacada">Destacada</a>
-        <a href="#catalogo">Catálogo</a>
+        <a href="#destacada">Inicio</a>
+        <a href="#catalogo">Buscar</a>
         <a href="#temporadas">Próximas</a>
-        <a href="#generos">Géneros</a>
-        <a href="#temporadas">Próximas</a>
-        <a href="#apoyo">Apoya Nébula</a>
       </nav>
 
-      <a href="#catalogo" class="btn btn-secondary">Explorar historias</a>
+      <a href="#catalogo" class="btn btn-secondary nav-search-btn">🔎 Buscar</a>
     </div>
   </header>
 
@@ -1388,32 +1687,18 @@
       </div>
     </section>
 
-    <section class="section" id="generos">
+    <section class="section catalog-section" id="catalogo">
       <div class="container">
         <div class="section-head">
           <div>
-            <p class="section-kicker">Explora por categorías</p>
-            <h2>Géneros</h2>
-          </div>
-          <p class="section-note">Romance, terror, historia, futurista, acción, comedia y más.</p>
-        </div>
-
-        <div class="genre-grid" id="genreGrid"></div>
-      </div>
-    </section>
-
-    <section class="section" id="catalogo">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <p class="section-kicker">Biblioteca principal</p>
-            <h2>Historias disponibles</h2>
+            <p class="section-kicker">Busca dentro de NÉBULA</p>
+            <h2>Encuentra tu próxima historia</h2>
           </div>
 
           <div class="catalog-tools">
             <label class="search-box" for="storySearch">
               <span>🔎</span>
-              <input type="search" id="storySearch" placeholder="Buscar novela o género..." autocomplete="off" />
+              <input type="search" id="storySearch" placeholder="Presiona aquí y busca novela, temporada o género..." autocomplete="off" />
             </label>
           </div>
         </div>
@@ -1440,10 +1725,8 @@
 
       <div class="footer-links">
         <a href="#destacada">Inicio</a>
-        <a href="#catalogo">Catálogo</a>
+        <a href="#catalogo">Buscar</a>
         <a href="#temporadas">Próximas</a>
-        <a href="#generos">Géneros</a>
-        <a href="#apoyo">Apoya Nébula</a>
       </div>
     </div>
   </footer>
@@ -1452,7 +1735,6 @@
 
   <script>
     const storyGrid = document.getElementById("storyGrid");
-    const genreGrid = document.getElementById("genreGrid");
     const emptyState = document.getElementById("emptyState");
     const storySearch = document.getElementById("storySearch");
 
@@ -1531,36 +1813,6 @@
       document.getElementById("featuredViews").textContent = `${formatViews(preferred.visitas || 0)} vistas`;
       document.getElementById("featuredChapters").textContent = `${preferred.chapters.length} disponibles`;
       document.getElementById("featuredReadLink").href = getNovelLink(preferred);
-    }
-
-    function renderGenres() {
-      const map = new Map();
-
-      novelas.forEach(novel => {
-        (novel.tags || []).forEach(tag => {
-          const key = String(tag).trim();
-          if (!key) return;
-          map.set(key, (map.get(key) || 0) + 1);
-        });
-      });
-
-      const genres = Array.from(map.entries())
-        .sort((a, b) => a[0].localeCompare(b[0], "es"));
-
-      genreGrid.innerHTML = genres.map(([genre, count]) => `
-        <button class="genre-card" type="button" data-genre="${safeText(genre)}">
-          <span>${safeText(genre)}</span>
-          <small>${count} historia${count === 1 ? "" : "s"}</small>
-        </button>
-      `).join("");
-
-      genreGrid.querySelectorAll("[data-genre]").forEach(button => {
-        button.addEventListener("click", () => {
-          storySearch.value = button.dataset.genre || "";
-          filterStories();
-          document.getElementById("catalogo").scrollIntoView({ behavior: "smooth" });
-        });
-      });
     }
 
     function renderStories(list) {
@@ -1648,7 +1900,6 @@
       filtradas = [...novelas];
 
       renderFeatured();
-      renderGenres();
       renderStories(filtradas);
 
       storySearch.addEventListener("input", filterStories);
@@ -1658,6 +1909,22 @@
   </script>
 
 
+  <script>
+    let lastScrollY = window.scrollY;
+    const siteHeader = document.querySelector(".site-header");
+
+    window.addEventListener("scroll", () => {
+      const currentY = window.scrollY;
+
+      if (currentY > 90 && currentY > lastScrollY) {
+        siteHeader.classList.add("header-hidden");
+      } else {
+        siteHeader.classList.remove("header-hidden");
+      }
+
+      lastScrollY = currentY;
+    }, { passive: true });
+  </script>
 
   <script>
     function initCountdowns() {
