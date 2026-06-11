@@ -2,14 +2,11 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-  />
-  <title>Nébula | Novela</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Nébula | Historias por capítulos</title>
   <meta
     name="description"
-    content="Explora capítulos y sigue leyendo historias completas en Nébula."
+    content="Nébula es una plataforma gratuita de historias por capítulos. Lee romance, terror, misterio, fantasía, comedia, historia y ciencia ficción."
   />
   <meta name="theme-color" content="#07101f" />
 
@@ -17,38 +14,27 @@
     :root{
       --bg:#040816;
       --bg2:#07101f;
-      --bg3:#0b1730;
-      --panel:rgba(8,18,40,.78);
+      --panel:rgba(8,18,40,.76);
       --panel-strong:rgba(10,20,44,.92);
-      --panel-soft:rgba(14,24,48,.62);
       --line:rgba(255,255,255,.08);
-      --line-strong:rgba(89,149,255,.22);
       --text:#f8fbff;
       --muted:#b8c4da;
       --muted-2:#8ea3c8;
       --blue:#3490ff;
       --blue2:#66b8ff;
       --violet:#9a66ff;
-      --cyan:#50dbff;
       --gold:#ffd54a;
-      --gold-2:#ffbf1f;
       --green:#4ee7a8;
       --shadow:0 24px 70px rgba(0,0,0,.34);
       --shadow-soft:0 18px 46px rgba(0,0,0,.24);
       --radius:26px;
       --radius-lg:32px;
-      --container:min(1180px, calc(100% - 32px));
+      --container:min(1280px, calc(100% - 32px));
     }
 
-    *{
-      box-sizing:border-box;
-      margin:0;
-      padding:0;
-    }
+    *{ box-sizing:border-box; margin:0; padding:0; }
 
-    html{
-      scroll-behavior:smooth;
-    }
+    html{ scroll-behavior:smooth; }
 
     body{
       min-height:100vh;
@@ -63,19 +49,9 @@
       position:relative;
     }
 
-    a{
-      color:inherit;
-      text-decoration:none;
-    }
-
-    button{
-      font:inherit;
-    }
-
-    img{
-      display:block;
-      max-width:100%;
-    }
+    a{ color:inherit; text-decoration:none; }
+    button,input{ font:inherit; }
+    img{ display:block; max-width:100%; }
 
     .container{
       width:var(--container);
@@ -121,7 +97,7 @@
         radial-gradient(2px 2px at 85% 45%, rgba(255,255,255,.86), transparent 62%),
         radial-gradient(1.5px 1.5px at 94% 14%, rgba(255,255,255,.82), transparent 62%);
       opacity:.7;
-      animation: starsFloat 120s linear infinite;
+      animation:starsFloat 120s linear infinite;
     }
 
     .galaxy-bg::after{
@@ -132,25 +108,7 @@
         radial-gradient(circle at 30% 82%, rgba(124,255,220,.07), transparent 18%);
       filter:blur(38px);
       opacity:.95;
-      animation: nebulaDrift 22s ease-in-out infinite alternate;
-    }
-
-    .galaxy-layer{
-      position:fixed;
-      inset:0;
-      z-index:-29;
-      pointer-events:none;
-      background-image:
-        radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,.42), transparent 62%),
-        radial-gradient(1px 1px at 22% 40%, rgba(255,255,255,.34), transparent 62%),
-        radial-gradient(1px 1px at 34% 70%, rgba(255,255,255,.42), transparent 62%),
-        radial-gradient(1px 1px at 48% 30%, rgba(255,255,255,.34), transparent 62%),
-        radial-gradient(1px 1px at 59% 60%, rgba(255,255,255,.38), transparent 62%),
-        radial-gradient(1px 1px at 72% 16%, rgba(255,255,255,.44), transparent 62%),
-        radial-gradient(1px 1px at 82% 48%, rgba(255,255,255,.32), transparent 62%),
-        radial-gradient(1px 1px at 92% 78%, rgba(255,255,255,.35), transparent 62%);
-      opacity:.55;
-      animation: starsFloatReverse 180s linear infinite;
+      animation:nebulaDrift 22s ease-in-out infinite alternate;
     }
 
     .bg-grid{
@@ -166,197 +124,331 @@
       opacity:.26;
     }
 
-    .bg-orb{
-      position:fixed;
-      pointer-events:none;
-      border-radius:50%;
-      filter:blur(48px);
-      z-index:-27;
-      opacity:.36;
-    }
+    @keyframes starsFloat{ from{ transform:translateY(0); } to{ transform:translateY(-120px); } }
+    @keyframes nebulaDrift{ from{ transform:scale(1) translate3d(0,0,0); } to{ transform:scale(1.07) translate3d(-1.5%, 1.5%, 0); } }
 
-    .orb-1{
-      width:420px;
-      height:420px;
-      top:14%;
-      right:-120px;
-      background:radial-gradient(circle, rgba(123,78,255,.36), transparent 68%);
-      animation: orbMove1 18s ease-in-out infinite alternate;
-    }
-
-    .orb-2{
-      width:360px;
-      height:360px;
-      left:-120px;
-      top:34%;
-      background:radial-gradient(circle, rgba(61,173,255,.28), transparent 68%);
-      animation: orbMove2 20s ease-in-out infinite alternate;
-    }
-
-    @keyframes starsFloat{
-      from{ transform:translateY(0); }
-      to{ transform:translateY(-120px); }
-    }
-
-    @keyframes starsFloatReverse{
-      from{ transform:translateY(0); }
-      to{ transform:translateY(85px); }
-    }
-
-    @keyframes nebulaDrift{
-      0%{ transform:scale(1) translate3d(0,0,0); }
-      100%{ transform:scale(1.07) translate3d(-1.5%, 1.5%, 0); }
-    }
-
-    @keyframes orbMove1{
-      from{ transform:translate3d(0,0,0); }
-      to{ transform:translate3d(-30px, 35px, 0); }
-    }
-
-    @keyframes orbMove2{
-      from{ transform:translate3d(0,0,0); }
-      to{ transform:translate3d(35px, -22px, 0); }
-    }
-
-    .page-header{
-      padding:16px 0 14px;
+    .site-header{
       position:sticky;
       top:0;
-      z-index:30;
-      backdrop-filter:blur(16px);
-      background:linear-gradient(180deg, rgba(4,10,24,.90), rgba(4,10,24,.64));
+      z-index:50;
+      backdrop-filter:blur(18px);
+      background:linear-gradient(180deg, rgba(4,10,24,.92), rgba(4,10,24,.72));
       border-bottom:1px solid rgba(255,255,255,.05);
     }
 
-    .page-header-inner{
+    .nav-shell{
+      min-height:88px;
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:18px;
-      flex-wrap:wrap;
+      gap:24px;
+      padding:12px 0;
     }
 
-    .brand-wrap{
+    .brand{
       display:flex;
       align-items:center;
       gap:16px;
       min-width:0;
-    }
-
-    .brand-link{
-      display:flex;
-      align-items:center;
-      gap:14px;
-      min-width:0;
+      flex-shrink:0;
     }
 
     .brand-logo{
-      width:142px;
+      width:170px;
       height:auto;
       object-fit:contain;
       flex-shrink:0;
       filter:
-        drop-shadow(0 0 18px rgba(118,160,255,.26))
-        drop-shadow(0 0 34px rgba(62,123,255,.20));
-    }
-
-    .brand-copy{
-      display:flex;
-      flex-direction:column;
-      min-width:0;
+        drop-shadow(0 0 18px rgba(118,160,255,.30))
+        drop-shadow(0 0 34px rgba(62,123,255,.24));
     }
 
     .brand-copy strong{
-      font-size:.74rem;
+      display:block;
+      font-size:.72rem;
       line-height:1;
-      letter-spacing:.14em;
+      letter-spacing:.13em;
       white-space:nowrap;
-      opacity:.96;
+      opacity:.92;
     }
 
     .brand-copy span{
+      display:block;
       color:var(--muted);
-      font-size:.46rem;
+      font-size:.44rem;
       margin-top:4px;
-      letter-spacing:.04em;
       white-space:nowrap;
+      letter-spacing:.03em;
+      opacity:.78;
     }
 
-    .header-actions{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      flex-wrap:wrap;
-    }
-
-    .back-link{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      min-height:48px;
-      padding:0 18px;
-      border-radius:16px;
-      background:rgba(255,255,255,.05);
-      border:1px solid rgba(255,255,255,.08);
-      color:#fff;
-      font-weight:700;
-    }
-
-    .mini-badge{
-      display:inline-flex;
-      align-items:center;
-      min-height:36px;
-      padding:0 14px;
-      border-radius:999px;
-      background:rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.08);
-      color:#dce8ff;
-      font-size:.88rem;
-      font-weight:700;
-    }
-
-    .user-chip{
-      display:inline-flex;
-      align-items:center;
-      min-height:44px;
-      padding:0 16px;
-      border-radius:999px;
-      background:rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.08);
-      color:#edf4ff;
-      font-size:.92rem;
-      font-weight:800;
-    }
-
-    .hero{
-      padding:32px 0 22px;
-    }
-
-    .hero-grid{
-      display:grid;
-      grid-template-columns:minmax(330px, 420px) minmax(0, 1fr);
-      gap:26px;
-      align-items:stretch;
-    }
-
-    .hero-cover-card,
-    .hero-content{
-      border-radius:30px;
-      overflow:hidden;
-      background:linear-gradient(180deg, rgba(8,18,40,.86), rgba(8,18,40,.62));
-      border:1px solid rgba(255,255,255,.07);
-      box-shadow:var(--shadow);
-    }
-
-    .hero-cover-wrap{
-      width:100%;
-      aspect-ratio:4 / 5.1;
-      background:#050b1a;
-      overflow:hidden;
+    .top-nav{
       display:flex;
       align-items:center;
       justify-content:center;
-      padding:14px;
+      gap:28px;
+      flex:1;
+      flex-wrap:wrap;
+    }
+
+    .top-nav a{
+      color:#d9e5f8;
+      font-weight:700;
+      font-size:1rem;
+      opacity:.92;
+      transition:.25s ease;
+    }
+
+    .top-nav a:hover{ color:#fff; opacity:1; }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      min-height:52px;
+      padding:0 24px;
+      border-radius:18px;
+      border:1px solid transparent;
+      font-weight:900;
+      font-size:1rem;
+      cursor:pointer;
+      transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
+      white-space:nowrap;
+    }
+
+    .btn:hover{ transform:translateY(-1px); }
+
+    .btn-primary{
+      color:#fff;
+      background:linear-gradient(135deg, #2a82ff 0%, #4aa7ff 100%);
+      box-shadow:0 18px 34px rgba(38,121,255,.24);
+    }
+
+    .btn-secondary{
+      color:#fff;
+      background:rgba(255,255,255,.06);
+      border-color:rgba(255,255,255,.08);
+      backdrop-filter:blur(10px);
+    }
+
+    .btn-gold{
+      color:#171105;
+      background:linear-gradient(135deg, #ffec9e 0%, #ffd54a 38%, #ffbf1f 100%);
+      border:1px solid rgba(255,212,74,.48);
+      box-shadow:0 18px 34px rgba(255,191,31,.20), 0 0 0 1px rgba(255,255,255,.14) inset;
+    }
+
+    .hero{ padding:42px 0 26px; }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:minmax(0, 1.05fr) minmax(380px, .95fr);
+      gap:28px;
+      align-items:stretch;
+    }
+
+    .hero-copy{
+      min-height:100%;
+      padding:clamp(24px, 3vw, 40px);
+      border-radius:var(--radius-lg);
+      background:linear-gradient(180deg, rgba(9,18,42,.78), rgba(9,18,42,.48));
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      min-height:34px;
+      padding:0 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.07);
+      color:#d8e7ff;
+      font-size:.84rem;
+      font-weight:800;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+    }
+
+    .hero-copy h1{
+      margin-top:18px;
+      font-size:clamp(2.15rem, 5vw, 4.4rem);
+      line-height:.95;
+      letter-spacing:-.04em;
+      max-width:12ch;
+    }
+
+    .hero-copy h1 span{
+      display:block;
+      color:#9fd4ff;
+      margin-top:10px;
+    }
+
+    .hero-copy p{
+      margin-top:22px;
+      max-width:62ch;
+      color:var(--muted);
+      font-size:clamp(1rem, 1.5vw, 1.14rem);
+      line-height:1.75;
+    }
+
+    .weekly-launch-banner{
+      margin-top:24px;
+      position:relative;
+      overflow:hidden;
+      border-radius:26px;
+      border:1px solid rgba(255,255,255,.08);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(94,125,255,.18), transparent 30%),
+        radial-gradient(circle at 82% 18%, rgba(155,102,255,.18), transparent 34%),
+        linear-gradient(135deg, rgba(15,27,62,.98), rgba(9,16,38,.92));
+      box-shadow:0 24px 50px rgba(0,0,0,.26);
+      padding:22px 22px 20px;
+    }
+
+    .weekly-launch-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+      margin-bottom:12px;
+    }
+
+    .weekly-chip{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      min-height:36px;
+      padding:0 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.08);
+      color:#eaf3ff;
+      font-weight:900;
+      font-size:.86rem;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+    }
+
+    .weekly-pulse{
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:var(--green);
+      box-shadow:0 0 18px rgba(78,231,168,.72);
+      animation:pulseDot 1.7s ease-in-out infinite;
+      flex-shrink:0;
+    }
+
+    @keyframes pulseDot{ 0%,100%{ transform:scale(1); opacity:1; } 50%{ transform:scale(1.35); opacity:.7; } }
+
+    .weekly-launch-banner h3{
+      font-size:clamp(1.25rem, 2vw, 1.9rem);
+      line-height:1.08;
+      margin-bottom:10px;
+    }
+
+    .weekly-launch-banner p{
+      margin-top:0;
+      max-width:none;
+      color:#d6e4fb;
+      font-size:1rem;
+      line-height:1.75;
+    }
+
+    .weekly-launch-points{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0, 1fr));
+      gap:12px;
+      margin-top:16px;
+    }
+
+    .weekly-launch-points > div{
+      padding:16px 16px 14px;
+      border-radius:18px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.07);
+      min-width:0;
+    }
+
+    .weekly-launch-points small{
+      display:block;
+      color:#9fb5db;
+      text-transform:uppercase;
+      letter-spacing:.05em;
+      font-size:.78rem;
+      margin-bottom:7px;
+    }
+
+    .weekly-launch-points strong{
+      font-size:1rem;
+      line-height:1.35;
+      display:block;
+    }
+
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      margin-top:24px;
+    }
+
+    .hero-stats{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0, 1fr));
+      gap:14px;
+      margin-top:26px;
+    }
+
+    .stat-card{
+      padding:18px 18px 16px;
+      border-radius:20px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.06);
+      box-shadow:var(--shadow-soft);
+      min-width:0;
+    }
+
+    .stat-card small{
+      display:block;
+      color:var(--muted-2);
+      font-size:.85rem;
+      margin-bottom:6px;
+    }
+
+    .stat-card strong{
+      font-size:1rem;
+      line-height:1.35;
+      word-break:break-word;
+    }
+
+    .hero-feature-card{
+      display:flex;
+      flex-direction:column;
+      min-width:0;
+      border-radius:var(--radius-lg);
+      overflow:hidden;
+      background:linear-gradient(180deg, rgba(8,16,36,.90), rgba(8,16,36,.75));
+      border:1px solid rgba(255,255,255,.07);
+      box-shadow:var(--shadow);
+      min-height:100%;
+    }
+
+    .hero-cover-wrap{
+      position:relative;
+      width:100%;
+      background:#050b1a;
+      aspect-ratio:16 / 10;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      padding:12px;
     }
 
     .hero-cover{
@@ -367,11 +459,12 @@
       background:#050b1a;
     }
 
-    .hero-content{
-      padding:28px;
+    .hero-feature-content{
       display:flex;
       flex-direction:column;
       gap:18px;
+      padding:24px;
+      flex:1;
     }
 
     .story-tags{
@@ -388,297 +481,92 @@
       border-radius:999px;
       background:rgba(255,255,255,.06);
       border:1px solid rgba(255,255,255,.08);
-      font-weight:700;
-      color:#eff6ff;
+      color:#f0f6ff;
+      font-weight:800;
+      font-size:.92rem;
     }
 
-    .hero-content h1{
-      font-size:clamp(2rem, 4vw, 3.5rem);
-      line-height:.95;
-      letter-spacing:-.04em;
+    .hero-feature-content h2{
+      font-size:clamp(1.7rem, 2.5vw, 2.3rem);
+      line-height:1.05;
     }
 
-    .story-description{
+    .hero-feature-content p{
       color:var(--muted);
-      line-height:1.8;
-      font-size:1.05rem;
-      max-width:70ch;
+      line-height:1.75;
+      font-size:1rem;
     }
 
-    .hero-meta{
+    .feature-rating{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:-4px;
+    }
+
+    .stars{
+      display:inline-flex;
+      align-items:center;
+      gap:4px;
+      line-height:1;
+    }
+
+    .star{
+      font-size:1.15rem;
+      color:rgba(255,255,255,.16);
+      text-shadow:none;
+    }
+
+    .star.active{
+      color:var(--gold);
+      text-shadow:0 0 10px rgba(255,213,74,.24);
+    }
+
+    .rating-label{
+      color:#dfe9fb;
+      font-weight:800;
+      font-size:.95rem;
+    }
+
+    .feature-meta{
       display:grid;
-      grid-template-columns:repeat(3, minmax(0, 1fr));
+      grid-template-columns:repeat(2, minmax(0, 1fr));
       gap:14px;
     }
 
-    .meta-card{
-      padding:16px 16px 14px;
-      border-radius:20px;
+    .feature-meta > div{
+      min-width:0;
+      padding:16px 18px;
+      border-radius:18px;
       background:rgba(255,255,255,.04);
       border:1px solid rgba(255,255,255,.06);
     }
 
-    .meta-card small{
+    .feature-meta small{
       display:block;
       color:var(--muted-2);
-      font-size:.82rem;
-      margin-bottom:6px;
-      text-transform:uppercase;
-      letter-spacing:.05em;
-    }
-
-    .meta-card strong{
-      display:block;
-      font-size:1rem;
-      line-height:1.3;
-    }
-
-    .value-strip{
-      display:grid;
-      grid-template-columns:repeat(2, minmax(0, 1fr));
-      gap:14px;
-      margin-top:2px;
-    }
-
-    .value-card{
-      padding:16px 16px 14px;
-      border-radius:20px;
-      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
-      border:1px solid rgba(255,255,255,.07);
-    }
-
-    .value-card small{
-      display:block;
-      color:var(--muted-2);
-      font-size:.8rem;
       margin-bottom:7px;
-      text-transform:uppercase;
-      letter-spacing:.05em;
-    }
-
-    .value-card strong{
-      display:block;
-      font-size:1rem;
-      line-height:1.35;
-      color:#fff;
-    }
-
-    .weekly-banner{
-      position:relative;
-      overflow:hidden;
-      padding:22px 22px 20px;
-      border-radius:24px;
-      background:
-        radial-gradient(circle at 12% 20%, rgba(82,140,255,.16), transparent 30%),
-        radial-gradient(circle at 86% 20%, rgba(154,102,255,.16), transparent 34%),
-        linear-gradient(135deg, rgba(12,22,52,.96), rgba(8,16,38,.94));
-      border:1px solid rgba(255,255,255,.08);
-      box-shadow:var(--shadow-soft);
-    }
-
-    .weekly-top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-      margin-bottom:10px;
-    }
-
-    .weekly-chip{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      min-height:36px;
-      padding:0 14px;
-      border-radius:999px;
-      background:rgba(255,255,255,.08);
-      border:1px solid rgba(255,255,255,.08);
-      color:#eaf3ff;
-      font-weight:800;
       font-size:.84rem;
       text-transform:uppercase;
-      letter-spacing:.05em;
+      letter-spacing:.04em;
     }
 
-    .weekly-dot{
-      width:10px;
-      height:10px;
-      border-radius:50%;
-      background:var(--green);
-      box-shadow:0 0 16px rgba(78,231,168,.72);
-      animation:pulseDot 1.7s ease-in-out infinite;
-      flex-shrink:0;
+    .feature-meta strong{
+      font-size:1.05rem;
+      line-height:1.3;
+      word-break:break-word;
     }
 
-    @keyframes pulseDot{
-      0%,100%{ transform:scale(1); opacity:1; }
-      50%{ transform:scale(1.35); opacity:.7; }
-    }
-
-    .weekly-banner h3{
-      font-size:1.28rem;
-      line-height:1.1;
-      margin-bottom:8px;
-    }
-
-    .weekly-banner p{
-      color:#d7e5fb;
-      line-height:1.72;
-      font-size:.98rem;
-    }
-
-    .access-banner{
-      padding:16px 18px;
-      border-radius:20px;
-      background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.08);
-    }
-
-    .access-banner strong{
-      display:block;
-      margin-bottom:6px;
-      font-size:1rem;
-    }
-
-    .access-banner span{
-      display:block;
-      color:var(--muted);
-      line-height:1.65;
-      font-size:.95rem;
-    }
-
-    .novel-rating-box{
-      padding:18px;
-      border-radius:22px;
-      background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.07);
-    }
-
-    .novel-rating-box h3{
-      margin-bottom:12px;
-      font-size:1.08rem;
-    }
-
-    .rating-stars{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-bottom:10px;
-    }
-
-    .rating-star{
-      min-width:52px;
-      min-height:52px;
-      border:none;
-      border-radius:16px;
-      background:rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.08);
-      color:#8ea3c8;
-      font-size:1.6rem;
-      font-weight:900;
-      cursor:pointer;
-      transition:transform .2s ease, color .2s ease, background .2s ease, border-color .2s ease;
-    }
-
-    .rating-star:hover{
-      transform:translateY(-1px);
-      color:#ffd54a;
-      border-color:rgba(255,212,74,.35);
-    }
-
-    .rating-star.active{
-      color:#ffd54a;
-      background:rgba(255,212,74,.12);
-      border-color:rgba(255,212,74,.35);
-    }
-
-    .rating-meta{
-      color:var(--muted);
-      line-height:1.6;
-      margin-bottom:6px;
-    }
-
-    .rating-status{
-      color:#dce8ff;
-      line-height:1.6;
-      font-size:.95rem;
-    }
-
-    .hero-actions{
+    .story-actions{
       display:flex;
       flex-wrap:wrap;
       gap:12px;
       margin-top:auto;
     }
 
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      min-height:54px;
-      padding:0 22px;
-      border-radius:18px;
-      border:1px solid transparent;
-      font-weight:800;
-      font-size:1rem;
-      cursor:pointer;
-      transition:transform .2s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
-      white-space:nowrap;
-    }
-
-    .btn:hover{
-      transform:translateY(-1px);
-    }
-
-    .btn-primary{
-      color:#fff;
-      background:linear-gradient(135deg, #2a82ff 0%, #4aa7ff 100%);
-      box-shadow:0 18px 34px rgba(38,121,255,.24);
-    }
-
-    .btn-secondary{
-      color:#fff;
-      background:rgba(255,255,255,.06);
-      border-color:rgba(255,255,255,.08);
-      backdrop-filter:blur(10px);
-    }
-
-    .payment-buttons{
-      display:none !important;
-    }
-
-    .btn-gold{
-      color:#171105;
-      background:linear-gradient(135deg, #ffec9e 0%, #ffd54a 38%, #ffbf1f 100%);
-      border:1px solid rgba(255,212,74,.48);
-      box-shadow:0 18px 34px rgba(255,191,31,.20), 0 0 0 1px rgba(255,255,255,.14) inset;
-      text-shadow:0 1px 0 rgba(255,255,255,.28);
-      font-weight:900;
-    }
-
-    .btn-gold:hover{
-      transform:translateY(-1px);
-      box-shadow:0 22px 40px rgba(255,191,31,.28), 0 0 0 1px rgba(255,255,255,.18) inset;
-    }
-
-    .btn-coin-hero{
-      min-height:64px;
-      padding:0 28px;
-      font-size:1.05rem;
-      font-weight:900;
-      box-shadow:0 22px 42px rgba(255,191,31,.24), 0 0 0 1px rgba(255,255,255,.14) inset;
-    }
-
-    .mini-badge.gold{
-      background:linear-gradient(135deg, rgba(255,212,74,.18), rgba(255,191,31,.12));
-      border:1px solid rgba(255,212,74,.34);
-      color:#fff6cf;
-    }
-
-    .chapters-section{
-      padding:10px 0 60px;
+    .section{
+      padding:34px 0 18px;
     }
 
     .section-head{
@@ -686,738 +574,1494 @@
       align-items:flex-end;
       justify-content:space-between;
       gap:18px;
-      flex-wrap:wrap;
       margin-bottom:22px;
+      flex-wrap:wrap;
+    }
+
+    .section-kicker{
+      color:#9ccfff;
+      text-transform:uppercase;
+      font-size:.84rem;
+      letter-spacing:.08em;
+      font-weight:900;
+      margin-bottom:8px;
     }
 
     .section-head h2{
-      font-size:clamp(1.5rem, 3vw, 2.6rem);
+      font-size:clamp(1.65rem, 3vw, 2.7rem);
       line-height:1;
     }
 
     .section-note{
       color:var(--muted);
       max-width:560px;
-      line-height:1.7;
+      line-height:1.65;
     }
 
-    .chapters-grid{
-      display:grid;
-      grid-template-columns:repeat(2, minmax(0, 1fr));
-      gap:18px;
-    }
-
-    .chapter-card{
-      position:relative;
+    .catalog-tools{
       display:flex;
-      flex-direction:column;
+      align-items:center;
+      gap:12px;
+      width:min(100%, 420px);
+    }
+
+    .search-box{
+      width:100%;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-height:56px;
+      padding:0 18px;
+      border-radius:18px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:var(--shadow-soft);
+    }
+
+    .search-box input{
+      width:100%;
+      background:transparent;
+      border:none;
+      outline:none;
+      color:#fff;
+      font-size:1rem;
+    }
+
+    .search-box input::placeholder{ color:#91a6c7; }
+
+    .genre-grid{
+      display:grid;
+      grid-template-columns:repeat(4, minmax(0, 1fr));
       gap:14px;
-      padding:22px;
-      border-radius:26px;
-      background:linear-gradient(180deg, rgba(8,18,40,.88), rgba(8,18,40,.68));
-      border:1px solid rgba(255,255,255,.07);
+    }
+
+    .genre-card{
+      min-height:88px;
+      padding:20px;
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
+      color:#fff;
+      cursor:pointer;
+      text-align:left;
       box-shadow:var(--shadow-soft);
       transition:transform .2s ease, border-color .2s ease, background .2s ease;
-      overflow:hidden;
     }
 
-    .chapter-card:hover{
+    .genre-card:hover{
       transform:translateY(-2px);
       border-color:rgba(90,160,255,.24);
+      background:linear-gradient(180deg, rgba(42,112,255,.10), rgba(255,255,255,.04));
     }
 
-    .chapter-card-top{
+    .genre-card span{
+      display:block;
+      font-size:1.08rem;
+      font-weight:900;
+    }
+
+    .genre-card small{
+      display:block;
+      color:var(--muted);
+      margin-top:8px;
+      font-size:.92rem;
+    }
+
+    .catalog-announcement{
+      margin:-4px 0 22px;
+      display:flex;
+      justify-content:center;
+    }
+
+    .catalog-announcement-box{
+      width:100%;
+      padding:18px 20px;
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.08);
+      background:
+        radial-gradient(circle at 10% 20%, rgba(82,140,255,.14), transparent 30%),
+        radial-gradient(circle at 90% 20%, rgba(154,102,255,.14), transparent 34%),
+        linear-gradient(135deg, rgba(10,18,42,.94), rgba(8,15,34,.92));
+      box-shadow:var(--shadow-soft);
+      text-align:center;
+    }
+
+    .catalog-announcement-box strong{
+      display:block;
+      font-size:1.08rem;
+      line-height:1.35;
+      margin-bottom:6px;
+    }
+
+    .catalog-announcement-box span{
+      color:var(--muted);
+      line-height:1.7;
+      display:block;
+    }
+
+    .story-grid{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0, 1fr));
+      gap:22px;
+    }
+
+    .story-card{
+      min-width:0;
+      display:flex;
+      flex-direction:column;
+      border-radius:30px;
+      overflow:hidden;
+      background:linear-gradient(180deg, rgba(7,16,37,.92), rgba(7,16,37,.78));
+      border:1px solid rgba(255,255,255,.07);
+      box-shadow:var(--shadow);
+      min-height:100%;
+    }
+
+    .story-cover-shell{
+      position:relative;
+      width:100%;
+      background:#050b1a;
+      aspect-ratio:16 / 10;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      padding:12px;
+    }
+
+    .story-cover{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      object-position:center;
+      background:#050b1a;
+    }
+
+    .story-badges{
+      position:absolute;
+      top:16px;
+      left:16px;
+      right:16px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      pointer-events:none;
+    }
+
+    .story-badges span{
+      display:inline-flex;
+      align-items:center;
+      min-height:34px;
+      padding:0 14px;
+      border-radius:999px;
+      background:rgba(15,17,28,.72);
+      border:1px solid rgba(255,255,255,.08);
+      backdrop-filter:blur(12px);
+      color:#fff;
+      font-weight:900;
+      font-size:.9rem;
+      box-shadow:0 8px 18px rgba(0,0,0,.18);
+    }
+
+    .story-body{
+      display:flex;
+      flex-direction:column;
+      gap:16px;
+      padding:22px 22px 24px;
+      flex:1;
+      min-width:0;
+    }
+
+    .story-topline{
       display:flex;
       align-items:flex-start;
       justify-content:space-between;
       gap:12px;
     }
 
-    .chapter-number{
-      display:inline-flex;
-      align-items:center;
-      min-height:34px;
-      padding:0 12px;
-      border-radius:999px;
-      background:rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.08);
-      color:#dbe9ff;
-      font-weight:800;
-      font-size:.88rem;
-    }
-
-    .chapter-status{
-      display:inline-flex;
-      align-items:center;
-      min-height:34px;
-      padding:0 12px;
-      border-radius:999px;
-      font-weight:800;
-      font-size:.84rem;
-      letter-spacing:.03em;
-      border:1px solid rgba(255,255,255,.08);
-    }
-
-    .status-free{
-      background:rgba(49,166,105,.14);
-      color:#b5ffd1;
-    }
-
-    .status-premium{
-      background:rgba(69,126,255,.14);
-      color:#d8e7ff;
-    }
-
-    .status-locked{
-      background:rgba(255,255,255,.08);
-      color:#f3f7ff;
-    }
-
-    .chapter-card h3{
-      font-size:1.38rem;
-      line-height:1.08;
+    .story-topline h3{
+      font-size:clamp(1.35rem, 2vw, 2rem);
+      line-height:1.05;
       letter-spacing:-.02em;
+      min-width:0;
     }
 
-    .chapter-card p{
+    .story-topline small{
+      flex-shrink:0;
+      color:#9eb5d7;
+      font-size:.95rem;
+      margin-top:4px;
+      white-space:nowrap;
+    }
+
+    .story-rating-line{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:-4px;
+    }
+
+    .story-body p{
       color:var(--muted);
       line-height:1.72;
-      font-size:.98rem;
+      font-size:1rem;
       flex:1;
     }
 
-    .chapter-actions{
-      display:flex;
+    .story-mini-meta{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0, 1fr));
       gap:12px;
-      flex-wrap:wrap;
+    }
+
+    .story-mini-meta > div{
+      min-width:0;
+      padding:16px 16px 14px;
+      border-radius:20px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.06);
+    }
+
+    .story-mini-meta small{
+      display:block;
+      color:var(--muted-2);
+      text-transform:uppercase;
+      letter-spacing:.05em;
+      font-size:.82rem;
+      margin-bottom:7px;
+    }
+
+    .story-mini-meta strong{
+      display:block;
+      font-size:1rem;
+      line-height:1.28;
+      word-break:break-word;
+    }
+
+    .story-card-actions{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:12px;
       margin-top:auto;
     }
 
-    .chapter-link{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-height:48px;
-      padding:0 18px;
-      border-radius:16px;
-      font-weight:800;
-      border:1px solid rgba(255,255,255,.09);
-      transition:transform .2s ease, background .2s ease, border-color .2s ease;
+    .story-card-actions .btn{
+      width:100%;
+      min-width:0;
+      padding:0 16px;
     }
 
-    .chapter-link:hover{
-      transform:translateY(-1px);
+    .support-grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:22px;
     }
 
-    .chapter-link.primary{
-      color:#fff;
-      background:linear-gradient(135deg, #2a82ff 0%, #4aa7ff 100%);
-      border-color:transparent;
-    }
-
-    .chapter-link.secondary{
-      color:#fff;
-      background:rgba(255,255,255,.05);
-    }
-
-    .chapter-card.locked{
+    .support-card{
+      padding:26px;
+      border-radius:30px;
+      background:linear-gradient(180deg, rgba(9,18,42,.88), rgba(9,18,42,.66));
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:var(--shadow);
+      min-width:0;
+      position:relative;
       overflow:hidden;
     }
 
-    .chapter-card.locked .chapter-lock-target{
-      filter:none;
-      opacity:1;
-      user-select:auto;
-      pointer-events:auto;
-    }
-
-    .chapter-card.locked::after{
-      content:"";
-      display:none !important;
-    }
-
-    .premium-box{
-      display:none !important;
-    }
-
-    .premium-box h3{
-      font-size:1.35rem;
+    .support-card h3{
+      font-size:1.55rem;
+      line-height:1.08;
       margin-bottom:8px;
     }
 
-    .premium-box p{
+    .support-card p{
       color:var(--muted);
-      line-height:1.7;
-      max-width:720px;
+      line-height:1.72;
+      margin-bottom:16px;
     }
 
-    .premium-details{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:14px;
-    }
-
-    .premium-pill{
+    .support-chip{
       display:inline-flex;
       align-items:center;
-      min-height:38px;
+      min-height:36px;
       padding:0 14px;
       border-radius:999px;
       background:rgba(255,255,255,.06);
       border:1px solid rgba(255,255,255,.08);
-      color:#fff;
+      color:#edf4ff;
+      font-weight:900;
+      font-size:.86rem;
+      text-transform:uppercase;
+      letter-spacing:.05em;
+      margin-bottom:14px;
+    }
+
+    .support-list{
+      display:grid;
+      gap:12px;
+      margin-bottom:20px;
+    }
+
+    .support-list div{
+      padding:14px 16px;
+      border-radius:18px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.06);
+      color:#e5efff;
+      line-height:1.6;
+    }
+
+    .empty-state{
+      margin-top:20px;
+      padding:22px;
+      border-radius:22px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.06);
+      color:#cbd7ea;
+      text-align:center;
+    }
+
+    .hidden{ display:none !important; }
+
+    .site-footer{
+      padding:42px 0 24px;
+    }
+
+    .footer-shell{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:18px;
+      padding:24px;
+      border-radius:28px;
+      border:1px solid rgba(255,255,255,.06);
+      background:rgba(255,255,255,.04);
+      flex-wrap:wrap;
+    }
+
+    .footer-shell strong{
+      display:block;
+      font-size:1.2rem;
+      margin-bottom:6px;
+      letter-spacing:.06em;
+    }
+
+    .footer-shell p{ color:var(--muted); }
+
+    .footer-links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:16px;
+    }
+
+    .footer-links a{
+      color:#dce7f8;
       font-weight:800;
+    }
+
+
+
+    /* ===== NÉBULA ANDROID / TEMPORADAS / PUBLICIDAD ===== */
+    .mobile-app-shell{
+      width:100%;
+      max-width:100%;
+      overflow:hidden;
+    }
+
+    .next-seasons-grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:22px;
+    }
+
+    .next-season-card{
+      position:relative;
+      overflow:hidden;
+      border-radius:30px;
+      background:linear-gradient(180deg, rgba(9,18,42,.94), rgba(6,12,30,.88));
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:var(--shadow);
+      min-width:0;
+    }
+
+    .next-season-cover{
+      position:relative;
+      width:100%;
+      aspect-ratio:16 / 9;
+      background:#050b1a;
+      overflow:hidden;
+    }
+
+    .next-season-cover img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      opacity:.92;
+      transform:scale(1.01);
+    }
+
+    .next-season-cover::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, transparent 20%, rgba(4,8,22,.92) 100%);
+    }
+
+    .next-season-badge{
+      position:absolute;
+      left:16px;
+      top:16px;
+      z-index:2;
+      display:inline-flex;
+      align-items:center;
+      min-height:34px;
+      padding:0 14px;
+      border-radius:999px;
+      background:rgba(5,10,24,.72);
+      border:1px solid rgba(255,255,255,.12);
+      backdrop-filter:blur(12px);
+      font-size:.82rem;
+      font-weight:900;
+      letter-spacing:.05em;
+      text-transform:uppercase;
+    }
+
+    .next-season-body{
+      padding:22px;
+      display:grid;
+      gap:14px;
+    }
+
+    .next-season-body h3{
+      font-size:clamp(1.35rem, 2.2vw, 2rem);
+      line-height:1.05;
+      letter-spacing:-.02em;
+    }
+
+    .next-season-body p{
+      color:var(--muted);
+      line-height:1.65;
+    }
+
+    .countdown-box{
+      display:grid;
+      grid-template-columns:repeat(4, minmax(0, 1fr));
+      gap:10px;
+      margin-top:4px;
+    }
+
+    .countdown-item{
+      padding:13px 8px 11px;
+      text-align:center;
+      border-radius:18px;
+      background:rgba(255,255,255,.055);
+      border:1px solid rgba(255,255,255,.075);
+      min-width:0;
+    }
+
+    .countdown-item strong{
+      display:block;
+      font-size:clamp(1.25rem, 3vw, 2rem);
+      line-height:1;
+      color:#ffffff;
+    }
+
+    .countdown-item small{
+      display:block;
+      margin-top:6px;
+      color:#9fb5db;
+      font-size:.72rem;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+      font-weight:900;
+    }
+
+    .ad-banner-section{
+      padding:20px 0 8px;
+    }
+
+    .ad-banner-box{
+      min-height:96px;
+      border-radius:24px;
+      border:1px dashed rgba(255,255,255,.18);
+      background:
+        radial-gradient(circle at 12% 20%, rgba(52,144,255,.14), transparent 34%),
+        linear-gradient(135deg, rgba(255,255,255,.055), rgba(255,255,255,.025));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:18px;
+      color:#dbe8ff;
+      box-shadow:var(--shadow-soft);
+    }
+
+    .ad-banner-box strong{
+      display:block;
+      font-size:1rem;
+      margin-bottom:4px;
+    }
+
+    .ad-banner-box span{
+      color:var(--muted-2);
       font-size:.9rem;
     }
 
-    .premium-note{
-      margin-top:16px;
-      padding:18px;
-      border-radius:22px;
-      background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.07);
+
+    /* ===== AJUSTE PROFESIONAL ANDROID / PORTADAS VERTICALES ===== */
+    .site-header{
+      transform:translateY(0);
+      transition:transform .28s ease, opacity .28s ease, background .28s ease;
     }
 
-    .premium-note strong{
-      display:block;
-      margin-bottom:6px;
-      font-size:1rem;
+    .site-header.header-hidden{
+      transform:translateY(-110%);
+      opacity:0;
+      pointer-events:none;
     }
 
-    .premium-note span{
-      display:block;
-      color:var(--muted);
-      line-height:1.7;
-      font-size:.96rem;
+    .nav-shell{
+      min-height:64px;
+      padding:8px 0;
     }
 
-    .error-box{
-      width:var(--container);
-      margin:48px auto;
-      padding:28px;
-      border-radius:28px;
-      background:linear-gradient(180deg, rgba(8,18,40,.92), rgba(8,18,40,.72));
-      border:1px solid rgba(255,255,255,.07);
-      box-shadow:var(--shadow);
-      position:relative;
-      z-index:2;
+    .brand-logo{
+      width:126px;
     }
 
-    .error-box h1{
-      font-size:clamp(1.7rem, 4vw, 2.6rem);
-      margin-bottom:12px;
+    .top-nav{
+      gap:14px;
     }
 
-    .error-box p{
-      color:var(--muted);
-      line-height:1.7;
+    .top-nav a{
+      font-size:.9rem;
+      padding:8px 10px;
+      border-radius:999px;
+      background:rgba(255,255,255,.045);
+      border:1px solid rgba(255,255,255,.055);
+    }
+
+    .nav-search-btn{
+      min-height:42px;
+      padding:0 16px;
+      border-radius:999px;
+      font-size:.92rem;
+    }
+
+    .hero{
+      padding-top:24px;
+    }
+
+    .hero-grid{
+      grid-template-columns:minmax(0, .92fr) minmax(300px, .45fr);
+      align-items:start;
+    }
+
+    .hero-cover-wrap,
+    .story-cover-shell{
+      aspect-ratio:2 / 3;
+      padding:0;
+      background:#050b1a;
+    }
+
+    .hero-cover,
+    .story-cover{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center;
+      background:#050b1a;
+    }
+
+    .hero-feature-card{
+      max-width:390px;
+      justify-self:center;
+    }
+
+    .catalog-section{
+      padding-top:30px;
+    }
+
+    .catalog-section .section-head{
+      align-items:center;
+      justify-content:center;
+      text-align:center;
       margin-bottom:18px;
     }
 
-    .footer-space{
-      height:20px;
+    .catalog-section .section-head > div{
+      width:100%;
     }
 
-    @media (max-width: 1100px){
-      .hero-grid{
-        grid-template-columns:1fr;
-      }
+    .catalog-section .section-kicker{
+      color:#66b8ff;
+    }
 
-      .hero-cover-wrap{
-        aspect-ratio:16 / 10;
-      }
+    .catalog-tools{
+      width:min(100%, 720px);
+      margin:0 auto;
+    }
+
+    .search-box{
+      min-height:64px;
+      border-radius:999px;
+      background:linear-gradient(135deg, rgba(255,255,255,.095), rgba(255,255,255,.045));
+      border:1px solid rgba(102,184,255,.22);
+      box-shadow:0 18px 42px rgba(0,0,0,.24), 0 0 0 1px rgba(255,255,255,.035) inset;
+    }
+
+    .search-box span{
+      font-size:1.2rem;
+    }
+
+    .search-box input{
+      font-size:1.05rem;
+      font-weight:700;
+    }
+
+    .catalog-announcement{
+      display:none;
+    }
+
+    .story-grid{
+      grid-template-columns:repeat(auto-fill, minmax(210px, 1fr));
+      gap:18px;
+      align-items:start;
+    }
+
+    .story-card{
+      border-radius:24px;
+      box-shadow:0 18px 48px rgba(0,0,0,.28);
+    }
+
+    .story-body{
+      gap:12px;
+      padding:16px;
+    }
+
+    .story-topline h3{
+      font-size:1.18rem;
+      line-height:1.12;
+    }
+
+    .story-topline small,
+    .story-rating-line,
+    .story-mini-meta{
+      display:none;
+    }
+
+    .story-body p{
+      font-size:.92rem;
+      line-height:1.52;
+      display:-webkit-box;
+      -webkit-line-clamp:3;
+      -webkit-box-orient:vertical;
+      overflow:hidden;
+    }
+
+    .story-card-actions{
+      grid-template-columns:1fr;
+    }
+
+    .story-card-actions .btn-secondary{
+      display:none;
+    }
+
+    .next-season-cover{
+      aspect-ratio:2 / 3;
+      max-height:none;
+    }
+
+    .next-season-cover img{
+      object-fit:cover;
+      object-position:center;
+    }
+
+    .next-seasons-grid{
+      grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+    }
+
+    .section-head{
+      margin-bottom:18px;
+    }
+
+    @media (max-width: 1200px){
+      .hero-grid{ grid-template-columns:1fr; }
+      .genre-grid{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
+      .story-grid{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
     }
 
     @media (max-width: 900px){
-      .hero-meta,
-      .value-strip{
-        grid-template-columns:1fr;
+      :root{ --container:min(100% - 24px, 1000px); }
+      .nav-shell{
+        flex-wrap:wrap;
+        justify-content:center;
+        padding:12px 0 16px;
+        gap:14px 18px;
       }
-
-      .chapters-grid{
-        grid-template-columns:1fr;
-      }
+      .brand{ width:100%; justify-content:center; }
+      .brand-logo{ width:150px; }
+      .top-nav{ order:3; width:100%; gap:18px; }
+      .weekly-launch-points,.hero-stats{ grid-template-columns:1fr; }
+      .support-grid{ grid-template-columns:1fr; }
+      .next-seasons-grid{ grid-template-columns:1fr; }
     }
 
     @media (max-width: 680px){
-      :root{
-        --container:min(100% - 18px, 1000px);
-      }
+      :root{ --container:min(100% - 16px, 1000px); }
+      body{ font-size:15px; }
+      .site-header{ position:relative; }
+      .nav-shell{ min-height:auto; padding:10px 0 12px; }
+      .hero{ padding:18px 0 12px; }
+      .section{ padding:24px 0 12px; }
+      .weekly-launch-banner{ padding:18px 16px; border-radius:22px; }
+      .support-card,.story-card,.hero-feature-card,.next-season-card{ border-radius:24px; }
+      .story-body,.hero-feature-content,.next-season-body{ padding:18px; }
+      .countdown-box{ gap:8px; }
+      .countdown-item{ border-radius:14px; padding:12px 6px 10px; }
+      .countdown-item small{ font-size:.64rem; }
+      .ad-banner-box{ min-height:82px; border-radius:20px; }
 
-      .page-header-inner{
-        align-items:flex-start;
-      }
+      .brand-logo{ width:128px; }
+      .brand-copy strong{ font-size:.54rem; }
+      .brand-copy span{ font-size:.34rem; }
+      .top-nav{ gap:14px; }
+      .top-nav a{ font-size:.94rem; }
+      .hero-copy{ padding:20px 18px; }
+      .hero-copy h1{ max-width:none; }
+      .hero-actions,.story-actions{ flex-direction:column; }
+      .hero-actions .btn,.story-actions .btn{ width:100%; }
+      .story-card-actions{ grid-template-columns:1fr; }
+      .feature-meta,.story-mini-meta,.genre-grid,.story-grid{ grid-template-columns:1fr; }
+      .story-topline{ flex-direction:column; align-items:flex-start; }
+      .catalog-tools{ width:100%; }
+      .footer-shell{ padding:20px 18px; }
+    }
 
-      .brand-logo{
-        width:124px;
+    @media (max-width: 420px){
+      .btn{ min-height:50px; padding:0 18px; font-size:.98rem; }
+      .brand-logo{ width:116px; }
+      .story-badges{ top:12px; left:12px; right:12px; }
+      .story-badges span,.story-tags span{ font-size:.84rem; min-height:32px; padding:0 12px; }
+      .hero-cover-wrap,.story-cover-shell{ aspect-ratio:4 / 3; }
+    }
+  
+    @media (max-width: 680px){
+      :root{ --container:min(100% - 14px, 1000px); }
+      .site-header{
+        position:fixed;
+        top:0;
+        left:0;
+        right:0;
+        background:linear-gradient(180deg, rgba(4,10,24,.96), rgba(4,10,24,.76));
       }
-
-      .brand-copy strong{
-        font-size:.64rem;
+      body{ padding-top:60px; }
+      .nav-shell{
+        min-height:56px;
+        flex-wrap:nowrap;
+        justify-content:space-between;
+        gap:8px;
       }
-
-      .brand-copy span{
-        font-size:.40rem;
+      .brand{
+        width:auto;
+        justify-content:flex-start;
+        gap:8px;
       }
-
-      .hero{
-        padding:22px 0 18px;
+      .brand-logo{ width:86px; }
+      .brand-copy{ display:none; }
+      .top-nav{
+        order:0;
+        width:auto;
+        flex:1;
+        justify-content:flex-end;
+        gap:6px;
+        overflow:hidden;
       }
-
-      .hero-content{
-        padding:20px 18px;
+      .top-nav a{
+        font-size:.76rem;
+        padding:7px 8px;
       }
-
-      .chapter-card{
-        padding:18px;
+      .nav-search-btn{
+        display:none;
       }
-
-      .hero-actions,
-      .chapter-actions{
-        flex-direction:column;
+      .hero-grid{
+        grid-template-columns:1fr;
+        gap:16px;
       }
-
-      .hero-actions .btn,
-      .chapter-actions .chapter-link,
-      .premium-box .btn{
-        width:100%;
+      .hero-copy{
+        padding:18px 16px;
+        border-radius:24px;
       }
-
-      .chapter-card-top{
-        flex-direction:column;
-        align-items:flex-start;
+      .hero-copy h1{
+        font-size:2.08rem;
+        line-height:.98;
       }
-
-      .premium-box{
-        display:none !important;
+      .weekly-launch-points,
+      .hero-stats{
+        grid-template-columns:1fr;
+      }
+      .hero-feature-card{
+        max-width:290px;
+        margin:0 auto;
+      }
+      .hero-cover-wrap,
+      .story-cover-shell,
+      .next-season-cover{
+        aspect-ratio:2 / 3 !important;
+        padding:0 !important;
+      }
+      .story-grid{
+        grid-template-columns:repeat(2, minmax(0, 1fr)) !important;
+        gap:12px;
+      }
+      .story-card{
+        border-radius:18px;
+      }
+      .story-body{
+        padding:12px;
+        gap:10px;
+      }
+      .story-topline h3{
+        font-size:.98rem;
+      }
+      .story-body p{
+        font-size:.82rem;
+        -webkit-line-clamp:2;
+      }
+      .story-card-actions .btn{
+        min-height:42px;
+        font-size:.86rem;
+        border-radius:14px;
+      }
+      .story-badges{
+        top:8px;
+        left:8px;
+        right:8px;
+      }
+      .story-badges span{
+        min-height:26px;
+        padding:0 9px;
+        font-size:.7rem;
+      }
+      .search-box{
+        min-height:58px;
+        padding:0 16px;
+      }
+      .support-grid{
+        grid-template-columns:1fr;
+      }
+      .footer-shell{
+        display:none;
+      }
+      .site-footer{
+        padding:10px 0 18px;
       }
     }
+
+    @media (max-width: 420px){
+      .story-grid{
+        grid-template-columns:repeat(2, minmax(0, 1fr)) !important;
+      }
+      .hero-cover-wrap,
+      .story-cover-shell,
+      .next-season-cover{
+        aspect-ratio:2 / 3 !important;
+      }
+    }
+
+
+    /* ===== NÉBULA ADS: VIDEO RECOMPENSADO PARA CAPÍTULOS ===== */
+    .reward-note{
+      margin-top:6px;
+      padding:12px 14px;
+      border-radius:16px;
+      background:rgba(255,212,74,.10);
+      border:1px solid rgba(255,212,74,.20);
+      color:#fff4c8;
+      font-size:.9rem;
+      line-height:1.45;
+      font-weight:700;
+    }
+
+    .chapter-status.status-reward{
+      background:rgba(255,212,74,.14);
+      color:#fff4c8;
+      border-color:rgba(255,212,74,.28);
+    }
+
+    .reward-modal{
+      position:fixed;
+      inset:0;
+      z-index:9999;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      background:rgba(2,6,18,.76);
+      backdrop-filter:blur(14px);
+    }
+
+    .reward-modal.active{
+      display:flex;
+    }
+
+    .reward-card{
+      width:min(100%, 430px);
+      padding:24px;
+      border-radius:28px;
+      background:
+        radial-gradient(circle at 12% 18%, rgba(52,144,255,.18), transparent 34%),
+        radial-gradient(circle at 90% 12%, rgba(154,102,255,.18), transparent 34%),
+        linear-gradient(180deg, rgba(9,18,42,.98), rgba(5,10,26,.96));
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow:0 28px 80px rgba(0,0,0,.48);
+      text-align:center;
+    }
+
+    .reward-icon{
+      width:64px;
+      height:64px;
+      margin:0 auto 14px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:22px;
+      background:linear-gradient(135deg, rgba(255,212,74,.22), rgba(52,144,255,.18));
+      border:1px solid rgba(255,255,255,.10);
+      font-size:2rem;
+    }
+
+    .reward-card h3{
+      font-size:1.45rem;
+      line-height:1.08;
+      margin-bottom:10px;
+    }
+
+    .reward-card p{
+      color:var(--muted);
+      line-height:1.65;
+      margin-bottom:18px;
+    }
+
+    .reward-actions{
+      display:grid;
+      gap:10px;
+    }
+
+    .reward-actions .btn{
+      width:100%;
+    }
+
+    .reward-small{
+      display:block;
+      margin-top:12px;
+      color:#8ea3c8;
+      font-size:.82rem;
+      line-height:1.45;
+    }
+
   </style>
 </head>
+
 <body>
   <canvas id="stars-canvas"></canvas>
   <div class="galaxy-bg"></div>
-  <div class="galaxy-layer"></div>
   <div class="bg-grid"></div>
-  <div class="bg-orb orb-1"></div>
-  <div class="bg-orb orb-2"></div>
 
-  <div id="app"></div>
+  <header class="site-header">
+    <div class="container nav-shell">
+      <a href="#" class="brand" aria-label="Inicio Nébula">
+        <img class="brand-logo" src="assets/logo/nebula-logo.png" alt="Nébula logo" />
+        <div class="brand-copy">
+          <strong>NÉBULA</strong>
+          <span>Historias por capítulos</span>
+        </div>
+      </a>
 
-  <script src="./data.js"></script>
+      <nav class="top-nav" aria-label="Principal">
+        <a href="#destacada">Inicio</a>
+        <a href="#catalogo">Buscar</a>
+        <a href="#temporadas">Próximas</a>
+      </nav>
 
-  <script>const params = new URLSearchParams(window.location.search);
-  const novelId = params.get("id");
-  const app = document.getElementById("app");
-  function updateViews(novelId, initialValue) {
-    const key = "nebula-views-" + novelId;
-    const current = Number(localStorage.getItem(key) || initialValue || 0);
-    const next = current + 1;
-    localStorage.setItem(key, String(next));
-    return next;
-  }
+      <a href="#catalogo" class="btn btn-secondary nav-search-btn">🔎 Buscar</a>
+    </div>
+  </header>
 
-  function formatViews(value) {
-    const number = Number(value || 0);
-    if (number >= 1000000) return (number / 1000000).toFixed(1).replace(".0", "") + "M";
-    if (number >= 1000) return (number / 1000).toFixed(1).replace(".0", "") + "K";
-    return String(number);
-  }
+  <main>
+    <section class="hero" id="destacada">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">Plataforma de lectura</div>
 
+          <h1>
+            Historias que te atrapan
+            <span>desde el primer capítulo</span>
+          </h1>
 
-  function escapeHtml(text) {
-    return String(text ?? "")
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#039;");
-  }
-
-  function getSeasonOrderValue(season) {
-    const match = String(season || "").match(/\d+/);
-    return match ? Number(match[0]) : 999;
-  }
-
-  function getOrderedChapters(chapters) {
-    return [...(Array.isArray(chapters) ? chapters : [])].sort((a, b) => {
-      const seasonDiff = getSeasonOrderValue(a.season) - getSeasonOrderValue(b.season);
-      if (seasonDiff !== 0) return seasonDiff;
-      return Number(a.num || 0) - Number(b.num || 0);
-    });
-  }
-
-  function getLocalUserName() {
-    try {
-      const raw = localStorage.getItem("nebula-user-profile");
-      if (!raw) return "Mi espacio";
-      const parsed = JSON.parse(raw);
-      return parsed?.name || "Mi espacio";
-    } catch {
-      return "Mi espacio";
-    }
-  }
-
-  function getLocalUserIcon() {
-    try {
-      const raw = localStorage.getItem("nebula-user-profile");
-      if (!raw) return "🌌";
-      const parsed = JSON.parse(raw);
-      return parsed?.icon || "🌌";
-    } catch {
-      return "🌌";
-    }
-  }
-
-  async function getUserAccessState(user) {
-    return {
-      isLogged: Boolean(user),
-      isPremium: false,
-      plan: "free",
-      subscription: "free",
-      unlockedNovels: []
-    };
-  }
-  function paintStars(stars, value) {
-    stars.forEach((star) => {
-      const starValue = Number(star.dataset.value);
-      star.classList.toggle("active", starValue <= value);
-    });
-  }
-
-  async function loadRatingData(novelId, user) {
-    const key = "nebula-rating-" + novelId;
-    const saved = Number(localStorage.getItem(key) || 0);
-
-    return {
-      totalVotes: saved > 0 ? 1 : 0,
-      totalScore: saved,
-      average: saved,
-      userVote: saved
-    };
-  }
-
-  function renderRatingUI(ratingState, stars, averageEl, totalEl, statusEl) {
-    const totalVotes = Number(ratingState.totalVotes || 0);
-    const average = Number(ratingState.average || 0);
-    const userVote = Number(ratingState.userVote || 0);
-
-    averageEl.textContent = totalVotes > 0 ? average.toFixed(1) : "0.0";
-    totalEl.textContent = String(totalVotes);
-
-    if (userVote > 0) {
-      statusEl.textContent = `Tu valoración actual es de ${userVote} estrella${userVote === 1 ? "" : "s"}.`;
-      paintStars(stars, userVote);
-      return;
-    }
-
-    if (totalVotes > 0) {
-      statusEl.textContent = "Valora esta novela para ayudar a otros lectores.";
-      paintStars(stars, Math.round(average));
-      return;
-    }
-
-    statusEl.textContent = "Sé el primero en valorar esta novela.";
-    paintStars(stars, 0);
-  }
-
-  async function submitVote(novelId, user, value) {
-    localStorage.setItem("nebula-rating-" + novelId, String(value));
-  }
-
-  async function renderNovel(accessState, currentUser) {
-    if (!novelId || !window.NEBULA_NOVELS || !window.NEBULA_NOVELS[novelId]) {
-      app.innerHTML = `
-        <section class="error-box">
-          <h1>Novela no encontrada</h1>
           <p>
-            No se encontró una novela asociada a este enlace. Revisa el parámetro
-            <strong>id</strong> o vuelve al catálogo principal.
+            Explora novelas por géneros, entra directo a leer y descubre nuevos universos desde cualquier dispositivo.
+            Nébula está pensada para una experiencia moderna, gratuita y visual.
           </p>
-          <a class="btn btn-primary" href="../index.html">Volver al inicio</a>
-        </section>
-      `;
-      return;
-    }
-    const novel = window.NEBULA_NOVELS[novelId];
-    const totalViews = updateViews(novel.id, Number(novel.visitas || 120));
-    const formattedViews = formatViews(totalViews);
-    const chapters = getOrderedChapters(novel.chapters);
-    const freeChapters = chapters.length;
-    const progressKey = "nebula-progress-" + novelId;
 
-    if (!chapters.length) {
-      app.innerHTML = `
-        <section class="error-box">
-          <h1>${escapeHtml(novel.title)}</h1>
-          <p>
-            Esta novela existe, pero todavía no tiene capítulos cargados en
-            <strong>data.js</strong>.
-          </p>
-          <a class="btn btn-primary" href="../index.html">Volver al inicio</a>
-        </section>
-      `;
-      return;
-    }
-
-    function getChapterPath(chapter) {
-      const seasonFolder = chapter.season || novel.defaultSeason || "temporada1";
-      return `./${novel.baseFolder}/${seasonFolder}/capitulo${chapter.num}.html`;
-    }
-
-    function getContinuePath() {
-      return localStorage.getItem(progressKey) || getChapterPath(chapters[0]);
-    }
-
-    function saveInitialProgress() {
-      if (!localStorage.getItem(progressKey)) {
-        localStorage.setItem(progressKey, getChapterPath(chapters[0]));
-      }
-    }
-
-    function chapterIsAccessible(index) {
-      return true;
-    }
-
-    function buildChapterCard(chapter, index) {
-      const chapterPath = getChapterPath(chapter);
-
-      return `
-        <article class="chapter-card">
-          <div class="chapter-lock-target">
-            <div class="chapter-card-top">
-              <span class="chapter-number">
-                ${escapeHtml(chapter.seasonLabel || chapter.season || novel.defaultSeasonLabel || "Temporada 1")} · Capítulo ${escapeHtml(chapter.num)}
-              </span>
-              <span class="chapter-status status-free">Disponible</span>
+          <div class="weekly-launch-banner">
+            <div class="weekly-launch-top">
+              <div class="weekly-chip"><span class="weekly-pulse"></span>Novedades semanales</div>
+              <div class="weekly-chip">Gratis + contenido constante</div>
             </div>
 
-            <h3>${escapeHtml(chapter.title)}</h3>
-            <p>${escapeHtml(chapter.description)}</p>
+            <h3>Todos los jueves se subirán nuevas historias</h3>
 
-            <div class="chapter-actions">
-              <a class="chapter-link primary" href="${chapterPath}" data-chapter-path="${chapterPath}">
-                Leer capítulo
-              </a>
+            <p>
+              Suspenso, romance, terror, historia, acción y más. Nébula crecerá con apoyo de anuncios dentro de la app,
+              sin forzar pagos ni registro obligatorio en esta primera versión.
+            </p>
+
+            <div class="weekly-launch-points">
+              <div><small>Ritmo fijo</small><strong>Contenido nuevo para mantener viva la plataforma</strong></div>
+              <div><small>Acceso libre</small><strong>Entra al catálogo y comienza a leer sin bloqueo</strong></div>
+              <div><small>Modelo app</small><strong>Preparada para anuncios y videos recompensados</strong></div>
             </div>
           </div>
-        </article>
-      `;
-    }
 
-    const accessTitle = "Lectura liberada";
-    const accessText = "Todos los capítulos de esta novela están disponibles para leer. Nébula crecerá como plataforma gratuita apoyada por anuncios y videos dentro de la app.";
-    const accessStateLabel = "Todos los capítulos disponibles";
-    const mainActionLabel = "Comenzar lectura";
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#catalogo">Explorar historias</a>
+            <a class="btn btn-secondary" href="#apoyo">Cómo se sostiene</a>
+          </div>
 
-    app.innerHTML = `
-      <header class="page-header">
-        <div class="container page-header-inner">
-          <div class="brand-wrap">
-            <a class="brand-link" href="../index.html" aria-label="Volver a Nébula">
-              <img class="brand-logo" src="../assets/logo/nebula-logo.png" alt="Logo Nébula" />
-              <div class="brand-copy">
-                <strong>NÉBULA</strong>
-                <span>Historias por capítulos</span>
+          <div class="hero-stats">
+            <div class="stat-card"><small>Lectura</small><strong>Acceso gratuito</strong></div>
+            <div class="stat-card"><small>Modelo</small><strong>Videos y anuncios</strong></div>
+            <div class="stat-card"><small>Compatible</small><strong>PC · Móvil · Tablet</strong></div>
+          </div>
+        </div>
+
+        <aside class="hero-feature-card" id="featuredCard">
+          <div class="hero-cover-wrap">
+            <img id="featuredCover" class="hero-cover" src="assets/covers/nebula.jpg" alt="Portada destacada" />
+          </div>
+
+          <div class="hero-feature-content">
+            <div class="story-tags">
+              <span id="featuredGenreTag">Futurista</span>
+              <span id="featuredSeasonTag">Temporada 1</span>
+            </div>
+
+            <h2 id="featuredTitle">Código Nébula</h2>
+
+            <div class="feature-rating">
+              <div class="stars" id="featuredStars"></div>
+              <span class="rating-label" id="featuredRatingLabel">0 / 5</span>
+            </div>
+
+            <p id="featuredDescription">
+              Una historia futurista donde nada es lo que parece y cada capítulo abre una nueva grieta en el sistema.
+            </p>
+
+            <div class="feature-meta">
+              <div><small>Lecturas</small><strong id="featuredViews">0 vistas</strong></div>
+              <div><small>Capítulos</small><strong id="featuredChapters">0 disponibles</strong></div>
+            </div>
+
+            <div class="story-actions">
+              <a id="featuredReadLink" class="btn btn-primary" href="novelas/index.html?id=codigo-nebula-t1">Comenzar a leer</a>
+              <a class="btn btn-secondary" href="#catalogo">Ver catálogo</a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="apoyo">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Modelo gratuito</p>
+            <h2>Nébula será gratis y se sostendrá con anuncios</h2>
+          </div>
+          <p class="section-note">
+            La primera versión de Nébula no tendrá pagos, coins ni bloqueo por premium. El objetivo es crecer,
+            atraer lectores y monetizar con videos/anuncios dentro de la app.
+          </p>
+        </div>
+
+        <div class="support-grid">
+          <article class="support-card">
+            <span class="support-chip">Acceso abierto</span>
+            <h3>Lee historias sin comprar acceso</h3>
+            <p>Explora novelas, temporadas y capítulos desde tu celular. La experiencia queda preparada para crecer con nuevas historias.</p>
+            <div class="support-list">
+              <div>📖 Historias por capítulos</div>
+              <div>🌌 Catálogo con géneros variados</div>
+              <div>📱 Compatible con celular, tablet, notebook y PC</div>
+              <div>🚀 Ideal para crecer con tráfico desde TikTok, Reels y Shorts</div>
+            </div>
+            <a class="btn btn-primary" href="#catalogo">Explorar catálogo</a>
+          </article>
+
+          <article class="support-card">
+            <span class="support-chip">Monetización futura</span>
+            <h3>Videos y anuncios dentro de la app</h3>
+            <p>La app Android podrá incorporar anuncios discretos o videos recompensados sin cobrarle al lector desde el inicio.</p>
+            <div class="support-list">
+              <div>🎬 Videos recompensados para contenido especial</div>
+              <div>📢 Banners o anuncios discretos dentro de la app</div>
+              <div>💡 Sin Mercado Pago en la primera versión</div>
+              <div>🔓 Sin bloqueo por progreso ni registro obligatorio</div>
+            </div>
+            <a class="btn btn-secondary" href="#catalogo">Comenzar a leer</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+
+    <section class="ad-banner-section" aria-label="Publicidad">
+      <div class="container">
+        <div class="ad-banner-box">
+          <div>
+            <strong>Espacio para publicidad de NÉBULA</strong>
+            <span>Este bloque queda listo para auspiciadores o campaña interna. El banner AdMob real va fijo abajo en la app Android.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="temporadas">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Próximos estrenos</p>
+            <h2>Temporadas en camino</h2>
+          </div>
+          <p class="section-note">Dos nuevas temporadas quedan anunciadas con contador de 15 días para crear expectativa dentro de la app.</p>
+        </div>
+
+        <div class="next-seasons-grid">
+          <article class="next-season-card">
+            <div class="next-season-cover">
+              <span class="next-season-badge">Estreno en 15 días</span>
+              <img src="assets/covers/proxima-temporada-1.jpg" alt="Próxima temporada 1" loading="lazy" />
+            </div>
+            <div class="next-season-body">
+              <h3>Próxima temporada I</h3>
+              <p>Nueva historia preparada para ampliar el universo NÉBULA con capítulos frescos y lectura gratuita.</p>
+              <div class="countdown-box" data-countdown="15">
+                <div class="countdown-item"><strong data-days>15</strong><small>Días</small></div>
+                <div class="countdown-item"><strong data-hours>00</strong><small>Horas</small></div>
+                <div class="countdown-item"><strong data-minutes>00</strong><small>Min</small></div>
+                <div class="countdown-item"><strong data-seconds>00</strong><small>Seg</small></div>
               </div>
-            </a>
-          </div>
+            </div>
+          </article>
 
-          <div class="header-actions">
-            <a class="back-link" href="../index.html">← Volver a Nébula</a>
-            <div class="mini-badge">Lectura por capítulos</div>
-            <div class="user-chip">${escapeHtml(getLocalUserIcon())} ${escapeHtml(getLocalUserName())}</div>
-          </div>
-        </div>
-      </header>
-
-<main>
-  <section class="hero">
-    <div class="container hero-grid">
-      <div class="hero-cover-card">
-        <div class="hero-cover-wrap">
-          <img
-            class="hero-cover"
-            src="${escapeHtml(novel.cover)}"
-            alt="${escapeHtml(novel.title)}"
-          />
+          <article class="next-season-card">
+            <div class="next-season-cover">
+              <span class="next-season-badge">Estreno en 15 días</span>
+              <img src="assets/covers/proxima-temporada-2.jpg" alt="Próxima temporada 2" loading="lazy" />
+            </div>
+            <div class="next-season-body">
+              <h3>Próxima temporada II</h3>
+              <p>Otro estreno anunciado para mantener el catálogo vivo y motivar a los lectores a volver cada semana.</p>
+              <div class="countdown-box" data-countdown="15">
+                <div class="countdown-item"><strong data-days>15</strong><small>Días</small></div>
+                <div class="countdown-item"><strong data-hours>00</strong><small>Horas</small></div>
+                <div class="countdown-item"><strong data-minutes>00</strong><small>Min</small></div>
+                <div class="countdown-item"><strong data-seconds>00</strong><small>Seg</small></div>
+              </div>
+            </div>
+          </article>
         </div>
       </div>
+    </section>
 
-      <div class="hero-content">
-        <div class="story-tags">
-          ${(novel.tags || []).map(tag => `<span>${escapeHtml(tag)}</span>`).join("")}
-          <span>${chapters.length} capítulos</span>
-        </div>
-
-        <h1>${escapeHtml(novel.title)}</h1>
-
-        <p class="story-description">${escapeHtml(novel.description)}</p>
-
-        <div class="hero-meta">
-          <div class="meta-card">
-            <small>Lectura libre</small>
-            <strong>Todos los capítulos disponibles</strong>
+    <section class="section catalog-section" id="catalogo">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Busca dentro de NÉBULA</p>
+            <h2>Encuentra tu próxima historia</h2>
           </div>
 
-          <div class="meta-card">
-            <small>Lecturas</small>
-            <strong>${formattedViews} vistas</strong>
-          </div>
-
-          <div class="meta-card">
-            <small>Estado</small>
-            <strong id="accessState">${accessStateLabel}</strong>
+          <div class="catalog-tools">
+            <label class="search-box" for="storySearch">
+              <span>🔎</span>
+              <input type="search" id="storySearch" placeholder="Presiona aquí y busca novela, temporada o género..." autocomplete="off" />
+            </label>
           </div>
         </div>
 
-        <div class="value-strip">
-          <div class="value-card">
-            <small>Modelo</small>
-            <strong>Gratis con anuncios en la app</strong>
-          </div>
-
-          <div class="value-card">
-            <small>Acceso</small>
-            <strong>Lectura abierta para todos los capítulos</strong>
+        <div class="catalog-announcement">
+          <div class="catalog-announcement-box">
+            <strong>Nébula crecerá con nuevas historias para mantener viva la plataforma.</strong>
+            <span>Lee libremente, comparte las historias y vuelve cada semana por nuevo contenido.</span>
           </div>
         </div>
 
-        <section class="weekly-banner">
-          <div class="weekly-top">
-            <div class="weekly-chip">
-              <span class="weekly-dot"></span>
-              Plataforma activa
-            </div>
+        <div class="story-grid" id="storyGrid"></div>
+        <div class="empty-state hidden" id="emptyState">No se encontraron historias con esa búsqueda.</div>
+      </div>
+    </section>
+  </main>
 
-            <div class="weekly-chip">
-              Gratis + contenido constante
-            </div>
-          </div>
+  <footer class="site-footer">
+    <div class="container footer-shell">
+      <div>
+        <strong>NÉBULA</strong>
+        <p>Plataforma gratuita de historias por capítulos.</p>
+      </div>
 
-          <h3>Todos los jueves se subirán 2 nuevas novelas</h3>
-
-          <p>
-            Nébula no se queda quieta. La plataforma seguirá creciendo con nuevas novelas,
-            temporadas y contenido constante para mantener viva la experiencia.
-          </p>
-        </section>
-
-        <section class="access-banner">
-          <strong>${accessTitle}</strong>
-          <span>${accessText}</span>
-        </section>
-
-        <section class="novel-rating-box">
-          <h3>Valora esta novela</h3>
-
-          <div id="ratingStars" class="rating-stars">
-            <button class="rating-star" data-value="1">★</button>
-            <button class="rating-star" data-value="2">★</button>
-            <button class="rating-star" data-value="3">★</button>
-            <button class="rating-star" data-value="4">★</button>
-            <button class="rating-star" data-value="5">★</button>
-          </div>
-
-          <p class="rating-meta">
-            Promedio: <strong id="ratingAverage">0.0</strong>
-            · Votos: <strong id="ratingTotal">0</strong>
-          </p>
-
-          <p id="ratingStatus">Cargando votación...</p>
-        </section>
-
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="${getChapterPath(chapters[0])}" id="startBtn">
-            ${mainActionLabel}
-          </a>
-          <button class="btn btn-secondary" id="continueBtn">
-            Seguir donde ibas
-          </button>
-        </div>
+      <div class="footer-links">
+        <a href="#destacada">Inicio</a>
+        <a href="#catalogo">Buscar</a>
+        <a href="#temporadas">Próximas</a>
       </div>
     </div>
-  </section>
+  </footer>
 
-  <section class="chapters-section">
-    <div class="container">
-      <div class="section-head">
-        <h2>Capítulos disponibles</h2>
+  <script src="novelas/data.js?v=20260526"></script>
 
-        <p class="section-note">
-          Todos los capítulos están disponibles para leer. Elige uno y continúa la historia sin bloqueo.
-        </p>
-      </div>
+  <script>
+    const storyGrid = document.getElementById("storyGrid");
+    const emptyState = document.getElementById("emptyState");
+    const storySearch = document.getElementById("storySearch");
 
-      <div class="chapters-grid">
-        ${chapters.map((chapter, index) => buildChapterCard(chapter, index)).join("")}
-      </div>
-    </div>
-  </section>
-</main>
+    let novelas = [];
+    let filtradas = [];
 
-      <div class="footer-space"></div>
-    `;
+    function normalizeCover(path) {
+      const value = String(path || "assets/covers/nebula.jpg");
 
-    saveInitialProgress();
-
-    const continueBtn = document.getElementById("continueBtn");
-    const startBtn = document.getElementById("startBtn");
-    const ratingStars = Array.from(document.querySelectorAll(".rating-star"));
-    const ratingAverage = document.getElementById("ratingAverage");
-    const ratingTotal = document.getElementById("ratingTotal");
-    const ratingStatus = document.getElementById("ratingStatus");
-
-    if (startBtn) {
-      startBtn.addEventListener("click", () => {
-        localStorage.setItem(progressKey, getChapterPath(chapters[0]));
-      });
+      if (value.startsWith("/nexoria-tes/")) return value;
+      if (value.startsWith("../")) return value.replace(/^\.\.\//, "");
+      if (value.startsWith("./")) return value.replace(/^\.\//, "");
+      return value;
     }
 
-    if (continueBtn) {
-      continueBtn.addEventListener("click", () => {
-        window.location.href = getContinuePath();
-      });
+    function safeText(value) {
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
     }
 
-    document.querySelectorAll("[data-chapter-path]").forEach(link => {
-      link.addEventListener("click", (e) => {
-        localStorage.setItem(progressKey, e.currentTarget.dataset.chapterPath);
+    function formatViews(value) {
+      const number = Number(value || 0);
+      if (number >= 1000000) return (number / 1000000).toFixed(1).replace(".0", "") + "M";
+      if (number >= 1000) return (number / 1000).toFixed(1).replace(".0", "") + "K";
+      return String(number);
+    }
+
+    function starsHTML(rating) {
+      const value = Math.max(0, Math.min(5, Number(rating || 0)));
+      let html = "";
+      for (let i = 1; i <= 5; i++) {
+        html += `<span class="star ${i <= value ? "active" : ""}">★</span>`;
+      }
+      return html;
+    }
+
+    function getPrimaryGenre(novel) {
+      return Array.isArray(novel.tags) && novel.tags.length ? novel.tags[0] : "Historia";
+    }
+
+    function getSeasonLabel(novel) {
+      return novel.defaultSeasonLabel || "Temporada";
+    }
+
+    function getNovelLink(novel) {
+      return `novelas/index.html?id=${encodeURIComponent(novel.id)}`;
+    }
+
+    function getAllNovels() {
+      const source = window.NEBULA_NOVELS || {};
+      return Object.values(source).map((novel) => ({
+        ...novel,
+        cover: normalizeCover(novel.cover),
+        chapters: Array.isArray(novel.chapters) ? novel.chapters : [],
+        tags: Array.isArray(novel.tags) ? novel.tags : []
+      }));
+    }
+
+    function renderFeatured() {
+      if (!novelas.length) return;
+
+      const preferred = novelas.find(novel => novel.id === "codigo-nebula-t1") || novelas[0];
+
+      document.getElementById("featuredCover").src = preferred.cover;
+      document.getElementById("featuredCover").alt = preferred.title || "Novela destacada";
+      document.getElementById("featuredGenreTag").textContent = getPrimaryGenre(preferred);
+      document.getElementById("featuredSeasonTag").textContent = getSeasonLabel(preferred);
+      document.getElementById("featuredTitle").textContent = preferred.sagaTitle || preferred.title;
+      document.getElementById("featuredDescription").textContent = preferred.description || "";
+      document.getElementById("featuredStars").innerHTML = starsHTML(preferred.rating);
+      document.getElementById("featuredRatingLabel").textContent = `${Number(preferred.rating || 0)} / 5`;
+      document.getElementById("featuredViews").textContent = `${formatViews(preferred.visitas || 0)} vistas`;
+      document.getElementById("featuredChapters").textContent = `${preferred.chapters.length} disponibles`;
+      document.getElementById("featuredReadLink").href = getNovelLink(preferred);
+    }
+
+    function renderStories(list) {
+      emptyState.classList.toggle("hidden", list.length > 0);
+
+      storyGrid.innerHTML = list.map(novel => {
+        const link = getNovelLink(novel);
+        const genre = getPrimaryGenre(novel);
+        const chaptersCount = novel.chapters.length;
+
+        return `
+          <article class="story-card">
+            <div class="story-cover-shell">
+              <img class="story-cover" src="${safeText(novel.cover)}" alt="${safeText(novel.title)}" loading="lazy" />
+              <div class="story-badges">
+                <span>${safeText(genre)}</span>
+                <span>${safeText(getSeasonLabel(novel))}</span>
+              </div>
+            </div>
+
+            <div class="story-body">
+              <div class="story-topline">
+                <h3>${safeText(novel.sagaTitle || novel.title)}</h3>
+                <small>${chaptersCount} capítulos</small>
+              </div>
+
+              <div class="story-rating-line">
+                <div class="stars">${starsHTML(novel.rating)}</div>
+                <span class="rating-label">${Number(novel.rating || 0)} / 5</span>
+              </div>
+
+              <p>${safeText(novel.description || "")}</p>
+
+              <div class="story-mini-meta">
+                <div>
+                  <small>Lectura</small>
+                  <strong>Gratis</strong>
+                </div>
+                <div>
+                  <small>Capítulos</small>
+                  <strong>${chaptersCount} disponibles</strong>
+                </div>
+                <div>
+                  <small>Modelo</small>
+                  <strong>Con anuncios</strong>
+                </div>
+              </div>
+
+              <div class="story-card-actions">
+                <a class="btn btn-primary" href="${safeText(link)}">Comenzar</a>
+                <a class="btn btn-secondary" href="${safeText(link)}">Ver capítulos</a>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    function filterStories() {
+      const query = (storySearch.value || "").trim().toLowerCase();
+
+      if (!query) {
+        filtradas = [...novelas];
+        renderStories(filtradas);
+        return;
+      }
+
+      filtradas = novelas.filter(novel => {
+        const haystack = [
+          novel.id,
+          novel.title,
+          novel.sagaTitle,
+          novel.description,
+          ...(novel.tags || [])
+        ].join(" ").toLowerCase();
+
+        return haystack.includes(query);
       });
-    });
 
-    let ratingState = await loadRatingData(novelId, currentUser);
-    renderRatingUI(ratingState, ratingStars, ratingAverage, ratingTotal, ratingStatus);
+      renderStories(filtradas);
+    }
 
-    ratingStars.forEach((star) => {
-      star.addEventListener("click", async () => {
-        const value = Number(star.dataset.value);
+    function initNebula() {
+      novelas = getAllNovels();
+      filtradas = [...novelas];
 
-        if (!currentUser) {
-          // La lectura está liberada y la valoración se guarda localmente.
+      renderFeatured();
+      renderStories(filtradas);
+
+      storySearch.addEventListener("input", filterStories);
+    }
+
+    window.addEventListener("load", initNebula);
+  </script>
+
+
+  <script>
+    let lastScrollY = window.scrollY;
+    const siteHeader = document.querySelector(".site-header");
+
+    window.addEventListener("scroll", () => {
+      const currentY = window.scrollY;
+
+      if (currentY > 90 && currentY > lastScrollY) {
+        siteHeader.classList.add("header-hidden");
+      } else {
+        siteHeader.classList.remove("header-hidden");
+      }
+
+      lastScrollY = currentY;
+    }, { passive: true });
+  </script>
+
+  <script>
+    function initCountdowns() {
+      const boxes = document.querySelectorAll("[data-countdown]");
+      const now = Date.now();
+
+      boxes.forEach((box, index) => {
+        const days = Number(box.dataset.countdown || 15);
+        const storageKey = `nebula-countdown-${index + 1}`;
+        let target = Number(localStorage.getItem(storageKey) || 0);
+
+        if (!target || target <= now) {
+          target = now + days * 24 * 60 * 60 * 1000;
+          localStorage.setItem(storageKey, String(target));
         }
 
-        try {
-          ratingStatus.textContent = "Guardando tu voto...";
-          await submitVote(novelId, currentUser, value);
-          ratingState = await loadRatingData(novelId, currentUser);
-          renderRatingUI(ratingState, ratingStars, ratingAverage, ratingTotal, ratingStatus);
-        } catch (error) {
-          console.error("Error guardando voto:", error);
-          ratingStatus.textContent = "No se pudo guardar tu voto. Intenta de nuevo.";
-        }
+        box.dataset.target = String(target);
       });
-    });
 
-    document.title = `${novel.title} | Nébula`;
-  }
+      function pad(value) {
+        return String(value).padStart(2, "0");
+      }
 
-  document.addEventListener("DOMContentLoaded", async () => {
-    const accessState = await getUserAccessState(null);
-    await renderNovel(accessState, null);
-  });
+      function updateCountdowns() {
+        boxes.forEach((box) => {
+          const target = Number(box.dataset.target || 0);
+          const diff = Math.max(0, target - Date.now());
 
+          const totalSeconds = Math.floor(diff / 1000);
+          const days = Math.floor(totalSeconds / 86400);
+          const hours = Math.floor((totalSeconds % 86400) / 3600);
+          const minutes = Math.floor((totalSeconds % 3600) / 60);
+          const seconds = totalSeconds % 60;
+
+          box.querySelector("[data-days]").textContent = String(days);
+          box.querySelector("[data-hours]").textContent = pad(hours);
+          box.querySelector("[data-minutes]").textContent = pad(minutes);
+          box.querySelector("[data-seconds]").textContent = pad(seconds);
+        });
+      }
+
+      updateCountdowns();
+      setInterval(updateCountdowns, 1000);
+    }
+
+    window.addEventListener("load", initCountdowns);
   </script>
 
   <script>
