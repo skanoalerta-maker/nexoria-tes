@@ -961,6 +961,154 @@
       font-weight:800;
     }
 
+
+
+    /* ===== NÉBULA ANDROID / TEMPORADAS / PUBLICIDAD ===== */
+    .mobile-app-shell{
+      width:100%;
+      max-width:100%;
+      overflow:hidden;
+    }
+
+    .next-seasons-grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:22px;
+    }
+
+    .next-season-card{
+      position:relative;
+      overflow:hidden;
+      border-radius:30px;
+      background:linear-gradient(180deg, rgba(9,18,42,.94), rgba(6,12,30,.88));
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:var(--shadow);
+      min-width:0;
+    }
+
+    .next-season-cover{
+      position:relative;
+      width:100%;
+      aspect-ratio:16 / 9;
+      background:#050b1a;
+      overflow:hidden;
+    }
+
+    .next-season-cover img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      opacity:.92;
+      transform:scale(1.01);
+    }
+
+    .next-season-cover::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, transparent 20%, rgba(4,8,22,.92) 100%);
+    }
+
+    .next-season-badge{
+      position:absolute;
+      left:16px;
+      top:16px;
+      z-index:2;
+      display:inline-flex;
+      align-items:center;
+      min-height:34px;
+      padding:0 14px;
+      border-radius:999px;
+      background:rgba(5,10,24,.72);
+      border:1px solid rgba(255,255,255,.12);
+      backdrop-filter:blur(12px);
+      font-size:.82rem;
+      font-weight:900;
+      letter-spacing:.05em;
+      text-transform:uppercase;
+    }
+
+    .next-season-body{
+      padding:22px;
+      display:grid;
+      gap:14px;
+    }
+
+    .next-season-body h3{
+      font-size:clamp(1.35rem, 2.2vw, 2rem);
+      line-height:1.05;
+      letter-spacing:-.02em;
+    }
+
+    .next-season-body p{
+      color:var(--muted);
+      line-height:1.65;
+    }
+
+    .countdown-box{
+      display:grid;
+      grid-template-columns:repeat(4, minmax(0, 1fr));
+      gap:10px;
+      margin-top:4px;
+    }
+
+    .countdown-item{
+      padding:13px 8px 11px;
+      text-align:center;
+      border-radius:18px;
+      background:rgba(255,255,255,.055);
+      border:1px solid rgba(255,255,255,.075);
+      min-width:0;
+    }
+
+    .countdown-item strong{
+      display:block;
+      font-size:clamp(1.25rem, 3vw, 2rem);
+      line-height:1;
+      color:#ffffff;
+    }
+
+    .countdown-item small{
+      display:block;
+      margin-top:6px;
+      color:#9fb5db;
+      font-size:.72rem;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+      font-weight:900;
+    }
+
+    .ad-banner-section{
+      padding:20px 0 8px;
+    }
+
+    .ad-banner-box{
+      min-height:96px;
+      border-radius:24px;
+      border:1px dashed rgba(255,255,255,.18);
+      background:
+        radial-gradient(circle at 12% 20%, rgba(52,144,255,.14), transparent 34%),
+        linear-gradient(135deg, rgba(255,255,255,.055), rgba(255,255,255,.025));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:18px;
+      color:#dbe8ff;
+      box-shadow:var(--shadow-soft);
+    }
+
+    .ad-banner-box strong{
+      display:block;
+      font-size:1rem;
+      margin-bottom:4px;
+    }
+
+    .ad-banner-box span{
+      color:var(--muted-2);
+      font-size:.9rem;
+    }
+
     @media (max-width: 1200px){
       .hero-grid{ grid-template-columns:1fr; }
       .genre-grid{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
@@ -980,10 +1128,24 @@
       .top-nav{ order:3; width:100%; gap:18px; }
       .weekly-launch-points,.hero-stats{ grid-template-columns:1fr; }
       .support-grid{ grid-template-columns:1fr; }
+      .next-seasons-grid{ grid-template-columns:1fr; }
     }
 
     @media (max-width: 680px){
-      :root{ --container:min(100% - 18px, 1000px); }
+      :root{ --container:min(100% - 16px, 1000px); }
+      body{ font-size:15px; }
+      .site-header{ position:relative; }
+      .nav-shell{ min-height:auto; padding:10px 0 12px; }
+      .hero{ padding:18px 0 12px; }
+      .section{ padding:24px 0 12px; }
+      .weekly-launch-banner{ padding:18px 16px; border-radius:22px; }
+      .support-card,.story-card,.hero-feature-card,.next-season-card{ border-radius:24px; }
+      .story-body,.hero-feature-content,.next-season-body{ padding:18px; }
+      .countdown-box{ gap:8px; }
+      .countdown-item{ border-radius:14px; padding:12px 6px 10px; }
+      .countdown-item small{ font-size:.64rem; }
+      .ad-banner-box{ min-height:82px; border-radius:20px; }
+
       .brand-logo{ width:128px; }
       .brand-copy strong{ font-size:.54rem; }
       .brand-copy span{ font-size:.34rem; }
@@ -1028,7 +1190,9 @@
       <nav class="top-nav" aria-label="Principal">
         <a href="#destacada">Destacada</a>
         <a href="#catalogo">Catálogo</a>
+        <a href="#temporadas">Próximas</a>
         <a href="#generos">Géneros</a>
+        <a href="#temporadas">Próximas</a>
         <a href="#apoyo">Apoya Nébula</a>
       </nav>
 
@@ -1163,6 +1327,67 @@
       </div>
     </section>
 
+
+
+    <section class="ad-banner-section" aria-label="Publicidad">
+      <div class="container">
+        <div class="ad-banner-box">
+          <div>
+            <strong>Espacio para publicidad de NÉBULA</strong>
+            <span>Este bloque queda listo para auspiciadores o campaña interna. El banner AdMob real va fijo abajo en la app Android.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="temporadas">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Próximos estrenos</p>
+            <h2>Temporadas en camino</h2>
+          </div>
+          <p class="section-note">Dos nuevas temporadas quedan anunciadas con contador de 15 días para crear expectativa dentro de la app.</p>
+        </div>
+
+        <div class="next-seasons-grid">
+          <article class="next-season-card">
+            <div class="next-season-cover">
+              <span class="next-season-badge">Estreno en 15 días</span>
+              <img src="assets/covers/proxima-temporada-1.jpg" alt="Próxima temporada 1" loading="lazy" />
+            </div>
+            <div class="next-season-body">
+              <h3>Próxima temporada I</h3>
+              <p>Nueva historia preparada para ampliar el universo NÉBULA con capítulos frescos y lectura gratuita.</p>
+              <div class="countdown-box" data-countdown="15">
+                <div class="countdown-item"><strong data-days>15</strong><small>Días</small></div>
+                <div class="countdown-item"><strong data-hours>00</strong><small>Horas</small></div>
+                <div class="countdown-item"><strong data-minutes>00</strong><small>Min</small></div>
+                <div class="countdown-item"><strong data-seconds>00</strong><small>Seg</small></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="next-season-card">
+            <div class="next-season-cover">
+              <span class="next-season-badge">Estreno en 15 días</span>
+              <img src="assets/covers/proxima-temporada-2.jpg" alt="Próxima temporada 2" loading="lazy" />
+            </div>
+            <div class="next-season-body">
+              <h3>Próxima temporada II</h3>
+              <p>Otro estreno anunciado para mantener el catálogo vivo y motivar a los lectores a volver cada semana.</p>
+              <div class="countdown-box" data-countdown="15">
+                <div class="countdown-item"><strong data-days>15</strong><small>Días</small></div>
+                <div class="countdown-item"><strong data-hours>00</strong><small>Horas</small></div>
+                <div class="countdown-item"><strong data-minutes>00</strong><small>Min</small></div>
+                <div class="countdown-item"><strong data-seconds>00</strong><small>Seg</small></div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section class="section" id="generos">
       <div class="container">
         <div class="section-head">
@@ -1216,6 +1441,7 @@
       <div class="footer-links">
         <a href="#destacada">Inicio</a>
         <a href="#catalogo">Catálogo</a>
+        <a href="#temporadas">Próximas</a>
         <a href="#generos">Géneros</a>
         <a href="#apoyo">Apoya Nébula</a>
       </div>
@@ -1429,6 +1655,55 @@
     }
 
     window.addEventListener("load", initNebula);
+  </script>
+
+
+
+  <script>
+    function initCountdowns() {
+      const boxes = document.querySelectorAll("[data-countdown]");
+      const now = Date.now();
+
+      boxes.forEach((box, index) => {
+        const days = Number(box.dataset.countdown || 15);
+        const storageKey = `nebula-countdown-${index + 1}`;
+        let target = Number(localStorage.getItem(storageKey) || 0);
+
+        if (!target || target <= now) {
+          target = now + days * 24 * 60 * 60 * 1000;
+          localStorage.setItem(storageKey, String(target));
+        }
+
+        box.dataset.target = String(target);
+      });
+
+      function pad(value) {
+        return String(value).padStart(2, "0");
+      }
+
+      function updateCountdowns() {
+        boxes.forEach((box) => {
+          const target = Number(box.dataset.target || 0);
+          const diff = Math.max(0, target - Date.now());
+
+          const totalSeconds = Math.floor(diff / 1000);
+          const days = Math.floor(totalSeconds / 86400);
+          const hours = Math.floor((totalSeconds % 86400) / 3600);
+          const minutes = Math.floor((totalSeconds % 3600) / 60);
+          const seconds = totalSeconds % 60;
+
+          box.querySelector("[data-days]").textContent = String(days);
+          box.querySelector("[data-hours]").textContent = pad(hours);
+          box.querySelector("[data-minutes]").textContent = pad(minutes);
+          box.querySelector("[data-seconds]").textContent = pad(seconds);
+        });
+      }
+
+      updateCountdowns();
+      setInterval(updateCountdowns, 1000);
+    }
+
+    window.addEventListener("load", initCountdowns);
   </script>
 
   <script>
