@@ -1832,14 +1832,25 @@
     let novelas = [];
     let filtradas = [];
 
-    function normalizeCover(path) {
-      const value = String(path || "assets/covers/nebula.jpg");
+function normalizeCover(path) {
+  const value = String(path || "/nexoria-tes/assets/covers/nebula.jpg");
 
-      if (value.startsWith("/nexoria-tes/")) return value;
-      if (value.startsWith("../")) return value.replace(/^\.\.\//, "");
-      if (value.startsWith("./")) return value.replace(/^\.\//, "");
-      return value;
-    }
+  if (value.startsWith("/nexoria-tes/")) return value;
+
+  if (value.startsWith("../")) {
+    return "/nexoria-tes/" + value.replace(/^\.\.\//, "");
+  }
+
+  if (value.startsWith("./")) {
+    return "/nexoria-tes/" + value.replace(/^\.\//, "");
+  }
+
+  if (value.startsWith("assets/")) {
+    return "/nexoria-tes/" + value;
+  }
+
+  return value;
+}
 
     function safeText(value) {
       return String(value ?? "")
