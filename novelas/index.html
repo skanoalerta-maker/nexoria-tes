@@ -1573,7 +1573,7 @@
   <header class="site-header">
     <div class="container nav-shell">
       <a href="#" class="brand" aria-label="Inicio Nébula">
-        <img class="brand-logo" src="assets/logo/nebula-logo.png" alt="Nébula logo" />
+        <img class="brand-logo" src="/nexoria-tes/assets/logo/nebula-logo.png" alt="Nébula logo" />
         <div class="brand-copy">
           <strong>NÉBULA</strong>
           <span>Historias por capítulos</span>
@@ -1640,7 +1640,7 @@
 
         <aside class="hero-feature-card" id="featuredCard">
           <div class="hero-cover-wrap">
-            <img id="featuredCover" class="hero-cover" src="assets/covers/nebula.jpg" alt="Portada destacada" />
+            <img id="featuredCover" class="hero-cover" src="/nexoria-tes/assets/covers/nebula.jpg" alt="Portada destacada" />
           </div>
 
           <div class="hero-feature-content">
@@ -1744,7 +1744,7 @@
           <article class="next-season-card">
             <div class="next-season-cover">
               <span class="next-season-badge">Estreno en 15 días</span>
-              <img src="assets/covers/proxima-temporada-1.jpg" alt="Próxima temporada 1" loading="lazy" />
+              <img src="/nexoria-tes/assets/covers/proxima-temporada-1.jpg" alt="Próxima temporada 1" loading="lazy" />
             </div>
             <div class="next-season-body">
               <h3>Próxima temporada I</h3>
@@ -1761,7 +1761,7 @@
           <article class="next-season-card">
             <div class="next-season-cover">
               <span class="next-season-badge">Estreno en 15 días</span>
-              <img src="assets/covers/proxima-temporada-2.jpg" alt="Próxima temporada 2" loading="lazy" />
+              <img src="/nexoria-tes/assets/covers/proxima-temporada-2.jpg" alt="Próxima temporada 2" loading="lazy" />
             </div>
             <div class="next-season-body">
               <h3>Próxima temporada II</h3>
@@ -1832,25 +1832,25 @@
     let novelas = [];
     let filtradas = [];
 
-function normalizeCover(path) {
-  const value = String(path || "/nexoria-tes/assets/covers/nebula.jpg");
+    function normalizeCover(path) {
+      const value = String(path || "/nexoria-tes/assets/covers/nebula.jpg");
 
-  if (value.startsWith("/nexoria-tes/")) return value;
+      if (value.startsWith("/nexoria-tes/")) return value;
 
-  if (value.startsWith("../")) {
-    return "/nexoria-tes/" + value.replace(/^\.\.\//, "");
-  }
+      if (value.startsWith("../")) {
+        return "/nexoria-tes/" + value.replace(/^\.\.\//, "");
+      }
 
-  if (value.startsWith("./")) {
-    return "/nexoria-tes/" + value.replace(/^\.\//, "");
-  }
+      if (value.startsWith("./")) {
+        return "/nexoria-tes/" + value.replace(/^\.\//, "");
+      }
 
-  if (value.startsWith("assets/")) {
-    return "/nexoria-tes/" + value;
-  }
+      if (value.startsWith("assets/")) {
+        return "/nexoria-tes/" + value;
+      }
 
-  return value;
-}
+      return value;
+    }
 
     function safeText(value) {
       return String(value ?? "")
