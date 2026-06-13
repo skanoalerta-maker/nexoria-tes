@@ -1885,10 +1885,16 @@
       return novel.defaultSeasonLabel || "Temporada";
     }
 
-    function getNovelLink(novel) {
-     return `index.html?id=${encodeURIComponent(novel.id)}`;
-    }
+function getNovelLink(novel) {
+  const chapter = Array.isArray(novel.chapters) && novel.chapters.length
+    ? novel.chapters[0]
+    : null;
 
+  if (!chapter) return "#catalogo";
+
+  return `${novel.baseFolder}/${chapter.season}/capitulo${chapter.num}.html`;
+}
+    
     function getAllNovels() {
       const source = window.NEBULA_NOVELS || {};
       return Object.values(source).map((novel) => ({
