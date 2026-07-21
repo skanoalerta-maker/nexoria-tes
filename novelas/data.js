@@ -123,12 +123,7 @@ window.NEBULA_NOVELS = {
     { num: 9, season: "temporada1", seasonLabel: "Temporada 1", title: "La caída", description: "Las decisiones acumuladas los empujan al punto sin retorno." },
     { num: 10, season: "temporada1", seasonLabel: "Temporada 1", title: "Lo que rompimos", description: "Empiezan a ver el daño real de lo que hicieron." },
     { num: 11, season: "temporada1", seasonLabel: "Temporada 1", title: "Intentar huir", description: "Uno de los dos decide cortar todo, pero no es tan simple." },
-    { num: 12, season: "temporada1", seasonLabel: "Temporada 1", title: "Volver a caer", description: "El intento de alejarse fracasa cuando el sentimiento sigue intacto." },
-    { num: 13, season: "temporada1", seasonLabel: "Temporada 1", title: "Lo que nadie sabe", description: "Un secreto empieza a complicar aún más la relación." },
-    { num: 14, season: "temporada1", seasonLabel: "Temporada 1", title: "Demasiado tarde", description: "Las consecuencias llegan cuando ya no hay control." },
-    { num: 15, season: "temporada1", seasonLabel: "Temporada 1", title: "La verdad", description: "Todo sale a la luz y cambia completamente el escenario." },
-    { num: 16, season: "temporada1", seasonLabel: "Temporada 1", title: "El final que no querían", description: "Se ven obligados a tomar una decisión definitiva." },
-    { num: 17, season: "temporada1", seasonLabel: "Temporada 1", title: "No debí enamorarme de ti", description: "El cierre deja una herida abierta y la sensación de que esto no ha terminado." }
+    { num: 12, season: "temporada1", seasonLabel: "Temporada 1", title: "Volver a caer", description: "El cierre de la primera temporada confirma que alejarse no bastó y deja abiertas las consecuencias que continúan en la temporada 2." }
   ]
 },
 
@@ -183,8 +178,8 @@ window.NEBULA_NOVELS = {
       { num: 8, season: "temporada1", seasonLabel: "Temporada 1", title: "No era una app", description: "La entidad detrás de los mensajes no vive en el teléfono; solo lo usa para entrar." },
       { num: 9, season: "temporada1", seasonLabel: "Temporada 1", title: "La última videollamada", description: "Aceptar una llamada final abre una escena que no debería existir del otro lado de la pantalla." },
       { num: 10, season: "temporada1", seasonLabel: "Temporada 1", title: "La última conexión", description: "El cierre de temporada revela que responder fue exactamente lo que esa presencia necesitaba." },
-      { num: 11, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 11", description: "La amenaza sigue creciendo y ya no parece posible desconectarse." },
-      { num: 12, season: "temporada1", seasonLabel: "Temporada 1", title: "Capítulo 12", description: "La historia profundiza en el verdadero origen de la presencia." }
+      { num: 11, season: "temporada1", seasonLabel: "Temporada 1", title: "La copia incompleta", description: "Daniel descubre que la presencia usa sus reacciones para construir una versión capaz de sustituirlo." },
+      { num: 12, season: "temporada1", seasonLabel: "Temporada 1", title: "La evaluación de salida", description: "La habitación deja de ser un asedio y se convierte en una prueba para decidir quién tiene derecho a salir." }
     ]
   },
 
